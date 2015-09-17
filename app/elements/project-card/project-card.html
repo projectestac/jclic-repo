@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="project-card">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-material elevation="1">
+      <h2 class="page-title"><span>{{title}}</span></h2>
+      <span class="paper-font-body2">Activity basic info...</span>
+    </paper-material>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'project-card',
+
+        properties: {
+          title: {
+            type: String,
+            value: 'No name'
+          }
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

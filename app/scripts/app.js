@@ -7,6 +7,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+/* global Polymer */
+
 (function(document) {
   'use strict';
 
@@ -73,17 +75,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   
   app.search = function() {
     console.log('Click on search!');
-    var newCard = document.createElement('paper-material');
-    newCard.className = 'paper-font-body2';
-    newCard.setAttribute('elevation', 3);
+    var card = document.createElement('paper-material');
+    card.className = 'paper-font-body2';
+    card.setAttribute('elevation', 3);
     
-    newCard.innerHTML = '<p>Nova targeta!!!</p>';
+    card.innerHTML = '<p>Nova targeta!!!</p>';
     //var p = document.createElement('p');
     //p.innerHTML='Nova targeta afegida!';
-    //newCard.appendChild(p);
+    //card.appendChild(p);
+    
+    var prj= document.createElement('project-card');
+    //card.setAttribute('title', 'prova');
+    card.title='prova';
     
     var container = document.querySelector('#mainHome');
-    container.appendChild(newCard);
+    container.appendChild(card);
+    container.appendChild(prj);
   };
 
 })(document);
