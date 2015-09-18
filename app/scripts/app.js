@@ -8,10 +8,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 /* global Polymer */
+/* global $ */
 
 (function(document) {
   'use strict';
-
+  
   // Grab a reference to our auto-binding template
   // and give it some initial binding values
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
@@ -73,24 +74,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     document.getElementById('mainContainer').scrollTop = 0;
   };
   
-  app.search = function() {
-    console.log('Click on search!');
-    var card = document.createElement('paper-material');
-    card.className = 'paper-font-body2';
-    card.setAttribute('elevation', 3);
-    
-    card.innerHTML = '<p>Nova targeta!!!</p>';
-    //var p = document.createElement('p');
-    //p.innerHTML='Nova targeta afegida!';
-    //card.appendChild(p);
-    
-    var prj= document.createElement('project-card');
-    //card.setAttribute('title', 'prova');
-    card.title='prova';
+  app.searchBak = function() {
     
     var container = document.querySelector('#mainHome');
-    container.appendChild(card);
-    container.appendChild(prj);
+    
+    container.appendChild(app.generateCard('Projecte 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
+    container.appendChild(app.generateCard('Projecte 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.'));
+    container.appendChild(app.generateCard('Projecte 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.'));
+    container.appendChild(app.generateCard('Projecte 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'));
+    container.appendChild(app.generateCard('Projecte 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'));
+    container.appendChild(app.generateCard('Projecte 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
+    container.appendChild(app.generateCard('Projecte 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'));
+    container.appendChild(app.generateCard('Projecte 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute.'));
+  };
+  
+  app.search = function() {
+    var $container = $('#mainHome');
+    
+    $container.append(app.generateCard('Hello', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
+    $container.append(app.generateCard('Projecte 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.'));
+    $container.append(app.generateCard('Projecte 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.'));
+    $container.append(app.generateCard('Projecte 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'));
+    $container.append(app.generateCard('Projecte 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'));
+    $container.append(app.generateCard('Projecte 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
+    $container.append(app.generateCard('Projecte 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'));
+    $container.append(app.generateCard('Projecte 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute.'));
+    
+  };
+  
+  app.generateCardBak = function(title, description){
+    
+    var prj= document.createElement('project-card');
+    prj.setAttribute('elevation', 1);
+    prj.setAttribute('animated', true);
+    prj.title = title;
+    prj.description=description;
+    
+    return prj;
   };
 
+  app.generateCard = function(title, description){
+    
+    var $prj= $('<project-card elevation=1 animated=true/>');
+    $prj.attr('title', title);
+    $prj.attr('description', description);
+    return $prj;
+  };
+  
 })(document);

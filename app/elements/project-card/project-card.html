@@ -1,31 +1,90 @@
+
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/shadow.html">
+
 
 <dom-module id="project-card">
-  <template>
-    <style include="shared-styles"></style>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <paper-material elevation="1">
-      <h2 class="page-title"><span>{{title}}</span></h2>
-      <span class="paper-font-body2">Activity basic info...</span>
-    </paper-material>
+
+  <style>
+    :host {
+      display: block;
+      position: relative;
+    }
+
+    :host([animated]) {
+      @apply(--shadow-transition);
+    }
+
+    :host([elevation="1"]) {
+      @apply(--shadow-elevation-2dp);
+    }
+
+    :host([elevation="2"]) {
+      @apply(--shadow-elevation-4dp);
+    }
+
+    :host([elevation="3"]) {
+      @apply(--shadow-elevation-6dp);
+    }
+
+    :host([elevation="4"]) {
+      @apply(--shadow-elevation-8dp);
+    }
+
+    :host([elevation="5"]) {
+      @apply(--shadow-elevation-16dp);
+    }
+  </style>    
+
+  <template>    
+    <p class="paper-font-body2">{{title}}</p>
+    <p class="paper-font-body1">{{description}}</p>
   </template>
 
   <script>
-    (function() {
+    (function () {
       'use strict';
-      
+
       Polymer({
         is: 'project-card',
-
         properties: {
           title: {
             type: String,
             value: 'No name'
+          },
+          description: {
+            type: String,
+            value: 'lorem ipsum...'
           }
+        },
+        /**
+         * Attributes inherited from paper-material
+         * 
+         * The z-depth of this element, from 0-5. Setting to 0 will remove the
+         * shadow, and each increasing number greater than 0 will be "deeper"
+         * than the last.
+         *
+         * @attribute elevation
+         * @type number
+         * @default 1
+         */
+        elevation: {
+          type: Number,
+          reflectToAttribute: true,
+          value: 1
+        },
+        /**
+         * Set this to true to animate the shadow when setting a new
+         * `elevation` value.
+         *
+         * @attribute animated
+         * @type boolean
+         * @default false
+         */
+        animated: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: false
         }
       });
     })();
