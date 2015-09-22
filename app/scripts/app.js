@@ -12,11 +12,115 @@
 
 (function (document) {
   'use strict';
-
+  
   // Grab a reference to our auto-binding template
-  // and give it some initial binding values
-  // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
+
+  app.options = {};
+  
+  app.lang = 'en';  
+  app.title = '';
+  app.description = '';
+  app.langLabel = '';
+
+  // Load 'main.json'
+  $.getJSON('main.json')
+          .done(function (data) {
+            $.extend(app.options, data);
+            app.lang = app.options.languages.indexOf(navigator.language) >= 0 ?
+                    navigator.language : app.options.defaultLanguage;
+            buildLangSelector();
+            load();
+            // register scroll
+          })
+          .fail(function () {
+            app.title = 'ERROR';
+            app.description='Error loading the repository data! Please try again.';
+          });
+          
+  // Builds the language selector, filling it with the languages available in options.languages
+  // TODO: Try to convert it in an HTML Element
+  var buildLangSelector = function() {
+    
+    var $langSel = $('#langSel');
+
+    $langSel.empty();
+
+    for (var i = 0; i < app.options.languages.length; i++) {
+      var $lng = $('<a href="#" class="JCRLang" title="'+app.options.langNames[i]+'">' + app.options.languages[i] + '</a>');
+      if(app.options.languages[i] === app.lang){
+        $lng.addClass('curLang');
+      }
+      $langSel.append($lng);
+    }
+    
+    // Set callback for language selectors
+    $('.JCRLang').on('click', function () {
+      app.lang = $(this).text();
+      $('.curLang').removeClass('curLang');
+      $(this).addClass('curLang');
+      load();
+      return false;
+    });  
+  };          
+
+  app.languages=['tots els idiomes', 'català', 'castellà', 'anglès'];
+  
+  // Fills the document with text according to the current language
+  var load = function () {
+    
+    app.title = app.options.title[app.lang];
+    app.description = app.options.description[app.lang];
+    app.langLabel = app.options.labels.languages[app.lang];
+    console.log(app.langLabel);
+    
+    
+    
+    /*   
+     this.$search.empty();
+     
+     this.$langSelect = $('<select name="language" class="filter"/>');
+     for (var i = 0; i < this.langs.options.length; i++) {
+     var l = this.langs.options[i];
+     this.$langSelect.append($('<option value="' + l + '"' + (i === 0 ? ' selected' : '') + '>' + this.langs[this.lang][l] + '</option>'));
+     }
+     this.$search.append(this.$langSelect);
+     
+     this.$levelSelect = $('<select name="level" class="filter"/>');
+     for (var i = 0; i < this.levels.options.length; i++) {
+     var l = this.levels.options[i];
+     this.$levelSelect.append($('<option value="' + l + '"' + (i === 0 ? ' selected' : '') + '>' + this.levels[this.lang][l] + '</option>'));
+     }
+     this.$search.append(this.$levelSelect);
+     
+     this.$areaSelect = $('<select name="area" class="filter"/>');
+     for (var i = 0; i < this.areas.options.length; i++) {
+     var l = this.areas.options[i];
+     this.$areaSelect.append($('<option value="' + l + '"' + (i === 0 ? ' selected' : '') + '>' + this.areas[this.lang][l] + '</option>'));
+     }
+     this.$search.append(this.$areaSelect);
+     
+     $('.filter').on('change', function () {
+     thisRepo.matchItems();
+     });
+     
+     
+     if (!this.projects) {
+     $.getJSON(this.options.index.path + '/' + this.options.index.file)
+     .done(function (data) {
+     thisRepo.projects = data;
+     thisRepo.matchItems();
+     })
+     .fail(function () {
+     thisRepo.$prjList.append($('<h2/>').html('ERROR loading repository data!'));
+     });
+     } else
+     this.matchItems();
+     */
+  };
+
+
+
 
   app.displayInstalledToast = function () {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
@@ -36,17 +140,17 @@
     // imports are loaded and elements have been registered    
 
     $('#mainContainer').on('scroll', function () {
-      
+
       var top = $(this).scrollTop();
       var height = $(this).innerHeight();
       var length = this.scrollHeight;
-      
-      console.log('scroll top: ' + top + ' - height: ' + height + ' (' +  (top+height) +') - scrollHeight: ' + length + ' (' + (length-top-height) + ')');
-      
-      if(length-top-height <= 10){
+
+      // console.log('scroll top: ' + top + ' - height: ' + height + ' (' +  (top+height) +') - scrollHeight: ' + length + ' (' + (length-top-height) + ')');
+
+      if (length - top - height <= 6) {
         app.search();
       }
-      
+
     });
 
 
@@ -91,20 +195,6 @@
     document.getElementById('mainContainer').scrollTop = 0;
   };
 
-  app.searchBak = function () {
-
-    var container = document.querySelector('#mainHome');
-
-    container.appendChild(app.generateCard('Projecte 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
-    container.appendChild(app.generateCard('Projecte 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.'));
-    container.appendChild(app.generateCard('Projecte 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.'));
-    container.appendChild(app.generateCard('Projecte 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'));
-    container.appendChild(app.generateCard('Projecte 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'));
-    container.appendChild(app.generateCard('Projecte 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
-    container.appendChild(app.generateCard('Projecte 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'));
-    container.appendChild(app.generateCard('Projecte 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute.'));
-  };
-
   app.search = function () {
     var $container = $('#mainHome');
 
@@ -119,23 +209,36 @@
 
   };
 
-  app.generateCardBak = function (title, description) {
-
-    var prj = document.createElement('project-card');
-    prj.setAttribute('elevation', 1);
-    prj.setAttribute('animated', true);
-    prj.title = title;
-    prj.description = description;
-
-    return prj;
-  };
-
   app.generateCard = function (title, description) {
 
-    var $prj = $('<project-card elevation=1 animated=true/>');
+    //var $prj = $('<project-card elevation="2" animated="true"/>');
+    var $prj = $('<prj-card elevation="1" animated="true"/>');
     $prj.attr('title', title);
     $prj.attr('description', description);
     return $prj;
   };
+
+  // Utility functions
+
+  // Converts an array of strings into a single string
+  /*
+   function enumList(list, sep, lower) {
+   var result = '';
+   
+   if (typeof sep !== 'string'){
+   sep = '|';
+   }
+   
+   for (var i = 0; i < list.length; i++) {
+   result = result + (lower ? list[i].toLowerCase() : list[i]);
+   if (i < list.length - 1){
+   result = result + sep;
+   }
+   }
+   return result;
+   }*/
+
+
+
 
 })(document);

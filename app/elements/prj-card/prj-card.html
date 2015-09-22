@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<!-- build:js bower_components/jquery/dist/jquery.min.js -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbuild -->
+
+<dom-module id="prj-card">
+
+  <template>
+    <paper-card heading="{{title}}" elevation="{{elevation}}" animated="{{animated}}">
+      <div class="card-content">{{description}}</div>
+      <div class="card-actions">
+        <paper-button>Show</paper-button>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    /* global $ */
+    var $currentCard = null;
+    Polymer({
+      is: 'prj-card',
+      properties: {
+        title: {
+          type: String,
+          value: 'No name'
+        },
+        description: {
+          type: String,
+          value: 'lorem ipsum...'
+        }
+      },
+      ready: function() {
+        $(this).on('click', function () {
+          console.log('click on '+this);
+          if ($currentCard !== null) {
+            $currentCard.attr('elevation', 2);
+          }
+          $currentCard = $(this);
+          $currentCard.attr('elevation', 4);
+        });
+        console.log('Card created! ');
+      }
+    });
+  </script>   
+</dom-module>

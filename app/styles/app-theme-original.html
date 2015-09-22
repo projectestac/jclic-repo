@@ -22,8 +22,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Application theme */
 
   :root {
-    
-    /*
     --dark-primary-color:       #7B1FA2;
     --default-primary-color:    #9C27B0;
     --light-primary-color:      #E1BEE7;
@@ -34,33 +32,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     --secondary-text-color:     #727272;
     --disabled-text-color:      #BDBDBD;
     --divider-color:            #B6B6B6;
-    */
 
 
     /* Components */
 
     /* paper-drawer-panel */
-    --drawer-menu-color:           var(--paper-toolbar-color);
+    --drawer-menu-color:           #ffffff;
     --drawer-border-color:         1px solid #ccc;
     --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
 
     /* paper-menu */
-    /*
     --paper-menu-background-color: #fff;
     --menu-link-color:             #111111;
-    */
 
     /* paper-input */
-    /*
    --paper-input-container-color:       rgba(255, 255, 255, 0.64);
    --paper-input-container-focus-color: rgba(255, 255, 255, 1);
    --paper-input-container-input-color: #fff;
-    */
    
-   --paper-card-header-color: (var --default-primary-color);
-   --paper-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);}; 
+   --paper-card-header-color: #9C27B0;
+   --paper-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);};
+   --paper-card-header-text: {};
+   --paper-card-header-image: {};
+   --paper-card-header-image-text: {};
    --paper-card-content: {font-size: 9pt;};
    --paper-card-actions: {font-size: 10pt;};
+   --paper-card: {};         
   }
 
   /* General styles */
@@ -85,6 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   project-card {
+    background: white;
     border-radius: 2px;
     height: 100%;
     padding: 16px 0 16px 0;

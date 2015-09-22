@@ -12,3 +12,17 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+.JCRLang {
+  padding: 0 0.3em;
+  border-right: 1pt solid;
+}
+
+.JCRLang:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.JCRLang.curLang {
+  font-weight: 800;
+}

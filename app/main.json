@@ -1,0 +1,24 @@
+{
+  "languages": ["en", "ca", "es"],
+  "langNames": ["English", "català", "español"],
+  "defaultLanguage": "en",
+  "title": {
+    "en": "JClic demo repository",
+    "ca": "Repositori JClic de demostració",
+    "es": "Repositorio JClic de demostración"
+  },
+  "description":{
+    "en": "Demo repository with some JClic sample projects",
+    "ca": "Repositori de demostració amb alguns projectes JClic",
+    "es": "Repositorio de demostración con algunos proyectos JClic"
+  },
+  "labels": {
+    "languages": {"en": "Languages", "ca": "Idiomes", "es": "Idiomas"}
+      
+  },
+  "logo": "logo.png",
+  "index": {
+    "path": "projects",
+    "file": "projects.json"
+  }
+}

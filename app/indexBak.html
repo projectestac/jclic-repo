@@ -13,10 +13,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Repository of JClic projects">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Polymer Starter Kit" />
-    <title>JClic library</title>
+    <title>Polymer Starter Kit</title>
     <!-- Place favicon.ico in the `app/` directory -->
 
     <!-- Chrome for Android theme color -->
@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="JClic library">
+    <meta name="application-name" content="PSK">
     <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
@@ -68,55 +68,116 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel">
+      <p>paperDrawerPanel</p>
       <!-- Drawer Scroll Header Panel -->
       <paper-scroll-header-panel drawer fixed>
+        <p>paper-scroll-header-panel</p>
+
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">Search activities</span>
+          <p>drawerToolbar</p>
+          <span class="paper-font-title">Menu</span>
         </paper-toolbar>
-        <!-- Selection form -->
-        <paper-dropdown-menu label="{{langLabel}}">
-          <paper-menu class="dropdown-content">
-            <template is="dom-repeat" items="{{languages}}">
-              <paper-item role="listitem">{{item}}</paper-item>              
-            </template>
-          </paper-menu>
-        </paper-dropdown-menu>
 
         <!-- Drawer Content -->
+        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+          <p>paper-menu class list</p>
+          <a data-route="home" href="/" on-click="onDataRouteClick">
+            <p>a data-route home</p>
+            <iron-icon icon="home"></iron-icon>
+            <span>Home</span>
+          </a>
+
+          <a data-route="users" href="/users" on-click="onDataRouteClick">
+            <p>a data-route users</p>
+            <iron-icon icon="info"></iron-icon>
+            <span>Users</span>
+          </a>
+
+          <a data-route="contact" href="/contact" on-click="onDataRouteClick">
+            <p>a data-route contact</p>
+            <iron-icon icon="mail"></iron-icon>
+            <span>Contact</span>
+          </a>
+        </paper-menu>
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
       <paper-scroll-header-panel main condenses keep-condensed-header>
+        <p>paper-scroll-header-panel</p>
+
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar" class="tall">
+          <p>mainToolbar</p>
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
+          <span class="flex">span flex</span>
 
           <!-- Toolbar icons -->
-          <div id="langSel"></div>
+          <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search" on-click="search"></paper-icon-button>
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">{{title}}</div>
+            <div class="app-name">JClicRepo test</div>
           </div>
 
           <!-- Application sub title -->
           <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">{{description}}</div>
+            <div class="bottom-title paper-font-subhead">Just testing...</div>
           </div>
 
         </paper-toolbar>
         
         <!-- Main Content -->
         <div class="content">
-          <iron-pages attr-for-selected="data-route" selected="home">            
-            <section data-route="home" id="mainHome">              
+          <p>div class content</p>
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">                       
+            <p>iron-pages attr-for-selected data-route</p>
+
+            <section data-route="home" id="mainHome">
+              <p>section mainHome</p>
+              
               <paper-material elevation="1">
-                <p class="paper-font-body2">Info</p>
+                <my-greeting></my-greeting>
+                <p class="paper-font-subhead">You now have:</p>
+                <my-list></my-list>
+
+                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+              </paper-material>
+
+              <paper-material elevation="2">
+                <p class="paper-font-body2">This is another card.</p>
+              </paper-material>
+
+            </section>
+
+            <section data-route="users">
+              <p>section users</p>
+              <paper-material elevation="1">
+                <h2 class="page-title">Users</h2>
+                <p>This is the users section</p>
+                <a href="/users/Rob">Rob</a>
               </paper-material>
             </section>
-            
+
+            <section data-route="user-info">
+              <p>section user-info</p>
+              <paper-material elevation="1">
+                <h2 class="page-title">
+                  User:<span>{{params.name}}</span>
+                </h2>
+                <div>This is <span>{{params.name}}</span>'s section</div>
+              </paper-material>
+            </section>
+
+            <section data-route="contact">
+              <p>section contact</p>
+              <paper-material elevation="1">
+                <h2 class="page-title">Contact</h2>
+                <p>This is the contact section</p>
+              </paper-material>
+            </section>
+
           </iron-pages>
         </div>
       </paper-scroll-header-panel>

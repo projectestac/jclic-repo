@@ -2,6 +2,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-styles/shadow.html">
 
+<!-- build:js bower_components/jquery/dist/jquery.min.js -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbuild -->
+
 
 <dom-module id="project-card">
 
@@ -34,60 +38,75 @@
     :host([elevation="5"]) {
       @apply(--shadow-elevation-16dp);
     }
-  </style>    
+  </style>
 
   <template>    
-    <p class="paper-font-body2">{{title}}</p>
-    <p class="paper-font-body1">{{description}}</p>
+    <p class="paper-font-body2 cardtitle">{{title}}</p>
+    <p class="paper-font-body1 description">{{description}}</p>
   </template>
 
   <script>
-    (function () {
-      'use strict';
+/* global $ */
 
-      Polymer({
-        is: 'project-card',
-        properties: {
-          title: {
-            type: String,
-            value: 'No name'
-          },
-          description: {
-            type: String,
-            value: 'lorem ipsum...'
-          }
-        },
-        /**
-         * Attributes inherited from paper-material
-         * 
-         * The z-depth of this element, from 0-5. Setting to 0 will remove the
-         * shadow, and each increasing number greater than 0 will be "deeper"
-         * than the last.
-         *
-         * @attribute elevation
-         * @type number
-         * @default 1
-         */
-        elevation: {
-          type: Number,
-          reflectToAttribute: true,
-          value: 1
-        },
-        /**
-         * Set this to true to animate the shadow when setting a new
-         * `elevation` value.
-         *
-         * @attribute animated
-         * @type boolean
-         * @default false
-         */
-        animated: {
-          type: Boolean,
-          reflectToAttribute: true,
-          value: false
+var $currentCard = null;
+
+(function () {
+  'use strict';
+
+  Polymer({
+    is: 'project-card',
+    properties: {
+      title: {
+        type: String,
+        value: 'No name'
+      },
+      description: {
+        type: String,
+        value: 'lorem ipsum...'
+      },
+      /**
+       * The z-depth of this element, from 0-5. Setting to 0 will remove the
+       * shadow, and each increasing number greater than 0 will be "deeper"
+       * than the last.
+       *
+       * @attribute elevation
+       * @type number
+       * @default 1
+       */
+      elevation: {
+        type: Number,
+        reflectToAttribute: true,
+        value: 1
+      },
+      /**
+       * Set this to true to animate the shadow when setting a new
+       * `elevation` value.
+       *
+       * @attribute animated
+       * @type boolean
+       * @default false
+       */
+      animated: {
+        type: Boolean,
+        reflectToAttribute: true,
+        value: false
+      }
+
+    },
+    ready: function () {
+      $(this).find('.cardtitle').on('click', function () {
+        if($currentCard !== null){          
+          $currentCard.parent().css({width: ''});
+          console.log('Current card: '+$currentCard.text());
         }
+        $currentCard = $(this);
+        $currentCard.parent().css({width: '400px'});
+        console.log('Click on ' + $currentCard.text());
       });
-    })();
+      console.log('Card created!');
+    }
+  });
+})();
   </script>
 
 </dom-module>
