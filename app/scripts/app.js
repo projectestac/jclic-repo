@@ -22,6 +22,7 @@
   app.title = '';
   app.description = '';
   app.langLabel = '';
+  app.searchLabel = '';
 
   // Load 'main.json'
   $.getJSON('main.json')
@@ -64,7 +65,20 @@
     });  
   };          
 
-  app.languages=['tots els idiomes', 'català', 'castellà', 'anglès'];
+  app.actLanguages=[];  
+  app.currentLang = 0;
+  
+  app.actSubjects=[];  
+  app.currentSubject = 0;
+  
+  app.actLevels=[];  
+  app.currentLevel = 0;
+  
+  app.filterChanged = function() {
+    console.log('Language: '+app.actLanguages[app.currentLang].val);
+    console.log('Subject: '+app.actSubjects[app.currentSubject].val);
+    console.log('Level: '+app.actLevels[app.currentLevel].val);
+  };
   
   // Fills the document with text according to the current language
   var load = function () {
@@ -72,8 +86,12 @@
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
     app.langLabel = app.options.labels.languages[app.lang];
-    console.log(app.langLabel);
-    
+    app.searchLabel = app.options.labels.search[app.lang];
+    app.actLanguages = app.options.actLanguages[app.lang];
+    app.subjectLabel = app.options.labels.subjects[app.lang];
+    app.actSubjects = app.options.actSubjects[app.lang];
+    app.levelLabel = app.options.labels.levels[app.lang];
+    app.actLevels = app.options.actLevels[app.lang];
     
     
     /*   

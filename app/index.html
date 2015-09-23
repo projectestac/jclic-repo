@@ -72,17 +72,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-scroll-header-panel drawer fixed>
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">Search activities</span>
+          <span class="paper-font-title">{{searchLabel}}</span>
         </paper-toolbar>
         <!-- Selection form -->
-        <paper-dropdown-menu label="{{langLabel}}">
-          <paper-menu class="dropdown-content">
-            <template is="dom-repeat" items="{{languages}}">
-              <paper-item role="listitem">{{item}}</paper-item>              
+        <paper-dropdown-menu label="{{langLabel}}" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentLang}}">
+            <template is="dom-repeat" items="{{actLanguages}}">
+              <paper-item role="listitem">{{item.text}}</paper-item>              
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu>
+        
+        <paper-dropdown-menu label="{{subjectLabel}}" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentSubject}}">
+            <template is="dom-repeat" items="{{actSubjects}}">
+              <paper-item role="listitem">{{item.text}}</paper-item>              
             </template>
           </paper-menu>
         </paper-dropdown-menu>
 
+        <paper-dropdown-menu label="{{levelLabel}}" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentLevel}}">
+            <template is="dom-repeat" items="{{actLevels}}">
+              <paper-item role="listitem">{{item.text}}</paper-item>              
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu>
+        
         <!-- Drawer Content -->
       </paper-scroll-header-panel>
 
