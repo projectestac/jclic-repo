@@ -9,7 +9,7 @@
 <dom-module id="prj-card">
 
   <template>
-    <paper-card heading="{{title}}" elevation="{{elevation}}" animated="{{animated}}">
+    <paper-card heading="{{title}}" elevation="{{elevation}}" animated="{{animated}}" image="{{image}}">
       <div class="card-content">{{description}}</div>
       <div class="card-actions">
         <paper-button>Show</paper-button>
@@ -29,6 +29,10 @@
         description: {
           type: String,
           value: 'lorem ipsum...'
+        },
+        image: {
+            type: String,
+            value: ''
         }
       },
       ready: function() {
