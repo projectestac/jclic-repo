@@ -61,6 +61,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    --paper-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);}; 
    --paper-card-content: {font-size: 9pt;};
    --paper-card-actions: {font-size: 10pt;};
+   
+   --prj-card-header-color: (var --default-primary-color);
+   --prj-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);}; 
+   --prj-card-content: {font-size: 9pt;};
+   --prj-card-actions: {font-size: 10pt;};
+   
   }
 
   /* General styles */
@@ -75,6 +81,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     height: 100%;
   }
 
+  prj-card {
+    width: calc(200px);
+    margin: 8px;
+    vertical-align: top;
+  }
+  
   paper-material {
     border-radius: 2px;
     height: 100%;
@@ -91,14 +103,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     margin: 16px auto;    
     display: inline-block;
     width: 200px;    
-  }
-  
-  prj-card {
-    height: 100%;
-    padding: 16px 0 16px 0;
-    margin: 16px auto;    
-    display: inline-block;
-    width: 200px;
   }
   
   paper-menu iron-icon {
@@ -183,7 +187,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     prj-card {
       --menu-container-display: none;      
-      width: calc(97.33% - 32px);      
+      width: calc(97.33% - 16px);
+      background: orange
     }
     
     paper-toolbar.tall .app-name {
@@ -227,12 +232,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     
     prj-card {
-      width: 200px;
-      min-height: 200px;
-      display: run-in;
-      vertical-align: top;
-      margin-bottom: 16px;
-      margin-right: 16px;
     }
 
     #drawer.paper-drawer-panel > [drawer] {

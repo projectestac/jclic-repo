@@ -1,51 +1,160 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<!-- Based on paper-card -->
 
-<!-- build:js bower_components/jquery/dist/jquery.min.js -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- endbuild -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 
 <dom-module id="prj-card">
-
   <template>
-    <paper-card heading="{{title}}" elevation="{{elevation}}" animated="{{animated}}" image="{{image}}">
-      <div class="card-content">{{description}}</div>
-      <div class="card-actions">
-        <paper-button>Show</paper-button>
-      </div>
-    </paper-card>
-  </template>
-  <script>
-    /* global $ */
-    var $currentCard = null;
-    Polymer({
-      is: 'prj-card',
-      properties: {
-        title: {
-          type: String,
-          value: 'No name'
-        },
-        description: {
-          type: String,
-          value: 'lorem ipsum...'
-        },
-        image: {
-            type: String,
-            value: ''
-        }
-      },
-      ready: function() {
-        $(this).on('click', function () {
-          console.log('click on '+this);
-          if ($currentCard !== null) {
-            $currentCard.attr('elevation', 2);
-          }
-          $currentCard = $(this);
-          $currentCard.attr('elevation', 4);
-        });
-        console.log('Card created! ');
+    <style>
+      :host {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+
+        background: #fff;
+        border-radius: 2px;
+        @apply(--prj-card);
       }
-    });
-  </script>   
+
+      paper-material {
+        border-radius: inherit;
+        @apply(--layout-fit);
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      [hidden] {
+        display: none !important;
+      }
+
+      .header {
+        position: relative;
+        height: 170px;
+        @apply(--prj-card-header);
+      }
+
+      .header img {
+        width: 100%;
+        pointer-events: none;
+        @apply(--prj-card-header-image);
+      }
+
+      .header .title-text {
+        padding: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--prj-card-header-color, #000);
+        @apply(--prj-card-header-text);
+      }
+
+      .header .title-text.over-image {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(255, 255, 255, 0.85);
+        padding-right: 50px;
+        right: 0px;
+        @apply(--prj-card-header-image-text);
+      }
+      
+      paper-fab {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        margin: 5px;
+      }
+
+      :host ::content .card-content {
+        padding: 8px;
+        position:relative;
+        @apply(--prj-card-content);
+      }
+
+      :host ::content .card-actions {
+        border-top: 1px solid #e8e8e8;
+        padding: 5px 16px;
+        position:relative;
+        @apply(--prj-card-actions);
+      }
+    </style>
+
+    <paper-material animated$="[[animatedShadow]]" elevation="[[elevation]]"></paper-material>
+
+    <div class="header" style$="[[_getHeaderStyle(image)]]">
+      <!-- img hidden$="[[!image]]" src="[[image]]" -->
+      <div hidden$="[[!heading]]" class$="[[_computeHeadingClass(image)]]">[[heading]]</div>
+      <paper-fab mini icon="av:play-arrow"></paper-fab>
+    </div>
+
+    <content></content>
+  </template>
+
 </dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'prj-card',
+
+    properties: {
+
+      /**
+       * The title of the card.
+       */
+      heading: {
+        type: String,
+        value: '',
+        observer: '_headingChanged'
+      },
+
+      /**
+       * The url of the title image of the card.
+       */
+      image: {
+        type: String,
+        value: ''
+      },
+
+      /**
+       * The z-depth of the card, from 0-5.
+       */
+      elevation: {
+        type: Number,
+        value: 1
+      },
+
+      /**
+       * Set this to true to animate the card shadow when setting a new
+       * `z` value.
+       */
+      animatedShadow: {
+        type: Boolean,
+        value: false
+      }
+    },
+
+    _headingChanged: function(heading) {
+      //var label = this.getAttribute('aria-label');
+      this.setAttribute('aria-label', heading);      
+    },
+    
+    _getHeaderStyle: function(image) {
+      var result = '';
+      if(image){
+        result = result + ';background: no-repeat center/150% url("' + image + '")';
+      } 
+      return result;
+    },
+
+    _computeHeadingClass: function(image) {
+      var cls = 'title-text';
+      if (image){
+        cls += ' over-image';
+      }
+      return cls;
+    }
+  });
+</script>
