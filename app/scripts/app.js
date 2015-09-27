@@ -77,7 +77,7 @@
   app.projects = null;
   app.matchProjects = [];
   app.lastItem = 0;
-  app.itemsPerScroll = 5;
+  app.itemsPerScroll = 20;
 
   app.filterChanged = function () {
     app.matchItems();
@@ -182,7 +182,7 @@
 
       // console.log('scroll top: ' + top + ' - height: ' + height + ' (' +  (top+height) +') - scrollHeight: ' + length + ' (' + (length-top-height) + ')');
 
-      if (length - top - height <= 6) {
+      if (length - top - height <= 10) {
         //app.search();
         app.fillList();
       }
