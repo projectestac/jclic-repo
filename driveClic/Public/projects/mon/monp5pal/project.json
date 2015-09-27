@@ -1,0 +1,53 @@
+{
+  "title": "El món et parla (Lletra de pal)",
+  "author": "Enric J. López, Imma Palahí i Maria Borrell Col·laboració: Aram López Veu: Nil López",
+  "school": "Escola Especial Concha Espina Barcelona, Escola Brasil Barcelona, Escola Diagonal-Mar Barcelona",
+  "date": "19/11/07",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "ca": "Diversos",
+    "es": "Diversos",
+    "en": "Miscellaneous"
+  },
+  "areaCodes": [
+    "div"
+  ],
+  "levels": {
+    "ca": "Infantil (3-6)",
+    "es": "Infantil (3-6)",
+    "en": "Kindergarten (3-6)"
+  },
+  "levelCodes": [
+    "INF"
+  ],
+  "description": {
+    "en": "<i>El món et parla</i> is a set of three projects addressed to the three courses of kindergarten being able to use it also for special education and classroom of reception. \n<ul> \n <li>El món et parla 1</li> \n <li>El món et parla 2</li> \n <li>El món et parla 3</li> \n</ul>",
+    "ca": "El món et parla és un conjunt de tres projectes adreçats als tres cursos d'educació infantil podent-se utilitzar també per educació especial i aula d'acollida. \n<ul> \n <li><b>El món et parla 1</b>: Creat a base de dibuixos molt senzills que intenten donar suport a un conjunt de sons organitzats en 9 temes, amb 10 audicions cada una. <br> Cada tema està organitzat en 2 parts. La primera (una activitat) de reconeixement i relació imatge-so, i la segona (10 activitats) on hi ha un so i s'ha de relacionar amb la seva imatge. </li>\n <li><b>El món et parla 2</b>: Creat a base de dibuixos molt senzills que intenten donar suport a un conjunt de sons organitzats en 9 temes, amb 10 audicions cada una. <br> Aquest joc tracta d'escoltar una pregunta i respondre segons el dibuix que s'observa. La resposta es fa amb unes tires de paraules que estan barrejades i s¿han d'organitzar correctament. En clicar cada una de les paraules s'escolta la paraula, la qual cosa facilita la lectura als nens i nenes que encara no en saben.<br> Permet fer un bon estudi de la frase, conservant l'article, nom, verb i complement.<br> Quan es confegeix correctament es sent la frase i el soroll que la representa. </li>\n <li><b>El món et parla 3</b>: Creat a base de dibuixos molt senzills que intenten donar suport a un conjunt de sons organitzats en 9 temes, amb 10 audicions cada una. <br> Aquest joc tracta d'escoltar l'endevinalla tot llegint i clicar en primera opció la resposta correcta. Quan desapareixen totes les opcions no valides s'escolta el so que la representa.<br> Les endevinalles es poden memoritzar, escriure, llegir-les en veu alta... </li>\n</ul>",
+    "es": "<i>El món et parla</i> es un conjunto de tres proyectos dirigidos a los tres cursos de educación infantil pudiendose utilizar también para educación especial y aula de acogida. \n<ul> \n <li><b>El món et parla 1</b>: Creado a partir de dibujos muy sencillos que intentan dar soporte a un conjunto de sonidos organizados en 9 temas, con 10 audiciones cada una.<br> Cada tema está organizado en 2 partes. La primera (una actividad) de reconocimiento y relación imagen-sonido, y la segunda (10 actividades) dónde hay un sonido y se debe relacionar con su imagen. </li>\n <li><b>El món et parla 2</b>: Creado a base de dibujos muy sencillos que intentan dar soporte a un conjunto de sonidos organizados en 9 temas.<br> Este juego trata de escuchar una pregunta y responder segun el dibujo que se observa. La respuesta se hace con unas tiras de palabras que están mezcladas y se han de organizar correctamente. Al hacer clic en una de las palabras se escucha la palabra, lo cual facilita la lectura a los niños y niñas que aún no saben.<br> Permite hacer un buen estudio de la frase, conservando el artículo, nombre, verbo y complemento.<br> Cuando se confecciona correctamente se oye la frase y el ruido que la representa. </li>\n <li><b>El món et parla 3</b>: Creado a base de dibujos muy sencillos que intentan dar soporte a un conjunto de sonidos organizados en 9 temas.<br> Este juego trata de escuchar la adivinanza leyendo y haciendo clic en la primera opción la respuesta correcta. Cuando desaparecen todas las opciones no válidas se escucha el sonido que representa.<br> Las adivinanzas se pueden memorizar, escribir, leerlas en voz alta...</li>\n</ul>"
+  },
+  "license": {
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3330,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3330",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/mon/monp5pal/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

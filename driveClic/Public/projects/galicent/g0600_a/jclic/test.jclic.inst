@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JClicInstall title="test" folder="test">
+ <file src="test.jclic.zip" />
+ <shortcut project="test.jclic.zip" text="test" description="Just testing" />
+</JClicInstall>
+

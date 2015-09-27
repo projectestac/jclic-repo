@@ -1,0 +1,53 @@
+{
+  "title": "El superdòmino",
+  "author": "Toni Miquel Mollà",
+  "school": "CP Crist de la Pau Sant Joan d'Alacant (Alacantí)",
+  "date": "10/11/03",
+  "languages": {
+    "en": "Basque",
+    "ca": "basc",
+    "es": "euskara"
+  },
+  "langCodes": [
+    "eu"
+  ],
+  "areas": {
+    "ca": "Matemàtiques",
+    "es": "Matemáticas",
+    "en": "Mathematics"
+  },
+  "areaCodes": [
+    "mat"
+  ],
+  "levels": {
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)",
+    "en": "Primary school (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "Mathematic activities with dominoes. This package contains:\n<br> \n<ul> \n <li>Fill series </li>\n <li>Sort out tokens </li>\n <li>Additions </li>\n <li>Find couples </li>\n <li>Find relationships </li>\n <li>etc. </li>\n</ul>",
+    "ca": "Conjunt de 16 paquets d'activitats amb exercicis matemàtics plantejats amb les fitxes del dòmino: \n<ul> \n <li>Completar sèries </li>\n <li>Ordenar fitxes </li>\n <li>Sumar </li>\n <li>Trobar parelles </li>\n <li>Relacionar </li>\n <li>Assenyalar </li>\n <li>... </li>\n</ul>",
+    "es": "Conjunto de 16 paquetes de actividades con ejercicios matemáticos planteados con las fichas del dominó: \n<ul> \n <li>Completar series </li>\n <li>Ordenar fichas </li>\n <li>Sumar </li>\n <li>Encontrar parejas </li>\n <li>Relacionar </li>\n <li>Señalar </li>\n <li>... </li>\n</ul>"
+  },
+  "license": {
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 1360,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1360",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/domineus/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

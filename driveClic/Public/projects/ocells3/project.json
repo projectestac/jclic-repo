@@ -1,0 +1,52 @@
+{
+  "title": "Els ocells de Catalunya",
+  "author": "Joaquima Paretas Ros JOAQUIMA PARETAS ROS",
+  "date": "26/03/15",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Experimental sciences",
+    "ca": "Ciències experimentals",
+    "es": "Ciencias experimentales"
+  },
+  "areaCodes": [
+    "exp"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "This project includes different activities with different modalities in order to publicize different birds from Catalonia.",
+    "ca": "En aquest projecte d'activitats JClic s'inclouen diferents activitats amb diferents modalitats per tal de donar a conèixer diferents ocells de Catalunya.",
+    "es": "En este proyecto de actividades JClic se incluyen diferentes actividades con diferentes modalidades para dar a conocer diferentes aves de Cataluña."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3887,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3887",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/ocells3/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Les fruites",
+  "author": "Eva Serinyà Suy",
+  "school": "Escola Pompeu Fabra Anglès (Selva)",
+  "date": "15/06/06",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Experimental sciences",
+    "ca": "Ciències experimentals",
+    "es": "Ciencias experimentales"
+  },
+  "areaCodes": [
+    "exp"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6)",
+    "ca": "Infantil (3-6)",
+    "es": "Infantil (3-6)"
+  },
+  "levelCodes": [
+    "INF"
+  ],
+  "description": {
+    "en": "Project of activities about the fruits addressed to kindergarten. The project has 3 parts.",
+    "ca": "Projecte d'activitats sobre les fruites estructurat en tres parts. Una primera dirigida a alumnes de P-3, la segona per a P-4 i la tercera per a P-5. Les tres parts es diferencien entre elles pel nivell de dificultat gradual que tenen.",
+    "es": "Proyecto de actividades sobre las frutas estructurado en tres partes. Una primera dirigida a alumnos de P-3, la segunda para P-4 y la tercera para P-5. Las partes se diferencian entre ellas por el nivel de dificultad que tienen."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3312,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3312",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/fruites/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

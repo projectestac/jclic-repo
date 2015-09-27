@@ -1,0 +1,53 @@
+{
+  "title": "Sèries",
+  "author": "Montserrat Vega Hors",
+  "school": "Escola Lluís Millet Santa Coloma de Gramenet (Barcelonès)",
+  "date": "24/07/02",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "ca": "Matemàtiques",
+    "es": "Matemáticas",
+    "en": "Mathematics"
+  },
+  "areaCodes": [
+    "mat"
+  ],
+  "levels": {
+    "ca": "Infantil (3-6), Primària (6-12)",
+    "es": "Infantil (3-6), Primaria (6-12)",
+    "en": "Kindergarten (3-6), Primary school (6-12)"
+  },
+  "levelCodes": [
+    "INF", "PRI"
+  ],
+  "description": {
+    "en": "This activity pack works on the ordering and serialization of various elements.",
+    "ca": "Aquest paquet d'activitats està pensat per treballar diversos aspectes de l'ordenació i la seriació d'elements. Hi trobareu 15 activitats de tres tipus barrejades al llarg del paquet: copiar una sèrie d'elements, trobar l'element que falta i ordenar segons un criteri.\n<br> Cal tenir l'ordinador configurat per a 256 colors.",
+    "es": "Este paquete de actividades está pensado para trabajar distintos aspectos de la ordenación y la seriación de elementos. Encontraréis 15 actividades de tres tipos mezcladas en el paquete: copiar una serie de elementos, encontrar el elemento que falta y ordenar según un criterio. \n<br> Conviene configurar la pantalla a 256 colores."
+  },
+  "license": {
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 1294,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=1294",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/series/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "Pirates! a l'abordatge!",
+  "author": "Alfonso Domínguez Sala, Núria Comellas i Susagna Argemí",
+  "school": "Escola Gras i Soler Esplugues de Llobregat (Baix Llobregat)",
+  "date": "12/03/08",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Social sciences, Languages, Mathematics",
+    "ca": "Ciències socials, Llengües, Matemàtiques",
+    "es": "Ciencias sociales, Lenguas, Matemáticas"
+  },
+  "areaCodes": [
+    "soc",
+    "lleng",
+    "mat"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6), Primary school (6-12)",
+    "ca": "Infantil (3-6), Primària (6-12)",
+    "es": "Infantil (3-6), Primaria (6-12)"
+  },
+  "levelCodes": [
+    "INF",
+    "PRI"
+  ],
+  "description": {
+    "en": "Project of activities to learn the Pirates' world. It's used as a steering theme which embraces the body parts, the transport media, the pirates' elements, the quantity notion form 1 to 6, the geometric figures (circle, square, triangle and rectangle), reading and writing the word \"pirate\" and other meaningful words, and at the end one pirate song.",
+    "ca": "Projecte d'activitats per conèixer el món dels Pirates. A partir d'aquest centre d'interès es treballen les parts bàsiques del cos, els mitjans de transport, els elements pirates, la noció de quantitat de l'1 al 6, les figures geomètriques (cercle, quadrat, triangle i rectangle), la lectoescriptura de la paraula \"pirata\" i d'altres paraules significatives, i per últim trobem l'audició d'una cançó pirata.",
+    "es": "Proyecto de actividades para conocer el mundo de los Piratas. A partir de este centro de interés se trabajan las partes básicas del cuerpo, los medios de transporte, los elementos piratas, la noción de cantidad del 1 al 6, las figuras geométricas (círculo, cuadrado, triángulo y rectángulo), la lectoescritura de la palabra \"pirata\" y de otras palabras significativa, y por último encontramos la audición de una canción pirata."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3449,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3449",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/pirabord/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

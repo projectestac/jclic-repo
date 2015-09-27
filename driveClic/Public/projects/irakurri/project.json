@@ -1,0 +1,53 @@
+{
+  "title": "Irakurketa hasteko",
+  "author": "José Manuel Mikelez",
+  "school": "Maria Auxiliadora Ikastetxea Intxaurrondo (Donostia)",
+  "date": "15/07/02",
+  "languages": {
+    "en": "Basque",
+    "ca": "basc",
+    "es": "euskara"
+  },
+  "langCodes": [
+    "eu"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6)",
+    "ca": "Infantil (3-6)",
+    "es": "Infantil (3-6)"
+  },
+  "levelCodes": [
+    "INF"
+  ],
+  "description": {
+    "en": "Bilingual program in Spanish and euskera designed for students in the beginning stages of reading. It is based on relationships between texts and figures.",
+    "ca": "Programa bilingüe euskera-espanyol d'iniciació a la lectura, dirigit a l'alumnat d'educació infantil. Es basa en la relació figura-text. Té quatre possibilitats: relacionar figura-text, ordenar figures un cop llegit el text, buscar les vocals perdudes i, donada una figura, escriure el seu nom. \n<br> Irakurketa hasteko programa bat da, Haur Hezkuntzako ikasleentzako zuzendua, 5 eta 4 urteko ikasleeentzat. Programak duen ezagarri nagusia testua eta irudiaren arteko lotura aurkitzea da. Euskeraz eta gasteliaz dago.",
+    "es": "Irakurketa hasteko programa bat da, Haur Hezkuntzako ikasleentzako zuzendua, 5 eta 4 urteko ikasleeentzat. Programak duen ezagarri nagusia testua eta irudiaren arteko lotura aurkitzea da. Euskeraz eta gasteliaz dago. \n<br> Es un programa bilingüe eusquera-español de iniciación a la lectura, dirigido al alumnado de educación infantil. Se basa en la relación figura texto. Tiene 4 posibilidades: relacionar figura-texto, ordenar figuras después de leído el texto, buscar las vocales perdidas y dada una figura escribir su nombre."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 1145,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1145",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/irakurri/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Els tres óssos",
+  "author": "M. Teresa Alcoceba Cardenal i Nieves Alcoceba",
+  "school": "Escola Pablo Neruda L'Hospitalet de Llobregat (Barcelonès), Escola Prosperitat Barcelona",
+  "date": "19/07/02",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6), Primary school (6-12)",
+    "ca": "Infantil (3-6), Primària (6-12)",
+    "es": "Infantil (3-6), Primaria (6-12)"
+  },
+  "levelCodes": [
+    "INF",
+    "PRI"
+  ],
+  "description": {
+    "en": "Catalan language activities based upon the children's story \"Ricitos de oro y los tres osos\". The main concepts worked on are: \n<li>Numbers 1-3 </li>\n<li>Size (small, medium, large) </li>\n<li>Logical sequences </li>\n<li>Spatial orientation </li>",
+    "ca": "Paquet d'activitats sobre el conte dels tres óssos i la Rínxols d'or adreçat a educació infantil i cicle inicial de primària. S'hi treballen conceptes com els nombres de l'u al tres, les mides (petit - gran - mitjà), seqüències lògiques i orientació espacial.",
+    "es": "Paquete de actividades en catalán sobre el cuento de Ricitos de oro y los tres osos. Se trabajan conceptos como los números del uno al tres, los tamaños (pequeño, grande y mediano), secuencias lógicas y orientación espacial."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 1207,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=1207",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/ossos/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "JClic demo activities",
+  "author": "Francesc Busquets",
+  "school": "Àrea TIC - Departament d'Educació Barcelona",
+  "date": "16/05/07",
+  "languages": {
+    "en": "Italian",
+    "ca": "italià",
+    "es": "italiano"
+  },
+  "langCodes": [
+    "it"
+  ],
+  "areas": {
+    "en": "",
+    "ca": "",
+    "es": ""
+  },
+  "areaCodes": [
+    ""
+  ],
+  "levels": {
+    "en": "",
+    "ca": "",
+    "es": ""
+  },
+  "levelCodes": [
+    ""
+  ],
+  "description": {
+    "en": "The main objective of this project is to show samples of the diverse types of activities and the main features of JClic. The project is organized in two parts: first, there is a sequence for each one of the basic types of activities (puzzles, associations, scrambled letters, crossword and text activities). In the second part there is a review of the new features of JClic compared to the previous version, Clic 3.0.",
+    "ca": "L'únic objectiu d'aquest projecte és mostrar els diversos tipus d'activitats i les principals funcionalitats del JClic.El projecte està organitzat en dues parts: a la primera hi ha una seqüència per a cada un dels tipus bàsics d'activitats (trencaclosques, associacions, sopes de lletres, mots encreuats i activitats de text) i a la segona es fa un repàs de les principals novetats del JClic respecte a la versió anterior, Clic 3.0.",
+    "es": "El único objetivo de este proyecto es mostrar los diversos tipos de actividades y las principales funcionalidades de JClic.El proyecto está organizado en dos partes: en la primera hay una secuencia para cada uno de los tipos básicos de actividades (puzzles, asociaciones, sopas de letras, crucigramas y actividades de texto) y en la segunda se hace un repaso de las principales novedades de JClic respecto a la anterior versión, Clic 3.0."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 2740,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=2740",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/demo_it/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Geoclic",
+  "author": "Jaume Bartrolí Brugués Col·laboració: Antonia Martínez Guirao",
+  "school": "Institut Manuel Carrasco i Formiguera Barcelona",
+  "date": "02/07/08",
+  "languages": {
+    "en": "Italian",
+    "ca": "italià",
+    "es": "italiano"
+  },
+  "langCodes": [
+    "it"
+  ],
+  "areas": {
+    "en": "Mathematics",
+    "ca": "Matemàtiques",
+    "es": "Matemáticas"
+  },
+  "areaCodes": [
+    "mat"
+  ],
+  "levels": {
+    "en": "Primary school (6-12), Secondary school (12-16)",
+    "ca": "Primària (6-12), Secundària (12-16)",
+    "es": "Primaria (6-12), Secundaria (12-16)"
+  },
+  "levelCodes": [
+    "PRI",
+    "SEC"
+  ],
+  "description": {
+    "en": "Geoclic is a group of 500 geometry activities grouped in 40 packs. This activities are designed for high school students and can be used as part of the curriculum or as complement to the class work.\n<p> <i>GeoClic english adaptation has been done with the support of the Socrates-Minerva Programme<br> Project V.I.M.(116338 - CP - 1 - 2004 - 1 - IT - MINERVA - MPP)</i> </p>",
+    "ca": "Geoclic és un conjunt de 500 activitats de geometria agrupades en 40 paquets temàtics. Estan pensades per a alumnes d'ESO, tant per al currículum comú com variable de matemàtiques (crèdits variables tipificats \"L'Altra geometria\" i \"Moviments en el pla\").\n<br> Poden ser utilitzades també en l'àrea d'educació visual i plàstica i moltes activitats són també aprofitables en l'Ensenyament Primari. A més a més, les funcionalitats de l'entorn Clic les fa adients per a alumnes amb certes discapacitats físiques i/o sensorials.\n<br> El programa inclou una guia didàctica en format Word (DOC) amb materials complementaris, orientacions, bibliografia, recull d'enllaços a internet i activitats d'avaluació.\n<br> \n<b>IMPORTANT:</b> Per a utilitzar les activitats cal configurar el monitor a una resolució de 800x600 o superior. Quan s'utilitza a 800x600 convé activar l'opció \"Amagar automáticament\" en la configuració de la barra de tasques del Windows, per tal que el programa pugui utilitzar tota la pantalla. \n<p> <i>L'adaptació del GeoClic a l'anglès ha estat feta amb l'ajuda del Programa Sócrates-Minerva<br> Projecte V.I.M. (116338 - CP - 1 - 2004 - 1 - IT - MINERVA - MPP)</i> </p>",
+    "es": "Geoclic es un conjunto de 500 actividades de geometría agrupadas en 40 paquetes temáticos. Están pensadas para alumnos de ESO, tanto para el currículum común como variable de matemáticas (créditos variables tipificados \"La otra geometría\" y \"Movimientos en el plano\").\n<br> Pueden ser utilizadas también en el área de educación visual y plástica, y muchas actividades son también aprovechables en la Educación Primaria. Además, las funcionalidades del entorno Clic las hace adecuadas para alumnos con ciertas discapacidades físicas y/o sensoriales.\n<br> \n<b>IMPORTANTE:</b> Para utilizar las actividades hay que configurar el monitor a una resolución de 800x600 o superior. Cuando se utiliza a 800x600 conviene activar la opción \"Esconder automáticamente\" en la configuración de la barra de tareas de Windows, para que el programa pueda utilizar la pantalla.\n<p> <i>La adaptación del GeoClic al inglés se ha hecho con la ayuda del Programa Sócrates-Minerva<br> Proyecto V.I.M. (116338 - CP - 1 - 2004 - 1 - IT - MINERVA - MPP)</i> </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 1308,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1308",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geoclici/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

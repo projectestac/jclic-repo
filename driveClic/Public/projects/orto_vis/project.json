@@ -1,0 +1,53 @@
+{
+  "title": "Ortografia i memòria visual",
+  "author": "Oriol Bosch Fainé",
+  "school": "Escola L'Esqueix - ZER El Moianès Monistrol de Calders (Bages)",
+  "date": "21/04/15",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "This project includes several activities related with common words proposed in the work \n<i>Ortografia sense esforç</i> (Spelling effortlessly) by Daniel Gabarró.\n<p> The first block is a sample of activities with simple words. The second block according to the difficulty of words is a little higher. In the third block there activities of these words (and other). </p>",
+    "ca": "Aquest projecte recull diferents activitats relacionades, entre d'altres, amb les paraules d'ús comú que es proposen en el treball Ortografia sense esforç de Daniel Gabarró. Amb aquestes es vol afavorir el treball i millora de la memòria visual i per tant de l'ortografia.\n<p> En un primer bloc hi ha una mostra de possibles activitats de paraules senzilles (no tenen accent). En el segon bloc la dificultat de les paraules és una mica més elevada. En el tercer bloc hi ha activitats d'aplicació d'aquestes paraules (i altres) en textos. </p>",
+    "es": "Este proyecto recoge diferentes actividades relacionadas, entre otras, con las palabras de uso común que se proponen en el trabajo Ortografía sin esfuerzo de Daniel Gabarró. Con estas se quiere favorecer el trabajo y mejora de la memoria visual y por tanto de la ortografía.\n<p> En un primer bloque hay una muestra de posibles actividades de palabras sencillas (no tienen acento). En el segundo bloque la dificultad de las palabras es un poco más elevada. En el tercer bloque hay actividades de aplicación de estas palabras (y otros) en textos. </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3894,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3894",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/orto_vis/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

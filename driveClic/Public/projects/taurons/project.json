@@ -1,0 +1,54 @@
+{
+  "title": "El tauró",
+  "author": "Anna Castelló",
+  "date": "28/06/12",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Experimental sciences, Languages, Mathematics",
+    "ca": "Ciències experimentals, Llengües, Matemàtiques",
+    "es": "Ciencias experimentales, Lenguas, Matemáticas"
+  },
+  "areaCodes": [
+    "exp",
+    "lleng",
+    "mat"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "Project of activities about sharks addressed to kindergarten: \n<ul> \n <li>habitat of sharks </li>\n <li>parts of sharks </li>\n <li>Adds with sharks  </li>\n</ul>",
+    "ca": "Projecte d'activitats sobre els taurons adreçat a cicle inicial. Al llarg del projecte trobem activitats de diferents temàtiques: \n<ul> \n <li>hàbitat dels taurons </li>\n <li>parts dels taurons </li>\n <li>comptar taurons </li>\n</ul>",
+    "es": "Proyecto de actividades sobre los tiburones dirigido a ciclo inicial. A lo largo del proyecto encontramos actividades de diferentes temáticas: \n<ul> \n <li>hábitat de los tiburones </li>\n <li>partes de los tiburones </li>\n <li>contar tiburones </li>\n</ul>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3782,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3782",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/taurons/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

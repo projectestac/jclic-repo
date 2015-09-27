@@ -1,0 +1,54 @@
+{
+  "title": "El transport en la indústria química",
+  "author": "Carles Domènec Freixanet",
+  "school": "Departament d'Ensenyament Barcelona",
+  "date": "09/04/15",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Social sciences",
+    "ca": "Ciències socials",
+    "es": "Ciencias sociales"
+  },
+  "areaCodes": [
+    "soc"
+  ],
+  "levels": {
+    "en": "Secondary school (12-16), High school (16-18)",
+    "ca": "Secundària (12-16), Batxillerat (16-18)",
+    "es": "Secundaria (12-16), Bachillerato (16-18)"
+  },
+  "levelCodes": [
+    "SEC",
+    "BTX"
+  ],
+  "description": {
+    "en": "Project addressed to students of \n<i>CFGM de Planta química</i> associated with transport of materials in chemical plant. \n<p> It serves as a review after each unit of matter or complete. Do not want to be exhaustive, but give the student a idea if understood their training. </p>",
+    "ca": "Projecte adreçat a alumnes de \n<b>CFGM de Planta química</b> associat al mòdul de transport de materials en planta química.\n<p> Serveix com a repàs després de cada unitat o de la matèria completa. No vol ser exhaustiu, sino donar a l'alumne/a una idea de si ha comprès la formació rebuda. </p>",
+    "es": "Proyecto dirigido a alumnos de \n<b>CFGM de Planta química</b> asociado al módulo de transporte de materiales en planta química. \n<p> Sirve como repaso después de cada unidad o de la materia completa. No quiere ser exhaustivo, sino dar al alumno/a una idea de si ha comprendido la formación recibida. </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3891,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3891",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/tra_qui/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Rimas",
+  "author": "Márcia Silva Madeira",
+  "school": "Colégio Salesiano Itajaí Santa Catarina (Brasil)",
+  "date": "21/04/15",
+  "languages": {
+    "en": "Portuguese",
+    "ca": "portuguès",
+    "es": "portugués"
+  },
+  "langCodes": [
+    "pt"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6), Primary school (6-12)",
+    "ca": "Infantil (3-6), Primària (6-12)",
+    "es": "Infantil (3-6), Primaria (6-12)"
+  },
+  "levelCodes": [
+    "INF",
+    "PRI"
+  ],
+  "description": {
+    "en": "JClic project activities in the Portuguese language addressed to primary education about the rhymes .",
+    "ca": "Projecte d'activitats JClic en llengua portuguesa adreçat a alumnat educació primària sobre les rimes.",
+    "es": "Proyecto de actividades JClic en lengua portuguesa dirigido a alumnado de educación primaria sobre las rimas."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3895,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=3895",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/rimas/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

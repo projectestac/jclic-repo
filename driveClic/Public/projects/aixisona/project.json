@@ -1,0 +1,53 @@
+{
+  "title": "Així sona...",
+  "author": "Josep Rafael Albert Guerola",
+  "school": "Escola Mestral Vandellòs i l'Hospitalet de l'Infant (L'Hospitalet de l'Infant) (Baix Camp)",
+  "date": "04/11/03",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Music",
+    "ca": "Música",
+    "es": "Música"
+  },
+  "areaCodes": [
+    "mus"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "This package is a set of activities addressed to pupils of primary school, based on the instruments of the symphonic orchestra.\n<p> The pictures are taken from <a href=\"http://www.supermusics.com\" target=\"_blank\">supermusics</a>. </p>",
+    "ca": "Aquest paquet és un conjunt d'activitats adreçades als alumnes de cicle mitjà per descobrir els instruments que formen l'orquestra simfònica.\n<p> També és pretén que coneguin aquesta agrupació instrumental i que gaudeixen de l'audició musical i del reconeixement dels instruments.</p>\n<p> Les imatges provenen de <a href=\"http://www.supermusics.com\" target=\"_blank\">supermúsics</a>. </p>",
+    "es": "Este paquete es un conjunto de actividades dirigidas a alumnos de ciclo medio para descubrir los instrumentos que forman parte de la orquesta sinfónica.\n<p> También se pretende que conozcan esta agrupación instrumental y que disfruten de la audición musical y del reconocimiento de los instrumentos.</p>\n<p> La imágenes provienen de <a href=\"http://www.supermusics.com\" target=\"_blank\">supermusics</a>. </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 2300,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=2300",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/aixisona/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

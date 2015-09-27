@@ -1,0 +1,54 @@
+{
+  "title": "Cangur 2011 (Nivell 2 - 4t d'ESO)",
+  "author": "Dani Royo, Gemma Capilla, Hèctor Goterris, Miguel Ángel Sánchez, Santi Lapenya i Sofía Noriega",
+  "school": "IES Broch i Llop Vila-real - Castelló (Plana Baixa), IES Francesc Tàrrega Vila-real - Castelló (Plana Baixa), IES Francesc Ribalta Castelló de la Plana - Castelló (Plana Alta), IES Vall d'Alba Vall d'Alba - Castelló (Plana Alta)",
+  "date": "12/07/12",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Mathematics",
+    "ca": "Matemàtiques",
+    "es": "Matemáticas"
+  },
+  "areaCodes": [
+    "mat"
+  ],
+  "levels": {
+    "en": "Secondary school (12-16), High school (16-18)",
+    "ca": "Secundària (12-16), Batxillerat (16-18)",
+    "es": "Secundaria (12-16), Bachillerato (16-18)"
+  },
+  "levelCodes": [
+    "SEC",
+    "BTX"
+  ],
+  "description": {
+    "en": "These projects allows you to do the Cangur Test\n<a href=\"http://cangur.org/cangur/cang2011/index.htm\"> Cangur</a> interactively. It's self-correcting. It also provides the solutions of each of the 30 tests. It also shows a final report of activities with the total number of right answers and the time spent. \n<p> The statements have been prepared by the Cangur Commission <a href=\"http://www.iecat.net/institucio/societats/SCMatematiques/index.asp\">Catalan Society of Mathematics</a> - Le Kangourou sans frontières. </p>",
+    "ca": "Aquest projecte permet fer la prova \n<a href=\"http://cangur.org/cangur/cang2011/index.htm\">Cangur</a> de forma interactiva. És autocorrectiu i dóna una resolució de cadascuna de les 30 qüestions. També mostra un informe final d'activitats amb el nombre total d'encerts i el temps emprat.\n<p> Enunciats cedits per la Comissió Cangur de la <a href=\"http://www.iecat.net/institucio/societats/SCMatematiques/index.asp\">Societat Catalana de Matemàtiques</a> - Le Kangourou sans frontières. </p>",
+    "es": "Proyecto de actividades para realizar la prueba \n<a href=\"http://cangur.org/cangur/cang2011/index.htm\"> Cangur</a> de forma interactiva. Es autocorrectivo y da una resolución de cadauna de las 30 actividades. También muestra un informe final de las actividades con el número total de aciertos y el tiempo utilizado.\n<p> Enunciados cedidos por la Comissió Cangur de la <a href=\"http://www.iecat.net/institucio/societats/SCMatematiques/index.asp\">Societat Catalana de Matemàtiques</a> - Le Kangourou sans frontières. </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3784,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3784",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/cangur11/jclic/nivell2/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

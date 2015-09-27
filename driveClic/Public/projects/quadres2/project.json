@@ -1,0 +1,53 @@
+{
+  "title": "El museu de la meva escola",
+  "author": "Sara Velasco Mesa",
+  "school": "Escola Santa Susanna Santa Susanna (Maresme)",
+  "date": "26/03/15",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Art & design",
+    "ca": "Visual i plàstica",
+    "es": "Plástica y visual"
+  },
+  "areaCodes": [
+    "vip"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6)",
+    "ca": "Infantil (3-6)",
+    "es": "Infantil (3-6)"
+  },
+  "levelCodes": [
+    "INF"
+  ],
+  "description": {
+    "en": "Children in second grade primary school in Santa Susanna have created some pictures and have drawn them in Paint. In addition, they have invented a name for their works. This JClic contains activities where they have to relate the paintings with the corresponding names, puzzles or memory activities.",
+    "ca": "Els nens i nenes de segon de primària de l'escola Santa Susanna han creat uns quadres i els han dibuixat amb el Paint. A més a més, han posat imaginació i s'han inventat un nom per les seves obres. Aquest JClic conté activitats on s'han de relacionar els quadres amb els noms corresponents, puzles o activitats de memòria.",
+    "es": "Los niños de segundo de primaria la escuela primaria de Santa Susanna han creado unos cuadros y los han dibujado en el Paint. Además, han puesto imaginación y se han inventado un nombre para sus obras. Este JClic contiene actividades donde se han de relacionar los cuadros con los nombres correspondientes, puzzles o actividades de memoria."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3886,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3886",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/quadres2/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

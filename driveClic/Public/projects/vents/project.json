@@ -1,0 +1,53 @@
+{
+  "title": "Temps de temps: Vents i ventots",
+  "author": "Joan A. Solano Querol",
+  "school": "Escola Cèsar August Tarragona",
+  "date": "21/11/05",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Experimental sciences",
+    "ca": "Ciències experimentals",
+    "es": "Ciencias experimentales"
+  },
+  "areaCodes": [
+    "exp"
+  ],
+  "levels": {
+    "en": "Secondary school (12-16)",
+    "ca": "Secundària (12-16)",
+    "es": "Secundaria (12-16)"
+  },
+  "levelCodes": [
+    "SEC"
+  ],
+  "description": {
+    "en": "The sixth part of the serial has the wind as main topic covering usual and wild behaviour. Through the first part of the package, centred in Catalonia, the pupils learn the wind naming according to the origin as well as its main features. It's also explained the wind intensity and direction from meteorological maps and it's disclosed the Beafort scale.\n<br> Next, the package is focused in the wild phenomena of the wind: the hurricanes and tornados. The package deals with the causes, features, structure and the measurement scales followed by curious associated facts like country naming and some freak anecdotes.\n<br> In these pages you will find the other parts of the serie: \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=1096\">L'atmosfera</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2860\">La previsió meteorològica</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2022\">Observem i mesurem</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2460\">A bots i barrals</a> and \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2861\">Llamp de rellamp</a>.",
+    "ca": "El sisè títol de la sèrie té com a protagonistes els vents, tant en la seva forma habitual com en la violenta. En la primera part del paquet, centrada a Catalunya, els alumnes aprenen a denominar-los segons el seu origen i a conèixer les seves característiques. També aprenen a veure la seva intensitat i direcció a partir de mapes meteorològics i descobreixen l'escala de Beaufort.\n<br> Tot seguit es passen a treballar les dues manifestacions violentes del fenomen: els huracans i els tornados. Dedicant-se a treballar les seves causes, característiques, estructura, escales de medició i tot un seguit de fets curiosos que van des de les denominacions a diversos països fins a les anècdotes més estrafolàries.\n<br> En aquestes pàgines es troben les altres parts de la sèrie temps de temps: \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=1096\">L'atmosfera</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2860\">La previsió meteorològica</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2022\">Observem i mesurem</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2460\">A bots i barrals</a> i \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2861\">Llamp de rellamp</a>.",
+    "es": "El sexto título de la serie tiene como protagonistas los vientos, tanto en su forma habitual como en la violenta. En la primera parte del paquete, centrada en Cataluña, los alumnos aprenden a denominarlos según su origen y a conocer sus características. También aprenden a ver su intensidad y dirección a partir de mapas meteorológicos y descubren la escala de Beaufort.\n<br> Seguidamente se passa a trabajar las dos manifestaciones violentas de fenómeno: los huracanes y los tornados. Dedicándose a trabajar sus causas, características, estrucutra, escala de medición y varios hechos curiosos que van desde las denominaciones en diversos países hasta las anécdotas más estrambóticas.\n<br> En estas páginas se encuentran las otras partes de la serie Temps de temps: \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=1096\">L'atmosfera</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2860\">La previsió meteorològica</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2022\">Observem i mesurem</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2460\">A bots i barrals</a> i \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2861\">Llamp de rellamp</a>."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3213,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3213",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/vents/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

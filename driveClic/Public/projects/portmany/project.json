@@ -1,0 +1,54 @@
+{
+  "title": "Sant Antoni de Portmany",
+  "author": "Gemma Arqué Albertí",
+  "school": "CP Es vivero Palma - Palma de Mallorca (Balears)",
+  "date": "28/07/09",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Social sciences",
+    "ca": "Ciències socials",
+    "es": "Ciencias sociales"
+  },
+  "areaCodes": [
+    "soc"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6), Primary school (6-12)",
+    "ca": "Infantil (3-6), Primària (6-12)",
+    "es": "Infantil (3-6), Primaria (6-12)"
+  },
+  "levelCodes": [
+    "INF",
+    "PRI"
+  ],
+  "description": {
+    "en": "Project of activities about Sant Antoni (Balearic Islands). The project has two parts: \n<ul> \n <li>infantile education </li>\n <li>primary education  </li>\n</ul>",
+    "ca": "Projecte d'activitats sobre el municipi eivissenc de Sant Antoni de Portmany. El projecte es divideix en dues parts: \n<ul> \n <li>9 activitats variades d'educació infantil amb imatges del municipi. </li>\n <li>17 activitats de primària referents a aspectes bàsics del municipi, dels pobles que hi pertanyen, de la cultura i les plantes... </li>\n</ul>",
+    "es": "Proyecto de actividades sobre el municipio ibicenco de Sant Antoni de Portmany. El proyecto se divide en dos partes: \n<ul> \n <li>9 actividades variadas de educación infantil con imágenes del municipio </li>\n <li>17 actividades de primaria referentes a aspectos básicos del municipio, d los pueblos que pertenecen, de la cultura, de las plantas... </li>\n</ul>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3563,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3563",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/portmany/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

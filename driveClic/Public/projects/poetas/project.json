@@ -1,0 +1,54 @@
+{
+  "title": "Pablo Neruda y Gabriela Mistral",
+  "author": "Viviana Schulz Valdes",
+  "school": "Colegio Los Bosquinos Maipú (Santiago de Xile)",
+  "date": "12/06/03",
+  "languages": {
+    "en": "Spanish",
+    "ca": "espanyol",
+    "es": "español"
+  },
+  "langCodes": [
+    "es"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Primary school (6-12), Secondary school (12-16)",
+    "ca": "Primària (6-12), Secundària (12-16)",
+    "es": "Primaria (6-12), Secundaria (12-16)"
+  },
+  "levelCodes": [
+    "PRI",
+    "SEC"
+  ],
+  "description": {
+    "en": "Activity package about the biography of two Chilean poets awarded with the Nobel Prize: Pablo Neruda and Gabriela Mistral \n<br> A way to introduce children to poetry and creation.",
+    "ca": "Paquet d'activitats relacionades amb les biografies de dos poetes xilens i Premi Nobel de Literatura, Pablo Neruda i Gabriela Mistral. \n<br> Una manera d'apropar als nens a la poesia i a la creació.",
+    "es": "Paquete de actividades relacionadas con las biografías de dos poetas chilenos y Premio Nobel de Literatura, Pablo Neruda y Gabriela Mistral. \n<br> Una forma de acercar a los niños a la poesía, a la creación y a la valoración de la identidad nacional."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 2200,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_es.jsp?id=2200",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/poetas/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

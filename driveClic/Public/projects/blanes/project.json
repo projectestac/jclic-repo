@@ -1,0 +1,53 @@
+{
+  "title": "Art al carrer",
+  "author": "Laura Bartrons Caminal",
+  "school": "CRP La Selva II Blanes (Selva)",
+  "date": "04/02/08",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Social sciences",
+    "ca": "Ciències socials",
+    "es": "Ciencias sociales"
+  },
+  "areaCodes": [
+    "soc"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "Project of activities about the sculptures of Blanes and its authors. This activity is a part of a didactic web page about Blanes: \n<a href=\"http://www.xtec.net/~lbartron/\">\"L'art al carrer. Itinerari didàctic per les escultures de Blanes\"</a>",
+    "ca": "Projecte d'activitats sobre les escultures de Blanes, els seus autors i personatges emblemàtics de la vila.\n<p> Forma part d'una web molt més àmplia, <a href=\"http://www.xtec.net/~lbartron/\">\"L'art al carrer. Itinerari didàctic per les escultures de Blanes\"</a>, amb propostes de diferents àrees del currículum a partir de l'element motivador de l'art al carrer. </p>",
+    "es": "Proyecto de actividades sobre las esculturas de Blanes, los autores y personajes emblemáticos del pueblo. \n<p> Forma parte de una web mucho más amplia, <a href=\"http://www.xtec.net/~lbartron/\">\"L'art al carrer. Itinerari didàctic per les escultures de Blanes\"</a>, con propuestas de diferentes áreas del currículum a partir del elemento motivador del arte en la calle. </p>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3437,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3437",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/blanes/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

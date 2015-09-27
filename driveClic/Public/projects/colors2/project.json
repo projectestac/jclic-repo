@@ -1,0 +1,54 @@
+{
+  "title": "Els colors",
+  "author": "Maria Del Mar Martinez Casas",
+  "school": "Escola Canigó Vilanova i la Geltrú (Garraf)",
+  "date": "19/06/06",
+  "languages": {
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
+  },
+  "langCodes": [
+    "ca"
+  ],
+  "areas": {
+    "en": "Art & design, Languages",
+    "ca": "Visual i plàstica, Llengües",
+    "es": "Plástica y visual, Lenguas"
+  },
+  "areaCodes": [
+    "vip",
+    "lleng"
+  ],
+  "levels": {
+    "en": "Kindergarten (3-6)",
+    "ca": "Infantil (3-6)",
+    "es": "Infantil (3-6)"
+  },
+  "levelCodes": [
+    "INF"
+  ],
+  "description": {
+    "en": "Project of activities about the colours and the chromatic circle.",
+    "ca": "Projecte d'activitats sobre els colors i el cercle cromàtic.",
+    "es": "Proyecto de actividades sobre los colores y el círculo cromático."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.gif",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3315,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3315",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/colors2/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

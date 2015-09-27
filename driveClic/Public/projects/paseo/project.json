@@ -1,0 +1,55 @@
+{
+  "title": "Un passeig pel JClic",
+  "author": "Pere Cornellà Canals",
+  "school": "Institut Celrà Celrà (Gironès)",
+  "date": "10/10/07",
+  "languages": {
+    "en": "Spanish",
+    "ca": "espanyol",
+    "es": "español"
+  },
+  "langCodes": [
+    "es"
+  ],
+  "areas": {
+    "en": "Miscellaneous",
+    "ca": "Diversos",
+    "es": "Diversos"
+  },
+  "areaCodes": [
+    "div"
+  ],
+  "levels": {
+    "en": "Primary school (6-12), Secondary school (12-16), High school (16-18)",
+    "ca": "Primària (6-12), Secundària (12-16), Batxillerat (16-18)",
+    "es": "Primaria (6-12), Secundaria (12-16), Bachillerato (16-18)"
+  },
+  "levelCodes": [
+    "PRI",
+    "SEC",
+    "BTX"
+  ],
+  "description": {
+    "en": "Package of activities about JClic. It also includes a review of the activities that can be created with this tool.",
+    "ca": "Conjunt d'activitats per descobrir com és el JClic, tant en el seu aspecte extern com en el seu funcionament. També es fa un ràpid repas a les activitats que es poden crear amb aquesta eina.",
+    "es": "Conjunto de actividades para descubrir cómo es el JClic, tanto en su aspecto externo com en su funcionamiento. También se hace un rápido repaso de las actividades que se pueden crear con esta herramienta."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.jpg",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3118,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_es.jsp?id=3118",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/paseo/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

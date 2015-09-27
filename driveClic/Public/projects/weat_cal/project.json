@@ -1,0 +1,53 @@
+{
+  "title": "Weather and calendar",
+  "author": "Antonia Morelló Bahilo",
+  "school": "CP Francisco Giner de los Rios València (País Valencià)",
+  "date": "09/04/15",
+  "languages": {
+    "en": "English",
+    "ca": "anglès",
+    "es": "inglés"
+  },
+  "langCodes": [
+    "en"
+  ],
+  "areas": {
+    "en": "Languages",
+    "ca": "Llengües",
+    "es": "Lenguas"
+  },
+  "areaCodes": [
+    "lleng"
+  ],
+  "levels": {
+    "en": "Primary school (6-12)",
+    "ca": "Primària (6-12)",
+    "es": "Primaria (6-12)"
+  },
+  "levelCodes": [
+    "PRI"
+  ],
+  "description": {
+    "en": "Project of activities in English about: \n<ul> \n <li>weather </li>\n <li>seasons </li>\n <li>months </li>\n <li>week days </li>\n</ul>",
+    "ca": "Projecte d'activitats per a l'àrea de llengua anglesa a cicle superior de primària per treballar vocabulari sobre: \n<ul> \n <li>el temps </li>\n <li>les estacions </li>\n <li>els mesos </li>\n <li>els dies de la setmana </li>\n</ul>",
+    "es": "Proyecto de actividades para el área de lengua inglesa en ciclo superior de primaria para trabajar vocabulario sobre: \n<ul> \n <li>el tiempo </li>\n <li>las estaciones </li>\n <li>los meses </li>\n <li>los días de la semana </li>\n</ul>"
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3892,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=3892",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/weat_cal/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}

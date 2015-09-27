@@ -1,0 +1,54 @@
+{
+  "title": "The hydrosphere",
+  "author": "Carmen María Mèndez González",
+  "school": "CP Ceo Hermanos Estevanez Murphy Salud alto (Santa Cruz de Tenerife) (Islas Canarias)",
+  "date": "09/04/15",
+  "languages": {
+    "en": "English",
+    "ca": "anglès",
+    "es": "inglés"
+  },
+  "langCodes": [
+    "en"
+  ],
+  "areas": {
+    "en": "Experimental sciences, Languages",
+    "ca": "Ciències experimentals, Llengües",
+    "es": "Ciencias experimentales, Lenguas"
+  },
+  "areaCodes": [
+    "exp",
+    "lleng"
+  ],
+  "levels": {
+    "en": "Secondary school (12-16)",
+    "ca": "Secundària (12-16)",
+    "es": "Secundaria (12-16)"
+  },
+  "levelCodes": [
+    "SEC"
+  ],
+  "description": {
+    "en": "Theses JClic activities belong to the unit of \"The hydrosphere\" which students are taught using English as a communication tool. The activities are aimed at the student to learn the vocabulary of the unit and some simple processes.",
+    "ca": "Les activitats aquí presentades pertanyen a la unitat didàctica \"La hidrosfera\" que s'imparteix als alumnes utilitzant l'anglès com a eina de comunicació. Les activitats tenen com a objectiu que l'alumne/a aprengui el vocabulari en anglès de la unitat i alguns processos senzills.",
+    "es": "Las actividades aquí presentadas pertenecen a la unidad didáctica \"La hidrosfera\" que se imparte a los alumnos utilizando el inglés como herramienta de comunicación. Las actividades tienen como objetivo que el alumno/a aprenda el vocabulario de la unidad y algunos procesos sencillos."
+  },
+  "license": {
+    "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
+    "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
+  },
+  "mainFile": "jclic.js/test.jclic",
+  "cover": "cover.png",
+  "thumbnail": "thumb.png",
+  "zipFile": "jclic/test.jclic.zip",
+  "instFile": "jclic/test.jclic.inst",
+  "clicZoneId": 3889,
+  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=3889",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/hydros/jclic/test.jclic.zip",
+  "meta_langs": [
+    "ca",
+    "es",
+    "en"
+  ]
+}
