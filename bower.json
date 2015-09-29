@@ -11,7 +11,5 @@
     "polymer": "Polymer/polymer#^1.1.0"
   },
   "devDependencies": {
-    "web-component-tester": "*",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
   }
 }

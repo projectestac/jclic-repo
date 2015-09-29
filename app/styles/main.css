@@ -26,3 +26,15 @@ body {
 .JCRLang.curLang {
   font-weight: 800;
 }
+
+.prjContainer {
+  background-color: #e8f0fa;
+}
+
+.cardContainer {
+  text-align: center;  
+}
+
+.cardContainer * {
+  text-align: left;
+}

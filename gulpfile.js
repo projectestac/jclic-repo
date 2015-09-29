@@ -87,7 +87,6 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
-    '!app/test',
     '!app/cache-config.json'
   ], {
     dot: true
@@ -125,7 +124,7 @@ gulp.task('fonts', function () {
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/**/*.html', '!app/{elements}/**/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
@@ -270,10 +269,6 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize','rename-index', // 'cache-config',
     cb);
 });
-
-// Load tasks for web-component-tester
-// Adds tasks for `gulp test:local` and `gulp test:remote`
-require('web-component-tester').gulp.init(gulp);
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}

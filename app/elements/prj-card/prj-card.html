@@ -82,10 +82,10 @@
 
     <paper-material animated$="[[animatedShadow]]" elevation="[[elevation]]"></paper-material>
 
-    <div class="header" style$="[[_getHeaderStyle(image)]]">
+    <div class="header" style$="[[_getHeaderStyle(image)]]" on-tap="_tapCard">
       <!-- img hidden$="[[!image]]" src="[[image]]" -->
       <div hidden$="[[!heading]]" class$="[[_computeHeadingClass(image)]]">[[heading]]</div>
-      <paper-fab mini icon="av:play-arrow"></paper-fab>
+      <paper-fab mini icon="av:play-arrow" on-tap="_tapButton"></paper-fab>
     </div>
 
     <content></content>
@@ -98,7 +98,7 @@
   Polymer({
 
     is: 'prj-card',
-
+    
     properties: {
 
       /**
@@ -125,7 +125,7 @@
         type: Number,
         value: 1
       },
-
+      
       /**
        * Set this to true to animate the card shadow when setting a new
        * `z` value.
@@ -134,6 +134,14 @@
         type: Boolean,
         value: false
       }
+    },
+    
+    _tapButton: function(){
+      this.fire('play');
+    },
+    
+    _tapCard: function(){
+      this.fire('selected');
     },
 
     _headingChanged: function(heading) {
@@ -155,6 +163,7 @@
         cls += ' over-image';
       }
       return cls;
-    }
+    },
+    
   });
 </script>

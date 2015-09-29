@@ -146,11 +146,20 @@
   app.createCard = function (prj) {
     var $prjCard = $('<prj-card elevation="2" animatedShadow="true"/>');
     $prjCard.attr('heading', prj.title);
-    $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);
+    $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);    
+        
+    $prjCard.on('play', function(){
+      window.open(app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile, 'JClicPlayWindow');
+    });
     
-    
+    $prjCard.on('selected', function(){
+      $('#bigCard').toggle();      
+    });
+      
     var $cardContent = $('<div class="card-content"/>');
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
+    
+    
     
     $prjCard.append($cardContent);
         
@@ -229,29 +238,6 @@
   // Scroll page to top and expand header
   app.scrollPageToTop = function () {
     document.getElementById('mainContainer').scrollTop = 0;
-  };
-
-  app.search = function () {
-    var $container = $('#mainHome');
-
-    $container.append(app.generateCard('Hello', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
-    $container.append(app.generateCard('Projecte 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.'));
-    $container.append(app.generateCard('Projecte 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.'));
-    $container.append(app.generateCard('Projecte 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'));
-    $container.append(app.generateCard('Projecte 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'));
-    $container.append(app.generateCard('Projecte 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'));
-    $container.append(app.generateCard('Projecte 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'));
-    $container.append(app.generateCard('Projecte 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute.'));
-
-  };
-
-  app.generateCard = function (title, description) {
-
-    //var $prj = $('<project-card elevation="2" animated="true"/>');
-    var $prj = $('<prj-card elevation="1" animated="true"/>');
-    $prj.attr('title', title);
-    $prj.attr('description', description);
-    return $prj;
   };
 
   // Utility functions
