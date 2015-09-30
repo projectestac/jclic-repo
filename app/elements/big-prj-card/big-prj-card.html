@@ -1,0 +1,104 @@
+<!-- Based on paper-card -->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="big-prj-card">
+  <template>
+    <style>
+      :host {
+        @apply(--big-prj-card);
+      }
+      
+      h2, p, img {
+        margin: 10px
+      }
+      
+      .label {
+        font-weight: bold;
+      }
+      
+      .school {
+        font-style: italic;
+      }
+
+      .cover {
+        float: right
+      }
+      
+      .buttons {
+        clear: both;
+      }
+
+    </style>
+    <div class="mainContent">
+      <h2>[[prj.title]]</h2>
+      <p class="author">[[prj.author]]</p>    
+      <p class="school">[[prj.school]]</p>    
+      <img class="cover" src='[[imgSrc]]'/>
+      <p class="description">[[fields.description]]</p>
+      <p class="languages"><span class="label">[[labels.languages]]</span>: <span>[[fields.languages]]</span></p>
+      <p class="area"><span class="label">[[labels.subjects]]</span>: <span>[[fields.areas]]</span></p>
+      <p class="level"><span class="label">[[labels.levels]]</span>: <span>[[fields.levels]]</span></p>
+      <p class="date"><span class="label">[[labels.date]]</span>: <span>[[prj.date]]</span></p>
+      <p class="license"><span class="label">[[labels.license]]</span>: <span>[[fields.license]]</span></p>
+    </div>
+    <div class="buttons">
+      <paper-button dialog-dismiss>[[labels.close]]</paper-button>
+    </div>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'big-prj-card',
+    properties: {
+      /**
+       * The project data.
+       */
+      prj: {
+        type: Object,
+        observer: '_prjChanged'
+      },
+      path: {
+        type: String,
+        value: ''
+      },
+      labels: {
+        type: Object,
+        value: {}
+      },
+      lang: {
+        type: String
+      },
+      imgSrc: {
+        type: String,
+        computed: 'computeImgSrc(path, prj)'
+      },
+      fields: {
+        type: Object,
+        computed: 'computeFields(prj, lang)'
+      }
+    },
+    computeImgSrc: function (path, prj) {
+      return path + '/' + prj.cover;
+    },
+    computeFields: function (prj, lang) {
+      return {
+        description: prj.description[lang],
+        languages: prj.languages[lang],
+        areas: prj.areas[lang],
+        levels: prj.levels[lang],
+        license: prj.license[lang]
+      };
+    },
+    _prjChanged: function (prj) {
+      //var label = this.getAttribute('aria-label');
+      this.setAttribute('aria-label', prj.title);
+    },
+    ready: function(){
+      console.log('Ready!');
+    }
+  });
+</script>

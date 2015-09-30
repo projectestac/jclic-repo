@@ -70,33 +70,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel">
+                    
       <!-- Drawer Scroll Header Panel -->
       <paper-scroll-header-panel drawer fixed>
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">{{searchLabel}}</span>
+          <span class="paper-font-title">[[labels.search]]</span>
         </paper-toolbar>
         <!-- Selection form -->
-        <paper-dropdown-menu label="{{langLabel}}" on-paper-dropdown-close="filterChanged">
+        <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
           <paper-menu class="dropdown-content" selected="{{currentLang}}">
-            <template is="dom-repeat" items="{{actLanguages}}">
-              <paper-item role="listitem">{{item.text}}</paper-item>              
+            <template is="dom-repeat" items="[[actLanguages]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
             </template>
           </paper-menu>
         </paper-dropdown-menu>
 
-        <paper-dropdown-menu label="{{subjectLabel}}" on-paper-dropdown-close="filterChanged">
+        <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
           <paper-menu class="dropdown-content" selected="{{currentSubject}}">
-            <template is="dom-repeat" items="{{actSubjects}}">
-              <paper-item role="listitem">{{item.text}}</paper-item>              
+            <template is="dom-repeat" items="[[actSubjects]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
             </template>
           </paper-menu>
         </paper-dropdown-menu>
 
-        <paper-dropdown-menu label="{{levelLabel}}" on-paper-dropdown-close="filterChanged">
+        <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
           <paper-menu class="dropdown-content" selected="{{currentLevel}}">
-            <template is="dom-repeat" items="{{actLevels}}">
-              <paper-item role="listitem">{{item.text}}</paper-item>              
+            <template is="dom-repeat" items="[[actLevels]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
             </template>
           </paper-menu>
         </paper-dropdown-menu>
@@ -116,12 +117,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">{{title}}</div>
+            <div class="app-name">[[title]]</div>
           </div>
 
           <!-- Application sub title -->
           <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">{{description}}</div>
+            <div class="bottom-title paper-font-subhead">[[description]]</div>
           </div>
 
         </paper-toolbar>
@@ -139,15 +140,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </paper-drawer-panel>
 
-    <paper-dialog id="bigCard">
-      <h2>Big card header</h2>
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-      <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button dialog-confirm>Accept</paper-button>
-      </div>
+    <paper-dialog id="bigCard" style="z-index: 10" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <big-prj-card id="bigCardContent" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
     </paper-dialog>
 
 

@@ -13,10 +13,32 @@
     "es": "Repositorio de demostración con algunos proyectos JClic"
   },
   "labels": {
-    "search": {"en": "Search activities", "ca": "Cerca activitats", "es": "Buscar actividades"},
-    "languages": {"en": "Language", "ca": "Idioma", "es": "Idioma"},
-    "subjects": {"en": "Subject", "ca": "Àrea curricular", "es": "Area curricular"},
-    "levels": {"en": "Level", "ca": "Nivell", "es": "Nivel"}      
+    "en": {
+      "search": "Search activities",
+      "languages": "Languages",
+      "subjects": "Subjects",
+      "levels": "Levels",
+      "date": "Date",
+      "license": "License",
+      "close": "close"
+      },
+    "ca": {
+      "search": "Cerca activitats",
+      "languages": "Idioma",
+      "subjects": "Àrea curricular",
+      "levels": "Nivell",
+      "date": "Data",
+      "license": "Llicència d'ús",
+      "close": "tanca"
+      },
+    "es": {
+      "search": "Buscar actividades",
+      "languages": "Idioma",
+      "subjects": "Área curricular",
+      "date": "Fecha",
+      "license": "Licencia de uso",
+      "close": "cerrar"
+      }      
   },
   "logo": "logo.png",
   "index": {

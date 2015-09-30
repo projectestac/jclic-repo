@@ -142,6 +142,7 @@
     
     _tapCard: function(){
       this.fire('selected');
+      return false;
     },
 
     _headingChanged: function(heading) {
@@ -163,7 +164,7 @@
         cls += ' over-image';
       }
       return cls;
-    },
+    }
     
   });
 </script>

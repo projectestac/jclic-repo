@@ -24,6 +24,20 @@
   app.langLabel = '';
   app.searchLabel = '';
 
+  app.actLanguages = [];
+  app.currentLang = 0;
+
+  app.actSubjects = [];
+  app.currentSubject = 0;
+
+  app.actLevels = [];
+  app.currentLevel = 0;
+
+  app.projects = null;
+  app.matchProjects = [];
+  app.lastItem = 0;
+  app.itemsPerScroll = 20;
+
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -65,19 +79,6 @@
     });
   };
 
-  app.actLanguages = [];
-  app.currentLang = 0;
-
-  app.actSubjects = [];
-  app.currentSubject = 0;
-
-  app.actLevels = [];
-  app.currentLevel = 0;
-
-  app.projects = null;
-  app.matchProjects = [];
-  app.lastItem = 0;
-  app.itemsPerScroll = 20;
 
   app.filterChanged = function () {
     app.matchItems();
@@ -88,12 +89,9 @@
 
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
-    app.langLabel = app.options.labels.languages[app.lang];
-    app.searchLabel = app.options.labels.search[app.lang];
+    app.labels = app.options.labels[app.lang];
     app.actLanguages = app.options.actLanguages[app.lang];
-    app.subjectLabel = app.options.labels.subjects[app.lang];
     app.actSubjects = app.options.actSubjects[app.lang];
-    app.levelLabel = app.options.labels.levels[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
     if (!app.projects) {
@@ -134,35 +132,62 @@
 
   app.fillList = function () {
     if (app.matchProjects) {
+      var $mainHome = $('#mainHome');
       for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
         var prj = app.matchProjects[app.lastItem++];
         prj.loadTries = 10;
         var $prjCard = app.createCard(prj);
-        $('#mainHome').append($prjCard);
+        $mainHome.append($prjCard);
       }
     }
   };
 
   app.createCard = function (prj) {
+
     var $prjCard = $('<prj-card elevation="2" animatedShadow="true"/>');
     $prjCard.attr('heading', prj.title);
-    $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);    
-        
-    $prjCard.on('play', function(){
-      window.open(app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile, 'JClicPlayWindow');
-    });
-    
-    $prjCard.on('selected', function(){
-      $('#bigCard').toggle();      
-    });
-      
+    $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);
+
     var $cardContent = $('<div class="card-content"/>');
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
-    
-    
-    
+
+    $prjCard.on('play', function () {
+      window.open(app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile, 'JClicPlayWindow');
+    });
+
+    $prjCard.on('selected', function () {
+      
+      var bigCard = $('#bigCard').get(0);
+      var bigCardContent = $('#bigCardContent').get(0);
+
+      if (!prj.detail) {
+        var prjFile = app.options.index.path + '/' + prj.path + '/project.json';
+        $.getJSON(prjFile)
+                .done(function (data) {
+                  prj.detail = data;
+                  bigCardContent.path = app.options.index.path + '/' + prj.path;
+                  bigCardContent.prj = prj.detail;
+                  bigCard.fit();
+                  bigCard.toggle();
+                })
+                .fail(function () {
+                  console.log('Error loading ' + prjFile);
+                });
+        return;
+      }
+
+      if (prj.detail) {
+        bigCardContent.path = app.options.index.path + '/' + prj.path;
+        bigCardContent.prj = prj.detail;
+        bigCard.fit();
+        bigCard.toggle();
+      }
+
+      return false;
+    });
+
     $prjCard.append($cardContent);
-        
+
     return $prjCard;
   };
 
