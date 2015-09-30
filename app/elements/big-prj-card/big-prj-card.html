@@ -9,10 +9,6 @@
         @apply(--big-prj-card);
       }
       
-      h2, p, img {
-        margin: 10px
-      }
-      
       .label {
         font-weight: bold;
       }
@@ -28,6 +24,11 @@
       .buttons {
         clear: both;
       }
+      
+      .mainContent {
+          margin: 20px;
+          max-width: 700px;
+      }
 
     </style>
     <div class="mainContent">
@@ -35,12 +36,13 @@
       <p class="author">[[prj.author]]</p>    
       <p class="school">[[prj.school]]</p>    
       <img class="cover" src='[[imgSrc]]'/>
-      <p class="description">[[fields.description]]</p>
+      <!-- p class="description">[[fields.description]]</p -->
+      <p class="description" id="description"></p>
       <p class="languages"><span class="label">[[labels.languages]]</span>: <span>[[fields.languages]]</span></p>
       <p class="area"><span class="label">[[labels.subjects]]</span>: <span>[[fields.areas]]</span></p>
       <p class="level"><span class="label">[[labels.levels]]</span>: <span>[[fields.levels]]</span></p>
       <p class="date"><span class="label">[[labels.date]]</span>: <span>[[prj.date]]</span></p>
-      <p class="license"><span class="label">[[labels.license]]</span>: <span>[[fields.license]]</span></p>
+      <p class="license"><span class="label">[[labels.license]]</span>: <span id="license"></span></p>
     </div>
     <div class="buttons">
       <paper-button dialog-dismiss>[[labels.close]]</paper-button>
@@ -78,7 +80,8 @@
       },
       fields: {
         type: Object,
-        computed: 'computeFields(prj, lang)'
+        computed: 'computeFields(prj, lang)',
+        observer: '_fieldsChanged'
       }
     },
     computeImgSrc: function (path, prj) {
@@ -96,6 +99,10 @@
     _prjChanged: function (prj) {
       //var label = this.getAttribute('aria-label');
       this.setAttribute('aria-label', prj.title);
+    },
+    _fieldsChanged: function(fields){
+        this.$.description.innerHTML = fields.description;
+        this.$.license.innerHTML = fields.license;
     },
     ready: function(){
       console.log('Ready!');
