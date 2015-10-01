@@ -1,4 +1,3 @@
-<!-- Based on paper-card -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
@@ -6,53 +5,84 @@
   <template>
     <style>
       :host {
+        @apply(--paper-dialog);
         @apply(--big-prj-card);
       }
-      
+
+      td {
+        padding: 0;
+      }
+
       .label {
         font-weight: bold;
+        color: var(--secondary-text-color, --primary-text-color);
+        padding-right: 5px;
       }
-      
+
       .school {
         font-style: italic;
       }
 
       .cover {
-        float: right
-      }
-      
-      .buttons {
-        clear: both;
-      }
-      
-      .mainContent {
-          margin: 20px;
-          max-width: 700px;
+        float: right;
+        margin: 5px 0px 5px 5px;
+        max-width: 50%;
       }
 
+      .author{
+        margin-bottom: 0;
+      }
+
+      .school{
+        margin-top: 0;
+      }
+
+      paper-dialog {
+        max-width: 700px;
+      }
+
+      paper-dialog h2 {
+        white-space: normal;
+      }
+
+      .dades {
+        min-width: 400px;
+      }
+
+      paper-button:hover {
+        background: var(--divider-color);
+      }      
+
     </style>
-    <div class="mainContent">
-      <h2>[[prj.title]]</h2>
-      <p class="author">[[prj.author]]</p>    
-      <p class="school">[[prj.school]]</p>    
-      <img class="cover" src='[[imgSrc]]'/>
-      <!-- p class="description">[[fields.description]]</p -->
-      <p class="description" id="description"></p>
-      <p class="languages"><span class="label">[[labels.languages]]</span>: <span>[[fields.languages]]</span></p>
-      <p class="area"><span class="label">[[labels.subjects]]</span>: <span>[[fields.areas]]</span></p>
-      <p class="level"><span class="label">[[labels.levels]]</span>: <span>[[fields.levels]]</span></p>
-      <p class="date"><span class="label">[[labels.date]]</span>: <span>[[prj.date]]</span></p>
-      <p class="license"><span class="label">[[labels.license]]</span>: <span id="license"></span></p>
-    </div>
-    <div class="buttons">
-      <paper-button dialog-dismiss>[[labels.close]]</paper-button>
-    </div>
-    <content></content>
+    <paper-dialog id="dialog" style="z-index: 10" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2>[[prj.title]]</h2>      
+      <paper-dialog-scrollable>
+        <img class="cover" src="[[imgSrc]]"/>
+        <p class="author">[[prj.author]]</p>    
+        <p class="school">[[prj.school]]</p>    
+        <p class="description" id="description"></p>
+        <table class="dades">
+          <tr><td class="label"><span>[[labels.languages]]</span>:</td><td>[[fields.languages]]</td></tr>
+          <tr><td class="label"><span>[[labels.subjects]]</span>:</td><td>[[fields.areas]]</td></tr>
+          <tr><td class="label"><span>[[labels.levels]]</span>:</td><td>[[fields.levels]]</td></tr>
+          <tr><td class="label"><span>[[labels.date]]</span>:</td><td>[[prj.date]]</td></tr>
+          <tr><td class="label"><span>[[labels.license]]</span>:</td><td id="license"></td></tr>
+        </table>
+      </paper-dialog-scrollable>      
+      <div class="buttons">
+        <paper-button id="play" title="[[labels.playText]]" on-tap="_tapPlay">[[labels.play]]</paper-button>
+        <paper-button id="playApplet" title="[[labels.playAppletText]]" on-tap="_tapPlayApplet">[[labels.playApplet]]</paper-button>
+        <paper-button id="install" title="[[labels.installText]]" on-tap="_tapInstall">[[labels.install]]</paper-button>
+        <span class="flex"></span>
+        <paper-button dialog-dismiss>[[labels.close]]</paper-button>
+      </div>
+      <content></content>
+    </paper-dialog>
   </template>
 </dom-module>
 
 <script>
-
+  
   Polymer({
     is: 'big-prj-card',
     properties: {
@@ -97,15 +127,25 @@
       };
     },
     _prjChanged: function (prj) {
-      //var label = this.getAttribute('aria-label');
       this.setAttribute('aria-label', prj.title);
+    },    
+    _fieldsChanged: function (fields) {
+      this.$.description.innerHTML = fields.description;
+      this.$.license.innerHTML = fields.license;
     },
-    _fieldsChanged: function(fields){
-        this.$.description.innerHTML = fields.description;
-        this.$.license.innerHTML = fields.license;
+    fit: function () {
+      this.$.dialog.fit();
     },
-    ready: function(){
-      console.log('Ready!');
-    }
+    toggle: function () {
+      this.$.dialog.toggle();
+    },
+    _tapPlay: function() {  
+      this.prj.app.openInNewWindow(this.prj);
+    },
+    _tapPlayApplet: function() {      
+      this.prj.app.openAppletInNewWindow(this.prj);
+    },
+    _tapInstall: function() {      
+    }    
   });
 </script>

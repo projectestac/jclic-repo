@@ -141,6 +141,17 @@
       }
     }
   };
+  
+  app.openInNewWindow = function(prj){
+    var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
+    window.open(cmd, 'JClicPlayWindow');
+  };
+  
+  app.openAppletInNewWindow = function(prj){
+    var cmd = app.options.index.path + '/index-java.html?' + prj.path + '/' + prj.zipFile;
+    window.open(cmd, 'JClicAppletWindow');
+  };
+  
 
   app.createCard = function (prj) {
 
@@ -151,22 +162,23 @@
     var $cardContent = $('<div class="card-content"/>');
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
 
-    $prjCard.on('play', function () {
-      window.open(app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile, 'JClicPlayWindow');
-    });
+    $prjCard.on('play', function(){app.openInNewWindow(prj);});
 
     $prjCard.on('selected', function () {
       
-      var bigCard = $('#bigCard').get(0);
-      var bigCardContent = $('#bigCardContent').get(0);
+      var bigCard = app.$.bigCard;
 
       if (!prj.detail) {
         var prjFile = app.options.index.path + '/' + prj.path + '/project.json';
         $.getJSON(prjFile)
                 .done(function (data) {
                   prj.detail = data;
-                  bigCardContent.path = app.options.index.path + '/' + prj.path;
-                  bigCardContent.prj = prj.detail;
+                  prj.detail.path = prj.path;
+                  prj.detail.app = app;
+                  
+                  bigCard.path = app.options.index.path + '/' + prj.path;
+                  bigCard.prj = prj.detail;                  
+                  
                   bigCard.fit();
                   bigCard.toggle();
                 })
@@ -176,9 +188,10 @@
         return;
       }
 
-      if (prj.detail) {
-        bigCardContent.path = app.options.index.path + '/' + prj.path;
-        bigCardContent.prj = prj.detail;
+      if (prj.detail) {        
+        bigCard.path = app.options.index.path + '/' + prj.path;
+        bigCard.prj = prj.detail;
+        
         bigCard.fit();
         bigCard.toggle();
       }
@@ -213,16 +226,11 @@
       var top = $(this).scrollTop();
       var height = $(this).innerHeight();
       var length = this.scrollHeight;
-
-      // console.log('scroll top: ' + top + ' - height: ' + height + ' (' +  (top+height) +') - scrollHeight: ' + length + ' (' + (length-top-height) + ')');
-
+      
       if (length - top - height <= 10) {
-        //app.search();
         app.fillList();
       }
-
     });
-
 
   });
 

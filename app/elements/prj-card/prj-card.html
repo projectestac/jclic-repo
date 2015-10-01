@@ -13,6 +13,7 @@
         display: inline-block;
         position: relative;
         box-sizing: border-box;
+        cursor: pointer;
 
         background: #fff;
         border-radius: 2px;
@@ -85,7 +86,7 @@
     <div class="header" style$="[[_getHeaderStyle(image)]]" on-tap="_tapCard">
       <!-- img hidden$="[[!image]]" src="[[image]]" -->
       <div hidden$="[[!heading]]" class$="[[_computeHeadingClass(image)]]">[[heading]]</div>
-      <paper-fab mini icon="av:play-arrow" on-tap="_tapButton"></paper-fab>
+      <paper-fab mini icon="av:play-arrow" title="play" role="button" on-tap="_tapButton"></paper-fab>
     </div>
 
     <content></content>
@@ -138,6 +139,7 @@
     
     _tapButton: function(){
       this.fire('play');
+      return false;
     },
     
     _tapCard: function(){
