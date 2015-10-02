@@ -1,22 +1,40 @@
 <!-- shared styles for all elements and index.html -->
 <dom-module id="shared-styles">
   <template>
-    <style>
+    <style>      
+      
+      .JCRLang {
+        padding: 0 0.3em;
+        border-right: 1pt solid;
+      }
+
+      .JCRLang:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      .JCRLang.curLang {
+        font-weight: 800;
+      }
+
+      .prjContainer {
+        background-color: #e8f0fa;
+      }
+
+      .cardContainer {
+        text-align: center;  
+      }
+
+      .cardContainer * {
+        text-align: left;
+      }
+
       .one-line-text {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       
-      .page-title {
-        @apply(--paper-font-display2);
-      }
-
-      @media (max-width: 600px) {
-        .page-title {
-          font-size: 24px!important;
-        }
-      }
     </style>
   </template>
 </dom-module>

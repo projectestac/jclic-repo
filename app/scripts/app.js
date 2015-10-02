@@ -33,6 +33,9 @@
   app.actLevels = [];
   app.currentLevel = 0;
 
+  app.currentTitle = '';
+  app.currentAuthor = '';
+
   app.projects = null;
   app.matchProjects = [];
   app.lastItem = 0;
@@ -97,7 +100,7 @@
     if (!app.projects) {
       $.getJSON(app.options.index.path + '/' + app.options.index.file)
               .done(function (data) {
-                app.projects = data;
+                app.projects = app.checkProjects(data);
                 app.matchItems();
               })
               .fail(function () {
@@ -106,6 +109,25 @@
     } else {
       app.matchItems();
     }
+  };
+  
+  app.checkProjects = function(projects) {
+    
+    for (var i in projects) {
+      var prj = projects[i];
+      if(!prj.langCodes)
+        prj.langCodes = [];
+      if(!prj.areaCodes)
+        prj.areaCodes = [];
+      if(!prj.levelCodes)
+        prj.levelCodes = [];
+      if(!prj.title)
+        prj.title = '';
+      if(!prj.author)
+        prj.author = '';      
+    }
+    
+    return projects;
   };
 
   app.matchItems = function () {
@@ -116,13 +138,18 @@
     var lang = app.actLanguages[app.currentLang].val;
     var area = app.actSubjects[app.currentSubject].val;
     var level = app.actLevels[app.currentLevel].val;
+    var title = app.currentTitle.trim().toLowerCase();
+    var author = app.currentAuthor.trim().toLowerCase();
 
     if (app.projects) {
       for (var i in app.projects) {
-        if ((lang === '*' || app.projects[i].langCodes.indexOf(lang) >= 0) &&
-                (area === '*' || app.projects[i].areaCodes.indexOf(area) >= 0) &&
-                (level === '*' || app.projects[i].levelCodes.indexOf(level) >= 0)) {
-          app.matchProjects.push(app.projects[i]);
+        var prj = app.projects[i];
+        if ((lang === '*' || prj.langCodes.indexOf(lang) >= 0) &&
+                (area === '*' || prj.areaCodes.indexOf(area) >= 0) &&
+                (level === '*' || prj.levelCodes.indexOf(level) >= 0) &&
+                (title === '' || prj.title.toLowerCase().indexOf(title) >= 0) &&
+                (author === '' || prj.author.toLowerCase().indexOf(author) >= 0)) {
+          app.matchProjects.push(prj);
         }
       }
     }
@@ -141,17 +168,17 @@
       }
     }
   };
-  
-  app.openInNewWindow = function(prj){
+
+  app.openInNewWindow = function (prj) {
     var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
     window.open(cmd, 'JClicPlayWindow');
   };
-  
-  app.openAppletInNewWindow = function(prj){
+
+  app.openAppletInNewWindow = function (prj) {
     var cmd = app.options.index.path + '/index-java.html?' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
-  
+
 
   app.createCard = function (prj) {
 
@@ -162,10 +189,12 @@
     var $cardContent = $('<div class="card-content"/>');
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
 
-    $prjCard.on('play', function(){app.openInNewWindow(prj);});
+    $prjCard.on('play', function () {
+      app.openInNewWindow(prj);
+    });
 
     $prjCard.on('selected', function () {
-      
+
       var bigCard = app.$.bigCard;
 
       if (!prj.detail) {
@@ -175,10 +204,10 @@
                   prj.detail = data;
                   prj.detail.path = prj.path;
                   prj.detail.app = app;
-                  
+
                   bigCard.path = app.options.index.path + '/' + prj.path;
-                  bigCard.prj = prj.detail;                  
-                  
+                  bigCard.prj = prj.detail;
+
                   bigCard.fit();
                   bigCard.toggle();
                 })
@@ -188,10 +217,10 @@
         return;
       }
 
-      if (prj.detail) {        
+      if (prj.detail) {
         bigCard.path = app.options.index.path + '/' + prj.path;
         bigCard.prj = prj.detail;
-        
+
         bigCard.fit();
         bigCard.toggle();
       }
@@ -226,7 +255,7 @@
       var top = $(this).scrollTop();
       var height = $(this).innerHeight();
       var length = this.scrollHeight;
-      
+
       if (length - top - height <= 10) {
         app.fillList();
       }

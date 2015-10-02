@@ -14,7 +14,7 @@
   },
   "labels": {
     "en": {
-      "search": "Search activities",
+      "searchTitle": "Search activities",
       "languages": "Languages",
       "subjects": "Subjects",
       "levels": "Levels",
@@ -26,10 +26,13 @@
       "playApplet": "applet",
       "playAppletText": "play Java™ applet",
       "install": "install",
-      "installText": "install as Java™ package"
+      "installText": "install as Java™ package",
+      "title": "title",
+      "author": "author",
+      "search": "search"
       },
     "ca": {
-      "search": "Cerca activitats",
+      "searchTitle": "Cerca activitats",
       "languages": "Idioma",
       "subjects": "Àrea curricular",
       "levels": "Nivell",
@@ -41,10 +44,13 @@
       "playApplet": "applet",
       "playAppletText": "engega l'applet Java™",
       "install": "instal·la",
-      "installText": "instal·la com a paquet Java™"
+      "installText": "instal·la com a paquet Java™",
+      "title": "títol",
+      "author": "autor/a",
+      "search": "cerca"
       },
     "es": {
-      "search": "Buscar actividades",
+      "searchTitle": "Buscar actividades",
       "languages": "Idioma",
       "subjects": "Área curricular",
       "date": "Fecha",
@@ -55,7 +61,10 @@
       "playApplet": "applet",
       "playAppletText": "abre applet Java™",
       "install": "instalar",
-      "installText": "instalar como paquete Java™"      
+      "installText": "instalar como paquete Java™",
+      "title": "título",
+      "author": "autor/a",
+      "search": "buscar"
       }      
   },
   "logo": "logo.png",

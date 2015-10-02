@@ -44,10 +44,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Tile icon for Win8 (144x144) -->
     <meta name="msapplication-TileImage" content="icons/ms-touch-icon-144x144-precomposed.png">
 
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild-->
-
     <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
@@ -75,7 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-scroll-header-panel drawer fixed>
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">[[labels.search]]</span>
+          <span class="paper-font-title">[[labels.searchTitle]]</span>
         </paper-toolbar>
         <!-- Selection form -->
         <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
@@ -102,6 +98,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-menu>
         </paper-dropdown-menu>
 
+        <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
+        <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
+        <paper-button raised class="colorful" label="[[labels.searchTitle]]" on-tap="matchItems">[[labels.search]]</paper-button>
+                
         <!-- Drawer Content -->
       </paper-scroll-header-panel>
 
@@ -117,7 +117,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">[[title]]</div>
+            <h1 class="app-name">[[title]]</h1>
           </div>
 
           <!-- Application sub title -->

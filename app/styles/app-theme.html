@@ -40,7 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /* Components */
 
     /* paper-drawer-panel */
-    --drawer-menu-color:           var(--paper-toolbar-color);
+    --drawer-menu-background:      var(--paper-toolbar-background);
     --drawer-border-color:         1px solid #ccc;
     --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
 
@@ -57,13 +57,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    --paper-input-container-input-color: #fff;
     */
    
-   --paper-card-header-color: (var --default-primary-color);
-   --paper-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);}; 
-   --paper-card-content: {font-size: 9pt;};
-   --paper-card-actions: {font-size: 10pt;};
-   
+   --prj-card-header: {}; 
    --prj-card-header-color: (var --default-primary-color);
-   --prj-card-header: {font-size: 10pt; background-color: rgba(255, 255, 255, 0.64);}; 
+   --prj-card-header-background: rgba(255, 255, 255, 0.85);
    --prj-card-content: {font-size: 9pt;};
    --prj-card-actions: {font-size: 10pt;};
    
@@ -72,8 +68,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* General styles */
 
   #drawerToolbar {
-    color: var(--secondary-text-color);
-    background-color: var(--drawer-menu-color);
+    color: var(--secondary-text-color, black);
+    background-color: var(--primary-background-color, white);
+    /* background-color: var(--drawer-menu-background); */
     border-bottom: var(--drawer-toolbar-border-color);
   }
 
@@ -155,6 +152,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Height of the scroll area */
   .content {
     height: 900px;
+  }
+  
+  .textInput {
+    margin-right: 8px;
+    margin-left: 8px;
   }
 
   /* Breakpoints */
