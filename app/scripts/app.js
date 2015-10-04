@@ -57,7 +57,7 @@
           });
 
   // Builds the language selector, filling it with the languages available in options.languages
-  // TODO: Try to convert it in an HTML Element
+  // TODO: Try to convert it into an HTML Element
   var buildLangSelector = function () {
 
     var $langSel = $('#langSel');
@@ -115,16 +115,21 @@
     
     for (var i in projects) {
       var prj = projects[i];
-      if(!prj.langCodes)
+      if(!prj.langCodes){
         prj.langCodes = [];
-      if(!prj.areaCodes)
+      }
+      if(!prj.areaCodes){
         prj.areaCodes = [];
-      if(!prj.levelCodes)
+      }
+      if(!prj.levelCodes){
         prj.levelCodes = [];
-      if(!prj.title)
+      }
+      if(!prj.title){
         prj.title = '';
-      if(!prj.author)
-        prj.author = '';      
+      }
+      if(!prj.author){
+        prj.author = '';
+      }      
     }
     
     return projects;
@@ -140,6 +145,8 @@
     var level = app.actLevels[app.currentLevel].val;
     var title = app.currentTitle.trim().toLowerCase();
     var author = app.currentAuthor.trim().toLowerCase();
+
+    console.log('lang: ' + lang + ' area: ' + area+ ' level: ' +level + ' title: ' + title + ' author: ' + author);
 
     if (app.projects) {
       for (var i in app.projects) {
@@ -175,7 +182,8 @@
   };
 
   app.openAppletInNewWindow = function (prj) {
-    var cmd = app.options.index.path + '/index-java.html?' + prj.path + '/' + prj.zipFile;
+    //var cmd = app.options.index.path + '/index-java.html?' + prj.path + '/' + prj.zipFile;
+    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + window.location.href + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
