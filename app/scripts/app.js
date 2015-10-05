@@ -9,6 +9,7 @@
 
 /* global Polymer */
 /* global $ */
+/* global deployJava */
 
 (function (document) {
   'use strict';
@@ -17,6 +18,8 @@
   var app = document.querySelector('#app');
 
   app.options = {};
+
+  app.javaDisabled = false;
 
   app.lang = 'en';
   app.title = '';
@@ -41,15 +44,28 @@
   app.lastItem = 0;
   app.itemsPerScroll = 20;
 
+  app.loading = false;
+  app.loaded = false;
+
+  app.baseURL = '.';
+
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
             $.extend(app.options, data);
             app.lang = app.options.languages.indexOf(navigator.language) >= 0 ?
                     navigator.language : app.options.defaultLanguage;
-            buildLangSelector();
-            load();
-            // register scroll
+
+            app.baseURL = window.location.href;
+            if (app.baseURL.charAt(app.baseURL.length - 1) !== '/') {
+              var p = app.baseURL.lastIndexOf('/', 0);
+              if (p > 8){
+                app.baseURL = app.baseURL.substring(0, p + 1);
+              }
+            }
+
+            app.buildLangSelector();
+            app.load();
           })
           .fail(function () {
             app.title = 'ERROR';
@@ -58,7 +74,7 @@
 
   // Builds the language selector, filling it with the languages available in options.languages
   // TODO: Try to convert it into an HTML Element
-  var buildLangSelector = function () {
+  app.buildLangSelector = function () {
 
     var $langSel = $('#langSel');
 
@@ -77,18 +93,19 @@
       app.lang = $(this).text();
       $('.curLang').removeClass('curLang');
       $(this).addClass('curLang');
-      load();
+      app.load();
       return false;
     });
   };
-
 
   app.filterChanged = function () {
     app.matchItems();
   };
 
   // Fills the document with text according to the current language
-  var load = function () {
+  app.load = function () {
+
+    console.log('Loading projects...');
 
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
@@ -97,7 +114,7 @@
     app.actSubjects = app.options.actSubjects[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
-    if (!app.projects) {
+    if (app.projects === null) {
       $.getJSON(app.options.index.path + '/' + app.options.index.file)
               .done(function (data) {
                 app.projects = app.checkProjects(data);
@@ -110,32 +127,35 @@
       app.matchItems();
     }
   };
-  
-  app.checkProjects = function(projects) {
-    
+
+  app.checkProjects = function (projects) {
+
     for (var i in projects) {
       var prj = projects[i];
-      if(!prj.langCodes){
+      if (!prj.langCodes) {
         prj.langCodes = [];
       }
-      if(!prj.areaCodes){
+      if (!prj.areaCodes) {
         prj.areaCodes = [];
       }
-      if(!prj.levelCodes){
+      if (!prj.levelCodes) {
         prj.levelCodes = [];
       }
-      if(!prj.title){
+      if (!prj.title) {
         prj.title = '';
       }
-      if(!prj.author){
+      if (!prj.author) {
         prj.author = '';
-      }      
+      }
     }
-    
+
     return projects;
   };
 
   app.matchItems = function () {
+
+    console.log('matching items');
+
     app.matchProjects = [];
     app.lastItem = 0;
     $('#mainHome').empty();
@@ -146,7 +166,7 @@
     var title = app.currentTitle.trim().toLowerCase();
     var author = app.currentAuthor.trim().toLowerCase();
 
-    console.log('lang: ' + lang + ' area: ' + area+ ' level: ' +level + ' title: ' + title + ' author: ' + author);
+    console.log('lang: ' + lang + ' area: ' + area + ' level: ' + level + ' title: ' + title + ' author: ' + author);
 
     if (app.projects) {
       for (var i in app.projects) {
@@ -165,28 +185,43 @@
   };
 
   app.fillList = function () {
+
+    console.log('Filling list!');
+
     if (app.matchProjects) {
       var $mainHome = $('#mainHome');
-      for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
-        var prj = app.matchProjects[app.lastItem++];
-        prj.loadTries = 10;
-        var $prjCard = app.createCard(prj);
-        $mainHome.append($prjCard);
+      if ($mainHome.length > 0) {
+        app.loading = true;
+        for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
+          var prj = app.matchProjects[app.lastItem++];
+          prj.loadTries = 10;
+          var $prjCard = app.createCard(prj);
+          $mainHome.append($prjCard);
+        }
+        app.loaded = true;
+        app.loading = false;
       }
     }
   };
 
-  app.openInNewWindow = function (prj) {
+  app.playActivities = function (prj) {
     var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
     window.open(cmd, 'JClicPlayWindow');
   };
 
-  app.openAppletInNewWindow = function (prj) {
-    //var cmd = app.options.index.path + '/index-java.html?' + prj.path + '/' + prj.zipFile;
-    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + window.location.href + '/' + prj.path + '/' + prj.zipFile;
+  app.openApplet = function (prj) {
+    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.baseURL + app.options.index.path + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
+  app.openInstall = function (prj) {
+    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.baseURL + app.options.index.path + '/' + prj.path + '/' + prj.instFile;
+    window.open(cmd, 'InstallWindow');
+  };
+
+  app.goToClicZone = function (prj) {
+    window.open(prj.clicZoneURL, 'ClicZoneWindow');
+  };
 
   app.createCard = function (prj) {
 
@@ -251,12 +286,23 @@
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function () {
-    console.log('Our app is ready to rock!');
+    if (!app.loaded && !app.loading) {
+      app.fillList();
+    }
+    console.log('Ready!');
   });
 
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function () {
-    // imports are loaded and elements have been registered    
+    // imports are loaded and elements have been registered 
+
+    console.log('Checking java...');
+    if (deployJava && deployJava.getJREs() instanceof Array) {
+      app.javaDisabled = deployJava.getJREs().length < 1;
+      console.log('javaDisabled is: ' + app.javaDisabled);
+    } else {
+      console.log('deployJava failed!!');
+    }
 
     $('#mainContainer').on('scroll', function () {
 

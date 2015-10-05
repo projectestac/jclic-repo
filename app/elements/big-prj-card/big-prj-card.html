@@ -52,6 +52,10 @@
       paper-button:hover {
         background: var(--divider-color);
       }      
+      
+      paper-fab {
+        margin-right: 10px;
+      }
 
     </style>
     <paper-dialog id="dialog" style="z-index: 10" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
@@ -70,11 +74,16 @@
         </table>
       </paper-dialog-scrollable>      
       <div class="buttons">
-        <paper-button id="play" title="[[labels.playText]]" on-tap="_tapPlay">[[labels.play]]</paper-button>
-        <paper-button id="playApplet" title="[[labels.playAppletText]]" on-tap="_tapPlayApplet">[[labels.playApplet]]</paper-button>
-        <paper-button id="install" title="[[labels.installText]]" on-tap="_tapInstall">[[labels.install]]</paper-button>
+        <paper-icon-button mini icon="av:play-circle-filled" title="[[labels.playText]]" id="play" on-tap="_tapPlay"></paper-icon-button>
+        <!-- paper-button id="play" icon="av:play-arrow" title="[[labels.playText]]" on-tap="_tapPlay">[[labels.play]]</paper-button -->
+        <paper-icon-button disabled="[[appletDisabled]]" mini icon="maps:local-cafe" id="playApplet" title="[[labels.playAppletText]]" on-tap="_tapPlayApplet"></paper-icon-button>
+        <!-- paper-button id="playApplet" title="[[labels.playAppletText]]" on-tap="_tapPlayApplet">[[labels.playApplet]]</paper-button -->
+        <paper-icon-button disabled="[[instalDisabled]]" mini icon="file-download" id="install" title="[[labels.installText]]" on-tap="_tapInstall"></paper-icon-button>
+        <paper-icon-button disabled="[[linkDisabled]]" mini icon="av:video-library" id="clicZone" title="[[labels.linkClicZoneText]]" on-tap="_tapLinkClicZone"></paper-icon-button>
+        <paper-icon-button mini icon="social:share" id="share" title="[[labels.shareText]]" on-tap="_tapShare"></paper-icon-button>
         <span class="flex"></span>
-        <paper-button dialog-dismiss>[[labels.close]]</paper-button>
+        <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
+        <!-- paper-button dialog-dismiss>[[labels.close]]</paper-button -->
       </div>
       <content></content>
     </paper-dialog>
@@ -82,7 +91,6 @@
 </dom-module>
 
 <script>
-  
   Polymer({
     is: 'big-prj-card',
     properties: {
@@ -112,6 +120,18 @@
         type: Object,
         computed: 'computeFields(prj, lang)',
         observer: '_fieldsChanged'
+      },
+      appletDisabled: {
+        type: String,
+        computed: 'computeAppletDisabled(prj)'
+      },
+      instalDisabled: {
+        type: String,
+        computed: 'computeInstalDisabled(prj)'
+      },
+      linkDisabled: {
+        type: String,
+        computed: 'computeLinkDisabled(prj)'
       }
     },
     computeImgSrc: function (path, prj) {
@@ -126,6 +146,15 @@
         license: prj.license[lang]
       };
     },
+    computeAppletDisabled: function() {
+      return !this.prj.zipFile || this.prj.app.javaDisabled;
+    },    
+    computeInstalDisabled: function() {
+      return !this.prj.instFile || this.prj.app.javaDisabled;
+    },    
+    computeLinkDisabled: function() {
+      return !this.prj.clicZoneURL;
+    },    
     _prjChanged: function (prj) {
       this.setAttribute('aria-label', prj.title);
     },    
@@ -140,12 +169,19 @@
       this.$.dialog.toggle();
     },
     _tapPlay: function() {  
-      this.prj.app.openInNewWindow(this.prj);
+      this.prj.app.playActivities(this.prj);
     },
     _tapPlayApplet: function() {      
-      this.prj.app.openAppletInNewWindow(this.prj);
+      this.prj.app.openApplet(this.prj);
     },
     _tapInstall: function() {      
+      this.prj.app.openInstall(this.prj);      
+    },
+    _tapLinkClicZone: function() {      
+      this.prj.app.goToClicZone(this.prj);
+    },
+    _tapShare: function() {      
+      window.alert('coming soon!');
     }    
   });
 </script>

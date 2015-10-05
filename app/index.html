@@ -52,6 +52,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <!-- endbuild -->
 
+    <!-- build:js bower_components/deployjava/deployjava.js -->
+    <script>
+      /** global s **/
+      // Hack to avoid a critical error en deployjava.js:1105 ('s' is not defined)
+      var s=null;
+    </script>
+    <script src="bower_components/deployjava/deployjava.js"></script>
+    <!-- endbuild -->
+    
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="elements/elements.html">
     <!-- endreplace-->
@@ -100,8 +109,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
         <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
-        <paper-button raised class="colorful" label="[[labels.searchTitle]]" on-tap="matchItems">[[labels.search]]</paper-button>
-                
+        <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="matchItems">
+          <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
+          <span>[[labels.search]]</span>
+        </paper-button>
+
         <!-- Drawer Content -->
       </paper-scroll-header-panel>
 
@@ -141,7 +153,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </paper-drawer-panel>
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
-    
+
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--
     <paper-toast id="caching-complete"
@@ -164,6 +176,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
+
 </body>
 
 </html>
