@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<script>
+  /* global exports:true */
+  /* global module:true */
+  if (typeof exports === 'undefined') {
+    exports = {};
+  }
+  if (typeof module === 'undefined') {
+    module = {};
+  }
+</script>
+
+<!-- build:js bower_components/jquery/jclic/jclic.min.js -->
+<script src="../../bower_components/jquery/jclic/jclic.min.js"></script>
+<!-- endbuild -->
+
+<dom-module id="jclic-player-js">
+  <template>
+    <style>
+      :host {
+        @apply(--paper-dialog);
+        @apply(--jclic-player-js);
+      }
+      
+      #JClicPlayer {
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+    <div id="JClicPlayer"></div>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+  /* global $ */
+  Polymer({
+    is: 'jclic-player-js',
+    properties: {
+      options: {
+        type: Object
+      },
+      project: {
+        type: String,
+        observer: '_prjChanged'
+      }
+    },
+    setProject: function (project, options) {
+      console.log('Project set: ' + project);
+      if (project) {
+        var $playerDiv = $('#JClicPlayer');
+        var player = new window.JClicObject.JClicPlayer($playerDiv, options);
+        player.load(project);
+        $(window).resize(function () {
+          if (player.skin) {
+            player.skin.doLayout();
+          }
+        });
+      }
+    },
+    _prjChanged: function (project) {
+      this.setProject(project, this.options);
+    }
+  });
+</script>

@@ -136,7 +136,8 @@
       }
     },
     
-    _tapButton: function(){
+    _tapButton: function(event){
+      event.stopPropagation();
       this.fire('play');
       return false;
     },

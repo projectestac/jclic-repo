@@ -153,6 +153,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </paper-drawer-panel>
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
+    
+    <paper-dialog id="playerDialog" modal style="z-index: 12;">
+      <jclic-player-js id="player"></jclic-player-js>      
+      <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
+    </paper-dialog>
+    
+    <paper-spinner alt="[[labels.loading]]" active="[[spinner]]"></paper-spinner>
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--

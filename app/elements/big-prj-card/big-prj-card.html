@@ -46,7 +46,7 @@
       }
 
       .dades {
-        min-width: 400px;
+        min-width: 80%;
       }
 
       paper-button:hover {
@@ -58,7 +58,7 @@
       }
 
     </style>
-    <paper-dialog id="dialog" style="z-index: 10" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+    <paper-dialog id="dialog" modal style="z-index: 10" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[prj.title]]</h2>      
       <paper-dialog-scrollable>
         <img class="cover" src="[[imgSrc]]"/>
@@ -162,11 +162,8 @@
       this.$.description.innerHTML = fields.description;
       this.$.license.innerHTML = fields.license;
     },
-    fit: function () {
-      this.$.dialog.fit();
-    },
-    toggle: function () {
-      this.$.dialog.toggle();
+    getPaperDialog: function(){
+      return this.$.dialog;
     },
     _tapPlay: function() {  
       this.prj.app.playActivities(this.prj);

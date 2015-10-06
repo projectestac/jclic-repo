@@ -48,7 +48,10 @@
   app.loaded = false;
 
   app.baseURL = '.';
+  
+  app.spinner = false;
 
+    
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -64,7 +67,7 @@
               }
             }
 
-            app.buildLangSelector();
+            app.buildLangSelector();            
             app.load();
           })
           .fail(function () {
@@ -106,7 +109,7 @@
   app.load = function () {
 
     console.log('Loading projects...');
-
+    
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
     app.labels = app.options.labels[app.lang];
@@ -114,13 +117,16 @@
     app.actSubjects = app.options.actSubjects[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
-    if (app.projects === null) {
+    if (app.projects === null) {      
+      app.spinner=true;
       $.getJSON(app.options.index.path + '/' + app.options.index.file)
               .done(function (data) {
                 app.projects = app.checkProjects(data);
                 app.matchItems();
+                app.spinner=false;
               })
               .fail(function () {
+                app.spinner=false;
                 $('#mainHome').append($('<h2/>').html('ERROR loading repository data!'));
               });
     } else {
@@ -191,6 +197,7 @@
     if (app.matchProjects) {
       var $mainHome = $('#mainHome');
       if ($mainHome.length > 0) {
+        app.spinner=true;
         app.loading = true;
         for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
           var prj = app.matchProjects[app.lastItem++];
@@ -200,13 +207,28 @@
         }
         app.loaded = true;
         app.loading = false;
+        app.spinner=false;
       }
     }
   };
 
   app.playActivities = function (prj) {
-    var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
-    window.open(cmd, 'JClicPlayWindow');
+    //var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
+    //window.open(cmd, 'JClicPlayWindow');
+    
+    var player = app.$.player;
+    var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
+    var options = {};
+    
+    
+    app.$.bigCard.getPaperDialog().close();
+    
+    var dialog = app.$.playerDialog;
+    dialog.fit();
+    dialog.noCancelOnOutsideClick = false;
+    player.setProject(project, options);    
+    dialog.open();
+    
   };
 
   app.openApplet = function (prj) {
@@ -233,7 +255,7 @@
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
 
     $prjCard.on('play', function () {
-      app.openInNewWindow(prj);
+      app.playActivities(prj);
     });
 
     $prjCard.on('selected', function () {
@@ -242,6 +264,7 @@
 
       if (!prj.detail) {
         var prjFile = app.options.index.path + '/' + prj.path + '/project.json';
+        app.spinner=true;
         $.getJSON(prjFile)
                 .done(function (data) {
                   prj.detail = data;
@@ -251,10 +274,13 @@
                   bigCard.path = app.options.index.path + '/' + prj.path;
                   bigCard.prj = prj.detail;
 
-                  bigCard.fit();
-                  bigCard.toggle();
+                  bigCard.getPaperDialog().fit();
+                  bigCard.getPaperDialog().open();
+                  bigCard.getPaperDialog().noCancelOnOutsideClick = false;
+                  app.spinner=false;
                 })
                 .fail(function () {
+                  app.spinner=false;
                   console.log('Error loading ' + prjFile);
                 });
         return;
@@ -264,8 +290,9 @@
         bigCard.path = app.options.index.path + '/' + prj.path;
         bigCard.prj = prj.detail;
 
-        bigCard.fit();
-        bigCard.toggle();
+        bigCard.getPaperDialog().fit();
+        bigCard.getPaperDialog().open();
+        bigCard.getPaperDialog().noCancelOnOutsideClick = false;        
       }
 
       return false;
@@ -299,11 +326,8 @@
     console.log('Checking java...');
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
-      console.log('javaDisabled is: ' + app.javaDisabled);
-    } else {
-      console.log('deployJava failed!!');
     }
-
+    
     $('#mainContainer').on('scroll', function () {
 
       var top = $(this).scrollTop();

@@ -2,7 +2,7 @@
 <dom-module id="shared-styles">
   <template>
     <style>      
-      
+
       .JCRLang {
         padding: 0 0.3em;
         border-right: 1pt solid;
@@ -34,14 +34,21 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      
+
       paper-button.search {
         background: var(--paper-toolbar-background, blue);
         color: var(--paper-toolbar-color, white);
         margin-left: 8px;
         margin-top: 15px;
-      }      
-      
+      }   
+
+      paper-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
     </style>
   </template>
 </dom-module>

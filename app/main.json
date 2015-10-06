@@ -33,7 +33,8 @@
       "shareText": "Share this project",
       "title": "title",
       "author": "author",
-      "search": "search"
+      "search": "search",
+      "loading": "loading..."
       },
     "ca": {
       "searchTitle": "Cerca activitats",
@@ -55,7 +56,8 @@
       "shareText": "Comparteix aquest projecte",
       "title": "títol",
       "author": "autor/a",
-      "search": "cerca"
+      "search": "cerca",
+      "loading": "s'està carregant..."
       },
     "es": {
       "searchTitle": "Buscar actividades",
@@ -76,7 +78,8 @@
       "shareText": "Compartir este proyecto",
       "title": "título",
       "author": "autor/a",
-      "search": "buscar"
+      "search": "buscar",
+      "loading": "cargando..."
       }
   },
   "logo": "logo.png",
