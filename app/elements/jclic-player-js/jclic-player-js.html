@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <!-- build:js ../../bower_components/jclic/dist/jclic.js -->
 <script src="../../bower_components/jclic/dist/jclic.js"></script>
 <!-- endbuild -->
@@ -9,15 +10,11 @@
       :host {
         @apply(--paper-dialog);
         @apply(--jclic-player-js);
-      }
-      
-      #JClicPlayer {
-        width: 800px;
-        height: 600px;
+        margin: 0 !important;
+        padding: 0;
       }
     </style>
-    <div id="JClicPlayer"></div>
-    <content></content>
+    <div id="playerDiv"></div>
   </template>
 </dom-module>
 
@@ -27,28 +24,44 @@
     is: 'jclic-player-js',
     properties: {
       options: {
-        type: Object
+        type: Object,
+        value: {}
       },
       project: {
         type: String,
-        observer: '_prjChanged'
+        observer: '_setProject'
+      },
+      _player: {
+        type: Object,
+        value: null,
+        reflectToAttribute: false,
+        notify: false
       }
     },
-    setProject: function (project, options) {
-      console.log('Project set: ' + project);
+    _setProject: function (project) {
       if (project) {
-        var $playerDiv = $('#JClicPlayer');
-        var player = new window.JClicObject.JClicPlayer($playerDiv, options);
-        player.load(project);
-        $(window).resize(function () {
-          if (player.skin) {
-            player.skin.doLayout();
-          }
-        });
+        var $div = this.$fitPlayer();
+        if (!this._player) {
+          this._player = new window.JClicObject.JClicPlayer($div, this.options);
+          var thisElement = this;
+          $(window).resize(function () {
+            thisElement.$fitPlayer();
+          });
+        }
+        this._player.load(project);
       }
     },
-    _prjChanged: function (project) {
-      this.setProject(project, this.options);
+    $fitPlayer: function () {
+      var $playerDiv = $(this.$.playerDiv);
+      var $rootParent = $playerDiv.parent().parent();
+      $playerDiv.css({
+        width: $rootParent.width(),
+        height: $rootParent.height()
+      });
+      if (this._player && this._player.skin) {
+        this._player.skin.fit();
+      }
+      return $playerDiv;
     }
   });
 </script>

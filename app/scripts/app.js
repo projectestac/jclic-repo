@@ -218,17 +218,13 @@
     
     var player = app.$.player;
     var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
-    var options = {};
-    
-    
     app.$.bigCard.getPaperDialog().close();
     
     var dialog = app.$.playerDialog;
     dialog.fit();
     dialog.noCancelOnOutsideClick = false;
-    player.setProject(project, options);    
-    dialog.open();
-    
+    dialog.open();    
+    player.project=project;
   };
 
   app.openApplet = function (prj) {

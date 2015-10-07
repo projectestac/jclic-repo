@@ -1,14 +1,4 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <html lang="">
 
   <head>
@@ -16,7 +6,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="description" content="Repository of JClic projects">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Polymer Starter Kit" />
-    <title>JClic library</title>
+    <title>JClic test library</title>
     <!-- Place favicon.ico in the `app/` directory -->
 
     <!-- Chrome for Android theme color -->
@@ -55,12 +45,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- build:js bower_components/deployjava/deployjava.js -->
     <script>
       /** global s **/
-      // Hack to avoid a critical error en deployjava.js:1105 ('s' is not defined)
-      var s=null;
+      // Hack to avoid a critical error in deployjava.js:1105 ('s' is not defined)
+      var s = null;
     </script>
     <script src="bower_components/deployjava/deployjava.js"></script>
     <!-- endbuild -->
-    
+
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="elements/elements.html">
     <!-- endreplace-->
@@ -153,12 +143,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </paper-drawer-panel>
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
-    
-    <paper-dialog id="playerDialog" modal style="z-index: 12;">
+
+    <paper-dialog id="playerDialog" modal style="z-index: 12; width: 95%; height: 95%">
       <jclic-player-js id="player"></jclic-player-js>      
-      <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
     </paper-dialog>
-    
+
     <paper-spinner alt="[[labels.loading]]" active="[[spinner]]"></paper-spinner>
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->

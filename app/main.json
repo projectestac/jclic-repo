@@ -3,14 +3,14 @@
   "langNames": ["English", "català", "español"],
   "defaultLanguage": "en",
   "title": {
-    "en": "JClic demo repository",
-    "ca": "Repositori JClic de demostració",
-    "es": "Repositorio JClic de demostración"
+    "en": "JClic projects library",
+    "ca": "Biblioteca de projectes JClic",
+    "es": "Biblioteca de proyectos JClic"
   },
   "description":{
-    "en": "Demo repository with some JClic sample projects",
-    "ca": "Repositori de demostració amb alguns projectes JClic",
-    "es": "Repositorio de demostración con algunos proyectos JClic"
+    "en": "Temporary site to test the new JClic HTML5 player",
+    "ca": "Espai provisional de proves del nou motor HTML5 del JClic",
+    "es": "Espacio provisional de pruebas del nuevo motor HTML5 de JClic"
   },
   "labels": {
     "en": {
