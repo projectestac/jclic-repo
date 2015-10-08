@@ -31,6 +31,10 @@
         type: String,
         observer: '_setProject'
       },
+      fullscreen: {
+        type: Boolean,
+        value: false
+      },
       _player: {
         type: Object,
         value: null,
@@ -49,6 +53,9 @@
           });
         }
         this._player.load(project);
+        if(this.fullscreen){
+          this._player.skin.setScreenFull(true);
+        }
       }
     },
     $fitPlayer: function () {

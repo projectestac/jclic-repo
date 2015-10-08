@@ -50,8 +50,10 @@
   app.baseURL = '.';
   
   app.spinner = false;
-
-    
+  
+  app.fullScreen = false;
+  app.fullScreenEnabled = false;
+  
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -66,14 +68,18 @@
                 app.baseURL = app.baseURL.substring(0, p + 1);
               }
             }
-
-            app.buildLangSelector();            
+            
             app.load();
           })
           .fail(function () {
             app.title = 'ERROR';
             app.description = 'Error loading the repository data! Please try again.';
           });
+
+
+  app.tapSettings = function() {
+    app.$.settings.open();    
+  };
 
   // Builds the language selector, filling it with the languages available in options.languages
   // TODO: Try to convert it into an HTML Element
@@ -211,10 +217,8 @@
       }
     }
   };
-
+  
   app.playActivities = function (prj) {
-    //var cmd = app.options.index.path + '/index.html?' + prj.path + '/' + prj.mainFile;
-    //window.open(cmd, 'JClicPlayWindow');
     
     var player = app.$.player;
     var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
@@ -312,6 +316,7 @@
     if (!app.loaded && !app.loading) {
       app.fillList();
     }
+    app.fullScreenEnabled = window.JClicObject.Utils.screenFullAllowed();
     console.log('Ready!');
   });
 
@@ -319,7 +324,14 @@
   window.addEventListener('WebComponentsReady', function () {
     // imports are loaded and elements have been registered 
 
-    console.log('Checking java...');
+    app.buildLangSelector();  
+    
+    app.playerOptions = {
+      closeFn: function(){
+        app.$.playerDialog.close();
+      }
+    };
+    
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
     }

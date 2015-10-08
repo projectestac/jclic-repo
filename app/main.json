@@ -34,7 +34,9 @@
       "title": "title",
       "author": "author",
       "search": "search",
-      "loading": "loading..."
+      "loading": "loading...",
+      "settings": "Settings",
+      "fullScreen": "Open activities at full screen"
       },
     "ca": {
       "searchTitle": "Cerca activitats",
@@ -45,7 +47,7 @@
       "license": "Llicència d'ús",
       "close": "tanca",
       "play": "obre",
-      "playText": "Engega les activitats (HTML5)",
+      "playText": "Obre les activitats (HTML5)",
       "playApplet": "applet",
       "playAppletText": "Engega l'applet Java™",
       "install": "instal·la",
@@ -57,7 +59,9 @@
       "title": "títol",
       "author": "autor/a",
       "search": "cerca",
-      "loading": "s'està carregant..."
+      "loading": "s'està carregant...",
+      "settings": "Configuració",
+      "fullScreen": "Obrir les activitats a pantalla completa"
       },
     "es": {
       "searchTitle": "Buscar actividades",
@@ -79,7 +83,9 @@
       "title": "título",
       "author": "autor/a",
       "search": "buscar",
-      "loading": "cargando..."
+      "loading": "cargando...",
+      "settings": "Configuración",
+      "fullScreen": "Abrir actividades a pantalla completa"      
       }
   },
   "logo": "logo.png",
