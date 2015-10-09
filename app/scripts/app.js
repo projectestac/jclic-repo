@@ -48,12 +48,15 @@
   app.loaded = false;
 
   app.baseURL = '.';
-  
+
   app.spinner = false;
-  
+
   app.fullScreen = false;
   app.fullScreenEnabled = false;
-  
+
+  app.order = 0;
+  app.orderInv = false;
+
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -64,11 +67,11 @@
             app.baseURL = window.location.href;
             if (app.baseURL.charAt(app.baseURL.length - 1) !== '/') {
               var p = app.baseURL.lastIndexOf('/', 0);
-              if (p > 8){
+              if (p > 8) {
                 app.baseURL = app.baseURL.substring(0, p + 1);
               }
             }
-            
+
             app.load();
           })
           .fail(function () {
@@ -77,8 +80,36 @@
           });
 
 
-  app.tapSettings = function() {
-    app.$.settings.open();    
+  app.readBackSettings = function (reset) {
+    if (reset) {
+      app.fullScreen = app.back.fullScreen;
+      app.order = app.back.order;
+      app.orderInv = app.back.orderInv;
+    } else {
+      app.back = {
+        fullScreen: app.fullScreen,
+        order: app.order,
+        orderInv: app.orderInv
+      };
+    }
+  };
+
+  app.readBackSettings(false);
+
+  app.tapSettings = function () {
+    app.readBackSettings(false);
+    app.$.settings.open();
+  };
+
+  app.newSettings = function () {
+    if (app.order !== app.back.order || app.orderInv !== app.back.orderInv) {
+      console.log('order changed!');
+      app.matchItems(true);
+    }
+  };
+
+  app.backSettings = function () {
+    app.readBackSettings(true);
   };
 
   // Builds the language selector, filling it with the languages available in options.languages
@@ -108,14 +139,14 @@
   };
 
   app.filterChanged = function () {
-    app.matchItems();
+    app.matchItems(false);
   };
 
   // Fills the document with text according to the current language
   app.load = function () {
 
     console.log('Loading projects...');
-    
+
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
     app.labels = app.options.labels[app.lang];
@@ -123,20 +154,20 @@
     app.actSubjects = app.options.actSubjects[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
-    if (app.projects === null) {      
-      app.spinner=true;
+    if (app.projects === null) {
+      app.spinner = true;
       $.getJSON(app.options.index.path + '/' + app.options.index.file)
               .done(function (data) {
                 app.projects = app.checkProjects(data);
-                app.matchItems();
-                app.spinner=false;
+                app.matchItems(false);
+                app.spinner = false;
               })
               .fail(function () {
-                app.spinner=false;
+                app.spinner = false;
                 $('#mainHome').append($('<h2/>').html('ERROR loading repository data!'));
               });
     } else {
-      app.matchItems();
+      app.matchItems(false);
     }
   };
 
@@ -159,14 +190,36 @@
       if (!prj.author) {
         prj.author = '';
       }
+      if (!prj.date) {
+        prj.date = '00/00/00';
+      }
+      var d = prj.date.split('/');
+      prj.dateCmp = '' + d[2] + d[1] + d[0];
     }
 
     return projects;
   };
 
-  app.matchItems = function () {
+  app.orderItems = function (projects) {
+    var inv = app.orderInv ? -1 : 1;
+    projects.sort(function (a, b) {
+      var result = 0;
+      switch (app.order) {
+        case 0: // Date
+          result = a.dateCmp.localeCompare(b.dateCmp) * -1;
+          break;
+        case 1: // Title
+          result = a.title.localeCompare(b.title);
+          break;
+        case 2: // Author          
+          result = a.author.localeCompare(b.author);
+          break;
+      }
+      return result * inv;
+    });
+  };
 
-    console.log('matching items');
+  app.matchItems = function (reorder) {
 
     app.matchProjects = [];
     app.lastItem = 0;
@@ -178,9 +231,10 @@
     var title = app.currentTitle.trim().toLowerCase();
     var author = app.currentAuthor.trim().toLowerCase();
 
-    console.log('lang: ' + lang + ' area: ' + area + ' level: ' + level + ' title: ' + title + ' author: ' + author);
-
     if (app.projects) {
+      if (reorder) {
+        app.orderItems(app.projects);
+      }
       for (var i in app.projects) {
         var prj = app.projects[i];
         if ((lang === '*' || prj.langCodes.indexOf(lang) >= 0) &&
@@ -192,18 +246,15 @@
         }
       }
     }
-
     app.fillList();
   };
 
   app.fillList = function () {
 
-    console.log('Filling list!');
-
     if (app.matchProjects) {
       var $mainHome = $('#mainHome');
       if ($mainHome.length > 0) {
-        app.spinner=true;
+        app.spinner = true;
         app.loading = true;
         for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
           var prj = app.matchProjects[app.lastItem++];
@@ -213,22 +264,22 @@
         }
         app.loaded = true;
         app.loading = false;
-        app.spinner=false;
+        app.spinner = false;
       }
     }
   };
-  
+
   app.playActivities = function (prj) {
-    
+
     var player = app.$.player;
     var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
     app.$.bigCard.getPaperDialog().close();
-    
+
     var dialog = app.$.playerDialog;
     dialog.fit();
     dialog.noCancelOnOutsideClick = false;
-    dialog.open();    
-    player.project=project;
+    dialog.open();
+    player.project = project;
   };
 
   app.openApplet = function (prj) {
@@ -250,6 +301,7 @@
     var $prjCard = $('<prj-card elevation="2" animatedShadow="true"/>');
     $prjCard.attr('heading', prj.title);
     $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);
+    $prjCard.attr('lang', app.enumList(prj.langCodes));
 
     var $cardContent = $('<div class="card-content"/>');
     $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
@@ -264,7 +316,7 @@
 
       if (!prj.detail) {
         var prjFile = app.options.index.path + '/' + prj.path + '/project.json';
-        app.spinner=true;
+        app.spinner = true;
         $.getJSON(prjFile)
                 .done(function (data) {
                   prj.detail = data;
@@ -277,10 +329,10 @@
                   bigCard.getPaperDialog().fit();
                   bigCard.getPaperDialog().open();
                   bigCard.getPaperDialog().noCancelOnOutsideClick = false;
-                  app.spinner=false;
+                  app.spinner = false;
                 })
                 .fail(function () {
-                  app.spinner=false;
+                  app.spinner = false;
                   console.log('Error loading ' + prjFile);
                 });
         return;
@@ -292,7 +344,7 @@
 
         bigCard.getPaperDialog().fit();
         bigCard.getPaperDialog().open();
-        bigCard.getPaperDialog().noCancelOnOutsideClick = false;        
+        bigCard.getPaperDialog().noCancelOnOutsideClick = false;
       }
 
       return false;
@@ -324,18 +376,18 @@
   window.addEventListener('WebComponentsReady', function () {
     // imports are loaded and elements have been registered 
 
-    app.buildLangSelector();  
-    
+    app.buildLangSelector();
+
     app.playerOptions = {
-      closeFn: function(){
+      closeFn: function () {
         app.$.playerDialog.close();
       }
     };
-    
+
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
     }
-    
+
     $('#mainContainer').on('scroll', function () {
 
       var top = $(this).scrollTop();
@@ -391,21 +443,20 @@
   // Utility functions
 
   // Converts an array of strings into a single string
-  /*
-   function enumList(list, sep, lower) {
-   var result = '';
-   
-   if (typeof sep !== 'string'){
-   sep = '|';
-   }
-   
-   for (var i = 0; i < list.length; i++) {
-   result = result + (lower ? list[i].toLowerCase() : list[i]);
-   if (i < list.length - 1){
-   result = result + sep;
-   }
-   }
-   return result;
-   }*/
+  app.enumList = function (list, sep, lower) {
+    var result = '';
+
+    if (typeof sep !== 'string') {
+      sep = '|';
+    }
+
+    for (var i = 0; i < list.length; i++) {
+      result = result + (lower ? list[i].toLowerCase() : list[i]);
+      if (i < list.length - 1) {
+        result = result + sep;
+      }
+    }
+    return result;
+  };
 
 })(document);

@@ -59,6 +59,10 @@
         @apply(--prj-card-header-image-text);
       }
       
+      .lang {
+        @apply(--prj-card-lang);
+      }
+      
       paper-fab {
         position: absolute;
         bottom: 0px;
@@ -84,7 +88,7 @@
     <paper-material animated$="[[animatedShadow]]" elevation="[[elevation]]"></paper-material>
 
     <div class="header" style$="[[_getHeaderStyle(image)]]" on-tap="_tapCard">
-      <!-- img hidden$="[[!image]]" src="[[image]]" -->
+         <span class="lang">[[lang]]</span>
       <div hidden$="[[!heading]]" class$="[[_computeHeadingClass(image)]]">[[heading]]</div>
       <paper-fab class="btn-primary" mini icon="av:play-arrow" title="play" role="button" on-tap="_tapButton"></paper-fab>
     </div>
@@ -109,6 +113,11 @@
         type: String,
         value: '',
         observer: '_headingChanged'
+      },
+      
+      lang: {
+        type: String,
+        value: ''
       },
 
       /**

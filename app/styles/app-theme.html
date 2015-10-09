@@ -17,12 +17,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
    See https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details
    for further information on custom CSS properties.
-   */
+  */
 
   /* Application theme */
 
   :root {
-    
+
     /*
     --dark-primary-color:       #7B1FA2;
     --default-primary-color:    #9C27B0;
@@ -56,13 +56,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    --paper-input-container-focus-color: rgba(255, 255, 255, 1);
    --paper-input-container-input-color: #fff;
     */
-   
-   --prj-card-header: {}; 
-   --prj-card-header-color: (var --default-primary-color);
-   --prj-card-header-background: rgba(255, 255, 255, 0.85);
-   --prj-card-content: {font-size: 9pt;};
-   --prj-card-actions: {font-size: 10pt;};
-   
+
+    --prj-card-header: {}; 
+    --prj-card-header-color: var(--primary-text-color);
+    --prj-card-header-background: rgba(255, 255, 255, 0.85);
+    --prj-card-content: {font-size: 9pt;};
+    --prj-card-actions: {font-size: 10pt;};
+    --prj-card-lang: {
+      font-size: 9pt;
+      font-weight: bold;
+      padding: 3px;
+      margin: 4px;
+      display: inline-block;
+      border-radius: 4px;
+      background-color: var(--primary-background-color);
+      color: var(--primary-text-color);
+    };
+
+    --paper-item-min-height: 20pt;
+
   }
 
   /* General styles */
@@ -79,20 +91,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   prj-card {
-    width: calc(200px);
+    width: 200px;
     margin: 8px;
     vertical-align: top;
   }
-  
-  paper-material {
-    border-radius: 2px;
-    height: 100%;
-    padding: 16px 0 16px 0;
-    width: calc(98.66% - 16px);
-    margin: 16px auto;
-    background: white;
+
+  paper-menu {
+    border: 1px solid var(--drawer-border-color);
   }
 
+  paper-item {
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;    
+  }
+
+  paper-material {
+    border-radius: 2px;
+    padding: 16px 0 16px 0;
+  }
+
+
+
+  /*
   paper-menu iron-icon {
     margin-right: 33px;
     opacity: 0.54;
@@ -101,7 +122,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .paper-menu > .iron-selected {
     color: var(--default-primary-color);
   }
+  */
 
+  /*
   paper-menu a {
     text-decoration: none;
     color: var(--menu-link-color);
@@ -123,6 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     min-height: 48px;
     padding: 0 16px;
   }
+  */
 
   paper-toolbar.tall .app-name {
     font-size: 40px;
@@ -153,35 +177,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .content {
     height: 900px;
   }
-  
+
   .textInput {
     margin-right: 8px;
     margin-left: 8px;
   }
-  
+
   #settingsBtn {
     position: absolute;
     bottom: 0px;
     left: 0px;
   }
-  
+
   /* Breakpoints */
 
   /* Small */
   @media (max-width: 600px) {
 
-    paper-material {
-      --menu-container-display: none;
-      width: calc(97.33% - 32px);
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
     prj-card {
       --menu-container-display: none;      
       width: calc(97.33% - 16px);
+      margin-top: 0px;      
     }
-    
+
     paper-toolbar.tall .app-name {
       font-size: 24px;
       font-weight: 400;
@@ -189,14 +207,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     #drawer .paper-toolbar {
       margin-left: 16px;
-    }
-
-    #overlay {
-      min-width: 360px;
-    }
-
-    .bg {
-      background: white;
     }
 
   }
@@ -209,9 +219,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       margin-bottom: 32px;
       padding-left: 30px;
       padding-right: 30px;
-    }
-
-    prj-card {
     }
 
     #drawer.paper-drawer-panel > [drawer] {
@@ -227,7 +234,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     or remove these breakpoints based on your needs.
 
     http://www.google.com/design/spec/layout/adaptive-ui.html#adaptive-ui-breakpoints
-   */
+  */
 
   /* mobile-small */
   @media all and (min-width: 0) and (max-width: 360px) and (orientation: portrait) { }

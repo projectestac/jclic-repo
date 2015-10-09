@@ -41,10 +41,10 @@
     <!-- build:js bower_components/jquery/dist/jquery.min.js -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <!-- endbuild -->
-    
-  <!-- build:js bower_components/jclic/dist/jclic.js -->
-  <script src="bower_components/jclic/dist/jclic.js"></script>
-  <!-- endbuild -->
+
+    <!-- build:js bower_components/jclic/dist/jclic.js -->
+    <script src="bower_components/jclic/dist/jclic.js"></script>
+    <!-- endbuild -->
 
     <!-- build:js bower_components/deployjava/deployjava.js -->
     <script>
@@ -72,46 +72,46 @@
 
       <!-- Drawer Scroll Header Panel -->
       <paper-scroll-header-panel drawer fixed>
-        
-          <!-- Drawer Toolbar -->
-          <paper-toolbar id="drawerToolbar">
-            <span class="paper-font-title" style="margin-left: -8px">[[labels.searchTitle]]</span>
-          </paper-toolbar>
-          
-          <!-- Selection form -->
-          <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentLang}}">
-              <template is="dom-repeat" items="[[actLanguages]]">
-                <paper-item role="listitem">[[item.text]]</paper-item>              
-              </template>
-            </paper-menu>
-          </paper-dropdown-menu>
 
-          <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentSubject}}">
-              <template is="dom-repeat" items="[[actSubjects]]">
-                <paper-item role="listitem">[[item.text]]</paper-item>              
-              </template>
-            </paper-menu>
-          </paper-dropdown-menu>
+        <!-- Drawer Toolbar -->
+        <paper-toolbar id="drawerToolbar">
+          <span class="paper-font-title" style="margin-left: -8px">[[labels.searchTitle]]</span>
+        </paper-toolbar>
 
-          <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentLevel}}">
-              <template is="dom-repeat" items="[[actLevels]]">
-                <paper-item role="listitem">[[item.text]]</paper-item>              
-              </template>
-            </paper-menu>
-          </paper-dropdown-menu>
+        <!-- Selection form -->
+        <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentLang}}">
+            <template is="dom-repeat" items="[[actLanguages]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu>
 
-          <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
-          <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
-          <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="matchItems">
-            <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
-            <span>[[labels.search]]</span>
-          </paper-button>
+        <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentSubject}}">
+            <template is="dom-repeat" items="[[actSubjects]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu>
 
-          <paper-icon-button icon="settings" id="settingsBtn" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
-          
+        <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
+          <paper-menu class="dropdown-content" selected="{{currentLevel}}">
+            <template is="dom-repeat" items="[[actLevels]]">
+              <paper-item role="listitem">[[item.text]]</paper-item>              
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu>
+
+        <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
+        <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
+        <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="matchItems">
+          <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
+          <span>[[labels.search]]</span>
+        </paper-button>
+
+        <paper-icon-button icon="settings" id="settingsBtn" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
+
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
@@ -149,12 +149,31 @@
 
     </paper-drawer-panel>
 
-    <paper-dialog id="settings">
+    <paper-dialog id="settings" modal>
       <h3>[[labels.settings]]</h3>
-      <label><paper-toggle-button checked="{{fullScreen}}" enabled="[[fullScreenEnabled]]"></paper-toggle-button> <span>[[labels.fullScreen]]</span></label>
-      <div class="buttons">
-        <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
+      <div class="vertical layout">
+        <paper-material elevation="1">
+          <paper-toggle-button checked="{{fullScreen}}" enabled="[[fullScreenEnabled]]">
+            <span>[[labels.fullScreen]]</span>
+          </paper-toggle-button>
+        </paper-material>
+        <paper-material elevation="1">
+          <p><span>[[labels.orderBy]]</span>:</p>
+          <paper-menu id="orderMenu" style="width: 75%" selected="{{order}}">
+            <paper-item id="orderDate">[[labels.date]]</paper-item>
+            <paper-item id="orderTitle">[[labels.title]]</paper-item>
+            <paper-item id="orderAuthor">[[labels.author]]</paper-item>        
+          </paper-menu>
+          <p/>
+          <paper-toggle-button checked="{{orderInv}}">
+            <span>[[labels.inverse]]</span>
+          </paper-toggle-button>        
+        </paper-material>
       </div>
+      <div class="buttons">
+        <paper-button dialog-dismiss on-click="backSettings">[[labels.cancel]]</paper-button>
+        <paper-button dialog-confirm on-click="newSettings">[[labels.ok]]</paper-button>
+      </div>      
     </paper-dialog>
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
