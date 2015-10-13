@@ -43,19 +43,17 @@
       }
     },
     _setProject: function (project) {
-      if (project) {
-        var $div = this.$fitPlayer();
-        if (!this._player) {
-          this._player = new window.JClicObject.JClicPlayer($div, this.options);
-          var thisElement = this;
-          $(window).resize(function () {
-            thisElement.$fitPlayer();
-          });
-        }
-        this._player.load(project);
-        if(this.fullscreen){
-          this._player.skin.setScreenFull(true);
-        }
+      var $div = this.$fitPlayer();
+      if (!this._player) {
+        this._player = new window.JClicObject.JClicPlayer($div, this.options);
+        var thisElement = this;
+        $(window).resize(function () {
+          thisElement.$fitPlayer();
+        });
+      }
+      this._player.load(project);
+      if (this.fullscreen) {
+        this._player.skin.setScreenFull(true);
       }
     },
     $fitPlayer: function () {

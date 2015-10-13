@@ -10,6 +10,7 @@
 /* global Polymer */
 /* global $ */
 /* global deployJava */
+/* global unidecode */
 
 (function (document) {
   'use strict';
@@ -22,6 +23,11 @@
   app.javaDisabled = false;
 
   app.lang = 'en';
+  app.langIndex = 0;
+  app.languages = [
+    {id: 'en', name: 'English'},
+    {id: 'ca', name: 'català'},
+    {id: 'es', name: 'español'}];
   app.title = '';
   app.description = '';
   app.langLabel = '';
@@ -41,6 +47,7 @@
 
   app.projects = null;
   app.matchProjects = [];
+  app.numMatchprojects = 0;
   app.lastItem = 0;
   app.itemsPerScroll = 20;
 
@@ -61,8 +68,6 @@
   $.getJSON('main.json')
           .done(function (data) {
             $.extend(app.options, data);
-            app.lang = app.options.languages.indexOf(navigator.language) >= 0 ?
-                    navigator.language : app.options.defaultLanguage;
 
             app.baseURL = window.location.href;
             if (app.baseURL.charAt(app.baseURL.length - 1) !== '/') {
@@ -72,7 +77,16 @@
               }
             }
 
-            app.load();
+            app.languages = app.options.languages;
+            var nl = navigator.language ? navigator.language : app.options.defaultLanguage;
+            var l = app.langIndex;
+            for (var n in app.languages) {
+              if (nl.indexOf(app.languages[n].id) === 0) {
+                l = n;
+                break;
+              }
+            }
+            app.setLang(l, true);
           })
           .fail(function () {
             app.title = 'ERROR';
@@ -112,30 +126,21 @@
     app.readBackSettings(true);
   };
 
-  // Builds the language selector, filling it with the languages available in options.languages
-  // TODO: Try to convert it into an HTML Element
-  app.buildLangSelector = function () {
+  app.clickOnLang = function (e) {
+    e.preventDefault();
+    app.setLang(e.model.index, false);
+    return false;
+  };
 
-    var $langSel = $('#langSel');
-
-    $langSel.empty();
-
-    for (var i = 0; i < app.options.languages.length; i++) {
-      var $lng = $('<a href="#" class="JCRLang" title="' + app.options.langNames[i] + '">' + app.options.languages[i] + '</a>');
-      if (app.options.languages[i] === app.lang) {
-        $lng.addClass('curLang');
-      }
-      $langSel.append($lng);
-    }
-
-    // Set callback for language selectors
-    $('.JCRLang').on('click', function () {
-      app.lang = $(this).text();
-      $('.curLang').removeClass('curLang');
-      $(this).addClass('curLang');
+  app.setLang = function (i, forceLoad) {
+    var currentLang = app.lang;
+    app.lang = app.languages[i].id;
+    app.langIndex = i;
+    $('.curLang').removeClass('curLang');
+    $('#langSel #' + app.lang).addClass('curLang');
+    if (forceLoad || app.lang !== currentLang) {
       app.load();
-      return false;
-    });
+    }
   };
 
   app.filterChanged = function () {
@@ -144,8 +149,6 @@
 
   // Fills the document with text according to the current language
   app.load = function () {
-
-    console.log('Loading projects...');
 
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
@@ -184,17 +187,24 @@
       if (!prj.levelCodes) {
         prj.levelCodes = [];
       }
+      
       if (!prj.title) {
         prj.title = '';
       }
+      prj.titleCmp = unidecode(prj.title).trim().toLowerCase();
+            
       if (!prj.author) {
         prj.author = '';
       }
+      prj.authorCmp = unidecode(prj.author).trim().toLowerCase();
+      
       if (!prj.date) {
         prj.date = '00/00/00';
       }
       var d = prj.date.split('/');
-      prj.dateCmp = '' + d[2] + d[1] + d[0];
+      // Years beggining with '9' are 199x, otherwise are 20xx
+      // Also, add a random number to avoid false equivalences when ordering
+      prj.dateCmp = (d[2].charAt(0) === '9' ? '19' : '20') + d[2] + d[1] + d[0] + Math.floor(10 + Math.random() * 90);
     }
 
     return projects;
@@ -209,10 +219,10 @@
           result = a.dateCmp.localeCompare(b.dateCmp) * -1;
           break;
         case 1: // Title
-          result = a.title.localeCompare(b.title);
+          result = a.titleCmp.localeCompare(b.titleCmp);
           break;
         case 2: // Author          
-          result = a.author.localeCompare(b.author);
+          result = a.authorCmp.localeCompare(b.authorCmp);
           break;
       }
       return result * inv;
@@ -221,6 +231,7 @@
 
   app.matchItems = function (reorder) {
 
+    app.spinner = true;
     app.matchProjects = [];
     app.lastItem = 0;
     $('#mainHome').empty();
@@ -228,8 +239,8 @@
     var lang = app.actLanguages[app.currentLang].val;
     var area = app.actSubjects[app.currentSubject].val;
     var level = app.actLevels[app.currentLevel].val;
-    var title = app.currentTitle.trim().toLowerCase();
-    var author = app.currentAuthor.trim().toLowerCase();
+    var title = unidecode(app.currentTitle.trim()).toLowerCase();
+    var author = unidecode(app.currentAuthor.trim()).toLowerCase();
 
     if (app.projects) {
       if (reorder) {
@@ -240,13 +251,16 @@
         if ((lang === '*' || prj.langCodes.indexOf(lang) >= 0) &&
                 (area === '*' || prj.areaCodes.indexOf(area) >= 0) &&
                 (level === '*' || prj.levelCodes.indexOf(level) >= 0) &&
-                (title === '' || prj.title.toLowerCase().indexOf(title) >= 0) &&
-                (author === '' || prj.author.toLowerCase().indexOf(author) >= 0)) {
+                (title === '' || prj.titleCmp.indexOf(title) >= 0) &&
+                (author === '' || prj.authorCmp.indexOf(author) >= 0)) {
           app.matchProjects.push(prj);
         }
       }
     }
+
+    app.numMatchProjects = app.matchProjects.length;
     app.fillList();
+    app.spinner = false;
   };
 
   app.fillList = function () {
@@ -272,6 +286,7 @@
   app.playActivities = function (prj) {
 
     var player = app.$.player;
+    
     var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
     app.$.bigCard.getPaperDialog().close();
 
@@ -280,6 +295,10 @@
     dialog.noCancelOnOutsideClick = false;
     dialog.open();
     player.project = project;
+  };
+  
+  app.playerClosed = function() {
+    app.$.player.project = null;    
   };
 
   app.openApplet = function (prj) {
@@ -376,7 +395,7 @@
   window.addEventListener('WebComponentsReady', function () {
     // imports are loaded and elements have been registered 
 
-    app.buildLangSelector();
+    app.setLang(app.langIndex);
 
     app.playerOptions = {
       closeFn: function () {
@@ -447,7 +466,7 @@
     var result = '';
 
     if (typeof sep !== 'string') {
-      sep = '|';
+      sep = ' ';
     }
 
     for (var i = 0; i < list.length; i++) {

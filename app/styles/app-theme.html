@@ -62,15 +62,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     --prj-card-header-background: rgba(255, 255, 255, 0.85);
     --prj-card-content: {font-size: 9pt;};
     --prj-card-actions: {font-size: 10pt;};
+    
     --prj-card-lang: {
-      font-size: 9pt;
+      font-size: 9.5pt;
       font-weight: bold;
       padding: 3px;
       margin: 4px;
       display: inline-block;
       border-radius: 4px;
-      background-color: var(--primary-background-color);
+      min-width: 14px;
+      text-align: center;
+      /*
+      background-color: var(--primary-background-color); 
       color: var(--primary-text-color);
+      */
+      background-color: var(--paper-toolbar-background);
+      color: var(--paper-toolbar-color);
+      
     };
 
     --paper-item-min-height: 20pt;
@@ -188,6 +196,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     bottom: 0px;
     left: 0px;
   }
+  
+  .numProjects {
+    font-size: 9.5pt;
+    color: var(--primary-text-color);
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 8px;
+  }
+
+  
 
   /* Breakpoints */
 

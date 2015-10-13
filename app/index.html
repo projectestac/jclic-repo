@@ -46,6 +46,10 @@
     <script src="bower_components/jclic/dist/jclic.js"></script>
     <!-- endbuild -->
 
+    <!-- build:js bower_components/bower-unidecode/unidecode.js -->
+    <script src="bower_components/bower-unidecode/unidecode.js"></script>
+    <!-- endbuild -->
+        
     <!-- build:js bower_components/deployjava/deployjava.js -->
     <script>
       /** global s **/
@@ -111,6 +115,8 @@
         </paper-button>
 
         <paper-icon-button icon="settings" id="settingsBtn" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
+        
+        <div class="numProjects"><span>[[numMatchProjects]]</span> <span>[[labels.projects]]</span></div>
 
       </paper-scroll-header-panel>
 
@@ -122,7 +128,9 @@
           <span class="flex"></span>
 
           <!-- Toolbar icons -->
-          <div id="langSel"></div>
+          <div id="langSel">
+            <template is="dom-repeat" items="[[languages]]"><a href="#" class="JCRLang" id="[[item.id]]" title="[[item.name]]" on-click="clickOnLang">[[item.id]]</a></template>
+          </div>
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
@@ -178,7 +186,7 @@
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]"></big-prj-card>
 
-    <paper-dialog id="playerDialog" modal style="z-index: 12; width: 95%; height: 95%">
+    <paper-dialog id="playerDialog" modal style="width: 95%; height: 95%" on-iron-overlay-closed="playerClosed">
       <jclic-player-js id="player" fullscreen="{{fullScreen}}" options="[[playerOptions]]"></jclic-player-js>      
     </paper-dialog>
 

@@ -10,7 +10,8 @@
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "polymer": "Polymer/polymer#^1.1.0",
     "deployjava": "tomtwo/deployjava",
-    "jclic": "~0.1.4"
+    "jclic": "~0.1.4",
+    "bower-unidecode": "noomz/bower-unidecode#~1.0.0"
   },
   "devDependencies": {}
 }

@@ -1,6 +1,8 @@
 {
-  "languages": ["en", "ca", "es"],
-  "langNames": ["English", "català", "español"],
+  "languages": [
+    {"id": "en", "name": "English"},
+    {"id": "ca", "name": "català"},
+    {"id": "es", "name": "español"}],
   "defaultLanguage": "en",
   "title": {
     "en": "JClic projects library",
@@ -40,7 +42,8 @@
       "settings": "Settings",
       "fullScreen": "Open activities at full screen",
       "orderBy": "Order by",
-      "inverse": "Inverse order"
+      "inverse": "Inverse order",
+      "projects": "projects"
       },
     "ca": {
       "ok": "D'acord",
@@ -69,7 +72,8 @@
       "settings": "Configuració",
       "fullScreen": "Obre les activitats a pantalla completa",
       "orderBy": "Ordena per",
-      "inverse": "Ordre invers"
+      "inverse": "Ordre invers",
+      "projects": "projectes"
       },
     "es": {
       "ok": "Aceptar",
@@ -97,7 +101,8 @@
       "settings": "Configuración",
       "fullScreen": "Abrir actividades a pantalla completa",
       "orderBy": "Ordenar por",
-      "inverse": "orden inverso"
+      "inverse": "orden inverso",
+      "projects": "proyectos"
       }
   },
   "logo": "logo.png",
