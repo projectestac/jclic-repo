@@ -45,7 +45,7 @@ var styleTask = function (stylesPath, srcs) {
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
     .pipe($.cssmin())
-    .pipe(gulp.dest('build/' + stylesPath))
+    .pipe(gulp.dest('dist/' + stylesPath))
     .pipe($.size({title: stylesPath}));
 };
 
@@ -79,7 +79,7 @@ gulp.task('images', function () {
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest('build/icons'))
+    .pipe(gulp.dest('dist/icons'))
     .pipe($.size({title: 'icons'}));
 });
 
@@ -91,39 +91,39 @@ gulp.task('copy', function () {
     '!app/cache-config.json'
   ], {
     dot: true
-  }).pipe(gulp.dest('build'));
+  }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
     'bower_components/**/*'
-  ]).pipe(gulp.dest('build/bower_components'));
+  ]).pipe(gulp.dest('dist/bower_components'));
 
   var elements = gulp.src(['app/elements/**/*.html'])
-    .pipe(gulp.dest('build/elements'));
+    .pipe(gulp.dest('dist/elements'));
 
   var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
-    .pipe(gulp.dest('build/elements/bootstrap'));
+    .pipe(gulp.dest('dist/elements/bootstrap'));
 
   var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
-    .pipe(gulp.dest('build/sw-toolbox'));
+    .pipe(gulp.dest('dist/sw-toolbox'));
 
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
-    .pipe(gulp.dest('build/elements'));
+    .pipe(gulp.dest('dist/elements'));
 
   return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
     .pipe($.size({title: 'copy'}));
 });
 
-// Copy web fonts to build
+// Copy web fonts to dist
 gulp.task('fonts', function () {
   return gulp.src(['app/fonts/**'])
-    .pipe(gulp.dest('build/fonts'))
+    .pipe(gulp.dest('dist/fonts'))
     .pipe($.size({title: 'fonts'}));
 });
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'build']});
+  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
   return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
@@ -143,16 +143,16 @@ gulp.task('html', function () {
       spare: true
     })))
     // Output files
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
 });
 
 // Polybuild will take care of inlining HTML imports,
 // scripts and CSS for you.
 gulp.task('vulcanize', function () {
-  return gulp.src('build/index.html')
+  return gulp.src('dist/index.html')
     .pipe(polybuild({maximumCrush: true}))
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('dist/'));
 });
 
 // If you require more granular configuration of Vulcanize
@@ -161,10 +161,10 @@ gulp.task('vulcanize', function () {
 
 // Rename Polybuild's index.build.html to index.html
 gulp.task('rename-index', function () {
-  gulp.src('build/index.build.html')
+  gulp.src('dist/index.build.html')
     .pipe($.rename('index.html'))
-    .pipe(gulp.dest('build/'));
-  //return del(['build/index.build.html']);
+    .pipe(gulp.dest('dist/'));
+  return del(['dist/index.build.html']);
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -175,7 +175,7 @@ gulp.task('rename-index', function () {
 // See https://github.com/PolymerElements/polymer-starter-kit#enable-service-worker-support
 // for more context.
 gulp.task('cache-config', function (callback) {
-  var dir = 'build';
+  var dir = 'dist';
   var config = {
     cacheId: packageJson.name || path.basename(__dirname),
     disabled: false
@@ -200,7 +200,7 @@ gulp.task('cache-config', function (callback) {
 
 // Clean output directory
 gulp.task('clean', function (cb) {
-  del(['.tmp', 'build', 'dist'], cb);
+  del(['.tmp', 'dist'], cb);
 });
 
 // Watch files for changes & reload
@@ -237,32 +237,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   gulp.watch(['app/images/**/*'], reload);
 });
 
-// Build and serve the output from the build directory
-gulp.task('serve:build', ['build'], function () {
-  browserSync({
-    port: 5001,
-    notify: false,
-    logPrefix: 'PSK',
-    snippetOptions: {
-      rule: {
-        match: '<span id="browser-sync-binding"></span>',
-        fn: function (snippet) {
-          return snippet;
-        }
-      }
-    },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    server: {
-      baseDir: ['build', 'root'],
-      middleware: [ historyApiFallback() ],
-    }
-  });
-});
-
-// Build and serve the output from the distribution directory
+// Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
     port: 5001,
@@ -287,46 +262,16 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Build production files
-gulp.task('build', ['clean'], function (cb) {
+// Build production files, the default task
+gulp.task('default', ['clean'], function (cb) {
   // Uncomment 'cache-config' after 'rename-index' if you are going to use service workers.
-  // Usage of parallel tasks avoided because of sync problems
   runSequence(
-    'copy', 'styles',
+    ['copy', 'styles'],
     'elements',
-    'jshint', 'images', 'fonts', 'html',
+    ['jshint', 'images', 'fonts', 'html'],
     'vulcanize','rename-index', // 'cache-config',
     cb);
 });
-
-// The default task
-gulp.task('default', ['build'], function (cb) {
-  runSequence('copyToDist', cb);
-});
-
-
-// Copy production files to dist
-gulp.task('copyToDist', function () {
-
-  var app = gulp.src([
-    'build/index.build.js',
-    'build/main.json',
-    'build/web-app-manifest.json'
-  ]).pipe(gulp.dest('dist'));
-
-  var index = gulp.src('build/index.build.html')
-    .pipe($.rename('index.html'))
-    .pipe(gulp.dest('dist'));
-
-  var icons = gulp.src([
-    'build/icons/*'
-  ]).pipe(gulp.dest('dist/icons'));
-
-  return merge(app, index, icons)
-    .pipe($.size({title: 'copy final files to dist'}));
-
-});
-
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
