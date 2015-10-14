@@ -11,7 +11,8 @@
     "polymer": "Polymer/polymer#^1.1.0",
     "deployjava": "tomtwo/deployjava",
     "jclic": "~0.1.4",
-    "bower-unidecode": "noomz/bower-unidecode#~1.0.0"
+    "bower-unidecode": "noomz/bower-unidecode#~1.0.0",
+    "clipboard.js": "lgarron/clipboard.js#~0.1.1"
   },
   "devDependencies": {}
 }

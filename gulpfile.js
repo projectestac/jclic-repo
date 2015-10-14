@@ -125,7 +125,7 @@ gulp.task('fonts', function () {
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'build']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/**/*.html', '!app/player.html', '!app/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
@@ -309,6 +309,7 @@ gulp.task('default', ['build'], function (cb) {
 gulp.task('copyToDist', function () {
 
   var app = gulp.src([
+    'build/player.html',
     'build/index.build.js',
     'build/main.json',
     'build/web-app-manifest.json'

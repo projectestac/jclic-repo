@@ -1,5 +1,8 @@
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- build:js ../../bower_components/clipboard.js/clipboard.js -->
+<script src="../../bower_components/clipboard.js/clipboard.js"></script>
+<!-- endbuild -->
 
 <dom-module id="big-prj-card">
   <template>
@@ -83,10 +86,41 @@
       </div>
       <content></content>
     </paper-dialog>
+
+    <paper-dialog id="share" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2>[[labels.shareText]]</h2>
+      <div class="layout vertical center-center">
+        <paper-material elevation="1">
+          <paper-input id="linkToProject" label="Link to project page:" readonly="true" size="10" value="[[linkToPage]]" style="min-width: 500px"></paper-input>
+          <paper-icon-button icon="content-copy" title="copy" on-tap="_copyPageLink"></paper-icon-button>
+        </paper-material>
+        <paper-material elevation="1">
+          <paper-input id="linkToActivities" label="Direct link to the activities:" readonly="true" size="10" value="[[linkToActivities]]" style="min-width: 500px"></paper-input>
+          <paper-icon-button icon="content-copy" title="copy" on-tap="_copyActLink"></paper-icon-button>
+        </paper-material>
+        <paper-material elevation="1">
+          <paper-textarea id="embedCode" label="Embed code:" readonly="true" size="10" value="[[embedCode]]" style="min-width: 500px"></paper-textarea>
+          <div style="width: 100%">
+            <paper-button toggles>500x400</paper-button>
+            <paper-button toggles>800x600</paper-button>
+            <paper-button toggles>1024x800</paper-button>          
+            <span class="flex"></span>
+            <paper-icon-button icon="content-copy" title="copy" on-tap="_copyEmbedCode"></paper-icon-button>
+          </div>        
+        </paper-material>
+      </div>
+      <div class="buttons">
+        <span class="flex"></span>        
+        <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
+      </div>      
+    </paper-dialog>
+
   </template>
 </dom-module>
 
 <script>
+  /* global clipboard */
+
   Polymer({
     is: 'big-prj-card',
     properties: {
@@ -128,6 +162,18 @@
       linkDisabled: {
         type: String,
         computed: 'computeLinkDisabled(prj)'
+      },
+      linkToPage: {
+        type: String,
+        computed: 'computeLinkToPage(prj)'
+      },
+      linkToActivities: {
+        type: String,
+        computed: 'computeLinkToActivities(prj)'
+      },
+      embedCode: {
+        type: String,
+        computed: 'computeEmbedCode(prj)'
       }
     },
     computeImgSrc: function (path, prj) {
@@ -142,39 +188,57 @@
         license: prj.license[lang]
       };
     },
-    computeAppletDisabled: function() {
+    computeAppletDisabled: function () {
       return !this.prj.zipFile || this.prj.app.javaDisabled;
-    },    
-    computeInstalDisabled: function() {
+    },
+    computeInstalDisabled: function () {
       return !this.prj.instFile || this.prj.app.javaDisabled;
-    },    
-    computeLinkDisabled: function() {
+    },
+    computeLinkDisabled: function () {
       return !this.prj.clicZoneURL;
-    },    
+    },
+    computeLinkToPage: function () {
+      return 'link to page is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+    },
+    computeLinkToActivities: function () {
+      return 'link to activities is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+    },
+    computeEmbedCode: function () {
+      return 'embed code is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+    },
     _prjChanged: function (prj) {
       this.setAttribute('aria-label', prj.title);
-    },    
+    },
     _fieldsChanged: function (fields) {
       this.$.description.innerHTML = fields.description;
       this.$.license.innerHTML = fields.license;
     },
-    getPaperDialog: function(){
+    getPaperDialog: function () {
       return this.$.dialog;
     },
-    _tapPlay: function() {  
+    _tapPlay: function () {
       this.prj.app.playActivities(this.prj);
     },
-    _tapPlayApplet: function() {      
+    _tapPlayApplet: function () {
       this.prj.app.openApplet(this.prj);
     },
-    _tapInstall: function() {      
-      this.prj.app.openInstall(this.prj);      
+    _tapInstall: function () {
+      this.prj.app.openInstall(this.prj);
     },
-    _tapLinkClicZone: function() {      
+    _tapLinkClicZone: function () {
       this.prj.app.goToClicZone(this.prj);
     },
-    _tapShare: function() {      
-      window.alert('coming soon!');
+    _tapShare: function () {
+      this.$.share.open();
+    },
+    _copyPageLink: function(){
+      clipboard.copy(this.linkToPage);      
+    },
+    _copyActLink: function(){
+      clipboard.copy(this.linkToActivities);      
+    },
+    _copyEmbedCode: function(){
+      clipboard.copy(this.embedCode);      
     }    
   });
 </script>
