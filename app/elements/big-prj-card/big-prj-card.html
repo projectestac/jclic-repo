@@ -56,6 +56,34 @@
         margin-right: 10px;
       }
 
+      .horizontal-section-container {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        @apply(--layout-wrap);
+      }
+
+      .vertical-section-container {
+        @apply(--layout-vertical);
+        @apply(--center-justified);
+      }
+
+      .horizontal-section {
+        background-color: white;
+        padding: 12px;
+        margin-right: 12px;
+        min-width: 200px;
+
+        @apply(--shadow-elevation-2dp);
+      }
+
+      .vertical-section {
+        background-color: white;
+        padding: 12px;
+        margin: 0 12px 12px 12px;
+
+        @apply(--shadow-elevation-2dp);
+      }
+
     </style>
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[prj.title]]</h2>      
@@ -89,25 +117,33 @@
 
     <paper-dialog id="share" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[labels.shareText]]</h2>
-      <div class="layout vertical center-center">
-        <paper-material elevation="1">
-          <paper-input id="linkToProject" label="Link to project page:" readonly="true" size="10" value="[[linkToPage]]" style="min-width: 500px"></paper-input>
-          <paper-icon-button icon="content-copy" title="copy" on-tap="_copyPageLink"></paper-icon-button>
-        </paper-material>
-        <paper-material elevation="1">
-          <paper-input id="linkToActivities" label="Direct link to the activities:" readonly="true" size="10" value="[[linkToActivities]]" style="min-width: 500px"></paper-input>
-          <paper-icon-button icon="content-copy" title="copy" on-tap="_copyActLink"></paper-icon-button>
-        </paper-material>
-        <paper-material elevation="1">
-          <paper-textarea id="embedCode" label="Embed code:" readonly="true" size="10" value="[[embedCode]]" style="min-width: 500px"></paper-textarea>
-          <div style="width: 100%">
-            <paper-button toggles>500x400</paper-button>
-            <paper-button toggles>800x600</paper-button>
-            <paper-button toggles>1024x800</paper-button>          
+      <div class="vertical-section-container">
+        <div class ="vertical-section">
+          <div class = "horizontal-section-container">
+            <paper-input class="flex" label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]"></paper-input>
+            <div>
+              <paper-button raised role="button" on-tap="_copyPageLink">[[labels.copy]]</paper-button>
+            </div>
+          </div>
+        </div>
+        <div class ="vertical-section">
+          <div class = "horizontal-section-container">
+            <paper-input class="flex" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]"></paper-input>
+            <div>
+              <paper-button raised role="button" on-tap="_copyActLink">[[labels.copy]]</paper-button>
+            </div>
+          </div>
+        </div>
+        <div class ="vertical-section">
+          <paper-textarea class="flex" label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]"></paper-textarea>
+          <div class = "horizontal-section-container">
+            <paper-button raised colorful toggles>500x400</paper-button>
+            <paper-button raised colorful toggles>800x600</paper-button>
+            <paper-button raised colorful toggles>1024x800</paper-button>          
             <span class="flex"></span>
-            <paper-icon-button icon="content-copy" title="copy" on-tap="_copyEmbedCode"></paper-icon-button>
+            <paper-button raised on-tap="_copyEmbedCode">[[labels.copy]]</paper-button>
           </div>        
-        </paper-material>
+        </div>
       </div>
       <div class="buttons">
         <span class="flex"></span>        
@@ -124,6 +160,12 @@
   Polymer({
     is: 'big-prj-card',
     properties: {
+      baseUrl: {
+        type: String
+      },
+      projectsPath: {
+        type: String
+      },
       /**
        * The project data.
        */
@@ -173,7 +215,7 @@
       },
       embedCode: {
         type: String,
-        computed: 'computeEmbedCode(prj)'
+        computed: 'computeEmbedCode(linkToActivities)'
       }
     },
     computeImgSrc: function (path, prj) {
@@ -198,13 +240,13 @@
       return !this.prj.clicZoneURL;
     },
     computeLinkToPage: function () {
-      return 'link to page is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+      return this.baseUrl + 'index.html?prj=' + this.prj.path;
     },
     computeLinkToActivities: function () {
-      return 'link to activities is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+      return this.baseUrl + 'player.html?' + this.projectsPath + '/' + this.prj.path + '/' + this.prj.mainFile;
     },
     computeEmbedCode: function () {
-      return 'embed code is https://19871de1c937261bf4698a4879171a4a60cba924.googledrive.com/host/0B1eFfedhm-71fjdnaFg1dV8wN3gwMWQzNU11dXlIejg3S1dtdFYzRWhIX0lhbE1WdG1EcEk/index.html';
+      return '<iframe src="' + this.linkToActivities + '"></iframe>';
     },
     _prjChanged: function (prj) {
       this.setAttribute('aria-label', prj.title);
@@ -231,14 +273,14 @@
     _tapShare: function () {
       this.$.share.open();
     },
-    _copyPageLink: function(){
-      clipboard.copy(this.linkToPage);      
+    _copyPageLink: function () {
+      clipboard.copy(this.linkToPage);
     },
-    _copyActLink: function(){
-      clipboard.copy(this.linkToActivities);      
+    _copyActLink: function () {
+      clipboard.copy(this.linkToActivities);
     },
-    _copyEmbedCode: function(){
-      clipboard.copy(this.embedCode);      
-    }    
+    _copyEmbedCode: function () {
+      clipboard.copy(this.embedCode);
+    }
   });
 </script>

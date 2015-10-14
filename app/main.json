@@ -43,7 +43,11 @@
       "fullScreen": "Open activities at full screen",
       "orderBy": "Order by",
       "inverse": "Inverse order",
-      "projects": "projects"
+      "projects": "projects",
+      "copy": "copy",
+      "linkToProject": "Link to project page:",
+      "linkToActivities": "Direct link to the activities:",
+      "embedCode": "Code to embed:"
       },
     "ca": {
       "ok": "D'acord",
@@ -73,7 +77,11 @@
       "fullScreen": "Obre les activitats a pantalla completa",
       "orderBy": "Ordena per",
       "inverse": "Ordre invers",
-      "projects": "projectes"
+      "projects": "projectes",
+      "copy": "copia",
+      "linkToProject": "Enllaç a la fitxa del projecte:",
+      "linkToActivities": "Enllaç directe a les activitats:",
+      "embedCode": "Codi per incustar les activitats en un blog o pàgina web:"
       },
     "es": {
       "ok": "Aceptar",
@@ -103,7 +111,11 @@
       "fullScreen": "Abrir actividades a pantalla completa",
       "orderBy": "Ordenar por",
       "inverse": "orden inverso",
-      "projects": "proyectos"
+      "projects": "proyectos",
+      "copy": "copiar",
+      "linkToProject": "Enlace a la ficha del proyecto:",
+      "linkToActivities": "Enlace directo a las actividades:",
+      "embedCode": "Código para incrustar las actividades en un blog o página web:"      
       }
   },
   "logo": "logo.png",

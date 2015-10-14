@@ -55,6 +55,7 @@
   app.loaded = false;
 
   app.baseURL = '.';
+  app.projectsPath = 'projects';
 
   app.spinner = false;
 
@@ -63,7 +64,7 @@
 
   app.order = 0;
   app.orderInv = false;
-
+  
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -76,6 +77,8 @@
                 app.baseURL = app.baseURL.substring(0, p + 1);
               }
             }
+            
+            app.projectsPath = app.options.index.path;
 
             app.languages = app.options.languages;
             var nl = navigator.language ? navigator.language : app.options.defaultLanguage;
@@ -159,7 +162,7 @@
 
     if (app.projects === null) {
       app.spinner = true;
-      $.getJSON(app.options.index.path + '/' + app.options.index.file)
+      $.getJSON(app.projectsPath + '/' + app.options.index.file)
               .done(function (data) {
                 app.projects = app.checkProjects(data);
                 app.matchItems(false);
@@ -287,7 +290,7 @@
 
     var player = app.$.player;
     
-    var project = app.options.index.path + '/' + prj.path + '/' + prj.mainFile;
+    var project = app.projectsPath + '/' + prj.path + '/' + prj.mainFile;
     app.$.bigCard.getPaperDialog().close();
 
     var dialog = app.$.playerDialog;
@@ -302,12 +305,12 @@
   };
 
   app.openApplet = function (prj) {
-    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.baseURL + app.options.index.path + '/' + prj.path + '/' + prj.zipFile;
+    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.baseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
   app.openInstall = function (prj) {
-    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.baseURL + app.options.index.path + '/' + prj.path + '/' + prj.instFile;
+    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.baseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
     window.open(cmd, 'InstallWindow');
   };
 
@@ -319,7 +322,7 @@
 
     var $prjCard = $('<prj-card elevation="2" animatedShadow="true"/>');
     $prjCard.attr('heading', prj.title);
-    $prjCard.attr('image', app.options.index.path + '/' + prj.path + '/' + prj.cover);
+    $prjCard.attr('image', app.projectsPath + '/' + prj.path + '/' + prj.cover);
     $prjCard.attr('lang', app.enumList(prj.langCodes));
 
     var $cardContent = $('<div class="card-content"/>');
@@ -334,7 +337,7 @@
       var bigCard = app.$.bigCard;
 
       if (!prj.detail) {
-        var prjFile = app.options.index.path + '/' + prj.path + '/project.json';
+        var prjFile = app.projectsPath + '/' + prj.path + '/project.json';
         app.spinner = true;
         $.getJSON(prjFile)
                 .done(function (data) {
@@ -342,7 +345,7 @@
                   prj.detail.path = prj.path;
                   prj.detail.app = app;
 
-                  bigCard.path = app.options.index.path + '/' + prj.path;
+                  bigCard.path = app.projectsPath + '/' + prj.path;
                   bigCard.prj = prj.detail;
 
                   bigCard.getPaperDialog().fit();
