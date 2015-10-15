@@ -40,7 +40,11 @@
         margin-top: 0;
       }
 
-      paper-dialog {
+      #dialog {
+        max-width: 700px;
+      }
+
+      #shareDlg {        
         max-width: 700px;
       }
 
@@ -79,9 +83,18 @@
       .vertical-section {
         background-color: white;
         padding: 12px;
-        margin: 0 12px 12px 12px;
+        margin: 0 12px 12px 12px;        
 
         @apply(--shadow-elevation-2dp);
+      }
+      
+      .social {
+        padding: 2px;
+        color: var(--secondary-text-color, --primary-text-color);
+      }
+      
+      a {
+        color: inherit;
       }
 
     </style>
@@ -115,36 +128,43 @@
       <content></content>
     </paper-dialog>
 
-    <paper-dialog id="share" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-      <h2>[[labels.shareText]]</h2>
-      <div class="vertical-section-container">
-        <div class ="vertical-section">
-          <div class = "horizontal-section-container">
-            <paper-input class="flex" label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]"></paper-input>
-            <div>
-              <paper-button raised role="button" on-tap="_copyPageLink">[[labels.copy]]</paper-button>
-            </div>
+    <paper-dialog id="shareDlg" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2><span>[[labels.share]]</span> "<span>[[prj.title]]</span>"</h2>
+      <paper-dialog-scrollable>
+        <div class="vertical-section-container">
+          <div class ="vertical-section">
+            <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
+              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyPageLink"></paper-icon-button>
+            </paper-input>
+            <a href=""><paper-icon-button mini class="social" icon="social:facebook-box" title="Facebook"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:google-plus-box" title="Google Plus"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:pinterest-box" title="Pinterest"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:twitter-box" title="Twitter"></paper-icon-button></a>
+          </div>
+          <div class ="vertical-section">
+            <paper-input label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
+              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyActLink"></paper-icon-button>
+            </paper-input>
+            <a href=""><paper-icon-button mini class="social" icon="social:facebook-box" title="Facebook"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:google-plus-box" title="Google Plus"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:pinterest-box" title="Pinterest"></paper-icon-button></a>
+            <a href=""><paper-icon-button mini class="social" icon="social:twitter-box" title="Twitter"></paper-icon-button></a>            
+          </div>
+          <div class ="vertical-section">
+            <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
+              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyEmbedCode"></paper-icon-button>
+            </paper-input>
+            <div class = "horizontal-section-container">
+              <paper-radio-group selected="{{embedSize}}">
+                <paper-radio-button name="small">640x390</paper-radio-button>
+                <paper-radio-button name="medium">800x600</paper-radio-button>
+                <paper-radio-button name="full">100%</paper-radio-button>
+                <span class="flex"></span>
+              </paper-radio-group>
+            </div>        
           </div>
         </div>
-        <div class ="vertical-section">
-          <div class = "horizontal-section-container">
-            <paper-input class="flex" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]"></paper-input>
-            <div>
-              <paper-button raised role="button" on-tap="_copyActLink">[[labels.copy]]</paper-button>
-            </div>
-          </div>
-        </div>
-        <div class ="vertical-section">
-          <paper-textarea class="flex" label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]"></paper-textarea>
-          <div class = "horizontal-section-container">
-            <paper-button raised colorful toggles>500x400</paper-button>
-            <paper-button raised colorful toggles>800x600</paper-button>
-            <paper-button raised colorful toggles>1024x800</paper-button>          
-            <span class="flex"></span>
-            <paper-button raised on-tap="_copyEmbedCode">[[labels.copy]]</paper-button>
-          </div>        
-        </div>
-      </div>
+      </paper-dialog-scrollable>
       <div class="buttons">
         <span class="flex"></span>        
         <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
@@ -155,132 +175,153 @@
 </dom-module>
 
 <script>
-  /* global clipboard */
+/* global clipboard */
 
-  Polymer({
-    is: 'big-prj-card',
-    properties: {
-      baseUrl: {
-        type: String
-      },
-      projectsPath: {
-        type: String
-      },
-      /**
-       * The project data.
-       */
-      prj: {
-        type: Object,
-        observer: '_prjChanged'
-      },
-      path: {
-        type: String,
-        value: ''
-      },
-      labels: {
-        type: Object,
-        value: {}
-      },
-      lang: {
-        type: String
-      },
-      imgSrc: {
-        type: String,
-        computed: 'computeImgSrc(path, prj)'
-      },
-      fields: {
-        type: Object,
-        computed: 'computeFields(prj, lang)',
-        observer: '_fieldsChanged'
-      },
-      appletDisabled: {
-        type: String,
-        computed: 'computeAppletDisabled(prj)'
-      },
-      instalDisabled: {
-        type: String,
-        computed: 'computeInstalDisabled(prj)'
-      },
-      linkDisabled: {
-        type: String,
-        computed: 'computeLinkDisabled(prj)'
-      },
-      linkToPage: {
-        type: String,
-        computed: 'computeLinkToPage(prj)'
-      },
-      linkToActivities: {
-        type: String,
-        computed: 'computeLinkToActivities(prj)'
-      },
-      embedCode: {
-        type: String,
-        computed: 'computeEmbedCode(linkToActivities)'
-      }
+Polymer({
+  is: 'big-prj-card',
+  properties: {
+    baseUrl: {
+      type: String
     },
-    computeImgSrc: function (path, prj) {
-      return path + '/' + prj.cover;
+    projectsPath: {
+      type: String
     },
-    computeFields: function (prj, lang) {
-      return {
-        description: prj.description[lang],
-        languages: prj.languages[lang],
-        areas: prj.areas[lang],
-        levels: prj.levels[lang],
-        license: prj.license[lang]
-      };
+    /**
+     * The project data.
+     */
+    prj: {
+      type: Object,
+      observer: '_prjChanged'
     },
-    computeAppletDisabled: function () {
-      return !this.prj.zipFile || this.prj.app.javaDisabled;
+    path: {
+      type: String,
+      value: ''
     },
-    computeInstalDisabled: function () {
-      return !this.prj.instFile || this.prj.app.javaDisabled;
+    labels: {
+      type: Object,
+      value: {}
     },
-    computeLinkDisabled: function () {
-      return !this.prj.clicZoneURL;
+    lang: {
+      type: String
     },
-    computeLinkToPage: function () {
-      return this.baseUrl + 'index.html?prj=' + this.prj.path;
+    imgSrc: {
+      type: String,
+      computed: 'computeImgSrc(path, prj)'
     },
-    computeLinkToActivities: function () {
-      return this.baseUrl + 'player.html?' + this.projectsPath + '/' + this.prj.path + '/' + this.prj.mainFile;
+    fields: {
+      type: Object,
+      computed: 'computeFields(prj, lang)',
+      observer: '_fieldsChanged'
     },
-    computeEmbedCode: function () {
-      return '<iframe src="' + this.linkToActivities + '"></iframe>';
+    appletDisabled: {
+      type: String,
+      computed: 'computeAppletDisabled(prj)'
     },
-    _prjChanged: function (prj) {
-      this.setAttribute('aria-label', prj.title);
+    instalDisabled: {
+      type: String,
+      computed: 'computeInstalDisabled(prj)'
     },
-    _fieldsChanged: function (fields) {
-      this.$.description.innerHTML = fields.description;
-      this.$.license.innerHTML = fields.license;
+    linkDisabled: {
+      type: String,
+      computed: 'computeLinkDisabled(prj)'
     },
-    getPaperDialog: function () {
-      return this.$.dialog;
+    linkToPage: {
+      type: String,
+      computed: 'computeLinkToPage(prj)'
     },
-    _tapPlay: function () {
-      this.prj.app.playActivities(this.prj);
+    linkToActivities: {
+      type: String,
+      computed: 'computeLinkToActivities(prj)'
     },
-    _tapPlayApplet: function () {
-      this.prj.app.openApplet(this.prj);
+    embedSize: {
+      type: String,
+      value: 'medium'
     },
-    _tapInstall: function () {
-      this.prj.app.openInstall(this.prj);
-    },
-    _tapLinkClicZone: function () {
-      this.prj.app.goToClicZone(this.prj);
-    },
-    _tapShare: function () {
-      this.$.share.open();
-    },
-    _copyPageLink: function () {
-      clipboard.copy(this.linkToPage);
-    },
-    _copyActLink: function () {
-      clipboard.copy(this.linkToActivities);
-    },
-    _copyEmbedCode: function () {
-      clipboard.copy(this.embedCode);
+    embedCode: {
+      type: String,
+      computed: 'computeEmbedCode(linkToActivities,embedSize)'
     }
-  });
+  },
+  computeImgSrc: function (path, prj) {
+    return path + '/' + prj.cover;
+  },
+  computeFields: function (prj, lang) {
+    return {
+      description: prj.description[lang],
+      languages: prj.languages[lang],
+      areas: prj.areas[lang],
+      levels: prj.levels[lang],
+      license: prj.license[lang]
+    };
+  },
+  computeAppletDisabled: function () {
+    return !this.prj.zipFile || this.prj.app.javaDisabled;
+  },
+  computeInstalDisabled: function () {
+    return !this.prj.instFile || this.prj.app.javaDisabled;
+  },
+  computeLinkDisabled: function () {
+    return !this.prj.clicZoneURL;
+  },
+  computeLinkToPage: function () {
+    return this.baseUrl + 'index.html?prj=' + this.prj.path;
+  },
+  computeLinkToActivities: function () {
+    return this.baseUrl + 'player.html?' + this.projectsPath + '/' + this.prj.path + '/' + this.prj.mainFile;
+  },
+  computeEmbedCode: function () {
+    var w, h;
+    switch (this.embedSize) {
+      case 'small':
+        w='640';
+        h='390';
+        break;
+      case 'medium':
+        w='800';
+        h='600';
+        break;
+      default:
+        w='100%';
+        h='100%';
+        break;
+    }
+    return '<iframe width="' + w + '" height="' + h +
+            '" frameborder="0" allowFullScreen="true" src="' + this.linkToActivities + '"></iframe>';
+  },
+  _prjChanged: function (prj) {
+    this.setAttribute('aria-label', prj.title);
+  },
+  _fieldsChanged: function (fields) {
+    this.$.description.innerHTML = fields.description;
+    this.$.license.innerHTML = fields.license;
+  },
+  getPaperDialog: function () {
+    return this.$.dialog;
+  },
+  _tapPlay: function () {
+    this.prj.app.playActivities(this.prj);
+  },
+  _tapPlayApplet: function () {
+    this.prj.app.openApplet(this.prj);
+  },
+  _tapInstall: function () {
+    this.prj.app.openInstall(this.prj);
+  },
+  _tapLinkClicZone: function () {
+    this.prj.app.goToClicZone(this.prj);
+  },
+  _tapShare: function () {
+    this.$.dialog.close();
+    this.$.shareDlg.open();
+  },
+  _copyPageLink: function () {
+    clipboard.copy(this.linkToPage);
+  },
+  _copyActLink: function () {
+    clipboard.copy(this.linkToActivities);
+  },
+  _copyEmbedCode: function () {
+    clipboard.copy(this.embedCode);
+  }
+});
 </script>
