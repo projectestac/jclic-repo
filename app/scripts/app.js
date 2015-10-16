@@ -64,7 +64,7 @@
 
   app.order = 0;
   app.orderInv = false;
-  
+
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
@@ -77,7 +77,7 @@
                 app.baseURL = app.baseURL.substring(0, p + 1);
               }
             }
-            
+
             app.projectsPath = app.options.index.path;
 
             app.languages = app.options.languages;
@@ -89,7 +89,7 @@
                 break;
               }
             }
-            app.setLang(l, true);
+            app.setLang(l, true);            
           })
           .fail(function () {
             app.title = 'ERROR';
@@ -167,6 +167,18 @@
                 app.projects = app.checkProjects(data);
                 app.matchItems(false);
                 app.spinner = false;
+                
+    // Solution from: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
+    var search = location.search.substring(1);
+    var params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+    console.log(params);
+    if (params.prj && app.projects[params.prj]) {
+      var $prjCard = app.createCard(app.projects[params.prj]);
+      if ($prjCard) {
+        $prjCard.trigger('selected');
+      }
+    }
+                
               })
               .fail(function () {
                 app.spinner = false;
@@ -190,17 +202,17 @@
       if (!prj.levelCodes) {
         prj.levelCodes = [];
       }
-      
+
       if (!prj.title) {
         prj.title = '';
       }
       prj.titleCmp = unidecode(prj.title).trim().toLowerCase();
-            
+
       if (!prj.author) {
         prj.author = '';
       }
       prj.authorCmp = unidecode(prj.author).trim().toLowerCase();
-      
+
       if (!prj.date) {
         prj.date = '00/00/00';
       }
@@ -289,7 +301,7 @@
   app.playActivities = function (prj) {
 
     var player = app.$.player;
-    
+
     var project = app.projectsPath + '/' + prj.path + '/' + prj.mainFile;
     app.$.bigCard.getPaperDialog().close();
 
@@ -299,9 +311,9 @@
     dialog.open();
     player.project = project;
   };
-  
-  app.playerClosed = function() {
-    app.$.player.project = null;    
+
+  app.playerClosed = function () {
+    app.$.player.project = null;
   };
 
   app.openApplet = function (prj) {
@@ -320,7 +332,7 @@
 
   app.createCard = function (prj) {
 
-    var $prjCard = $('<prj-card elevation="2" animatedShadow="true"/>');
+    var $prjCard = $('<prj-card/>');
     $prjCard.attr('heading', prj.title);
     $prjCard.attr('image', app.projectsPath + '/' + prj.path + '/' + prj.cover);
     $prjCard.attr('lang', app.enumList(prj.langCodes));
@@ -372,6 +384,14 @@
       return false;
     });
 
+    $prjCard.hover(
+            function () {
+              $prjCard.attr('elevation', 4);
+            },
+            function () {
+              $prjCard.attr('elevation', 1);
+            });
+
     $prjCard.append($cardContent);
 
     return $prjCard;
@@ -391,6 +411,7 @@
       app.fillList();
     }
     app.fullScreenEnabled = window.JClicObject.Utils.screenFullAllowed();
+    
     console.log('Ready!');
   });
 
@@ -472,10 +493,12 @@
       sep = ' ';
     }
 
-    for (var i = 0; i < list.length; i++) {
-      result = result + (lower ? list[i].toLowerCase() : list[i]);
-      if (i < list.length - 1) {
-        result = result + sep;
+    if (list) {
+      for (var i = 0; i < list.length; i++) {
+        result = result + (lower ? list[i].toLowerCase() : list[i]);
+        if (i < list.length - 1) {
+          result = result + sep;
+        }
       }
     }
     return result;

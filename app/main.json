@@ -47,7 +47,8 @@
       "copy": "copy",
       "linkToProject": "Link to project page:",
       "linkToActivities": "Direct link to the activities:",
-      "embedCode": "Code to embed:"
+      "embedCode": "Code to embed:",
+      "check": "Check this activities running on the new JClic HTML5 player"
       },
     "ca": {
       "ok": "D'acord",
@@ -81,7 +82,8 @@
       "copy": "copia",
       "linkToProject": "Enllaç a la fitxa del projecte:",
       "linkToActivities": "Enllaç directe a les activitats:",
-      "embedCode": "Codi per incustar les activitats en un blog o pàgina web:"
+      "embedCode": "Codi per incustar les activitats en un blog o pàgina web:",
+      "check": "Proveu aquestes activitats amb el nou JClic per a HTML5"
       },
     "es": {
       "ok": "Aceptar",
@@ -115,7 +117,8 @@
       "copy": "copiar",
       "linkToProject": "Enlace a la ficha del proyecto:",
       "linkToActivities": "Enlace directo a las actividades:",
-      "embedCode": "Código para incrustar las actividades en un blog o página web:"      
+      "embedCode": "Código para incrustar las actividades en un blog o página web:",
+      "check": "Prueba estas actividades con el nuevo JClic para HTML5"
       }
   },
   "logo": "logo.png",

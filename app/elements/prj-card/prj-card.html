@@ -58,11 +58,11 @@
         right: 0px;
         @apply(--prj-card-header-image-text);
       }
-      
+
       .lang {
         @apply(--prj-card-lang);
       }
-      
+
       paper-fab {
         position: absolute;
         bottom: 0px;
@@ -82,10 +82,10 @@
         position:relative;
         @apply(--prj-card-actions);
       }
-            
+
     </style>
 
-    <paper-material animated$="[[animatedShadow]]" elevation="[[elevation]]"></paper-material>
+    <paper-material animated="true" elevation="[[elevation]]"></paper-material>
 
     <div class="header" style$="[[_getHeaderStyle(image)]]" on-tap="_tapCard">
          <span class="lang">[[lang]]</span>
@@ -101,11 +101,8 @@
 <script>
 
   Polymer({
-
     is: 'prj-card',
-    
     properties: {
-
       /**
        * The title of the card.
        */
@@ -114,12 +111,10 @@
         value: '',
         observer: '_headingChanged'
       },
-      
       lang: {
         type: String,
         value: ''
       },
-
       /**
        * The url of the title image of the card.
        */
@@ -127,56 +122,40 @@
         type: String,
         value: ''
       },
-
       /**
        * The z-depth of the card, from 0-5.
        */
       elevation: {
         type: Number,
         value: 1
-      },
-      
-      /**
-       * Set this to true to animate the card shadow when setting a new
-       * `z` value.
-       */
-      animatedShadow: {
-        type: Boolean,
-        value: false
-      }
+      }      
     },
-    
-    _tapButton: function(event){
+    _tapButton: function (event) {
       event.stopPropagation();
       this.fire('play');
       return false;
     },
-    
-    _tapCard: function(){
+    _tapCard: function () {
       this.fire('selected');
       return false;
     },
-
-    _headingChanged: function(heading) {
+    _headingChanged: function (heading) {
       //var label = this.getAttribute('aria-label');
-      this.setAttribute('aria-label', heading);      
+      this.setAttribute('aria-label', heading);
     },
-    
-    _getHeaderStyle: function(image) {
+    _getHeaderStyle: function (image) {
       var result = '';
-      if(image){
+      if (image) {
         result = result + ';background: no-repeat center/150% url("' + image + '")';
-      } 
+      }
       return result;
     },
-
-    _computeHeadingClass: function(image) {
+    _computeHeadingClass: function (image) {
       var cls = 'title-text';
-      if (image){
+      if (image) {
         cls += ' over-image';
       }
       return cls;
     }
-    
   });
 </script>

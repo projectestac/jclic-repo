@@ -1,0 +1,115 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+
+<iron-iconset-svg name="sbtn" size="24">
+  <svg><defs>
+  <g id="facebook-box"><path d="M19,4V7H17A1,1 0 0,0 16,8V10H19V13H16V20H13V13H11V10H13V7.5C13,5.56 14.57,4 16.5,4M20,2H4A2,2 0 0,0 2,4V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V4C22,2.89 21.1,2 20,2Z"/></g>
+  <g id="pinterest-box"><path d="M13,16.2C12.2,16.2 11.43,15.86 10.88,15.28L9.93,18.5L9.86,18.69L9.83,18.67C9.64,19 9.29,19.2 8.9,19.2C8.29,19.2 7.8,18.71 7.8,18.1C7.8,18.05 7.81,18 7.81,17.95H7.8L7.85,17.77L9.7,12.21C9.7,12.21 9.5,11.59 9.5,10.73C9.5,9 10.42,8.5 11.16,8.5C11.91,8.5 12.58,8.76 12.58,9.81C12.58,11.15 11.69,11.84 11.69,12.81C11.69,13.55 12.29,14.16 13.03,14.16C15.37,14.16 16.2,12.4 16.2,10.75C16.2,8.57 14.32,6.8 12,6.8C9.68,6.8 7.8,8.57 7.8,10.75C7.8,11.42 8,12.09 8.34,12.68C8.43,12.84 8.5,13 8.5,13.2A1,1 0 0,1 7.5,14.2C7.13,14.2 6.79,14 6.62,13.7C6.08,12.81 5.8,11.79 5.8,10.75C5.8,7.47 8.58,4.8 12,4.8C15.42,4.8 18.2,7.47 18.2,10.75C18.2,13.37 16.57,16.2 13,16.2M20,2H4C2.89,2 2,2.89 2,4V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V4C22,2.89 21.1,2 20,2Z"/></g>
+  <g id="twitter-box"><path d="M17.71,9.33C17.64,13.95 14.69,17.11 10.28,17.31C8.46,17.39 7.15,16.81 6,16.08C7.34,16.29 9,15.76 9.9,15C8.58,14.86 7.81,14.19 7.44,13.12C7.82,13.18 8.22,13.16 8.58,13.09C7.39,12.69 6.54,11.95 6.5,10.41C6.83,10.57 7.18,10.71 7.64,10.74C6.75,10.23 6.1,8.38 6.85,7.16C8.17,8.61 9.76,9.79 12.37,9.95C11.71,7.15 15.42,5.63 16.97,7.5C17.63,7.38 18.16,7.14 18.68,6.86C18.47,7.5 18.06,7.97 17.56,8.33C18.1,8.26 18.59,8.13 19,7.92C18.75,8.45 18.19,8.93 17.71,9.33M20,2H4A2,2 0 0,0 2,4V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V4C22,2.89 21.1,2 20,2Z"/></g>
+  <g id="google-plus-box"><path d="M20,2A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4C2,2.89 2.9,2 4,2H20M20,12H18V10H17V12H15V13H17V15H18V13H20V12M9,11.29V13H11.86C11.71,13.71 11,15.14 9,15.14C7.29,15.14 5.93,13.71 5.93,12C5.93,10.29 7.29,8.86 9,8.86C10,8.86 10.64,9.29 11,9.64L12.36,8.36C11.5,7.5 10.36,7 9,7C6.21,7 4,9.21 4,12C4,14.79 6.21,17 9,17C11.86,17 13.79,15 13.79,12.14C13.79,11.79 13.79,11.57 13.71,11.29H9Z"/></g>
+  <g id="mail"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></g>
+  </defs></svg>
+</iron-iconset-svg>
+
+<dom-module id="social-buttons">
+  <template>
+    <style>
+      
+      .social {
+        height: 28px;
+        width: 28px;
+        padding: 0;
+        margin: 0;
+        color: var(--secondary-text-color, --primary-text-color);
+        @apply(--social-buttons);
+      }
+
+      a {
+        color: inherit;
+      }
+
+    </style>
+    <a href="[[linkToFacebook]]" target="_blank"><paper-icon-button class="social" icon="sbtn:facebook-box" title="Facebook"></paper-icon-button></a>
+    <a href="[[linkToGooglePlus]]" target="_blank"><paper-icon-button class="social" icon="sbtn:google-plus-box" title="Google Plus"></paper-icon-button></a>
+    <a href="[[linkToPinterest]]" target="_blank"><paper-icon-button class="social" icon="sbtn:pinterest-box" title="Pinterest"></paper-icon-button></a>
+    <a href="[[linkToTwitter]]" target="_blank"><paper-icon-button class="social" icon="sbtn:twitter-box" title="Twitter"></paper-icon-button></a>
+    <a href="[[linkToMail]]" target="_blank"><paper-icon-button class="social" icon="sbtn:mail" title="email"></paper-icon-button></a>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'social-buttons',
+    properties: {
+      url: {
+        type: String
+      },
+      imgurl: {
+        type: String
+      },
+      text: {
+        type: String
+      },
+      labels: {
+        type: Object,
+        value: {}
+      },
+      lang: {
+        type: String
+      },
+      linkToFacebook: {
+        type: String,
+        computed: 'computeLinkToFacebook(url, imgurl, text, labels)'
+      },
+      linkToGooglePlus: {
+        type: String,
+        computed: 'computeLinkToGooglePlus(url, text)'
+      },
+      linkToPinterest: {
+        type: String,
+        computed: 'computeLinkToPinterest(url, imgurl, text)'
+      },
+      linkToTwitter: {
+        type: String,
+        computed: 'computeLinkToTwitter(url, text)'
+      },
+      linkToMail: {
+        type: String,
+        computed: 'computeLinkToMail(url, text, labels)'
+      }
+    },
+    computeLinkToFacebook: function (url, imgurl, text, labels) {
+      return 'https://www.facebook.com/dialog/feed?'+
+              'app_id=134530986736267'+         // WARNING: A valid ID must set!
+              '&link=' + encodeURIComponent(url) +
+              '&picture=' + encodeURIComponent(imgurl) +
+              '&name=' + encodeURIComponent(text) +
+              '&description=' + encodeURIComponent(labels.check) +
+              '&redirect_uri=' + encodeURIComponent('http://facebook.com/');
+    },
+    computeLinkToGooglePlus: function (url) {
+      return 'https://plus.google.com/share?'+
+              'url=' + encodeURIComponent(url);
+    },
+    computeLinkToPinterest: function (url, imgurl, text) {
+      return 'https://pinterest.com/pin/create/button/?'+
+              'url=' + encodeURIComponent(url) + 
+              '&media=' + encodeURIComponent(imgurl) +
+              '&description=' + encodeURIComponent(text);
+    },
+    computeLinkToTwitter: function (url, text) {
+      return 'https://twitter.com/intent/tweet?' +
+              'text=' + encodeURIComponent(text) +
+              '&url=' + encodeURIComponent(url) +
+              '&hashtags=JClic' +
+              '&via=jclic';
+    },
+    computeLinkToMail: function (url, text, labels) {
+      return 'mailto:?'+
+              'subject=' + encodeURIComponent(text) +
+              '&body=' + encodeURIComponent(text + '\n\n' + labels.check + ': ' + url);
+    }
+  });
+</script>
