@@ -64,19 +64,23 @@
 
   app.order = 0;
   app.orderInv = false;
-
+  
+  // Read parameters passed to index.html
+  app.params = {};
+  // Solution from: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
+  if(location.search){
+      app.params = JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+  }
+  
+  app.path = window.location.pathname;
+  var p = app.path.lastIndexOf('/');
+  app.path = app.path.substring(0, p) + '/';
+  app.baseURL = window.location.origin + app.path;
+  
   // Load 'main.json'
   $.getJSON('main.json')
           .done(function (data) {
             $.extend(app.options, data);
-
-            app.baseURL = window.location.href;
-            if (app.baseURL.charAt(app.baseURL.length - 1) !== '/') {
-              var p = app.baseURL.lastIndexOf('/', 0);
-              if (p > 8) {
-                app.baseURL = app.baseURL.substring(0, p + 1);
-              }
-            }
 
             app.projectsPath = app.options.index.path;
 
@@ -168,17 +172,24 @@
                 app.matchItems(false);
                 app.spinner = false;
                 
-    // Solution from: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
-    var search = location.search.substring(1);
-    var params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
-    console.log(params);
-    if (params.prj && app.projects[params.prj]) {
-      var $prjCard = app.createCard(app.projects[params.prj]);
-      if ($prjCard) {
-        $prjCard.trigger('selected');
-      }
-    }
-                
+                if (app.params.prj) {
+                    var prj = null;
+                    for(var i in app.projects){
+                        if(app.projects[i].path === app.params.prj){
+                            prj = app.projects[i];
+                            break;
+                        }
+                    }
+                    
+                    if(prj===null){
+                        console.log('Unknown project: '+app.params.prj);
+                    } else {
+                        var $prjCard = app.createCard(prj);
+                        if ($prjCard) {
+                            $prjCard.trigger('selected');
+                        }
+                    }
+                }
               })
               .fail(function () {
                 app.spinner = false;
