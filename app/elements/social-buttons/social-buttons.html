@@ -82,7 +82,7 @@
     },
     computeLinkToFacebook: function (url, imgurl, text, labels) {
       return 'https://www.facebook.com/dialog/feed?'+
-              'app_id=134530986736267'+         // WARNING: A valid ID must set!
+              'app_id=1917838468440790'+         // WARNING: A valid ID must set!
               '&link=' + encodeURIComponent(url) +
               '&picture=' + encodeURIComponent(imgurl) +
               '&name=' + encodeURIComponent(text) +
@@ -109,7 +109,7 @@
     computeLinkToMail: function (url, text, labels) {
       return 'mailto:?'+
               'subject=' + encodeURIComponent(text) +
-              '&body=' + encodeURIComponent(text + '\n\n' + labels.check + ': ' + url);
+              '&body=' + encodeURIComponent(text + '\n\n' + labels.check + ':\n' + url);
     }
   });
 </script>

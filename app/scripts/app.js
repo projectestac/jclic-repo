@@ -55,6 +55,7 @@
   app.loaded = false;
 
   app.baseURL = '.';
+  app.localBaseURL = app.baseURL;
   app.projectsPath = 'projects';
 
   app.spinner = false;
@@ -76,6 +77,7 @@
   var p = app.path.lastIndexOf('/');
   app.path = app.path.substring(0, p) + '/';
   app.baseURL = window.location.origin + app.path;
+  app.localBaseURL = app.baseURL;
   
   // Load 'main.json'
   $.getJSON('main.json')
@@ -83,6 +85,10 @@
             $.extend(app.options, data);
 
             app.projectsPath = app.options.index.path;
+            
+            if(app.options.baseURL){
+              app.baseURL = app.options.baseURL;
+            }
 
             app.languages = app.options.languages;
             var nl = navigator.language ? navigator.language : app.options.defaultLanguage;
@@ -328,12 +334,12 @@
   };
 
   app.openApplet = function (prj) {
-    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.baseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
+    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
   app.openInstall = function (prj) {
-    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.baseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
+    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
     window.open(cmd, 'InstallWindow');
   };
 

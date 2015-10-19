@@ -139,13 +139,13 @@
             <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
               <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyPageLink"></paper-icon-button>
             </paper-input>
-            <social-buttons url="[[linkToPage]]" imgurl="[[imgSrc]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
+            <social-buttons url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
           </div>
           <div class ="vertical-section">
             <paper-input label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
               <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyActLink"></paper-icon-button>
             </paper-input>
-            <social-buttons url="[[linkToActivities]]" imgurl="[[imgSrc]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
+            <social-buttons url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
           </div>
           <div class ="vertical-section">
             <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
@@ -180,6 +180,9 @@ Polymer({
     baseUrl: {
       type: String
     },
+    localBaseUrl: {
+      type: String
+    },
     projectsPath: {
       type: String
     },
@@ -204,6 +207,10 @@ Polymer({
     imgSrc: {
       type: String,
       computed: 'computeImgSrc(path, prj)'
+    },
+    imgFullPath: {
+      type: String,
+      computed: 'computeImgFullPath(localBaseUrl, path, prj)'
     },
     fields: {
       type: Object,
@@ -241,6 +248,9 @@ Polymer({
   },
   computeImgSrc: function (path, prj) {
     return path + '/' + prj.cover;
+  },
+  computeImgFullPath: function(localBaseUrl, path, prj){
+    return localBaseUrl + path + '/' + prj.cover;
   },
   computeFields: function (prj, lang) {
     return {
