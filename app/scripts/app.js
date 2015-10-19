@@ -1,10 +1,25 @@
 /*
- Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
- This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
- The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
- The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
- Code distributed by Google as part of the polymer project is also
- subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ * Basic repository for JClic projects
+ * https://github.com/projectestac/jclic-repo
+ * http://clic.xtec.cat/js
+ * 
+ * (c) 2015 Catalan Educational Telematic Network (XTEC) 
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, version. This program is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
+ * License for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * Based on Polymer Starter Kit: https://github.com/PolymerElements/polymer-starter-kit
+ * Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also subject to
+ * an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
 /* global Polymer */
@@ -65,31 +80,37 @@
 
   app.order = 0;
   app.orderInv = false;
-  
-  // Read parameters passed to index.html
+
+  // Read parameters passed to 'index.html'
   app.params = {};
-  // Solution from: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
-  if(location.search){
-      app.params = JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+  // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
+  if (location.search) {
+    app.params = JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
   }
-  
+
+  // Determines path and base URL
   app.path = window.location.pathname;
   var p = app.path.lastIndexOf('/');
   app.path = app.path.substring(0, p) + '/';
   app.baseURL = window.location.origin + app.path;
   app.localBaseURL = app.baseURL;
-  
-  // Load 'main.json'
+
+  // Asyncronouslly loading of settings stored in 'main.json'
+  // When ready, continue loading the page contents
   $.getJSON('main.json')
           .done(function (data) {
             $.extend(app.options, data);
 
             app.projectsPath = app.options.index.path;
-            
-            if(app.options.baseURL){
+
+            // baseURL can be overwritten by main.json
+            // The final base will be used to build share links
+            if (app.options.baseURL) {
               app.baseURL = app.options.baseURL;
             }
 
+            // Try to determine the browser's main language and use it as
+            // default
             app.languages = app.options.languages;
             var nl = navigator.language ? navigator.language : app.options.defaultLanguage;
             var l = app.langIndex;
@@ -99,7 +120,9 @@
                 break;
               }
             }
-            app.setLang(l, true);            
+
+            // Call to 'setLang' will cause a full reload of the page contents
+            app.setLang(l, true);
           })
           .fail(function () {
             app.title = 'ERROR';
@@ -107,6 +130,7 @@
           });
 
 
+  // Restore settings previously stored in `app.back`
   app.readBackSettings = function (reset) {
     if (reset) {
       app.fullScreen = app.back.fullScreen;
@@ -121,13 +145,16 @@
     }
   };
 
+  // Initialize `app.back`
   app.readBackSettings(false);
 
+  // Opens the settings dialog
   app.tapSettings = function () {
     app.readBackSettings(false);
     app.$.settings.open();
   };
 
+  // Check if settings have changed, and reload if needed
   app.newSettings = function () {
     if (app.order !== app.back.order || app.orderInv !== app.back.orderInv) {
       console.log('order changed!');
@@ -135,16 +162,20 @@
     }
   };
 
+  // Restores settings previously stored in `app.back`. Called by `Cancel` button
+  // in settings dialog
   app.backSettings = function () {
     app.readBackSettings(true);
   };
 
+  // Changes the main language of the site
   app.clickOnLang = function (e) {
     e.preventDefault();
     app.setLang(e.model.index, false);
     return false;
   };
 
+  // Sets the language of the site and calls 'load' when needed or forced
   app.setLang = function (i, forceLoad) {
     var currentLang = app.lang;
     app.lang = app.languages[i].id;
@@ -156,13 +187,13 @@
     }
   };
 
+  // Applies new criteria to filter activities
   app.filterChanged = function () {
     app.matchItems(false);
   };
 
   // Fills the document with text according to the current language
   app.load = function () {
-
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
     app.labels = app.options.labels[app.lang];
@@ -170,6 +201,7 @@
     app.actSubjects = app.options.actSubjects[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
+    // Load the full list of projects (only at the beggining)
     if (app.projects === null) {
       app.spinner = true;
       $.getJSON(app.projectsPath + '/' + app.options.index.file)
@@ -177,24 +209,28 @@
                 app.projects = app.checkProjects(data);
                 app.matchItems(false);
                 app.spinner = false;
-                
+
+                // Searches for the project specified as 'prj' param, if any, and
+                // loads it.
                 if (app.params.prj) {
-                    var prj = null;
-                    for(var i in app.projects){
-                        if(app.projects[i].path === app.params.prj){
-                            prj = app.projects[i];
-                            break;
-                        }
+                  var prj = null;
+
+                  for (var i in app.projects) {
+                    if (app.projects[i].path === app.params.prj) {
+                      prj = app.projects[i];
+                      break;
                     }
-                    
-                    if(prj===null){
-                        console.log('Unknown project: '+app.params.prj);
-                    } else {
-                        var $prjCard = app.createCard(prj);
-                        if ($prjCard) {
-                            $prjCard.trigger('selected');
-                        }
+                  }
+
+                  if (prj === null) {
+                    console.log('Unknown project: ' + app.params.prj);
+                  } else {
+                    var $prjCard = app.createCard(prj);
+                    if ($prjCard) {
+                      // Opens the big card of the selected project
+                      $prjCard.trigger('selected');
                     }
+                  }
                 }
               })
               .fail(function () {
@@ -428,7 +464,7 @@
       app.fillList();
     }
     app.fullScreenEnabled = window.JClicObject.Utils.screenFullAllowed();
-    
+
     console.log('Ready!');
   });
 
