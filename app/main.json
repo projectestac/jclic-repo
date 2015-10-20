@@ -1,5 +1,5 @@
 {
-  "baseURL": "https://clic.xtec.cat/js/",
+  "baseURL": "http://clic.xtec.cat/js/",
   "languages": [
     {"id": "en", "name": "English"},
     {"id": "ca", "name": "català"},
