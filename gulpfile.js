@@ -87,8 +87,7 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
-    '!app/test',
-    '!app/cache-config.json'
+    '!app/test'
   ], {
     dot: true
   }).pipe(gulp.dest('build'));
@@ -165,37 +164,6 @@ gulp.task('rename-index', function () {
     .pipe($.rename('index.html'))
     .pipe(gulp.dest('build/'));
   //return del(['build/index.build.html']);
-});
-
-// Generate config data for the <sw-precache-cache> element.
-// This include a list of files that should be precached, as well as a (hopefully unique) cache
-// id that ensure that multiple PSK projects don't share the same Cache Storage.
-// This task does not run by default, but if you are interested in using service worker caching
-// in your project, please enable it within the 'default' task.
-// See https://github.com/PolymerElements/polymer-starter-kit#enable-service-worker-support
-// for more context.
-gulp.task('cache-config', function (callback) {
-  var dir = 'build';
-  var config = {
-    cacheId: packageJson.name || path.basename(__dirname),
-    disabled: false
-  };
-
-  glob('{elements,scripts,styles}/**/*.*', {cwd: dir}, function(error, files) {
-    if (error) {
-      callback(error);
-    } else {
-      files.push('index.html', './', 'bower_components/webcomponentsjs/webcomponents-lite.min.js');
-      config.precache = files;
-
-      var md5 = crypto.createHash('md5');
-      md5.update(JSON.stringify(config.precache));
-      config.precacheFingerprint = md5.digest('hex');
-
-      var configPath = path.join(dir, 'cache-config.json');
-      fs.writeFile(configPath, JSON.stringify(config), callback);
-    }
-  });
 });
 
 // Clean output directory
@@ -289,13 +257,12 @@ gulp.task('serve:dist', ['default'], function () {
 
 // Build production files
 gulp.task('build', ['clean'], function (cb) {
-  // Uncomment 'cache-config' after 'rename-index' if you are going to use service workers.
   // Usage of parallel tasks avoided because of sync problems
   runSequence(
     'copy', 'styles',
     'elements',
     'jshint', 'images', 'fonts', 'html',
-    'vulcanize','rename-index', // 'cache-config',
+    'vulcanize','rename-index',
     cb);
 });
 
@@ -304,7 +271,6 @@ gulp.task('default', ['build'], function (cb) {
   runSequence('copyToDist', cb);
 });
 
-
 // Copy production files to dist
 gulp.task('copyToDist', function () {
 
@@ -312,7 +278,8 @@ gulp.task('copyToDist', function () {
     'build/player.html',
     'build/index.build.js',
     'build/main.json',
-    'build/web-app-manifest.json'
+    'build/web-app-manifest.json',
+    'app/robots.txt'
   ]).pipe(gulp.dest('dist'));
 
   var index = gulp.src('build/index.build.html')
@@ -327,7 +294,6 @@ gulp.task('copyToDist', function () {
     .pipe($.size({title: 'copy final files to dist'}));
 
 });
-
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`

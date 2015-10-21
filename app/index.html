@@ -85,11 +85,12 @@
     <paper-drawer-panel id="paperDrawerPanel" drawer-width="220px">
 
       <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel drawer fixed>
+      <paper-scroll-header-panel id="scrollPanel" drawer fixed>
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
           <span class="paper-font-title" style="margin-left: -8px">[[labels.searchTitle]]</span>
+          <span class="flex"></span>
         </paper-toolbar>
 
         <!-- Selection form -->
@@ -124,10 +125,11 @@
           <span>[[labels.search]]</span>
         </paper-button>
 
-        <paper-icon-button icon="settings" id="settingsBtn" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
-
+        <div class="bottomBtn">
+          <paper-icon-button icon="settings" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
+          <paper-icon-button icon="info" title="[[labels.about]]" on-tap="displayInfo"></paper-icon-button>
+        </div>
         <div class="numProjects"><span>[[numMatchProjects]]</span> <span>[[labels.projects]]</span></div>
-
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
@@ -151,20 +153,40 @@
           <div class="bottom bottom-container center horizontal layout">
             <div class="bottom-title paper-font-subhead">[[description]]</div>
           </div>
-
         </paper-toolbar>
 
         <!-- Main Content -->
         <div class="content">
-          <iron-pages attr-for-selected="data-route" selected="home">            
+          <iron-pages attr-for-selected="data-route" selected="[[route]]">
+            <!-- Main section: list of projects -->
             <section data-route="home" class="prjContainer">
               <div id="mainHome" class="cardContainer" /> 
+            </section>
+            <section data-route="info-ca">
+              <paper-material class="infoCard">
+                <h2>Informació en català</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <paper-icon-button icon="close" title="[[labels.close]]" on-tap="closeInfo"></paper-icon-button>                
+              </paper-material>
+            </section>            
+            <section data-route="info-es">
+              <paper-material class="infoCard">
+                <h2>Información en castellano</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <paper-icon-button icon="close" title="[[labels.close]]" on-tap="closeInfo"></paper-icon-button>                
+              </paper-material>
+            </section>            
+            <section data-route="info-en">
+              <paper-material class="infoCard">
+                <h2>Information in English</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <paper-icon-button icon="close" title="[[labels.close]]" on-tap="closeInfo"></paper-icon-button>                
+              </paper-material>
             </section>            
           </iron-pages>
         </div>
 
       </paper-scroll-header-panel>      
-
     </paper-drawer-panel>
 
     <paper-dialog id="settings" modal>
@@ -202,25 +224,7 @@
 
     <paper-spinner alt="[[labels.loading]]" active="[[spinner]]"></paper-spinner>
 
-    <!-- Uncomment next block to enable Service Worker support (1/2) -->
-    <!--
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
-
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="fastest"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-    -->
-
   </template>
-
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->

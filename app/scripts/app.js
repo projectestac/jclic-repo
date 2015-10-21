@@ -35,6 +35,8 @@
 
   app.options = {};
 
+  app.route = 'home';
+
   app.javaDisabled = false;
 
   app.lang = 'en';
@@ -109,25 +111,51 @@
               app.baseURL = app.options.baseURL;
             }
 
-            // Try to determine the browser's main language and use it as
-            // default
             app.languages = app.options.languages;
-            var nl = navigator.language ? navigator.language : app.options.defaultLanguage;
-            var l = app.langIndex;
-            for (var n in app.languages) {
-              if (nl.indexOf(app.languages[n].id) === 0) {
-                l = n;
-                break;
-              }
-            }
-
+            app.langIndex = app.checkPreferredLanguage();
             // Call to 'setLang' will cause a full reload of the page contents
-            app.setLang(l, true);
+            app.setLang(app.langIndex, true);
+
           })
           .fail(function () {
             app.title = 'ERROR';
             app.description = 'Error loading the repository data! Please try again.';
           });
+
+
+  // Try to determine the preferred language          
+  app.checkPreferredLanguage = function () {
+    var result = -1;
+    // Create an array to store possible values
+    var tries = [];
+    // If "lang=" was on location.search, check it
+    if (app.params.lang) {
+      tries.push(app.params.lang);
+    }
+    // Add user's preferred languages, if any
+    if (navigator.languages) {
+      tries = tries.concat(navigator.languages);
+    }
+    // Add the navigator main language, if defined
+    if (navigator.language) {
+      tries.push(navigator.language);
+    }
+    // Add English as final option
+    tries.push('en');
+
+    for (var i in tries) {
+      for (var n in app.languages) {
+        if (tries[i].indexOf(app.languages[n].id) === 0) {
+          result = n;
+          break;
+        }
+      }
+      if (result >= 0) {
+        break;
+      }
+    }
+    return result;
+  };
 
 
   // Restore settings previously stored in `app.back`
@@ -201,7 +229,7 @@
     app.actSubjects = app.options.actSubjects[app.lang];
     app.actLevels = app.options.actLevels[app.lang];
 
-    // Load the full list of projects (only at the beggining)
+    // Load the full list of projects (if empty)
     if (app.projects === null) {
       app.spinner = true;
       $.getJSON(app.projectsPath + '/' + app.options.index.file)
@@ -242,8 +270,8 @@
     }
   };
 
+  // Checks the `projects` array for inconsistences or missing fields
   app.checkProjects = function (projects) {
-
     for (var i in projects) {
       var prj = projects[i];
       if (!prj.langCodes) {
@@ -278,6 +306,7 @@
     return projects;
   };
 
+  // Puts in order `projects`, based on the current sorting settings
   app.orderItems = function (projects) {
     var inv = app.orderInv ? -1 : 1;
     projects.sort(function (a, b) {
@@ -297,12 +326,13 @@
     });
   };
 
+  // Fills `app.matchProjects` with the projects that match the search criteria
   app.matchItems = function (reorder) {
-
     app.spinner = true;
     app.matchProjects = [];
     app.lastItem = 0;
     $('#mainHome').empty();
+    app.closeInfo();
 
     var lang = app.actLanguages[app.currentLang].val;
     var area = app.actSubjects[app.currentSubject].val;
@@ -331,8 +361,8 @@
     app.spinner = false;
   };
 
+  // Fills the main list with some project cards
   app.fillList = function () {
-
     if (app.matchProjects) {
       var $mainHome = $('#mainHome');
       if ($mainHome.length > 0) {
@@ -351,13 +381,15 @@
     }
   };
 
+  // Launches the jclic.js player with the activities pointed to by the
+  // `mainFile` member of `prj`
   app.playActivities = function (prj) {
-
     var player = app.$.player;
-
+    // Full path to the main file
     var project = app.projectsPath + '/' + prj.path + '/' + prj.mainFile;
+    // Close existing dialogs
     app.$.bigCard.getPaperDialog().close();
-
+    // Open the player dialog and fill it with the appropiate parameters
     var dialog = app.$.playerDialog;
     dialog.fit();
     dialog.noCancelOnOutsideClick = false;
@@ -365,42 +397,47 @@
     player.project = project;
   };
 
+  // Removes the current project of player dialog, if any.
   app.playerClosed = function () {
     app.$.player.project = null;
   };
 
+  // Launches the JClic java applet in a separate window
   app.openApplet = function (prj) {
     var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
+  // Launches the JClic java installewr in a separate window
   app.openInstall = function (prj) {
     var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
     window.open(cmd, 'InstallWindow');
   };
 
+  // Opens the page corresponding to `prj` in the clicZone, in a separate window
   app.goToClicZone = function (prj) {
     window.open(prj.clicZoneURL, 'ClicZoneWindow');
   };
 
+  // Creates a small, regular card for the project specified in `prj`
   app.createCard = function (prj) {
-
     var $prjCard = $('<prj-card/>');
     $prjCard.attr('heading', prj.title);
     $prjCard.attr('image', app.projectsPath + '/' + prj.path + '/' + prj.cover);
     $prjCard.attr('lang', app.enumList(prj.langCodes));
 
-    var $cardContent = $('<div class="card-content"/>');
-    $cardContent.append($('<div class="one-line-text"/>').append(prj.author));
+    $prjCard.append(
+            $('<div class="card-content"/>')
+            .append($('<div class="one-line-text"/>')
+                    .append(prj.author)));
 
     $prjCard.on('play', function () {
       app.playActivities(prj);
     });
 
+    // When selected, reads the full project data and opens a big card with it
     $prjCard.on('selected', function () {
-
       var bigCard = app.$.bigCard;
-
       if (!prj.detail) {
         var prjFile = app.projectsPath + '/' + prj.path + '/project.json';
         app.spinner = true;
@@ -433,10 +470,10 @@
         bigCard.getPaperDialog().open();
         bigCard.getPaperDialog().noCancelOnOutsideClick = false;
       }
-
       return false;
     });
 
+    // Animate changes on the `elevation` property when the mouse passes over the card
     $prjCard.hover(
             function () {
               $prjCard.attr('elevation', 4);
@@ -445,15 +482,18 @@
               $prjCard.attr('elevation', 1);
             });
 
-    $prjCard.append($cardContent);
-
     return $prjCard;
   };
 
-  app.displayInstalledToast = function () {
-    // Check to make sure caching is actually enabled—it won't be in the dev environment.
-    if (!document.querySelector('platinum-sw-cache').disabled) {
-      document.querySelector('#caching-complete').show();
+  // Displays the information section
+  app.displayInfo = function () {
+    app.route = 'info-' + app.lang;
+  };
+
+  // Sets the default main page (list of projects)
+  app.closeInfo = function () {
+    if (app.route !== 'home') {
+      app.route = 'home';
     }
   };
 
@@ -464,8 +504,6 @@
       app.fillList();
     }
     app.fullScreenEnabled = window.JClicObject.Utils.screenFullAllowed();
-
-    console.log('Ready!');
   });
 
   // See https://github.com/Polymer/polymer/issues/1381
@@ -480,23 +518,26 @@
       }
     };
 
+    // Check if the current browser has Java enabled
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
     }
+  });
 
-    $('#mainContainer').on('scroll', function () {
-
-      var top = $(this).scrollTop();
-      var height = $(this).innerHeight();
-      var length = this.scrollHeight;
+  // Just before the main container reaches the end of the scroll area, try
+  // to load more elements into the project's list
+  addEventListener('content-scroll', function () {
+    if (app.route === 'home') {
+      var $scrolling = $('#mainContainer');
+      var top = $scrolling.scrollTop();
+      var height = $scrolling.innerHeight();
+      var length = $scrolling.prop('scrollHeight');
 
       if (length - top - height <= 10) {
         app.fillList();
       }
-    });
-
+    }
   });
-
 
   // Main area's paper-scroll-header-panel custom condensing transformation of
   // the appName in the middle-container and the bottom title in the bottom-container.
@@ -541,11 +582,9 @@
   // Converts an array of strings into a single string
   app.enumList = function (list, sep, lower) {
     var result = '';
-
     if (typeof sep !== 'string') {
       sep = ' ';
     }
-
     if (list) {
       for (var i = 0; i < list.length; i++) {
         result = result + (lower ? list[i].toLowerCase() : list[i]);

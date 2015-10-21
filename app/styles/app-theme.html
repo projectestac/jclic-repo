@@ -115,11 +115,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   paper-material {
-    border-radius: 2px;
-    padding: 16px 0 16px 0;
+    padding: 16px;
+    margin-bottom: 16px;
   }
-
-
 
   /*
   paper-menu iron-icon {
@@ -181,20 +179,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     transform-origin: left center;
   }
 
-  /* Height of the scroll area */
-  .content {
-    height: 900px;
-  }
-
   .textInput {
     margin-right: 8px;
     margin-left: 8px;
   }
-
-  #settingsBtn {
+  
+  .bottomBtn {
     position: absolute;
     bottom: 0px;
     left: 0px;
+  }
+  
+  .bottomBtn :first-child {
+    padding-right: 0;  
+  }
+  
+  .bottomBtn :not(:first-child) {
+    padding-left: 0;  
   }
   
   .numProjects {
@@ -204,6 +205,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     bottom: 0px;
     right: 0px;
     margin: 8px;
+  }
+  
+  .infoCard {
+    margin: 16px 16px;
   }
 
   /* Breakpoints */
@@ -232,12 +237,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Tablet+ */
   @media (min-width: 601px) {
 
+    /*
     paper-material {
       width: calc(98% - 46px);      
       margin-bottom: 32px;
       padding-left: 30px;
       padding-right: 30px;
     }
+    */    
 
     #drawer.paper-drawer-panel > [drawer] {
       border-right: 1px solid rgba(0, 0, 0, 0.14);
