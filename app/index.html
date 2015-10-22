@@ -94,36 +94,38 @@
         </paper-toolbar>
 
         <!-- Selection form -->
-        <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
-          <paper-menu class="dropdown-content" selected="{{currentLang}}">
-            <template is="dom-repeat" items="[[actLanguages]]">
-              <paper-item role="listitem">[[item.text]]</paper-item>              
-            </template>
-          </paper-menu>
-        </paper-dropdown-menu>
+        <div id="selectionForm">
+          <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
+            <paper-menu class="dropdown-content" selected="{{currentLang}}">
+              <template is="dom-repeat" items="[[actLanguages]]">
+                <paper-item role="listitem">[[item.text]]</paper-item>              
+              </template>
+            </paper-menu>
+          </paper-dropdown-menu>
 
-        <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
-          <paper-menu class="dropdown-content" selected="{{currentSubject}}">
-            <template is="dom-repeat" items="[[actSubjects]]">
-              <paper-item role="listitem">[[item.text]]</paper-item>              
-            </template>
-          </paper-menu>
-        </paper-dropdown-menu>
+          <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
+            <paper-menu class="dropdown-content" selected="{{currentSubject}}">
+              <template is="dom-repeat" items="[[actSubjects]]">
+                <paper-item role="listitem">[[item.text]]</paper-item>              
+              </template>
+            </paper-menu>
+          </paper-dropdown-menu>
 
-        <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
-          <paper-menu class="dropdown-content" selected="{{currentLevel}}">
-            <template is="dom-repeat" items="[[actLevels]]">
-              <paper-item role="listitem">[[item.text]]</paper-item>              
-            </template>
-          </paper-menu>
-        </paper-dropdown-menu>
+          <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
+            <paper-menu class="dropdown-content" selected="{{currentLevel}}">
+              <template is="dom-repeat" items="[[actLevels]]">
+                <paper-item role="listitem">[[item.text]]</paper-item>              
+              </template>
+            </paper-menu>
+          </paper-dropdown-menu>
 
-        <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
-        <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
-        <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="matchItems">
-          <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
-          <span>[[labels.search]]</span>
-        </paper-button>
+          <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
+          <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
+          <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="matchItems">
+            <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
+            <span>[[labels.search]]</span>
+          </paper-button>
+        </div>
 
         <div class="bottomBtn">
           <paper-icon-button icon="settings" title="[[labels.settings]]" on-tap="tapSettings"></paper-icon-button>
@@ -164,8 +166,17 @@
             </section>
             <section data-route="info-ca">
               <paper-material class="infoCard">
-                <h2>Informació en català</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2>JClic</h2>
+                <p>El JClic es un projecte de programari lliure del Departament d’Ensenyament
+                  de la Generalitat de Catalunya que serveix per crear fàcilment diversos tipus
+                  d’activitats interactives (associacions, puzzles, activitats de text, mots
+                  encreuats, sopes de lletres…) a partir d’elements de text, gràfics i multimèdia.</p>
+                <p>El JClic està composat per diversos mòduls: eina d’autor, reproductor d’activitats,
+                  applet, sistema d’informes i mòdul per a Moodle. Tots aquests mòduls funcionen amb
+                  Java sobre Linux, Windows i Mac, estan traduïts a 17 idiomes i es poden descarregar
+                  lliurement des de la <a href="http://clic.xtec.cat/ca/jclic/download.htm">zonaClic</a>.</p>
+                <p>El codi font de tots els components del JClic està disponible a GitHub i pot ser
+                  modificat i redistribuït lliurement sota els termes de la llicència GPL.</p>
                 <paper-icon-button icon="close" title="[[labels.close]]" on-tap="closeInfo"></paper-icon-button>                
               </paper-material>
             </section>            
