@@ -35,7 +35,7 @@
 
   app.options = {};
 
-  app.route = 'home';
+  app.route = 'projects';
 
   app.javaDisabled = false;
 
@@ -178,6 +178,7 @@
 
   // Opens the settings dialog
   app.tapSettings = function () {
+    app.closeInfo();
     app.readBackSettings(false);
     app.$.settings.open();
   };
@@ -217,6 +218,7 @@
 
   // Applies new criteria to filter activities
   app.filterChanged = function () {
+    app.closeInfo();
     app.matchItems(false);
   };
 
@@ -263,7 +265,7 @@
               })
               .fail(function () {
                 app.spinner = false;
-                $('#mainHome').append($('<h2/>').html('ERROR loading repository data!'));
+                $('#projects').append($('<h2/>').html('ERROR loading repository data!'));
               });
     } else {
       app.matchItems(false);
@@ -331,8 +333,7 @@
     app.spinner = true;
     app.matchProjects = [];
     app.lastItem = 0;
-    $('#mainHome').empty();
-    app.closeInfo();
+    $('#projects').empty();
 
     var lang = app.actLanguages[app.currentLang].val;
     var area = app.actSubjects[app.currentSubject].val;
@@ -364,15 +365,15 @@
   // Fills the main list with some project cards
   app.fillList = function () {
     if (app.matchProjects) {
-      var $mainHome = $('#mainHome');
-      if ($mainHome.length > 0) {
+      var $projects = $('#projects');
+      if ($projects.length > 0) {
         app.spinner = true;
         app.loading = true;
         for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
           var prj = app.matchProjects[app.lastItem++];
           prj.loadTries = 10;
           var $prjCard = app.createCard(prj);
-          $mainHome.append($prjCard);
+          $projects.append($prjCard);
         }
         app.loaded = true;
         app.loading = false;
@@ -487,14 +488,20 @@
 
   // Displays the information section
   app.displayInfo = function () {
-    app.route = 'info-' + app.lang;
+    app.route = 'info';
   };
 
   // Sets the default main page (list of projects)
   app.closeInfo = function () {
-    if (app.route !== 'home') {
-      app.route = 'home';
+    if (app.route !== 'projects') {
+      app.route = 'projects';
     }
+  };
+  
+  // Tap on "search" button
+  app.tapSearch = function() {
+    app.closeInfo();
+    app.matchItems(false);
   };
 
   // Listen for template bound event to know when bindings
@@ -527,7 +534,7 @@
   // Just before the main container reaches the end of the scroll area, try
   // to load more elements into the project's list
   addEventListener('content-scroll', function () {
-    if (app.route === 'home') {
+    if (app.route === 'projects') {
       var $scrolling = $('#mainContainer');
       var top = $scrolling.scrollTop();
       var height = $scrolling.innerHeight();
