@@ -43,11 +43,11 @@
       #dialog {
         max-width: 700px;
       }
-
+      
       #shareDlg {        
         max-width: 700px;
       }
-
+      
       paper-dialog h2 {
         white-space: normal;
       }
@@ -88,6 +88,12 @@
         @apply(--shadow-elevation-2dp);
       }
       
+      @media (min-width: 601px) {
+        #shareDlg {        
+          min-width: 500px;
+        }              
+      }
+            
     </style>
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[prj.title]]</h2>      
