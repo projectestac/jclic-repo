@@ -22,13 +22,15 @@
  * an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-/* global Polymer */
-/* global $ */
-/* global deployJava */
-/* global unidecode */
+/* global Polymer, $, deployJava, unidecode */
 
 (function (document) {
   'use strict';
+
+  // If needed, get JQuery from JClicObject
+  if(typeof window.$ === 'undefined'){
+    window.$ = window.JClicObject.$;
+  }
 
   // Grab a reference to our auto-binding template
   var app = document.querySelector('#app');
@@ -96,7 +98,7 @@
   app.path = app.path.substring(0, p) + '/';
   app.baseURL = window.location.origin + app.path;
   app.localBaseURL = app.baseURL;
-
+  
   // Asyncronouslly loading of settings stored in 'main.json'
   // When ready, continue loading the page contents
   $.getJSON('main.json')

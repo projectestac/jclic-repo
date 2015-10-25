@@ -127,6 +127,7 @@ gulp.task('html', function () {
   return gulp.src(['app/**/*.html', '!app/player.html', '!app/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
+    .pipe($.if('*.html', $.replace('<script src="dist/jclic.min.js"></script>', '')))
     .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
@@ -161,6 +162,7 @@ gulp.task('vulcanize', function () {
 // Rename Polybuild's index.build.html to index.html
 gulp.task('rename-index', function () {
   gulp.src('build/index.build.html')
+    .pipe($.replace('<script src="index.build.js">','<script src="dist/jclic.min.js"></script><script src="index.build.js">'))
     .pipe($.rename('index.html'))
     .pipe(gulp.dest('build/'));
   //return del(['build/index.build.html']);
@@ -283,9 +285,10 @@ gulp.task('copyToDist', function () {
   ]).pipe(gulp.dest('dist'));
 
   var index = gulp.src('build/index.build.html')
+    .pipe($.replace('<script src="index.build.js">','<script src="dist/jclic.min.js"></script><script src="index.build.js">'))
     .pipe($.rename('index.html'))
     .pipe(gulp.dest('dist'));
-
+    
   var icons = gulp.src([
     'build/icons/*'
   ]).pipe(gulp.dest('dist/icons'));
