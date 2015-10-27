@@ -130,16 +130,16 @@
       <paper-dialog-scrollable>
         <div class="vertical-section-container">
           <div class ="vertical-section">
-            <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
-              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyPageLink"></paper-icon-button>
-            </paper-input>
-            <social-buttons url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
-          </div>
-          <div class ="vertical-section">
             <paper-input label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
               <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyActLink"></paper-icon-button>
             </paper-input>
             <social-buttons url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
+          </div>
+          <div class ="vertical-section">
+            <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
+              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyPageLink"></paper-icon-button>
+            </paper-input>
+            <social-buttons url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[prj.title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
           </div>
           <div class ="vertical-section">
             <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">

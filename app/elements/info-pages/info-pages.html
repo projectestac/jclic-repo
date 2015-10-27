@@ -9,37 +9,64 @@
         @apply(--info-pages);
       }
 
-      h2 {
-        margin-top: 30pt;
-        margin-bottom: 0;
-      }
-
-      paper-material {
+      .item {
+        margin-bottom: 10pt;
         margin-right: 10pt;
         margin-left: 10pt;
-        padding: 16pt;
+        padding: 10pt;
         background-color: var(--primary-background-color);
         color: var(--primary-text-color);
       }
-      
-      #footer {
-        margin-top: 30pt;
+
+      .item p {
+        margin-left: 54pt;
       }
-      
+
+      .item h2 {
+        color: var(--secondary-text-color);
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 54pt;
+        text-transform: uppercase;
+      }
+
+      .warn p {
+        color: var(--accent-color);
+        margin-left: 0 !important;
+      }
+
       .appIcon {
-        display: inline-block;
-        float: left;
-        margin-right: 10px;
-        margin-bottom: 10px;
+        width: 64px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 8pt;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #footer {
+        margin-top: 20pt;
+        margin-left: 10pt;        
       }
 
     </style>
-    <paper-material elevation="2">
-      <iron-pages attr-for-selected="language" selected="[[lang]]">
-        <section language="ca">
-          
-          
-          <h2><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic">Projecte JClic</h2>
+    <!-- paper-material elevation="2" -->
+    <iron-pages attr-for-selected="language" selected="[[lang]]">
+      <section language="ca">
+
+        <paper-material elevation="2" class="item" title="JClic">
+          <h2>Projecte JClic</h2>
+          <a href="http://clic.xtec.cat/ca/jclic/index.htm"><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic"></a>
           <p>El JClic és un projecte de programari lliure de la
             <a href="http://www.xtec.cat">Xarxa Telemàtica Educativa de Catalunya</a> (XTEC) que permet
             crear diversos tipus d’activitats interactives com ara associacions, puzles, activitats de
@@ -48,25 +75,30 @@
             executar-les i un sistema d'informes que emmagatzema els resultats obtinguts pels alumnes. Tots
             aquests components, així com diverses guies i tutorials per aprendre a crear les activitats,
             es troben disponibles a la <a href="http://clic.xtec.cat/ca/jclic/download.htm">zonaClic</a>.</p>
-          <p>El JClic està desenvolupat en Java i funciona en sistemes Linux, Windows i Mac. El codi font
+          <p>El JClic és una aplicació Java que funciona en sistemes Linux, Windows i Mac OS. El codi font
             i la documentació tècnica de l'aplicació es troben disponibles a
             <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
-          
-          
-          <h2><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js">JClic.js</h2>
+        </paper-material>
+
+        <paper-material elevation="2" class="item" title="jclic.js">
+          <h2>jclic.js</h2>
+          <a href="http://projectestac.github.io/jclic.js/"><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>Aquest és un projecte encara en fase de desenvolupament que pretén crear un nou reproductor
             d’activitats JClic totalment basat en <a href="http://www.w3.org/html/">HTML5</a>
             (HTML + JavaScript + CSS3). L’objectiu és poder veure les activitats JClic
             en qualsevol navegador web modern (Firefox, Chrome, Safari…) sense cap connector especial.
             Això permetrà utilitzar el JClic en sistemes que no suporten Java, com ara Android, iOS,
             o ChromeOS, així com en els navegadors Google Chrome i MS Edge.</p>
-          <p>El codi font i la documentació del projecte <strong>jclic.js</strong> es troben disponibles a
+          <p>El codi font i la documentació del projecte jclic.js es troben disponibles a
             <a href="http://projectestac.github.io/jclic.js/">GitHub</a>. El projecte està obert a les
             aportacions de tots aquells que vulguin participar en el seu desenvolupament.</p>
           <p>Està previst que el mòdul JClic Author permeti aviat l’exportació directa de les activitats
             a pàgines HTML amb jclic.js.</p>
+        </paper-material>
 
-          <h2><img src="../../icons/icon-library.svg" class="appIcon" alt="Biblioteca">Biblioteca d’activitats JClic</h2>
+        <paper-material class="item" title="JClic library" elevation="2">
+          <h2>Biblioteca d’activitats JClic</h2>
+          <a href="http://clic.xtec.cat/db/listact_ca.jsp"><img src="../../icons/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Són molts els docents de diferents països que han utilitzat el JClic per crear materials
             interactius en diverses llengües i per a múltiples nivells, temes i àrees curriculars. Alguns
             d’aquests materials s’han anat recollint a la
@@ -74,33 +106,42 @@
             gràcies a la generositat dels seus autors, que han decidit compartir-los amb llicències
             Creative Commons permetent així la seva reutilització, traducció i adaptació a escenaris educatius
             diversos.</p>
+        </paper-material>
 
+        <paper-material class="item" title="JClic-repo" elevation="2">
           <h2>JClic-repo</h2>
+          <a href="https://github.com/projectestac/jclic-repo"><img src="../../icons/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>Aquesta pàgina forma part de "jclic-repo", un nou projecte que té com a objectiu
             facilitar la publicació de col·leccions de projectes JClic en serveis d'allotjament web
             estàtic. El projecte utilitza la tecnologia de components web
             <a href="https://www.polymer-project.org">Polymer</a>, i totes les seves fonts es troben també
             disponibles a <a href="https://github.com/projectestac/jclic-repo">GitHub</a>.</p>
-          <p>Aquesta instal·lació de <strong>jclic-repo</strong> es troba allotjada provisionalment a
+          <p>Aquesta instal·lació de jclic-repo es troba allotjada provisionalment a
             l'espai Google Drive de la XTEC i conté una bona part dels més de 2.300 recursos de la biblioteca
             de projectes de la zonaClic. El cercador us permet filtrar els resultats per idioma, nivell
             educatiu, àrea curricular, títol o autoria. Fent clic damunt la targeta de cada projecte
             accedireu a una informació més detallada, des d’on podreu engegar les activitats en HTML5,
             obrir-les en un applet (sempre i quan el sistema suporti Java) o compartir-les a les
             xarxes socials.</p>
-          <p>&nbsp;</p>
-          <p><strong>Molt important</strong>: us trobeu en un espai provisional destinat principalment
-            a la realització de proves per facilitar el desenvolupament del <strong>jclic.js</strong>.
-            Alguns tipus d’activitats i recursos multimèdia encara no funcionen. Podeu contribuir al
-            desenvolupament dels projectes notificant incidències o suggerint millores a les comunitats
-            de desenvolupament de <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
+        </paper-material>
+
+        <paper-material class="item warn" elevation="2">
+          <p><strong>Atenció</strong>: us trobeu en un espai provisional destinat principalment a la realització
+            de proves per facilitar el desenvolupament del jclic.js. Alguns tipus d’activitats encara no funcionen
+            correctament en tots els dispositius, i hi ha diverses funcionalitats encara no implementades. Podeu
+            ajudar-nos notificant errors, suggerint millores i proposant possibles solucions als espais de
+            desenvolupament dels projectes <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
             <a href="https://github.com/projectestac/jclic.js/issues">jclic.js</a> i
-            <a href="https://github.com/projectestac/jclic-repo/issues">jclic-repo</a>.</p>
-          
-        </section>        
-        <section language="es">
-          
-          <h2><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic">Proyecto JClic</h2>
+            <a href="https://github.com/projectestac/jclic-repo/issues">jclic-repo</a>.</p>          
+        </paper-material>
+
+      </section>
+
+      <section language="es">
+
+        <paper-material elevation="2" class="item" title="JClic">
+          <h2>Proyecto JClic</h2>
+          <a href="http://clic.xtec.cat/es/jclic/index.htm"><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic"></a>
           <p>JClic es un proyecto de software libre de la
             <a href="http://www.xtec.cat">Red Telemática Educativa de Cataluña</a> (XTEC) que permite
             crear diversos tipos de actividades interactivas como asociaciones, puzles, actividades de
@@ -110,11 +151,14 @@
             los alumnos. Todos estos componentes, así como diversas guías y tutoriales para aprender a
             crear las actividades, se encuentran disponibles en la
             <a href="http://clic.xtec.cat/es/jclic/download.htm">zonaClic</a>.</p>
-          <p>JClic está desarrollado en Java y funciona en sistemas Linux, Windows y Mac. El código
+          <p>JClic es una aplicación Java que funciona en sistemas Linux, Windows y Mac OS. El código
             fuente y la documentación técnica de la aplicación están disponibles en
             <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
-          
-          <h2><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js">JClic.js</h2>
+        </paper-material>
+
+        <paper-material elevation="2" class="item" title="jclic.js">
+          <h2>jclic.js</h2>
+          <a href="http://projectestac.github.io/jclic.js/"><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>Es un proyecto todavía en fase de desarrollo que pretende crear un nuevo reproductor de
             actividades JClic totalmente basado en <a href="http://www.w3.org/html/">HTML5</a>
             (HTML + JavaScript + CSS3). El objetivo es poder ver las actividades JClic
@@ -126,8 +170,11 @@
             las aportaciones de todas las personas que quieran participar en su desarrollo.</p>
           <p>Está previsto que el módulo JClic Author permita pronto la exportación directa de las
             actividades a páginas HTML con jclic.js.</p>
-          
-          <h2><img src="../../icons/icon-library.svg" class="appIcon" alt="Biblioteca">Biblioteca de actividades JClic</h2>
+        </paper-material>
+
+        <paper-material class="item" title="JClic library" elevation="2">
+          <h2>Biblioteca de actividades JClic</h2>
+          <a href="http://clic.xtec.cat/db/listact_es.jsp"><img src="../../icons/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Son muchos los docentes de distintos países que han utilizado JClic para crear materiales
             interactivos en diversas lenguas y para múltiples niveles, temas y áreas curriculares. Algunos
             de estos materiales se han ido recopilando en la
@@ -135,34 +182,42 @@
             gracias a la generosidad de sus autores, que han decidido compartirlos bajo licencias
             Creative Commons permitiendo así su reutilización, traducción y adaptación a escenarios
             educativos diversos.</p>
-          
+        </paper-material>
+
+        <paper-material class="item" title="JClic-repo" elevation="2">
           <h2>JClic-repo</h2>
+          <a href="https://github.com/projectestac/jclic-repo"><img src="../../icons/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>Esta página forma parte de "jclic-repo", un nuevo proyecto que tiene como
             objetivo facilitar la publicación de colecciones de proyectos JClic en servicios de alojamiento
             web estático. El proyecto utiliza la tecnología de componentes web
             <a href="https://www.polymer-project.org/">Polymer</a>, y todas sus fuentes se encuentran
             también disponibles en <a href="https://github.com/projectestac/jclic-repo">GitHub</a>.</p>
-          <p>Esta instalación de <strong>jclic-repo</strong> se encuentra alojada provisionalmente en
+          <p>Esta instalación de jclic-repo se encuentra alojada provisionalmente en
             un espació Google Drive de XTEC y contiene una buena parte de los más de 2.300 recursos de
             la biblioteca de proyectos de la zonaClic. El buscador os permite filtrar los resultados por
             idioma, nivel educativo, área curricular, título o autoría. Haciendo clic en la tarjeta de
             cada proyecto se accede a una información más detallada, desde donde se pueden poner en
             marcha las actividades en HTML5, abrirlas en un applet (siempre que el sistema soporte Java)
             o compartirlas en las redes sociales.</p>
-          <p>&nbsp;</p>
-          <p><strong>Muy importante</strong>: os encontráis en un espacio provisional destinado
-            principalmente a la realización de pruebas para facilitar el desarrollo de
-            <strong>jclic.js</strong>. Algunos tipos de actividades y recursos multimedia todavía no
-            funcionan. Podéis contribuir al desarrollo de los proyectos notificando incidencias o
-            sugiriendo mejoras en las comunidades de desarrollo de
+        </paper-material>
+
+        <paper-material class="item warn" elevation="2">
+          <p><strong>Muy importante</strong>: Éste es un espacio provisional destinado principalmente a la
+            realización de pruebas para facilitar el desarrollo de jclic.js. Algunos tipos de actividades
+            aún no funcionan correctamente en todos los dispositivos, y hay diversas funcionalidades todavía
+            no implementadas. Podéis ayudarnos notificando errores, sugiriendo mejoras y proponiendo posibles
+            soluciones en los espacios de desarrollo de los proyectos
             <a href="https://github.com/projectestac/jclic/issues">JClic</a>, 
             <a href="https://github.com/projectestac/jclic.js/issues">jclic.js</a> y 
             <a href="https://github.com/projectestac/jclic-repo/issues">jclic-repo</a>.</p>
+        </paper-material>
 
-        </section>
-        <section language="en">
-          
-          <h2><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic">JClic project</h2>
+      </section>
+      <section language="en">
+
+        <paper-material elevation="2" class="item" title="JClic">
+          <h2>JClic project</h2>
+          <a href="http://clic.xtec.cat/en/jclic/index.htm"><img src="../../icons/icon-main.svg" class="appIcon" alt="JClic"></a>
           <p>JClic is a free software project of the
             <a href="http://www.xtec.cat/">Catalan Educational Telematic Network</a> (XTEC) for creating
             various types of interactive activities such as associations, puzzles, text activities,
@@ -171,56 +226,68 @@
             system that stores the results obtained by students. All these components, among with some
             guides and tutorials on how to create activities, are available in the
             <a href="http://clic.xtec.cat/en/jclic/download.htm">clicZone</a>.</p>
-          <p>JClic was developed in Java and runs on Linux, Windows and Mac OS. Source code and technical
+          <p>JClic is a Java application that runs on Linux, Windows and Mac OS. Source code and technical
             documentation are available on <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
-          
-          <h2><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js">JClic.js</h2>
+        </paper-material>
+
+        <paper-material elevation="2" class="item" title="jclic.js">
+          <h2>jclic.js</h2>
+          <a href="http://projectestac.github.io/jclic.js/"><img src="../../icons/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>It's a project still under development which aims to create a new JClic player entirely
             based on <a href="http://www.w3.org/html/">HTML5</a> (HTML + JavaScript + CSS3). The goal
             is to play JClic activities in any modern web browser (Firefox, Chrome, Safari ...) without
             any special plug-in. This will allow JClic to run in systems that do not support Java such
             as Android, iOS or ChromeOS, and also in browsers like Google Chrome or MS Edge.</p>
-          <p>Source code and documentation of <strong>jclic.js</strong> are also available on
+          <p>Source code and documentation of jclic.js are also available on
             <a href="http://projectestac.github.io/jclic.js/">GitHub</a>. The project is open to everyone
             liking to participate in its development.</p>
           <p>The JClic Author module will soon allow direct exporting of activities in HTML format with
             jclic.js.</p>
-          
-          <h2><img src="../../icons/icon-library.svg" class="appIcon" alt="Biblioteca">JClic projects library</h2>
+        </paper-material>
+
+        <paper-material class="item" title="JClic library" elevation="2">
+          <h2>Library of JClic projects</h2>
+          <a href="http://clic.xtec.cat/db/listact_en.jsp"><img src="../../icons/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Many teachers from different countries have used JClic to create interactive materials
             for a wide variety of levels, subjects, languages and curriculum areas. Some of these materials
             have been collected in the <a href="http://clic.xtec.cat/db/listact_en.jsp">clicZone projects
-            library</a> thanks to the generosity of their authors, who have decided to share it under
+              library</a> thanks to the generosity of their authors, who have decided to share it under
             Creative Commons licenses allowing reuse, translation and adaptation to different educational
             scenarios.</p>
-          
+        </paper-material>
+
+        <paper-material class="item" title="JClic-repo" elevation="2">
           <h2>JClic-repo</h2>
+          <a href="https://github.com/projectestac/jclic-repo"><img src="../../icons/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>This page is part of "jclic-repo", a new project that will facilitate the publication of
             collections of JClic projects in static web hosting services. The project is build using
             <a href="https://www.polymer-project.org/">Polymer</a> web components, and all its sources
             are also available on <a href="https://github.com/projectestac/jclic-repo">GitHub</a>.</p>
-          <p>This installation of <strong>jclic-repo</strong> is temporarily housed in a Google Drive
+          <p>This installation of jclic-repo is temporarily housed in a Google Drive
             shared space, and contains most of the 2,300 resources published in the clicZone library.
             It has a search engine that allow you to filter the results by language, level, topic, title
             or author. By clicking on each project card more detailed information is shown. From here
             you can launch the activities in HTML5, open them in an Java applet (when allowed), or share
             them on social networks.</p>
-          <p>&nbsp;</p>
-          <p><strong>Very important</strong>: you are in an interim site intended primarily for testing
-            jclic.js. Some types of activities and multimedia resources are not yet working. You can
-            contribute to the development of the projects notifying incidents and proposing improvements
-            on the GitHub project pages of <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
+        </paper-material>
+
+        <paper-material class="item warn" elevation="2">
+          <p><strong>Warning</strong>: You are in a temporary site intended primarily for developing and
+            testing jclic.js. Some types of activities are not yet working in all devices, and some funcionalities
+            are not yet implemented. You can help reporting errors, suggesting improvements and proposing
+            possible solutions to issues for <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
             <a href="https://github.com/projectestac/jclic.js/issues">JClic.js</a> and
             <a href="https://github.com/projectestac/jclic-repo/issues">JClic-repo</a>.</p>
-          
-        </section>
-      </iron-pages>
-      <div id="footer" class="horizontal layout">
-        <social-buttons url="[[url]]" imgurl="[[img]]" text="[[title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
-        <span class="flex"></span>
-        <paper-icon-button icon="close" title="[[labels.close]]" on-tap="_tapClose"></paper-icon-button>
-      </div>
-    </paper-material>
+        </paper-material>
+
+      </section>
+    </iron-pages>
+    <div id="footer" class="horizontal layout">
+      <social-buttons url="[[url]]" imgurl="[[img]]" text="[[title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
+      <span class="flex"></span>
+      <paper-icon-button icon="close" title="[[labels.close]]" on-tap="_tapClose"></paper-icon-button>
+    </div>
+    <!-- /paper-material -->
   </template>
 </dom-module>
 
@@ -248,10 +315,10 @@
         type: String
       }
     },
-  _tapClose: function (event) {
+    _tapClose: function (event) {
       event.stopPropagation();
       this.fire('close');
       return false;
-    }    
+    }
   });
 </script>

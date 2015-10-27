@@ -311,7 +311,7 @@
   };
 
   // Puts in order `projects`, based on the current sorting settings
-  app.orderItems = function (projects) {
+  app.sortItems = function (projects) {
     var inv = app.orderInv ? -1 : 1;
     projects.sort(function (a, b) {
       var result = 0;
@@ -345,7 +345,7 @@
 
     if (app.projects) {
       if (reorder) {
-        app.orderItems(app.projects);
+        app.sortItems(app.projects);
       }
       for (var i in app.projects) {
         var prj = app.projects[i];
@@ -491,12 +491,14 @@
   // Displays the information section
   app.displayInfo = function () {
     app.route = 'info';
+    app.scrollPageToTop();
   };
 
   // Sets the default main page (list of projects)
   app.closeInfo = function () {
     if (app.route !== 'projects') {
       app.route = 'projects';
+      app.scrollPageToTop();      
     }
   };
   

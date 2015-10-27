@@ -1,5 +1,5 @@
 {
-  "baseURL": "http://clic.xtec.cat/js/",
+  "baseURL": "http://clic.xtec.cat/repo/",
   "languages": [
     {"id": "en", "name": "English"},
     {"id": "ca", "name": "català"},
@@ -84,7 +84,7 @@
       "copy": "copia",
       "linkToProject": "Enllaç a la fitxa del projecte:",
       "linkToActivities": "Enllaç directe a les activitats:",
-      "embedCode": "Codi per incustar les activitats en un blog o pàgina web:",
+      "embedCode": "Codi per incrustar les activitats en un blog o pàgina web:",
       "check": "Proveu aquestes activitats amb el nou JClic per a HTML5",
       "about": "Quant a..."
       },
