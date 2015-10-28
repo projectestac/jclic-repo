@@ -30,9 +30,11 @@
     "web-component-tester": "^3.3.26"
   },
   "scripts": {
-    "start": "gulp serve"
+    "start": "gulp serve:dist",
+    "debug": "gulp serve"
   },
   "engines": {
     "node": ">=0.10.0"
-  }
+  },
+  "name": "jclic-repo"
 }
