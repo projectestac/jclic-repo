@@ -407,13 +407,13 @@
 
   // Launches the JClic java applet in a separate window
   app.openApplet = function (prj) {
-    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
+    var cmd = 'https://clic.xtec.cat/db/jclicApplet.jsp?project=' + app.localBaseURL + app.projectsPath + '/' + prj.path + '/' + prj.zipFile;
     window.open(cmd, 'JClicAppletWindow');
   };
 
   // Launches the JClic java installewr in a separate window
   app.openInstall = function (prj) {
-    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.localBaseURL + '/' + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
+    var cmd = 'http://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=' + app.localBaseURL + app.projectsPath + '/' + prj.path + '/' + prj.instFile;
     window.open(cmd, 'InstallWindow');
   };
 

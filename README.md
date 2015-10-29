@@ -1,6 +1,5 @@
 # jclic-repo
 **Static repository of JClic projects**
----
 
 This is a single-page HTML5 application used to publish repositories of JClic projects. A big instance of jclic-repo is
 currently running at [http://clic.xtec.cat/repo]
