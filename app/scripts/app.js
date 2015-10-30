@@ -533,6 +533,18 @@
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
     }
+    
+    if(app.params.page){
+      switch(app.params.page){
+        case 'info':
+          app.displayInfo();
+          break;
+        default:
+          break;
+      }
+    }
+    
+    
   });
 
   // Just before the main container reaches the end of the scroll area, try
