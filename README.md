@@ -69,7 +69,7 @@ Another important file is `projects.json`. This file, usually placed at the root
 contains a full list of the projects published on the repository and basic information (project's folder,
 title, authors, languages, icons, main file...) about them.
 
-Every project folder must have a `project.json` file with a full description. See  the [`samples`](../samples)
+Every project folder must have a `project.json` file with a full description. See  the [`samples`](../../tree/samples/projects)
 branch for examples of `project.json` and `projects.json` files.
 
 For more detailed instructions please refer to the [readme](https://github.com/PolymerElements/polymer-starter-kit) of Polymer Starter Kit.
