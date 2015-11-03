@@ -50,11 +50,11 @@ To build jclic-repo, just run:
 gulp
 ```
 
-This will generate the needed files into the `dist` folder.
+This will generate the final files, ready for production, into the `dist` folder.
 
 You must set-up a JClic projects repository tree in `root/projects`. There is a demo tree on
 the [samples](https://github.com/projectestac/jclic-repo/tree/samples) branch. Please checkout this
-branch on another directory and symlink `root/projects` to its `projects` folder.
+branch on another directory and symlink `root/projects` to it.
 
 To test the module and see the demo in your browser, just launch the test server running:
 
@@ -62,7 +62,14 @@ To test the module and see the demo in your browser, just launch the test server
 gulp serve:dist
 ```
 
+The main parameters of the application (like title, language and the location of the `projects` folder)
+are defined in [`main.json`](app/main.json).
+
+Another important file is `projects.json`. This file, usually placed at the root of the `projects` folder,
+contains a full list of the projects published on the repository and basic information (project's folder,
+title, authors, languages, icons, main file...) about them.
+
+Every project folder must have a `project.json` file with a full description. See  the [`samples`](../samples)
+branch for examples of `project.json` and `projects.json` files.
+
 For more detailed instructions please refer to the [readme](https://github.com/PolymerElements/polymer-starter-kit) of Polymer Starter Kit.
-
-
-
