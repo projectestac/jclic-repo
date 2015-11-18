@@ -50,7 +50,10 @@
       "linkToActivities": "Direct link to the activities:",
       "embedCode": "Code to embed:",
       "check": "Check this activities running on the new JClic HTML5 player",
-      "about": "About..."
+      "about": "About...",
+      "continue": "Continue",
+      "unknownProject": "Unknown project:",
+      "errorLoading": "Error loading:"
       },
     "ca": {
       "ok": "D'acord",
@@ -86,7 +89,10 @@
       "linkToActivities": "Enllaç directe a les activitats:",
       "embedCode": "Codi per incrustar les activitats en un blog o pàgina web:",
       "check": "Proveu aquestes activitats amb el nou JClic per a HTML5",
-      "about": "Quant a..."
+      "about": "Quant a...",
+      "continue": "Continua",
+      "unknownProject": "Projecte desconegut:",
+      "errorLoading": "S'ha produït un error en llegir:"      
       },
     "es": {
       "ok": "Aceptar",
@@ -122,7 +128,10 @@
       "linkToActivities": "Enlace directo a las actividades:",
       "embedCode": "Código para incrustar las actividades en un blog o página web:",
       "check": "Prueba estas actividades con el nuevo JClic para HTML5",
-      "about": "Acerca de..."
+      "about": "Acerca de...",
+      "continue": "Continuar",
+      "unknownProject": "Proyecto desconocido:",
+      "errorLoading": "Se ha producido un error al leer:"            
       }
   },
   "logo": "logo.png",

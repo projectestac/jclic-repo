@@ -197,13 +197,24 @@
 
     <big-prj-card id="bigCard" lang="[[lang]]" labels="[[labels]]" base-url="{{baseURL}}" local-base-url="{{localBaseURL}}" projects-path="{{projectsPath}}"></big-prj-card>
 
-    <paper-dialog id="playerDialog" modal style="width: 100%; height: 100%" on-iron-overlay-closed="playerClosed">
+    <paper-dialog id="playerDialog" modal style="width: 100vw; height: 100vh; margin: 0;" on-iron-overlay-closed="playerClosed">
       <jclic-player-js id="player" fullscreen="{{fullScreen}}" options="[[playerOptions]]"></jclic-player-js>      
     </paper-dialog>
-
+    
     <paper-spinner alt="[[labels.loading]]" active="[[spinner]]"></paper-spinner>
-
+    
+    <paper-dialog id="warnDialog" modal>
+      <paper-dialog-scrollable>
+        <iron-icon icon="warning"></iron-icon><span style="margin: 10px;">[[warnText]]</span>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>[[labels.continue]]</paper-button>
+      </div>
+    </paper-dialog>
+    
   </template>
+    
+    
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->

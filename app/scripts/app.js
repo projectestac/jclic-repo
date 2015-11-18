@@ -28,7 +28,7 @@
   'use strict';
 
   // If needed, get JQuery from JClicObject
-  if(typeof window.$ === 'undefined'){
+  if (typeof window.$ === 'undefined') {
     window.$ = window.JClicObject.$;
   }
 
@@ -98,7 +98,7 @@
   app.path = app.path.substring(0, p) + '/';
   app.baseURL = window.location.origin + app.path;
   app.localBaseURL = app.baseURL;
-  
+
   // Asyncronouslly loading of settings stored in 'main.json'
   // When ready, continue loading the page contents
   $.getJSON('main.json')
@@ -188,7 +188,6 @@
   // Check if settings have changed, and reload if needed
   app.newSettings = function () {
     if (app.order !== app.back.order || app.orderInv !== app.back.orderInv) {
-      console.log('order changed!');
       app.matchItems(true);
     }
   };
@@ -255,7 +254,7 @@
                   }
 
                   if (prj === null) {
-                    console.log('Unknown project: ' + app.params.prj);
+                    app.warn(app.labels.unknownProject + ' "' + app.params.prj + '"');
                   } else {
                     var $prjCard = app.createCard(prj);
                     if ($prjCard) {
@@ -384,6 +383,12 @@
     }
   };
 
+  app.warn = function (text) {
+    app.warnText = text;
+    app.$.warnDialog.fit();
+    app.$.warnDialog.open();
+  };
+
   // Launches the jclic.js player with the activities pointed to by the
   // `mainFile` member of `prj`
   app.playActivities = function (prj) {
@@ -393,6 +398,7 @@
     // Close existing dialogs
     app.$.bigCard.getPaperDialog().close();
     // Open the player dialog and fill it with the appropiate parameters
+
     var dialog = app.$.playerDialog;
     dialog.fit();
     dialog.noCancelOnOutsideClick = false;
@@ -460,7 +466,7 @@
                 })
                 .fail(function () {
                   app.spinner = false;
-                  console.log('Error loading ' + prjFile);
+                  app.warn(app.labels.errorLoading + ' "' + prjFile + '"');
                 });
         return;
       }
@@ -498,12 +504,12 @@
   app.closeInfo = function () {
     if (app.route !== 'projects') {
       app.route = 'projects';
-      app.scrollPageToTop();      
+      app.scrollPageToTop();
     }
   };
-  
+
   // Tap on "search" button
-  app.tapSearch = function() {
+  app.tapSearch = function () {
     app.closeInfo();
     app.matchItems(false);
   };
@@ -533,9 +539,9 @@
     if (deployJava && deployJava.getJREs() instanceof Array) {
       app.javaDisabled = deployJava.getJREs().length < 1;
     }
-    
-    if(app.params.page){
-      switch(app.params.page){
+
+    if (app.params.page) {
+      switch (app.params.page) {
         case 'info':
           app.displayInfo();
           break;
@@ -543,7 +549,7 @@
           break;
       }
     }
-    
+
     // Correct iron-dropdown bug that makes drop-downs menu dissappear when in narrow screen
     $('iron-dropdown[id=dropdown]').on('iron-overlay-opened', function () {
       if ($(window).width() <= 600) {
