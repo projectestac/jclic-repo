@@ -30,6 +30,7 @@
         float: right;
         margin: 5px 0px 5px 5px;
         max-width: 50%;
+        cursor: pointer;
       }
 
       .author{
@@ -98,7 +99,7 @@
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[prj.title]]</h2>      
       <paper-dialog-scrollable>
-        <img class="cover" src="[[imgSrc]]"/>
+        <img class="cover" src="[[imgSrc]]" on-tap="_tapPlay"/>
         <p class="author">[[prj.author]]</p>    
         <p class="school">[[prj.school]]</p>    
         <p class="description" id="description"></p>

@@ -550,7 +550,7 @@
       }
     }
 
-    // Correct iron-dropdown bug that makes drop-downs menu dissappear when in narrow screen
+    // Correct iron-dropdown bug that makes drop-down menus dissappear when in narrow screen
     $('iron-dropdown[id=dropdown]').on('iron-overlay-opened', function () {
       if ($(window).width() <= 600) {
         setTimeout(function (dropdown) {
