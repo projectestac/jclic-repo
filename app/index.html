@@ -90,32 +90,32 @@
 
         <!-- Selection form -->
         <div id="selectionForm">
-          <paper-dropdown-menu label="[[labels.languages]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentLang}}">
+          <paper-dropdown-menu label="[[labels.languages]]">
+            <paper-menu class="dropdown-content" selected="{{currentLang}}" on-iron-select="filterChanged">
               <template is="dom-repeat" items="[[actLanguages]]">
                 <paper-item role="listitem">[[item.text]]</paper-item>              
               </template>
             </paper-menu>
           </paper-dropdown-menu>
 
-          <paper-dropdown-menu label="[[labels.subjects]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentSubject}}">
+          <paper-dropdown-menu label="[[labels.subjects]]">
+            <paper-menu class="dropdown-content" selected="{{currentSubject}}" on-iron-select="filterChanged">
               <template is="dom-repeat" items="[[actSubjects]]">
                 <paper-item role="listitem">[[item.text]]</paper-item>              
               </template>
             </paper-menu>
           </paper-dropdown-menu>
 
-          <paper-dropdown-menu label="[[labels.levels]]" on-paper-dropdown-close="filterChanged">
-            <paper-menu class="dropdown-content" selected="{{currentLevel}}">
+          <paper-dropdown-menu label="[[labels.levels]]">
+            <paper-menu class="dropdown-content" selected="{{currentLevel}}" on-iron-select="filterChanged">
               <template is="dom-repeat" items="[[actLevels]]">
                 <paper-item role="listitem">[[item.text]]</paper-item>              
               </template>
             </paper-menu>
           </paper-dropdown-menu>
 
-          <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}"></paper-input>
-          <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}"></paper-input>
+          <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}" on-change="filterChanged"></paper-input>
+          <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}" on-change="filterChanged"></paper-input>
           <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="tapSearch">
             <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
             <span>[[labels.search]]</span>

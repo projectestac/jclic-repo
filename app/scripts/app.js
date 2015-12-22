@@ -72,6 +72,7 @@
 
   app.loading = false;
   app.loaded = false;
+  app.ready = false;
 
   app.baseURL = '.';
   app.localBaseURL = app.baseURL;
@@ -219,14 +220,16 @@
 
   // Applies new criteria to filter activities
   app.filterChanged = function () {
-    app.closeInfo();
-    // currentLanguage, currentSubject, currentLevel.... may not be initialized
-    // when the paper-dropdown-closed event is fired. Let's do the task later.
-    window.setTimeout(app.matchItems, 0);
+    if (app.ready) {
+      console.log('Filter changed!');
+      app.closeInfo();
+      app.matchItems(false);
+    }
   };
 
   // Fills the document with text according to the current language
   app.load = function () {
+    app.ready = false;
     app.title = app.options.title[app.lang];
     app.description = app.options.description[app.lang];
     app.labels = app.options.labels[app.lang];
@@ -273,6 +276,8 @@
     } else {
       app.matchItems(false);
     }
+    // Change 'ready' flag when all launched tasks are done
+    window.setTimeout(function(){app.ready=true;}, 0);
   };
 
   // Checks the `projects` array for inconsistences or missing fields
