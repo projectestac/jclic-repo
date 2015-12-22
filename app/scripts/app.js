@@ -220,7 +220,9 @@
   // Applies new criteria to filter activities
   app.filterChanged = function () {
     app.closeInfo();
-    app.matchItems(false);
+    // currentLanguage, currentSubject, currentLevel.... may not be initialized
+    // when the paper-dropdown-closed event is fired. Let's do the task later.
+    window.setTimeout(app.matchItems, 0);
   };
 
   // Fills the document with text according to the current language
