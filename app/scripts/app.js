@@ -22,7 +22,7 @@
  * an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-/* global Polymer, $, deployJava, unidecode */
+/* global Polymer, $, unidecode */
 
 (function (document) {
   'use strict';
@@ -542,11 +542,19 @@
       }
     };
 
-    // Check if the current browser has Java enabled
-    if (deployJava && deployJava.getJREs() instanceof Array) {
-      app.javaDisabled = deployJava.getJREs().length < 1;
+    // Usage of deployJava discarded because of problems with Firefox on Windows
+    //if (deployJava && deployJava.getJREs() instanceof Array) {
+    //  app.javaDisabled = deployJava.getJREs().length < 1;
+    //}
+    
+    // Currently Firefox is the only HTML5 browser that supports Java applets
+    if(navigator && navigator.userAgent && (navigator.userAgent.toLowerCase().indexOf('firefox')>=0)){
+      app.javaDisabled = false;
     }
-
+    else{
+      app.javaDisabled = true;
+    }
+      
     if (app.params.page) {
       switch (app.params.page) {
         case 'info':
