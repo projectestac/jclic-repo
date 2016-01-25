@@ -22,7 +22,7 @@
  * an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-/* global Polymer, $, unidecode */
+/* global window, Polymer, $, unidecode, Math */
 
 (function (document) {
   'use strict';
@@ -89,8 +89,8 @@
   // Read parameters passed to 'index.html'
   app.params = {};
   // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
-  if (location.search) {
-    app.params = JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+  if (window.location.search) {
+    app.params = window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
   }
 
   // Determines path and base URL
@@ -136,12 +136,12 @@
       tries.push(app.params.lang);
     }
     // Add user's preferred languages, if any
-    if (navigator.languages) {
-      tries = tries.concat(navigator.languages);
+    if (window.navigator.languages) {
+      tries = tries.concat(window.navigator.languages);
     }
     // Add the navigator main language, if defined
-    if (navigator.language) {
-      tries.push(navigator.language);
+    if (window.navigator.language) {
+      tries.push(window.navigator.language);
     }
     // Add English as final option
     tries.push('en');
@@ -548,13 +548,9 @@
     //}
     
     // Currently Firefox is the only HTML5 browser that supports Java applets
-    if(navigator && navigator.userAgent && (navigator.userAgent.toLowerCase().indexOf('firefox')>=0)){
-      app.javaDisabled = false;
-    }
-    else{
-      app.javaDisabled = true;
-    }
-      
+    app.javaDisabled = !(window.navigator && window.navigator.userAgent &&
+            (window.navigator.userAgent.toLowerCase().indexOf('firefox')>=0));
+    
     if (app.params.page) {
       switch (app.params.page) {
         case 'info':
@@ -647,4 +643,4 @@
     return result;
   };
 
-})(document);
+})(window.document);
