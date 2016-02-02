@@ -384,8 +384,8 @@
       newQuery = (newQuery ? (newQuery + '&') : '') + 'author=' + encodeURIComponent(author);
       p.author = author;
     }
-
-    if (newQuery !== null && newQuery !== app.currentQuery) {
+    
+    if (newQuery !== null && newQuery !== app.currentQuery && !app.cmpParams(window.history.state, p)) {
       var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + newQuery;
       window.history.pushState(p, '', newUrl);
       app.currentQuery = newQuery;
@@ -410,6 +410,16 @@
     app.numMatchProjects = app.matchProjects.length;
     app.fillList();
     app.spinner = false;
+  };
+  
+  app.cmpParams = function(s1, s2){
+    // TODO: Add project name and current page to history
+    return (s1) && (s2) &&
+            s1.language === s2.language && 
+            s1.area === s2.area &&
+            s1.level === s2.level &&
+            s1.title === s2.title &&
+            s1.author === s2.author;
   };
 
   // Fills the main list with some project cards
@@ -655,17 +665,12 @@
       }
     }
     app.currentSubject = v;
-
+    
     app.filterChanged();
-
   };
 
   window.onpopstate = function (e) {
-    if (e.state) {
-      app.checkParams(e.state);
-    } else {
-      window.location.reload();
-    }
+    app.checkParams(e.state ? e.state : {});    
   };
 
   // Just before the main container reaches the end of the scroll area, try
