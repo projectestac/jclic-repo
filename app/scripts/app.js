@@ -86,6 +86,8 @@
   app.order = 0;
   app.orderInv = false;
 
+  app.currentQuery = null;
+
   // Read parameters passed to 'index.html'
   app.params = {};
   // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
@@ -277,7 +279,9 @@
       app.matchItems(false);
     }
     // Change 'ready' flag when all launched tasks are done
-    window.setTimeout(function(){app.ready=true;}, 0);
+    window.setTimeout(function () {
+      app.ready = true;
+    }, 0);
   };
 
   // Checks the `projects` array for inconsistences or missing fields
@@ -343,11 +347,49 @@
     app.lastItem = 0;
     $('#projects').empty();
 
-    var lang = app.actLanguages[app.currentLang].val;
-    var area = app.actSubjects[app.currentSubject].val;
-    var level = app.actLevels[app.currentLevel].val;
+    var lang = '*';
+    var area = '*';
+    var level = '*';
+    var newQuery = app.currentQuery ? '' : null;
+    var p = {};
+
+    if (app.actLanguages[app.currentLang]) {
+      lang = app.actLanguages[app.currentLang].val;
+      if (app.currentLang > 0) {
+        newQuery = (newQuery ? (newQuery + '&') : '') + 'language=' + lang;
+        p.language = lang;
+      }
+    }
+    if (app.actSubjects[app.currentSubject]) {
+      area = app.actSubjects[app.currentSubject].val;
+      if (app.currentSubject > 0) {
+        newQuery = (newQuery ? (newQuery + '&') : '') + 'subject=' + area;
+        p.subject = area;
+      }
+    }
+    if (app.actLevels[app.currentLevel]) {
+      level = app.actLevels[app.currentLevel].val;
+      if (app.currentLevel > 0) {
+        newQuery = (newQuery ? (newQuery + '&') : '') + 'level=' + level;
+        p.level = level;
+      }
+    }
     var title = unidecode(app.currentTitle.trim()).toLowerCase();
+    if (title !== '') {
+      newQuery = (newQuery ? (newQuery + '&') : '') + 'title=' + encodeURIComponent(title);
+      p.title = title;
+    }
     var author = unidecode(app.currentAuthor.trim()).toLowerCase();
+    if (author !== '') {
+      newQuery = (newQuery ? (newQuery + '&') : '') + 'author=' + encodeURIComponent(author);
+      p.author = author;
+    }
+
+    if (newQuery !== null && newQuery !== app.currentQuery) {
+      var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + newQuery;
+      window.history.pushState(p, '', newUrl);
+      app.currentQuery = newQuery;
+    }
 
     if (app.projects) {
       if (reorder) {
@@ -546,20 +588,11 @@
     //if (deployJava && deployJava.getJREs() instanceof Array) {
     //  app.javaDisabled = deployJava.getJREs().length < 1;
     //}
-    
+
     // Currently Firefox is the only HTML5 browser that supports Java applets
     app.javaDisabled = !(window.navigator && window.navigator.userAgent &&
-            (window.navigator.userAgent.toLowerCase().indexOf('firefox')>=0));
-    
-    if (app.params.page) {
-      switch (app.params.page) {
-        case 'info':
-          app.displayInfo();
-          break;
-        default:
-          break;
-      }
-    }
+            (window.navigator.userAgent.toLowerCase().indexOf('firefox') >= 0));
+
 
     // Correct iron-dropdown bug that makes drop-down menus dissappear when in narrow screen
     $('iron-dropdown[id=dropdown]').on('iron-overlay-opened', function () {
@@ -569,7 +602,71 @@
         }, 0, this);
       }
     });
+
+    app.checkParams(app.params);
+
   });
+
+  app.checkParams = function (p) {
+
+    if (p.page) {
+      switch (p.page) {
+        case 'info':
+          app.displayInfo();
+          break;
+        default:
+          break;
+      }
+    }
+
+    app.currentTitle = p.title ? p.title : '';
+    app.currentAuthor = p.author ? p.author : '';
+
+    var i, v;
+    v = 0;
+    if (p.language) {
+      for (i = 0; i < app.actLanguages.length; i++) {
+        if (app.actLanguages[i].val === p.language || app.actLanguages[i].text === p.language) {
+          v = i;
+          break;
+        }
+      }
+    }
+    app.currentLang = v;
+
+    v = 0;
+    if (p.level) {
+      for (i = 0; i < app.actLevels.length; i++) {
+        if (app.actLevels[i].val === p.level || app.actLevels[i].text === p.level) {
+          v = i;
+          break;
+        }
+      }
+    }
+    app.currentLevel = v;
+
+    v = 0;
+    if (p.subject) {
+      for (i = 0; i < app.actSubjects.length; i++) {
+        if (app.actSubjects[i].val === p.subject || app.actSubjects[i].text === p.subject) {
+          v = i;
+          break;
+        }
+      }
+    }
+    app.currentSubject = v;
+
+    app.filterChanged();
+
+  };
+
+  window.onpopstate = function (e) {
+    if (e.state) {
+      app.checkParams(e.state);
+    } else {
+      window.location.reload();
+    }
+  };
 
   // Just before the main container reaches the end of the scroll area, try
   // to load more elements into the project's list
