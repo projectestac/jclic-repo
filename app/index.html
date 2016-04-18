@@ -107,7 +107,7 @@
 
           <paper-input class="textInput" label="[[labels.title]]" value="{{currentTitle}}" on-change="filterChanged"></paper-input>
           <paper-input class="textInput" label="[[labels.author]]" value="{{currentAuthor}}" on-change="filterChanged"></paper-input>
-          <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="tapSearch">
+          <paper-button raised class="search" label="[[labels.searchTitle]]" on-tap="tapSearch" id="searchBtn">
             <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
             <span>[[labels.search]]</span>
           </paper-button>

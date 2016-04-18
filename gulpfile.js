@@ -21,6 +21,7 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
+var connectLogger = require('connect-logger');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
@@ -178,7 +179,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
     port: 5000,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'JCRepo',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -193,7 +194,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
     // https: true,
     server: {
       baseDir: ['.tmp', 'app', 'root'],
-      middleware: [ historyApiFallback() ],
+      middleware: [ connectLogger(), historyApiFallback() ],
       routes: {
         '/bower_components': 'bower_components'
       }
@@ -212,7 +213,7 @@ gulp.task('serve:build', ['build'], function () {
   browserSync({
     port: 5001,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'JCRepo',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -227,7 +228,7 @@ gulp.task('serve:build', ['build'], function () {
     // https: true,
     server: {
       baseDir: ['build', 'root'],
-      middleware: [ historyApiFallback() ],
+      middleware: [ connectLogger(), historyApiFallback() ],
     }
   });
 });
@@ -235,9 +236,9 @@ gulp.task('serve:build', ['build'], function () {
 // Build and serve the output from the distribution directory
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
-    port: 5001,
+    port: 5002,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'JCRepo',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -252,7 +253,7 @@ gulp.task('serve:dist', ['default'], function () {
     // https: true,
     server: {
       baseDir: ['dist', 'root'],
-      middleware: [ historyApiFallback() ],
+      middleware: [ connectLogger(), historyApiFallback() ],
     }
   });
 });
