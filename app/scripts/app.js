@@ -217,13 +217,25 @@
     $('#langSel #' + app.lang).addClass('curLang');
     if (forceLoad || app.lang !== currentLang) {
       app.load();
+      // Reset filters
+      // (not working on event thread, so launch a new process
+      // when language change is completed)
+      window.setTimeout(function () {
+        // Force reload text in dropdown box
+        app.currentLang = -1;
+        app.currentSubject = -1;
+        app.currentLevel = -1;
+        // Set default values
+        app.currentLang = 0;
+        app.currentSubject = 0;
+        app.currentLevel = 0;
+      }, 0);
     }
   };
 
   // Applies new criteria to filter activities
   app.filterChanged = function () {
     if (app.ready) {
-      console.log('Filter changed!');
       app.closeInfo();
       app.matchItems(false);
     }
