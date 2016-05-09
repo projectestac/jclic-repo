@@ -163,7 +163,7 @@
         {"val" :"sv", "text":"suec"},
         {"val" :"zh", "text":"xinès"}],
     "en": [
-        {"val" :"*", "text":"all languages"},
+        {"val" :"*", "text":"All languages"},
         {"val" :"ar", "text":"Arabic"},
         {"val" :"arn", "text":"Araucanian"},
         {"val" :"eu", "text":"Basque"},

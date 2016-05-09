@@ -210,25 +210,37 @@
 
   // Sets the language of the site and calls 'load' when needed or forced
   app.setLang = function (i, forceLoad) {
-    var currentLang = app.lang;
+    var currentAppLang = app.lang;
     app.lang = app.languages[i].id;
     app.langIndex = i;
     $('.curLang').removeClass('curLang');
     $('#langSel #' + app.lang).addClass('curLang');
-    if (forceLoad || app.lang !== currentLang) {
+    if (forceLoad) {
+      // Called on first attempt to build the page
       app.load();
+    } else if (app.lang !== currentAppLang) {
+      // Called on main language changed
+
+      // Read current values
+      var langVal = app.actLanguages[app.currentLang].val;
+      var levelVal = app.actLevels[app.currentLevel].val;
+      var subjectVal = app.actSubjects[app.currentSubject].val;
+
+      // Change language
+      app.load();
+
       // Reset filters
       // (not working on event thread, so launch a new process
       // when language change is completed)
       window.setTimeout(function () {
-        // Force reload text in dropdown box
+        // Force reload text on dropdown boxes
         app.currentLang = -1;
         app.currentSubject = -1;
         app.currentLevel = -1;
-        // Set default values
-        app.currentLang = 0;
-        app.currentSubject = 0;
-        app.currentLevel = 0;
+        // Restore original values
+        app.currentLang = app.findValIndex(langVal, app.actLanguages, false);
+        app.currentLevel = app.findValIndex(levelVal, app.actLevels, false);
+        app.currentSubject = app.findValIndex(subjectVal, app.actSubjects, false);
       }, 0);
     }
   };
@@ -396,7 +408,7 @@
       newQuery = (newQuery ? (newQuery + '&') : '') + 'author=' + encodeURIComponent(author);
       p.author = author;
     }
-    
+
     if (newQuery !== null && newQuery !== app.currentQuery && !app.cmpParams(window.history.state, p)) {
       var newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + newQuery;
       window.history.pushState(p, '', newUrl);
@@ -423,12 +435,12 @@
     app.fillList();
     app.spinner = false;
   };
-  
-  app.cmpParams = function(s1, s2){
+
+  app.cmpParams = function (s1, s2) {
     // TODO: Add project name and current page to history
     return (s1) && (s2) &&
-            s1.language === s2.language && 
-            s1.area === s2.area &&
+            s1.language === s2.language &&
+            s1.subject === s2.subject &&
             s1.level === s2.level &&
             s1.title === s2.title &&
             s1.author === s2.author;
@@ -629,8 +641,27 @@
 
   });
 
-  app.checkParams = function (p) {
 
+  // Finds an object with a `val` attribute equal to `v`
+  // The object must be stored into `values` (an array of objects with `val` attribute)
+  // When `checkAlsoText` is true, `v` is checked also against the `text` attribute
+  // of the objects stored in `values`
+  app.findValIndex = function (v, values, checkAlsoText) {
+    var result = 0;
+    if (v) {
+      for (var i = 0; i < values.length; i++) {
+        if (v === values[i].val || (checkAlsoText && v === values[i].text)) {
+          result = i;
+          break;
+        }
+      }
+    }
+    return result;
+  };
+
+
+
+  app.checkParams = function (p) {
     if (p.page) {
       switch (p.page) {
         case 'info':
@@ -640,49 +671,16 @@
           break;
       }
     }
-
     app.currentTitle = p.title ? p.title : '';
     app.currentAuthor = p.author ? p.author : '';
-
-    var i, v;
-    v = 0;
-    if (p.language) {
-      for (i = 0; i < app.actLanguages.length; i++) {
-        if (app.actLanguages[i].val === p.language || app.actLanguages[i].text === p.language) {
-          v = i;
-          break;
-        }
-      }
-    }
-    app.currentLang = v;
-
-    v = 0;
-    if (p.level) {
-      for (i = 0; i < app.actLevels.length; i++) {
-        if (app.actLevels[i].val === p.level || app.actLevels[i].text === p.level) {
-          v = i;
-          break;
-        }
-      }
-    }
-    app.currentLevel = v;
-
-    v = 0;
-    if (p.subject) {
-      for (i = 0; i < app.actSubjects.length; i++) {
-        if (app.actSubjects[i].val === p.subject || app.actSubjects[i].text === p.subject) {
-          v = i;
-          break;
-        }
-      }
-    }
-    app.currentSubject = v;
-    
+    app.currentLang = app.findValIndex(p.language, app.actLanguages, true);
+    app.currentLevel = app.findValIndex(p.level, app.actLevels, true);
+    app.currentSubject = app.findValIndex(p.subject, app.actSubjects, true);
     app.filterChanged();
   };
 
   window.onpopstate = function (e) {
-    app.checkParams(e.state ? e.state : {});    
+    app.checkParams(e.state ? e.state : {});
   };
 
   // Just before the main container reaches the end of the scroll area, try
