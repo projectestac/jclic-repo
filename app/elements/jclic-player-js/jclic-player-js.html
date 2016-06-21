@@ -47,7 +47,13 @@
           thisElement.$fitPlayer();
         });
       }
-      this._player.load(project);
+
+      //this._player.load(project);
+      var thisPlayer = this._player;
+      thisPlayer.initReporter().then(function(){
+          thisPlayer.load(project);
+      });
+
       if (this.fullscreen) {
         this._player.skin.setScreenFull(true);
       }
