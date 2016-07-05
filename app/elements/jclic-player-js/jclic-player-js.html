@@ -48,7 +48,6 @@
         });
       }
 
-      //this._player.load(project);
       var thisPlayer = this._player;
       thisPlayer.initReporter().then(function(){
           thisPlayer.load(project);
@@ -60,7 +59,7 @@
     },
     $fitPlayer: function () {
       var $playerDiv = $(this.$.playerDiv);
-      var $rootParent = $playerDiv.parent().parent();
+      var $rootParent = $playerDiv.parent().parent().parent();
       $playerDiv.css({
         width: $rootParent.width(),
         height: $rootParent.height()
