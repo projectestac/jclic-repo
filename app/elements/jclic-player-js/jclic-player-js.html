@@ -50,6 +50,7 @@
 
       var thisPlayer = this._player;
       thisPlayer.initReporter().then(function(){
+          thisPlayer.reset();
           thisPlayer.load(project);
       });
 
