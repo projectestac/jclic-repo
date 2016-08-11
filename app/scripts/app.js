@@ -88,11 +88,21 @@
 
   app.currentQuery = null;
 
+  app.playerOptions = {
+    closeFn: function () {
+      app.$.playerDialog.close();
+    }
+  };
+
   // Read parameters passed to 'index.html'
   app.params = {};
   // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
   if (window.location.search) {
     app.params = window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+  }
+
+  if (app.params.logLevel) {
+    app.playerOptions.logLevel = app.params.logLevel;
   }
 
   // Determines path and base URL
@@ -611,12 +621,6 @@
     // imports are loaded and elements have been registered 
 
     app.setLang(app.langIndex);
-
-    app.playerOptions = {
-      closeFn: function () {
-        app.$.playerDialog.close();
-      }
-    };
 
     // Usage of deployJava discarded because of problems with Firefox on Windows
     //if (deployJava && deployJava.getJREs() instanceof Array) {

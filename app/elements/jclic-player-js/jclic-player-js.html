@@ -49,12 +49,14 @@
       }
 
       var thisPlayer = this._player;
-      thisPlayer.initReporter().then(function(){
-          thisPlayer.reset();
+      thisPlayer.initReporter().then(function () {
+        thisPlayer.reset();
+        if (project) {
           thisPlayer.load(project);
+        }
       });
 
-      if (this.fullscreen) {
+      if (project && this.fullscreen) {
         this._player.skin.setScreenFull(true);
       }
     },

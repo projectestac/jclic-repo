@@ -1,8 +1,26 @@
 {
-  "elements": {},
+  "elements": {
+    "template": {
+      "attributes": {
+        "id": {}
+      }
+    },
+    "dom-module": {
+      "attributes": {
+        "id": {}
+      }
+    },
+    "paper-material": {}
+  },
   "attributes": {
     "is": {
       "context": "style"
+    },
+    "on-tap": {
+      "context": "div"
+    },
+    "style$": {
+      "context": "div"
     }
   }
 }
