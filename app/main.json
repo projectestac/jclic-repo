@@ -1,5 +1,5 @@
 {
-  "baseURL": "http://clic.xtec.cat/repo/",
+  "baseURL": "https://clic.xtec.cat/repo/",
   "languages": [
     {"id": "en", "name": "English"},
     {"id": "ca", "name": "català"},
@@ -92,7 +92,7 @@
       "about": "Quant a...",
       "continue": "Continua",
       "unknownProject": "Projecte desconegut:",
-      "errorLoading": "S'ha produït un error en llegir:"      
+      "errorLoading": "S'ha produït un error en llegir:"
       },
     "es": {
       "ok": "Aceptar",
@@ -131,7 +131,7 @@
       "about": "Acerca de...",
       "continue": "Continuar",
       "unknownProject": "Proyecto desconocido:",
-      "errorLoading": "Se ha producido un error al leer:"            
+      "errorLoading": "Se ha producido un error al leer:"
       }
   },
   "logo": "logo.png",
@@ -261,5 +261,5 @@
         {"val" :"PRI", "text":"Primaria (6-12)"},
         {"val" :"SEC", "text":"Secundaria (12-16)"},
         {"val" :"BTX", "text":"Bachillerato (16-18)"}]
-  }  
+  }
 }
