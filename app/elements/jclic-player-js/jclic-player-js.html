@@ -9,6 +9,10 @@
         margin: 0 !important;
         padding: 0;
       }
+      :host #playerDiv {
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
     <div id="playerDiv"></div>
   </template>
@@ -39,13 +43,8 @@
       }
     },
     _setProject: function (project) {
-      var $div = this.$fitPlayer();
       if (!this._player) {
-        this._player = new window.JClicObject.JClicPlayer($div, this.options);
-        var thisElement = this;
-        $(window).resize(function () {
-          thisElement.$fitPlayer();
-        });
+        this._player = new window.JClicObject.JClicPlayer($(this.$.playerDiv), this.options);
       }
 
       var thisPlayer = this._player;
@@ -59,18 +58,6 @@
       if (project && this.fullscreen) {
         this._player.skin.setScreenFull(true);
       }
-    },
-    $fitPlayer: function () {
-      var $playerDiv = $(this.$.playerDiv);
-      var $rootParent = $playerDiv.parent().parent().parent();
-      $playerDiv.css({
-        width: $rootParent.width(),
-        height: $rootParent.height()
-      });
-      if (this._player && this._player.skin) {
-        this._player.skin.fit();
-      }
-      return $playerDiv;
     }
   });
 </script>
