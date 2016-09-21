@@ -19,7 +19,6 @@
 </dom-module>
 
 <script>
-  /* global $ */
   Polymer({
     is: 'jclic-player-js',
     properties: {
@@ -43,21 +42,15 @@
       }
     },
     _setProject: function (project) {
-      if (!this._player) {
-        this._player = new window.JClicObject.JClicPlayer($(this.$.playerDiv), this.options);
+      
+      if(project) {
+        this._player = window.JClicObject.loadProject(this.$.playerDiv, project, this.options);
       }
-
-      var thisPlayer = this._player;
-      thisPlayer.initReporter().then(function () {
-        thisPlayer.reset();
-        if (project) {
-          thisPlayer.load(project);
-        }
-      });
-
-      if (project && this.fullscreen) {
+      
+      if (this._player && this.fullscreen) {
         this._player.skin.setScreenFull(true);
       }
+      
     }
   });
 </script>
