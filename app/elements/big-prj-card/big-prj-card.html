@@ -155,6 +155,11 @@
               </paper-radio-group>
             </div>        
           </div>
+          <div class ="vertical-section">
+            <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
+              <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyMoodleLink"></paper-icon-button>
+            </paper-input>
+          </div>          
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
@@ -173,6 +178,9 @@ Polymer({
   is: 'big-prj-card',
   properties: {
     baseUrl: {
+      type: String
+    },
+    projectsBaseUrl: {
       type: String
     },
     localBaseUrl: {
@@ -232,6 +240,10 @@ Polymer({
       type: String,
       computed: 'computeLinkToActivities(prj)'
     },
+    linkForMoodle: {
+      type: String,
+      computed: 'computeLinkForMoodle(prj)'
+    },
     embedSize: {
       type: String,
       value: 'medium'
@@ -270,6 +282,9 @@ Polymer({
   },
   computeLinkToActivities: function () {
     return this.baseUrl + 'player.html?' + this.prj.path + '/' + this.prj.mainFile;
+  },
+  computeLinkForMoodle: function () {
+    return this.projectsBaseUrl + this.projectsPath + '/' + this.prj.path + '/' + this.prj.mainFile;
   },
   computeEmbedCode: function () {
     var w, h;
@@ -321,6 +336,9 @@ Polymer({
   },
   _copyActLink: function () {
     clipboard.copy(this.linkToActivities);
+  },
+  _copyMoodleLink: function () {
+    clipboard.copy(this.linkForMoodle);
   },
   _copyEmbedCode: function () {
     clipboard.copy(this.embedCode);

@@ -1,7 +1,7 @@
 /*
  * Basic repository for JClic projects
  * https://github.com/projectestac/jclic-repo
- * http://clic.xtec.cat/js
+ * http://clic.xtec.cat/repo
  * 
  * (c) 2015 Catalan Educational Telematic Network (XTEC) 
  * 
@@ -75,6 +75,7 @@
   app.ready = false;
 
   app.baseURL = '.';
+  app.projectsBaseURL = '.';
   app.localBaseURL = app.baseURL;
   app.projectsPath = 'projects';
 
@@ -120,10 +121,14 @@
 
             app.projectsPath = app.options.index.path;
 
-            // baseURL can be overwritten by main.json
+            // baseURL and projectsBaseURL can be overwritten by main.json
             // The final base will be used to build share links
             if (app.options.baseURL) {
               app.baseURL = app.options.baseURL;
+            }
+
+            if (app.options.projectsBaseURL) {
+              app.projectsBaseURL = app.options.projectsBaseURL;
             }
 
             app.languages = app.options.languages;
