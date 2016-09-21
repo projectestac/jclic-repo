@@ -1,6 +1,6 @@
 {
   "baseURL": "https://clic.xtec.cat/repo/",
-  "projectsBaseURL": "https://clic.xtec.cat/",
+  "projectsBaseURL": "https://clic.xtec.cat/projects/",
   "languages": [
     {"id": "en", "name": "English"},
     {"id": "ca", "name": "català"},

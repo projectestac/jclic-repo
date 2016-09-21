@@ -44,11 +44,11 @@
       #dialog {
         max-width: 700px;
       }
-      
-      #shareDlg {        
+
+      #shareDlg {
         max-width: 700px;
       }
-      
+
       paper-dialog h2 {
         white-space: normal;
       }
@@ -84,24 +84,24 @@
       .vertical-section {
         background-color: white;
         padding: 12px;
-        margin: 0 12px 12px 12px;        
+        margin: 0 12px 12px 12px;
 
         @apply(--shadow-elevation-2dp);
       }
-      
+
       @media (min-width: 601px) {
-        #shareDlg {        
+        #shareDlg {
           min-width: 500px;
-        }              
+        }
       }
-            
+
     </style>
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-      <h2>[[prj.title]]</h2>      
+      <h2>[[prj.title]]</h2>
       <paper-dialog-scrollable>
         <img class="cover" src="[[imgSrc]]" on-tap="_tapPlay"/>
-        <p class="author">[[prj.author]]</p>    
-        <p class="school">[[prj.school]]</p>    
+        <p class="author">[[prj.author]]</p>
+        <p class="school">[[prj.school]]</p>
         <p class="description" id="description"></p>
         <table class="dades">
           <tr><td class="label"><span>[[labels.languages]]</span>:</td><td>[[fields.languages]]</td></tr>
@@ -110,7 +110,7 @@
           <tr><td class="label"><span>[[labels.date]]</span>:</td><td>[[prj.date]]</td></tr>
           <tr><td class="label"><span>[[labels.license]]</span>:</td><td id="license"></td></tr>
         </table>
-      </paper-dialog-scrollable>      
+      </paper-dialog-scrollable>
       <div class="buttons">
         <paper-icon-button mini icon="av:play-circle-filled" title="[[labels.playText]]" id="play" on-tap="_tapPlay"></paper-icon-button>
         <!-- paper-button id="play" icon="av:play-arrow" title="[[labels.playText]]" on-tap="_tapPlay">[[labels.play]]</paper-button -->
@@ -153,19 +153,19 @@
                 <paper-radio-button name="full">100%</paper-radio-button>
                 <span class="flex"></span>
               </paper-radio-group>
-            </div>        
+            </div>
           </div>
           <div class ="vertical-section">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
               <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyMoodleLink"></paper-icon-button>
             </paper-input>
-          </div>          
+          </div>
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <span class="flex"></span>        
+        <span class="flex"></span>
         <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
-      </div>      
+      </div>
     </paper-dialog>
 
   </template>
@@ -284,7 +284,7 @@ Polymer({
     return this.baseUrl + 'player.html?' + this.prj.path + '/' + this.prj.mainFile;
   },
   computeLinkForMoodle: function () {
-    return this.projectsBaseUrl + this.projectsPath + '/' + this.prj.path + '/' + this.prj.mainFile;
+    return this.projectsBaseUrl + this.prj.path + '/' + this.prj.mainFile;
   },
   computeEmbedCode: function () {
     var w, h;
