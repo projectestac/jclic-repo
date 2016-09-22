@@ -1,5 +1,6 @@
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <!-- build:js ../../bower_components/clipboard.js/clipboard.js -->
 <script src="../../bower_components/clipboard.js/clipboard.js"></script>
 <!-- endbuild -->
@@ -95,6 +96,10 @@
         }
       }
 
+      .moodle-logo {
+        height: 18pt;
+      }
+
     </style>
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[prj.title]]</h2>
@@ -156,6 +161,7 @@
             </div>
           </div>
           <div class ="vertical-section">
+            <img src="moodle-logo.svg" class="moodle-logo">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
               <paper-icon-button suffix icon="content-copy" title="[[labels.copy]]" on-tap="_copyMoodleLink"></paper-icon-button>
             </paper-input>
