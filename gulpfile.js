@@ -175,7 +175,8 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+// was: gulp.task('serve', ['styles', 'elements', 'images'], function () {
+gulp.task('serve', ['styles', 'elements'], function () {
   browserSync({
     port: 5000,
     notify: false,
@@ -233,8 +234,9 @@ gulp.task('serve:build', ['build'], function () {
   });
 });
 
-// Build and serve the output from the distribution directory
-gulp.task('serve:dist', ['default'], function () {
+// Serve the output from the distribution directory
+// was: gulp.task('serve:dist', ['default'], function () {
+gulp.task('serve:dist', [], function () {
   browserSync({
     port: 5002,
     notify: false,
