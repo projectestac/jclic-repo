@@ -2,9 +2,9 @@
  * Basic repository for JClic projects
  * https://github.com/projectestac/jclic-repo
  * http://clic.xtec.cat/repo
- * 
- * (c) 2015 Catalan Educational Telematic Network (XTEC) 
- * 
+ *
+ * (c) 2015 Catalan Educational Telematic Network (XTEC)
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, version. This program is distributed in the hope that it will be
@@ -12,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
  * License for more details. You should have received a copy of the GNU General
  * Public License along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * Based on Polymer Starter Kit: https://github.com/PolymerElements/polymer-starter-kit
  * Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
  * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -143,7 +143,7 @@
           });
 
 
-  // Try to determine the preferred language          
+  // Try to determine the preferred language
   app.checkPreferredLanguage = function () {
     var result = -1;
     // Create an array to store possible values
@@ -177,6 +177,14 @@
     return result;
   };
 
+  // Calculates the maximum number of items simultaneously displayed on the current viewport
+  app.calcItemsPerScroll = function() {
+    var cardsH = Math.ceil($('#mainContainer').width() / 210);
+    var cardsV = Math.ceil($('#mainContainer').height() / 210) + 1;
+    app.itemsPerScroll = Math.max(20, cardsH * cardsV);
+    console.log(app.itemsPerScroll);
+    return app.itemsPerScroll;
+  };
 
   // Restore settings previously stored in `app.back`
   app.readBackSettings = function (reset) {
@@ -371,7 +379,7 @@
         case 1: // Title
           result = a.titleCmp.localeCompare(b.titleCmp);
           break;
-        case 2: // Author          
+        case 2: // Author
           result = a.authorCmp.localeCompare(b.authorCmp);
           break;
       }
@@ -468,11 +476,14 @@
       if ($projects.length > 0) {
         app.spinner = true;
         app.loading = true;
-        for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
-          var prj = app.matchProjects[app.lastItem++];
-          prj.loadTries = 10;
-          var $prjCard = app.createCard(prj);
-          $projects.append($prjCard);
+        if(app.lastItem < app.matchProjects.length) {
+          app.calcItemsPerScroll();
+          for (var i = 0; i < app.itemsPerScroll && app.lastItem < app.matchProjects.length; i++) {
+            var prj = app.matchProjects[app.lastItem++];
+            prj.loadTries = 10;
+            var $prjCard = app.createCard(prj);
+            $projects.append($prjCard);
+          }
         }
         app.loaded = true;
         app.loading = false;
@@ -623,7 +634,7 @@
 
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function () {
-    // imports are loaded and elements have been registered 
+    // imports are loaded and elements have been registered
 
     app.setLang(app.langIndex);
 
