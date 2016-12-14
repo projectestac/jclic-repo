@@ -182,7 +182,6 @@
     var cardsH = Math.ceil($('#mainContainer').width() / 210);
     var cardsV = Math.ceil($('#mainContainer').height() / 210) + 1;
     app.itemsPerScroll = Math.max(20, cardsH * cardsV);
-    console.log(app.itemsPerScroll);
     return app.itemsPerScroll;
   };
 
