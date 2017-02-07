@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
     <link rel="apple-touch-icon-precomposed" sizes="128x128" href="icons/icon-128.png">    
     <script>      
-      var JClicDataProject = 'projects/' + location.search.substring(1);
+      var JClicDataProject = 'projects/' + decodeURIComponent(location.search.substring(1));
     </script>
     <script type="text/javascript" src="https://clic.xtec.cat/dist/jclic.js/jclic.min.js"></script>    
   </head>
