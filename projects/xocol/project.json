@@ -17,7 +17,8 @@
     "en": "Social sciences, Languages"
   },
   "areaCodes": [
-    "soc", "lleng"
+    "soc",
+    "lleng"
   ],
   "levels": {
     "ca": "Infantil (3-6), Primària (6-12)",
@@ -25,7 +26,8 @@
     "en": "Kindergarten (3-6), Primary school (6-12)"
   },
   "levelCodes": [
-    "INF", "PRI"
+    "INF",
+    "PRI"
   ],
   "description": {
     "en": "<p>This project of activities is a tribute to \"the chocolate panel\", made 300 years ago to decorate the gardens of the palace of the Marquis of Alella (near Barcelona). This ceramic panel, very well preserved, tells us about customs and daily life in the eighteenth century.</p> \n<p>The project is organized in two main blocks:</p> \n<ol> \n <li>The look</li> \n <ul> \n  <li>About the panel</li> \n  <li>Characters</li> \n  <li>The place</li> \n  <li>Actions</li> \n  <li>Personal items</li> \n  <li>Puzzles</li> \n </ul> \n <li>Beyond the look</li> \n <ul> \n  <li>The passage of time</li> \n  <li>Customs</li> \n  <li>Society</li> \n  <li>Chocolate</li> \n  <li>From cocoa to chocolate</li> \n  <li>Chocolate in the world</li> \n  <li>Ancestors</li> \n  <li>To learn more...</li> \n </ul>\n</ol>",
@@ -49,5 +51,17 @@
     "ca",
     "es",
     "en"
+  ],
+  "files": [
+    "cover.png",
+    "project.json",
+    "thumb.png",
+    "jclic.js/test.jclic",
+    "jclic.js/index.html",
+    "jclic.js/test.jclic.js",
+    "jclic.js/favicon.ico",
+    "jclic.js/icon-72.png",
+    "jclic.js/icon-192.png",
+    "jclic.js/imsmanifest.xml"
   ]
 }

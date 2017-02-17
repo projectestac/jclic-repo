@@ -50,5 +50,17 @@
     "ca",
     "es",
     "en"
+  ],
+  "files": [
+    "cover.png",
+    "project.json",
+    "thumb.png",
+    "jclic.js/test.jclic",
+    "jclic.js/index.html",
+    "jclic.js/test.jclic.js",
+    "jclic.js/favicon.ico",
+    "jclic.js/icon-72.png",
+    "jclic.js/icon-192.png",
+    "jclic.js/imsmanifest.xml"
   ]
 }
