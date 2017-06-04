@@ -1,0 +1,161 @@
+<!--
+  File    : projects-selector.html
+  Created : 18/04/2017
+  By      : Francesc Busquets <francesc@gmail.com>
+
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+  
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+  
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="shared-icons.html">
+
+<!--
+
+This component provides user input controls for searching specific content in the repository of JClic projects.
+The search criteria is dynamically stored in a compound object called `filter`, usually provided by `repo-data`.
+Changes in this object should trigger a refresh in the main projects showcase.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property       | Description                          | Default
+----------------------|--------------------------------------|----------
+`--search-button`     | Mixin applied to the "Search" button | `{}`
+`--projects-selector` | Mixin applied to the selector        | `{}`
+
+-->
+
+<dom-module id="projects-selector">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding: 1em;
+        @apply --projects-selector;
+      }
+
+      paper-dropdown-menu-light {
+        width: 100%;
+        --paper-item-min-height: 2em;
+        --paper-item: {
+          cursor: pointer;
+        }
+      }
+
+      #searchBtn {
+        margin-top: 15px;
+        margin-left: 0;
+        background-color: var(--dark-primary-color);
+        color: var(--text-primary-color);
+        @apply --search-button;
+      }
+
+      h4 {
+        color: var(--secondary-text-color);
+        margin-bottom: 0;
+      }
+    </style>
+
+    <h4>[[labels.searchTitle]]</h4>
+
+    <paper-dropdown-menu-light id="dropLang" label="[[labels.languages]]">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="_updateFilter">
+        <template is="dom-repeat" items="[[selectOptions.languages]]">
+          <paper-item data-type="language" data-val$="[[item.val]]">[[item.text]]</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu-light>
+
+    <paper-dropdown-menu-light id="dropSubj" label="[[labels.subjects]]">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="_updateFilter">
+        <template is="dom-repeat" items="[[selectOptions.subjects]]">
+          <paper-item data-type="subject" data-val$="[[item.val]]">[[item.text]]</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu-light>
+
+    <paper-dropdown-menu-light id="dropLev" label="[[labels.levels]]">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="_updateFilter">
+        <template is="dom-repeat" items="[[selectOptions.levels]]">
+          <paper-item data-type="level" data-val$="[[item.val]]">[[item.text]]</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu-light>
+
+    <paper-input id="title" class="textInput" label="[[labels.title]]" value="{{filter.title}}" on-change="_updateFilter"></paper-input>
+    <paper-input id="author" class="textInput" label="[[labels.author]]" value="{{filter.author}}" on-change="_updateFilter"></paper-input>
+
+    <paper-button raised class="search" on-tap="_updateFilter" id="searchBtn">
+      <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
+      <span>[[labels.search]]</span>
+    </paper-button>
+
+  </template>
+
+  <script>
+    class ProjectsSelector extends Polymer.MutableData(Polymer.Element) {
+      static get is() { return 'projects-selector' }
+      static get properties() {
+        return {
+          // Current set of labels, titles and messages, translated into the current app language. Initialized and updated in `repo-data`.
+          labels: Object,
+          // Current choices of languages, subjects and levels, expresed in the current language and used to filter the main project list. Initialized and updated in `repo-data`.
+          selectOptions: Object,
+          // Current set of filter and search options. Also initialized and updated in `repo-data`.
+          filter: {
+            type: Object,
+            notify: true,
+          },
+        }
+      }
+
+      // Called on changes in any control. Updates selected members of the `filter` object
+      _updateFilter(e) {
+        if (this.filter && e && e.detail && e.detail.item && e.detail.item.dataset.type)
+          this.filter[e.detail.item.dataset.type] = e.detail.item.dataset.val || '*'
+        this.notifyPath('filter')
+      }
+    }
+
+    window.customElements.define(ProjectsSelector.is, ProjectsSelector)
+  </script>
+</dom-module>

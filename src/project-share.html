@@ -1,0 +1,218 @@
+<!--
+  File    : project-share.html
+  Created : 03/05/2017
+  By      : Francesc Busquets <francesc@gmail.com>
+
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+  
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+  
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="shared-icons.html">
+<link rel="import" href="social-buttons.html">
+
+<!-- build:js ../bower_components/clipboard.js/clipboard.js -->
+<script src="../bower_components/clipboard.js/clipboard.js"></script>
+<!-- endbuild -->
+
+<!-- 
+  WARNING: File images/
+
+
+-->
+
+<dom-module id="project-share">
+  <template>
+    <style include="shared-styles">
+       :host {
+        --paper-input-container-input-color: var(--secondary-text-color);
+        @apply --project-share;
+      }
+
+      #dialog {
+        max-width: 500px;
+      }
+
+      @media (min-width: 601px) {
+        #dialog {
+          min-width: 500px;
+        }
+      }
+
+      paper-input {
+        margin-top: 0;
+      }
+
+      .vertical-section {
+        @apply --shadow-elevation-2dp;
+        padding: 0 10pt 10pt 10pt;
+        margin: 10pt 0;
+      }
+
+      .horizontal-section-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .moodle-logo {
+        height: 18pt;
+        margin-top: 8px;
+      }
+      /* Workaround for https://github.com/PolymerElements/paper-toast/issues/88 */
+
+      .toast-msg {
+        position: relative;
+        margin-top: 0.3em;
+        top: 50%;
+        left: 50%;
+        float: left;
+        transform: translate(-50%, 50%);
+      }
+    </style>
+
+    <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
+      <paper-dialog-scrollable>
+        <div class="vertical-section-container">
+          <div class="vertical-section">
+            <paper-input id="linkToActivities" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-tap="_copy"></paper-icon-button>
+            </paper-input>
+            <social-buttons settings="[[settings]]" url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
+          </div>
+          <div class="vertical-section">
+            <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-tap="_copy"></paper-icon-button>
+            </paper-input>
+            <social-buttons settings="[[settings]]" url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
+          </div>
+          <div class="vertical-section">
+            <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-tap="_copy"></paper-icon-button>
+            </paper-input>
+            <div class="horizontal-section-container">
+              <paper-radio-group selected="{{embedSize}}">
+                <paper-radio-button name="small">640x390</paper-radio-button>
+                <paper-radio-button name="medium">800x600</paper-radio-button>
+                <paper-radio-button name="full">100%</paper-radio-button>
+              </paper-radio-group>
+            </div>
+          </div>
+          <div class="vertical-section">
+            <!-- WARNING: "img src" paths are always relative to the root document, not to this component! -->
+            <img src="images/moodle-logo.png" class="moodle-logo">
+            <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-tap="_copy"></paper-icon-button>
+            </paper-input>
+          </div>
+        </div>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <span class="flex"></span>
+        <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
+      </div>
+      <paper-toast id="copied">
+        <div class="toast-msg">[[labels.copied]]</div>
+      </paper-toast>
+    </paper-dialog>
+  </template>
+
+  <script>
+    class ProjectShare extends Polymer.Element {
+      static get is() { return 'project-share'; }
+
+      static get properties() {
+        return {
+          settings: Object,
+          project: Object,
+          repoRoot: String,
+          lang: String,
+          labels: Object,
+          // URL used as a base for absolute references to project's components
+          baseUrl: String,          
+          title: String,
+          linkToActivities: String,
+          linkToPage: String,
+          linkForMoodle: String,
+          imgFullPath: String,
+          embedCode: String,
+          embedSize: {
+            type: String,
+            value: 'medium',
+          }
+        }
+      }
+
+      static get observers() {
+        return [
+          '_projectChanged(project, repoRoot)',
+          '_embedChanged(linkToActivities, embedSize)'
+        ];
+      }
+
+      _projectChanged(prj, repoRoot) {
+        this.title = prj ? prj.title : '';
+        this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : '';
+        this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : '';
+        this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : '';
+        this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : '';
+      }
+
+      _embedChanged(link, size) {
+        const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 };
+        this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : '';
+      }
+
+      _copy(ev) {
+        if (ev.target && ev.target.dataset.value) {
+          if (this.$.copied.opened)
+            this.$.copied.close();
+          this.$.copied.noCancelOnOutsideClick = false;
+          this.$.copied.positionTarget = ev.target;
+          clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied));
+        }
+      }
+
+    }
+
+    window.customElements.define(ProjectShare.is, ProjectShare);
+  </script>
+</dom-module>

@@ -1,0 +1,164 @@
+<!--
+  File    : user-settings.html
+  Created : 24/05/2017
+  By      : Francesc Busquets <francesc@gmail.com>
+
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+  
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+  
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="user-settings">
+  <template>
+    <style include="shared-styles">
+       :host {
+        @apply --user-settings;
+      }
+
+      paper-material {
+        display: block;
+        padding: 10pt;
+        margin-top: 10pt;
+      }
+
+      #orderMenu {
+        margin-bottom: 10pt;
+      }
+
+      paper-item {
+        cursor: pointer;
+      }
+
+      paper-item .iron-selected {
+        background-color: --dark-primary-color;
+      }
+
+      paper-material > h4 {
+        margin-top: 0;
+        margin-bottom: 8pt;
+      }
+
+    </style>
+
+    <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2>[[labels.settings]]</h2>
+      <paper-dialog-scrollable>
+        <paper-material elevation="1">
+          <paper-toggle-button checked="{{_fullScreen}}" disabled="[[_noFullScreenAvailable]]">
+            <span>[[labels.fullScreen]]</span>
+          </paper-toggle-button>
+        </paper-material>
+        <paper-material elevation="1">
+          <h4>[[labels.orderBy]]:</h4>
+          <paper-listbox id="orderMenu" selected="{{_order}}">
+            <template is="dom-repeat" items="[[orderOptions]]">
+              <paper-item id="[[item]]">[[_getLabel(labels, item)]]</paper-item>
+            </template>
+          </paper-listbox>
+          <paper-toggle-button checked="{{_orderInv}}">
+            <span>[[labels.inverse]]</span>
+          </paper-toggle-button>
+        </paper-material>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-confirm on-click="_ok">[[labels.ok]]</paper-button>
+        <paper-button dialog-dismiss on-click="_cancel">[[labels.cancel]]</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    class UserSettings extends Polymer.MutableData(Polymer.Element) {
+      static get is() { return 'user-settings'; }
+
+      static get properties() {
+        return {
+          // Control labels, already localized
+          labels: Object,
+          _fullScreen: Boolean,
+          _order: Number,
+          _orderInv: Boolean,
+          _noFullScreenAvailable: {
+            type: Boolean,
+            value: () => !document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled,
+          },
+          orderOptions: {
+            type: Object,
+            value: () => ['date', 'title', 'author'],
+          },
+          // Ordering criteria: {field: '', inv: false}
+          ordering: {
+            type: Object,
+            notify: true,
+          },
+          fullScreenPlayer: {
+            type: Boolean,
+            notify: true,
+          },
+        }
+      }
+
+      _getLabel(labels, item) {
+        return labels ? (labels[item] || item) : '';
+      }
+
+      open() {
+        this._fullScreen = this.fullScreenPlayer;
+        this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0;
+        this._orderInv = this.ordering ? this.ordering.inv || false : false;
+        this.$.dialog.open();
+      }
+
+      _cancel() {
+        this.$.dialog.close();
+      }
+
+      _ok() {
+        this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen;
+        this.ordering.field = this.orderOptions[this._order];
+        this.ordering.inv = this._orderInv;
+        this.notifyPath('ordering');
+        this.$.dialog.close();
+      }
+    }
+
+    window.customElements.define(UserSettings.is, UserSettings);
+  </script>
+</dom-module>

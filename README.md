@@ -4,10 +4,9 @@
 This is a single-page HTML5 application used to publish repositories of JClic projects. A big instance of jclic-repo is
 currently running at [http://clic.xtec.cat/repo]
 
-Built with [Polymer web components](https://www.polymer-project.org/1.0/) upon
-[Polymer Starter Kit](https://developers.google.com/web/tools/polymer-starter-kit/)
+Built with [Polymer 2.0](https://www.polymer-project.org/) web components
 
-## How to build jclic-repo
+## How to check and build jclic-repo
 
 jclic-repo uses [Node.js](https://nodejs.org/) modules encapsulated in
 [npm](https://www.npmjs.com/) packages. First of all, you must have Node.js
@@ -17,49 +16,48 @@ on your system.
 If you work with Debian/Ubuntu, it's convenient to replace the original node.js packages for those provided by 
 [NodeSource](https://github.com/nodesource/distributions).
 
-**jclic-repo** was developed with Node.js Version 0.12, packaged by NodeSource.
+**jclic-repo** was developed with Node.js Version 6.10, packaged by NodeSource.
 
 To update `npm` to the latest version, run:
 
 ```
-sudo npm install npm -g
+sudo npm install -g npm
 ```
 
-We also use [Gulp](http://gulpjs.com/) and [Bower](http://bower.io/) for package dependencies amd automation of building tasks.
+We also use [Polymer CLI](https://www.polymer-project.org/2.0/docs/tools/polymer-cli) and [Bower](http://bower.io/) for package dependencies amd automation of building tasks.
 You must globally install these packages running:
 
 ```
-sudo npm install -g gulp bower
+sudo npm install -g bower polymer-cli
 ```
 
 To install the remaining packages, just go to the project's root directory and run:
 
 ```
-npm install
 bower install
 ```
 
-This will install Polymer elements, [jclic.js](https://github.com/projectestac/jclic.js) and other required packages
-into `node_modules` and `bower_components`
+This will install the Polymer web components and other required packages into `bower_components`
 
 The installation process can be long, so be patient.
 
-To build jclic-repo, just run:
-
-```
-gulp
-```
-
-This will generate the final files, ready for production, into the `dist` folder.
-
-You must set-up a JClic projects repository tree in `root/projects`. There is a demo tree on
+You must set-up a JClic projects repository tree in `/projects`. There is a demo tree on
 the [samples](https://github.com/projectestac/jclic-repo/tree/samples) branch. Please checkout this
-branch on another directory and symlink `root/projects` to it.
+branch on another directory and symlink `dist/default/projects` to it.
+
+From jclic-repo, launch:
+
+```
+cd ..
+git clone https://github.com/projectestac/jclic-repo.git --branch samples --single-branch jclic-repo-samples
+cd jclic-repo
+ln -s ../jclic-repo/samples/projects .
+```
 
 To test the module and see the demo in your browser, just launch the test server running:
 
 ```
-gulp serve:dist
+polymer serve
 ```
 
 The main parameters of the application (like title, language and the location of the `projects` folder)
@@ -72,4 +70,12 @@ title, authors, languages, icons, main file...) about them.
 Every project folder must have a `project.json` file with a full description. See  the [`samples`](../../tree/samples/projects)
 branch for examples of `project.json` and `projects.json` files.
 
-For more detailed instructions please refer to the [readme](https://github.com/PolymerElements/polymer-starter-kit) of Polymer Starter Kit.
+To build jclic-repo, just run:
+
+```
+polymer build
+```
+
+This will generate the final files, ready for production, into the `dist/default` folder. Note that the
+parameter `index.path` of `main.json` must point to a valid JClic repository folder.
+

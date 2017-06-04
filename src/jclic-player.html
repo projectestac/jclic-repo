@@ -1,0 +1,101 @@
+<!--
+  File    : jclic-player.html
+  Created : 18/04/2017
+  By      : Francesc Busquets <francesc@gmail.com>
+
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+  
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+  
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<!-- Load the latest JClic.js package from unpkg.com -->
+<script src="https://unpkg.com/jclic/dist/jclic.min.js"></script>
+<!-- script src="https://unpkg.com/jclic/dist/jclic.js"></script -->
+<!-- script src="../jclic.js"></script -->
+
+<dom-module id="jclic-player">
+  <template>
+    <style include="shared-styles">
+       :host {
+        @apply --jclic-player;
+        display: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+      }
+    </style>
+    <div id="player"></div>
+  </template>
+
+  <script>
+    class JClicPlayerElement extends Polymer.Element {
+      static get is() { return 'jclic-player'; }
+
+      static get properties() {
+        return {
+          options: Object,
+          fullScreen: Boolean,
+          project: {
+            type: String,
+            observer: '_setProject',
+          },
+          _currentPlayer: {
+            type: Object,
+            value: null,
+            reflectToAttribute: false,
+            notify: false,
+          }
+        }
+      }
+
+      _setProject(prj) {
+        if (prj) {
+          this.style.display = 'block';
+          this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null);
+          if (this.fullScreen)
+            this._currentPlayer.skin.setScreenFull(true);
+        } else {
+          this.style.display = 'none';
+          if (this._currentPlayer)
+            this._currentPlayer.reset();
+        }
+      }
+    }
+
+    window.customElements.define(JClicPlayerElement.is, JClicPlayerElement);
+  </script>
+</dom-module>
