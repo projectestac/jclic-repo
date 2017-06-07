@@ -1,0 +1,91 @@
+<!--
+  File    : project-download.html
+  Created : 07/06/2017
+  By      : Francesc Busquets <francesc@gmail.com>
+
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+  
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+  
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<script src="../bower_components/jszip/jszip.js"></script>
+<script src="../bower_components/jszip-utils/jszip-utils.js"></script>
+<script src="../bower_components/file-saver/file-saver.js"></script>
+
+<link rel="import" href="shared-styles.html">
+
+<!--
+
+....
+
+-->
+
+<dom-module id="project-download">
+  <template>
+    <style include="shared-styles">
+       :host {
+        @apply --project-download;
+      }
+    </style>
+
+    <div id="log">
+
+    </div>
+
+  </template>
+
+  <script>
+    class ProjectDownload extends Polymer.Element {
+      static get is() { return 'project-download'; }
+
+      static get properties() {
+        return {
+          // The controller object, usually pointing to `jclic-repo`, used to launch the JClic player on request
+          controller: Object,
+          // Object containing the data of the JClic project currently displayed on this card
+          project: {
+            type: Object,
+            observer: '_setProject'
+          },
+          // ----------------------------------------------------------------
+          // Properties used by this component but initialized in `repo-data`
+          // ----------------------------------------------------------------
+          // Relative path to the folder where the JClic projects of this repository are located
+          repoRoot: String,
+          // Current set of labels, titles and messages, translated into the current app language
+          labels: Object,
+        }
+      }
+    }
+
+    window.customElements.define(ProjectDownload.is, ProjectDownload);
+  </script>
+</dom-module>

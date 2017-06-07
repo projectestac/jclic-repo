@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "version": "0.3.1",
-  "homepage": "http://projectestac.github.io/jclic-repo",  
+  "homepage": "http://projectestac.github.io/jclic-repo",
   "authors": [
     "Francesc Busquets <francesc@gmail.com>"
   ],
@@ -48,7 +48,10 @@
     "clipboard.js": "^0.3.3",
     "paper-spinner": "PolymerElements/paper-spinner",
     "iron-scroll-threshold": "PolymerElements/iron-scroll-threshold#^2.0.0",
-    "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.0.0"
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.0.0",
+    "jszip": "Stuk/jszip#^3.1.3",
+    "jszip-utils": "Stuk/jszip-utils#^0.0.2",
+    "file-saver": "^1.3.3"
   },
   "resolutions": {
     "polymer": "^2.0.0"
