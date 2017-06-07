@@ -54,6 +54,7 @@
 
       paper-material {
         display: block;
+        background-color: #fff;
         padding: 10pt;
         margin-top: 10pt;
       }
@@ -67,12 +68,16 @@
       }
 
       paper-item .iron-selected {
-        background-color: --dark-primary-color;
+        background-color: var(--dark-primary-color);
       }
 
       paper-material > h4 {
         margin-top: 0;
         margin-bottom: 8pt;
+      }
+
+      paper-listbox {
+        background-color: var(--light-primary-color);
       }
 
     </style>
@@ -98,8 +103,8 @@
         </paper-material>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <paper-button dialog-confirm on-click="_ok">[[labels.ok]]</paper-button>
-        <paper-button dialog-dismiss on-click="_cancel">[[labels.cancel]]</paper-button>
+        <paper-button raised dialog-confirm on-click="_ok">[[labels.ok]]</paper-button>
+        <paper-button raised dialog-dismiss on-click="_cancel">[[labels.cancel]]</paper-button>
       </div>
     </paper-dialog>
   </template>
