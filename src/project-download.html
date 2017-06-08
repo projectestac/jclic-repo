@@ -35,10 +35,14 @@
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<script src="../bower_components/jszip/jszip.js"></script>
-<script src="../bower_components/jszip-utils/jszip-utils.js"></script>
-<script src="../bower_components/file-saver/file-saver.js"></script>
+<script src="../bower_components/jszip/dist/jszip.js"></script>
+<script src="../bower_components/jszip-utils/dist/jszip-utils.js"></script>
+<script src="../bower_components/file-saver/FileSaver.js"></script>
 
 <link rel="import" href="shared-styles.html">
 
@@ -54,12 +58,31 @@
        :host {
         @apply --project-download;
       }
+
+      #dialog {
+        max-width: 500px;
+      }
+
+      @media (min-width: 601px) {
+        #dialog {
+          min-width: 500px;
+        }
+      }
     </style>
 
-    <div id="log">
+    <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2><span>[[labels.download]]</span> "<span>[[project.title]]</span>"</h2>
+      <paper-dialog-scrollable>
+        <div id="log">
 
-    </div>
-
+        </div>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button id="cancelBtn" raised on-click="_cancelDownload">[[labels.cancel]]</paper-button>
+        <paper-button id="downloadBtn" raised on-click="_downloadFile">Descarrega el fitxer</paper-button>
+        <paper-icon-button id="closeBtn" icon="close" title="[[labels.close]]" on-click="_cancelDownload"></paper-icon-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
@@ -68,22 +91,73 @@
 
       static get properties() {
         return {
-          // The controller object, usually pointing to `jclic-repo`, used to launch the JClic player on request
-          controller: Object,
           // Object containing the data of the JClic project currently displayed on this card
-          project: {
-            type: Object,
-            observer: '_setProject'
-          },
+          project: Object,
+          zipFile: Object,
+          cancelFlag: Boolean,
           // ----------------------------------------------------------------
           // Properties used by this component but initialized in `repo-data`
           // ----------------------------------------------------------------
           // Relative path to the folder where the JClic projects of this repository are located
           repoRoot: String,
+          baseUrl: String,
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
         }
       }
+
+      static get observers() {
+        return [
+          '_projectSet(project)',
+          '_fileChanged(zipFile)'
+        ];
+      }
+
+      _projectSet(project) {
+        if (project)
+          this.zipFile = null
+      }
+
+      prepareZipFile() {
+        if (this.project) {
+          // Start downloading
+          this._log('Start!')
+          this._log(`Preparing file for "${this.project.title}"`)
+          setTimeout(() => {
+            this.zipFile = 'some data'
+          }, 5000)
+        }
+      }
+
+      _fileChanged(zipFile) {
+        if (zipFile) {
+          this.$.cancelBtn.style.display = 'none'
+          this.$.downloadBtn.style.display = 'flex'
+        } else {
+          this.$.cancelBtn.style.display = 'flex'
+          this.$.downloadBtn.style.display = 'none'
+        }
+      }
+
+      _cancelDownload() {
+        this.$.dialog.close()
+        this.cancelFlag = true
+        this.zipFile = null
+      }
+
+      _downloadFile() {
+        if (this.zipFile) {
+          window.saveAs(new Blob([this.zipFile], {type: "text/plain;charset=utf-8"}), 'test.txt')
+          this._cancelDownload()
+        }
+      }
+
+      _log(txt) {
+        const p = document.createElement('p')
+        p.textContent = txt
+        this.$.log.appendChild(p)
+      }
+
     }
 
     window.customElements.define(ProjectDownload.is, ProjectDownload);

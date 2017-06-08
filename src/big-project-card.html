@@ -44,6 +44,7 @@
 <link rel="import" href="shared-icons.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="project-share.html">
+<link rel="import" href="project-download.html">
 
 <!--
 
@@ -147,9 +148,10 @@ Custom property      | Description                       | Default
       </div>
     </paper-dialog>
 
-    <!-- Additional dialog with sharing options-->
+    <!-- Additional dialogs for sharing and downloading the project -->
     <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
-
+    <project-download id="downloadDlg" project="[[project]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
+    
   </template>
 
   <script>
@@ -218,8 +220,10 @@ Custom property      | Description                       | Default
 
       // Downloads the JClic project in SCORM format (not yet implemented!)
       _tapDownload() {
-        console.log(`Downloading project ${this.project.title}`);
-        alert('Downloading is not yet implemented!');
+        if(this.project){
+          this.$.downloadDlg.$.dialog.open();
+          this.$.downloadDlg.prepareZipFile();
+        }
       }
 
       // Redirects the navigation to the project's page in the legacy clicZone
