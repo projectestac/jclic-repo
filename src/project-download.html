@@ -39,6 +39,7 @@
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-request.html">
 
 <script src="../bower_components/jszip/dist/jszip.js"></script>
 <script src="../bower_components/jszip-utils/dist/jszip-utils.js"></script>
@@ -61,6 +62,17 @@
 
       #dialog {
         max-width: 500px;
+      }
+
+      #log {
+        height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      #log>p {
+        line-height: 1;
+        margin: 8px;
       }
 
       @media (min-width: 601px) {
@@ -93,7 +105,9 @@
         return {
           // Object containing the data of the JClic project currently displayed on this card
           project: Object,
+          // zipFile is a BLOB
           zipFile: Object,
+          zipFileName: String,
           cancelFlag: Boolean,
           // ----------------------------------------------------------------
           // Properties used by this component but initialized in `repo-data`
@@ -119,13 +133,58 @@
       }
 
       prepareZipFile() {
+        const logger = this._log.bind(this);
         if (this.project) {
+          const projectPath = `${this.repoRoot || '.'}/${this.project.path}/project.json`
+          if (!this.project.mainFile || !this.project.path) {
+            logger(`ERROR: Invalid project file: ${projectPath}`)
+            return;
+          }
           // Start downloading
-          this._log('Start!')
-          this._log(`Preparing file for "${this.project.title}"`)
-          setTimeout(() => {
-            this.zipFile = 'some data'
-          }, 5000)
+          logger(`Preparing SCORM file for "${this.project.title}"`)
+          const parts = projectPath.split('/')
+          this.zipFileName = `${parts[parts.length - 2]}.scorm.zip`
+          const avoidDir = ProjectDownload.buildRegExp(ProjectDownload.getBasePath(this.project.mainFile), 'g')
+          let files = this.project.files;
+          const objects = [];
+          const basePath = ProjectDownload.getBasePath(projectPath);
+          // Make a normalized copy of 'project'
+          const prj = JSON.parse(JSON.stringify(this.project).replace(avoidDir, ''))
+          // Delete fields added by repo-data
+          delete prj.path
+          delete prj.titleCmp
+          delete prj.authorCmp
+          delete prj.dateCmp
+          // Delete fields related to clicZone and references to the old JClic format
+          delete prj.zipFile;
+          delete prj.instFile;
+          delete prj.clicZoneId;
+          delete prj.clicZoneURL;
+          delete prj.clicZoneAppletURL;
+          // Remove 'project.json' from the list of files to be copied
+          files = this.project.files.filter(f => f !== 'project.json');
+          // Add the modified 'project.json' to the array of objects to be placed into the ZIP file
+          objects.push({
+            name: 'project.json',
+            content: JSON.stringify(prj, null, ' ')
+          });
+          // The real work starts here: download files and add them to a 'zip' object
+          ProjectDownload.buildZip(basePath, files, objects, logger, avoidDir)
+            .then(
+            // resolve returns an array with the same "zip" object repeated multiple times
+            zip => {
+              zip[0].generateAsync({ type: 'blob' }).then(
+                // On success
+                blob => {
+                  logger('ZIP file successfully generated!');
+                  this.zipFile = blob;
+                },
+                // On error
+                err => logger(`Error generating ZIP file: ${err}`)
+              );
+            },
+            // reject - Error code received
+            err => logger(`Error collecting files: ${err}`))
         }
       }
 
@@ -147,15 +206,63 @@
 
       _downloadFile() {
         if (this.zipFile) {
-          window.saveAs(new Blob([this.zipFile], {type: "text/plain;charset=utf-8"}), 'test.txt')
+          window.saveAs(this.zipFile, this.zipFileName)
           this._cancelDownload()
         }
       }
 
       _log(txt) {
+        const log = this.$.log
         const p = document.createElement('p')
         p.textContent = txt
-        this.$.log.appendChild(p)
+        log.appendChild(p)
+        setTimeout(() => p.scrollIntoView(), 100)
+      }
+
+      // Utility functions
+
+      // Gets the base path of the given file path (absolute or full URL). This base path always ends
+      // with `/`, meaning it can be concatenated with relative paths without adding a separator.
+      static getBasePath(path) {
+        const p = path.lastIndexOf('/')
+        return p >= 0 ? path.substring(0, p + 1) : ''
+      }
+
+      // Builds a RegExp object escaping the provided expression
+      static buildRegExp(s, options) {
+        return new RegExp(s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), options);
+      }
+
+      static buildZip(baseURL, files, objects, logger, avoidDir) {
+        const zip = new JSZip()
+        avoidDir = avoidDir || ''
+        const handlers = []
+
+        if (files)
+          files.forEach(file => {
+            handlers.push(new Promise((resolve, reject) => {
+              logger(`Loading ${file}`)
+              JSZipUtils.getBinaryContent(baseURL + file, (err, data) => {
+                if (err)
+                  reject(err)
+                else {
+                  logger(`File "${file}" has been loaded`)
+                  zip.file(file.replace(avoidDir, ''), data, { binary: true })
+                  resolve(zip)
+                }
+              });
+            }));
+          });
+
+        if (objects)
+          objects.forEach(obj => handlers.push(new Promise((resolve /*, reject*/) => {
+            logger(`Adding ${obj.name} to the zip file`)
+            zip.file(obj.name.replace(avoidDir, ''), obj.content, obj.options || {})
+            resolve(zip)
+          })));
+
+        // Returns a promise
+        return Promise.all(handlers)
       }
 
     }
