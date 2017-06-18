@@ -114,7 +114,6 @@
           // zipFile is a BLOB
           zipFile: Object,
           zipFileName: String,
-          cancelFlag: Boolean,
           // ----------------------------------------------------------------
           // Properties used by this component but initialized in `repo-data`
           // ----------------------------------------------------------------
@@ -123,6 +122,7 @@
           baseUrl: String,
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
+          _xhrs: Object,
         }
       }
 
@@ -169,16 +169,55 @@
           delete prj.clicZoneAppletURL;
           // Remove 'project.json' from the list of files to be copied
           files = this.project.files.filter(f => f !== 'project.json');
+
           // Add the modified 'project.json' to the array of objects to be placed into the ZIP file
           objects.push({
             name: 'project.json',
             content: JSON.stringify(prj, null, ' ')
           });
+
           // The real work starts here: download files and add them to a 'zip' object
-          ProjectDownload.buildZip(basePath, files, objects, this, avoidDir)
+          const zip = new JSZip()
+          this._xhrs = []
+          const promises = []
+
+          this._initProgress(files.length + objects.length)
+
+          files.forEach(file => {
+            let xhr
+            var filePromise = new Promise((resolve, reject) => {
+              this._log(`Loading ${file}`)
+              xhr = ProjectDownload.getBinaryContent(basePath + file, (err, data) => {
+                if (err)
+                  reject(err)
+                else {
+                  this._log(`File "${file}" has been loaded`)
+                  zip.file(file.replace(avoidDir, ''), data, { binary: true })
+                  this._incProgress()
+                  resolve(zip)
+                }
+              });
+              if (this._xhrs)
+                this._xhrs.push(xhr);
+            });
+            promises.push(filePromise);
+          });
+
+          objects.forEach(obj => {
+            const objPromise = new Promise((resolve /*, reject*/) => {
+              this._log(`Adding ${obj.name} to the zip file`)
+              zip.file(obj.name.replace(avoidDir, ''), obj.content, obj.options || {})
+              this._incProgress()
+              resolve(zip)
+            })
+            promises.push(objPromise);
+          });
+
+          Promise.all(promises)
             .then(
-            // resolve returns an array with the same "zip" object repeated multiple times
             zips => {
+              this._xhrs = null;
+              // resolve returns an array with the same "zip" object repeated multiple times
               zips[0].generateAsync({ type: 'blob' }).then(
                 // On success
                 blob => {
@@ -186,11 +225,16 @@
                   this.zipFile = blob;
                 },
                 // On error
-                err => this._log(`Error generating SCORM file: ${err}`)
+                err => {
+                  this._log(`Error generating SCORM file: ${err}`)
+                }
               );
             },
             // reject - Error code received
-            err => this._log(`Error downloading the project components: ${err}`))
+            err => {
+              this._xhrs = null
+              this._log(`Error downloading project components: ${err}`)
+            })
         }
       }
 
@@ -206,11 +250,28 @@
 
       _cancelDownload() {
         this.$.dialog.close()
-        this.cancelFlag = true
+        this._cancelAllXhr()
+        var el = this.$.log
+        while (el.firstChild)
+          el.removeChild(el.firstChild)
+        this.$.log.innerHtml
         this.zipFile = null
+      }
 
-        // TODO: Implement calls to XMLHttpRequest.abort for each pending download promise
-
+      _cancelAllXhr() {
+        if (this._xhrs) {
+          this._xhrs.forEach(xhr => {
+            if (xhr.readyState < 4) {
+              try {
+                console.log(`Cancelling ${xhr}`)
+                xhr.abort();
+              } catch (err) {
+                console.log(`Error cancelling XHR: ${err}`)
+              }
+            }
+          })
+          this._xhrs = null
+        }
       }
 
       _downloadFile() {
@@ -251,42 +312,43 @@
         return new RegExp(s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), options);
       }
 
-      static buildZip(baseURL, files, objects, logger, avoidDir) {
-        const zip = new JSZip()
-        avoidDir = avoidDir || ''
-        const handlers = []
+      /**
+       * Taken from Stuart Knightley's JSZipUtils
+       * https://github.com/Stuk/jszip-utils
+       **/
+      static getBinaryContent(path, callback) {
+        let xhr = null;
+        try {
+          xhr = new XMLHttpRequest()
+          xhr.open('GET', path, true)
+          if ("responseType" in xhr)
+            xhr.responseType = "arraybuffer"
+          if (xhr.overrideMimeType)
+            xhr.overrideMimeType("text/plain; charset=x-user-defined")
 
-        logger._initProgress(files.length + objects.length)
-
-        if (files)
-          files.forEach(file => {
-            handlers.push(new Promise((resolve, reject) => {
-              logger._log(`Loading ${file}`)
-              JSZipUtils.getBinaryContent(baseURL + file, (err, data) => {
-                if (err)
-                  reject(err)
-                else {
-                  logger._log(`File "${file}" has been loaded`)
-                  zip.file(file.replace(avoidDir, ''), data, { binary: true })
-                  logger._incProgress()
-                  resolve(zip)
+          xhr.onreadystatechange = function (evt) {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200 || xhr.status === 0) {
+                let file = null
+                let err = null
+                try {
+                  // for xhr.responseText, the 0xFF mask is applied by JSZip
+                  file = xhr.response || xhr.responseText
+                } catch (e) {
+                  err = new Error(e)
                 }
-              });
-            }));
-          });
-
-        if (objects)
-          objects.forEach(obj => handlers.push(new Promise((resolve /*, reject*/) => {
-            logger._log(`Adding ${obj.name} to the zip file`)
-            zip.file(obj.name.replace(avoidDir, ''), obj.content, obj.options || {})
-            logger._incProgress()
-            resolve(zip)
-          })));
-
-        // Returns a promise
-        return Promise.all(handlers)
+                callback(err, file)
+              } else
+                callback(new Error("Ajax error for " + path + " : " + this.status + " " + this.statusText), null)
+            }
+          }
+          xhr.send()
+        } catch (e) {
+          xhr = null
+          callback(new Error(e), null)
+        }
+        return xhr
       }
-
     }
 
     window.customElements.define(ProjectDownload.is, ProjectDownload);
