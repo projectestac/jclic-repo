@@ -1,7 +1,8 @@
 {
   "logo": "logo.png",
   "index": {
-    "path": "projects",
+    "path": "https://clic.xtec.cat/projects",
+    "path-local": "projects",
     "file": "projects.json"
   },
   "baseURL": "https://clic.xtec.cat/repo/",

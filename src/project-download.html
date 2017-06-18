@@ -39,6 +39,7 @@
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-request.html">
 
 <script src="../bower_components/jszip/dist/jszip.js"></script>
@@ -75,6 +76,10 @@
         margin: 8px;
       }
 
+      paper-progress {
+        width: 100%;
+      }
+
       @media (min-width: 601px) {
         #dialog {
           min-width: 500px;
@@ -88,6 +93,7 @@
         <div id="log">
 
         </div>
+        <paper-progress id="progress"></paper-progress>
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button id="cancelBtn" raised on-click="_cancelDownload">[[labels.cancel]]</paper-button>
@@ -128,20 +134,20 @@
       }
 
       _projectSet(project) {
+        this._initProgress();
         if (project)
           this.zipFile = null
       }
 
       prepareZipFile() {
-        const logger = this._log.bind(this);
         if (this.project) {
           const projectPath = `${this.repoRoot || '.'}/${this.project.path}/project.json`
           if (!this.project.mainFile || !this.project.path) {
-            logger(`ERROR: Invalid project file: ${projectPath}`)
+            this._log(`ERROR: Invalid project file: ${projectPath}`)
             return;
           }
           // Start downloading
-          logger(`Preparing SCORM file for "${this.project.title}"`)
+          this._log(`Preparing SCORM file for "${this.project.title}"`)
           const parts = projectPath.split('/')
           this.zipFileName = `${parts[parts.length - 2]}.scorm.zip`
           const avoidDir = ProjectDownload.buildRegExp(ProjectDownload.getBasePath(this.project.mainFile), 'g')
@@ -169,22 +175,22 @@
             content: JSON.stringify(prj, null, ' ')
           });
           // The real work starts here: download files and add them to a 'zip' object
-          ProjectDownload.buildZip(basePath, files, objects, logger, avoidDir)
+          ProjectDownload.buildZip(basePath, files, objects, this, avoidDir)
             .then(
             // resolve returns an array with the same "zip" object repeated multiple times
-            zip => {
-              zip[0].generateAsync({ type: 'blob' }).then(
+            zips => {
+              zips[0].generateAsync({ type: 'blob' }).then(
                 // On success
                 blob => {
-                  logger('ZIP file successfully generated!');
+                  this._log('SCORM file successfully generated and ready for download');
                   this.zipFile = blob;
                 },
                 // On error
-                err => logger(`Error generating ZIP file: ${err}`)
+                err => this._log(`Error generating SCORM file: ${err}`)
               );
             },
             // reject - Error code received
-            err => logger(`Error collecting files: ${err}`))
+            err => this._log(`Error downloading the project components: ${err}`))
         }
       }
 
@@ -202,6 +208,9 @@
         this.$.dialog.close()
         this.cancelFlag = true
         this.zipFile = null
+
+        // TODO: Implement calls to XMLHttpRequest.abort for each pending download promise
+
       }
 
       _downloadFile() {
@@ -217,6 +226,15 @@
         p.textContent = txt
         log.appendChild(p)
         setTimeout(() => p.scrollIntoView(), 100)
+      }
+
+      _initProgress(total = 0) {
+        this.$.progress.value = 0
+        this.$.progress.max = total
+      }
+
+      _incProgress(value = 1) {
+        this.$.progress.value += value
       }
 
       // Utility functions
@@ -238,16 +256,19 @@
         avoidDir = avoidDir || ''
         const handlers = []
 
+        logger._initProgress(files.length + objects.length)
+
         if (files)
           files.forEach(file => {
             handlers.push(new Promise((resolve, reject) => {
-              logger(`Loading ${file}`)
+              logger._log(`Loading ${file}`)
               JSZipUtils.getBinaryContent(baseURL + file, (err, data) => {
                 if (err)
                   reject(err)
                 else {
-                  logger(`File "${file}" has been loaded`)
+                  logger._log(`File "${file}" has been loaded`)
                   zip.file(file.replace(avoidDir, ''), data, { binary: true })
+                  logger._incProgress()
                   resolve(zip)
                 }
               });
@@ -256,8 +277,9 @@
 
         if (objects)
           objects.forEach(obj => handlers.push(new Promise((resolve /*, reject*/) => {
-            logger(`Adding ${obj.name} to the zip file`)
+            logger._log(`Adding ${obj.name} to the zip file`)
             zip.file(obj.name.replace(avoidDir, ''), obj.content, obj.options || {})
+            logger._incProgress()
             resolve(zip)
           })));
 
