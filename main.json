@@ -1,8 +1,8 @@
 {
   "logo": "logo.png",
   "index": {
-    "path": "https://clic.xtec.cat/projects",
-    "path-local": "projects",
+    "path-remote": "https://clic.xtec.cat/projects",
+    "path": "projects",
     "file": "projects.json"
   },
   "baseURL": "https://clic.xtec.cat/repo/",
@@ -58,7 +58,12 @@
       "about": "About...",
       "continue": "Continue",
       "unknownProject": "Unknown project:",
-      "errorLoading": "Error loading:"
+      "errorLoading": "Error loading:",
+      "preparingSCORM": "Preparing SCORM file",
+      "downloadingIngredients": "Downloading project ingredients",
+      "pleaseWaitCompressing": "Compressing all data into a ZIP file. Please wait.",
+      "zipFileAvailable": "ZIP file successfully generated and available for download",
+      "errorGeneratingZip": "Error generating ZIP file"
       },
     "ca": {
       "mainTitle": "Biblioteca de projectes JClic HTML5",
@@ -101,7 +106,12 @@
       "about": "Quant a...",
       "continue": "Continua",
       "unknownProject": "Projecte desconegut:",
-      "errorLoading": "S'ha produït un error en llegir:"
+      "errorLoading": "S'ha produït un error en llegir:",
+      "preparingSCORM": "S'està preparant el fitxer SCORM",
+      "downloadingIngredients": "S'estan descarregant els ingredients del projecte",
+      "pleaseWaitCompressing": "S'estan comprimint les dades en un fitxer ZIP. Espereu, si us plau.",
+      "zipFileAvailable": "Fitxer ZIP generat amb èxit i disponible per ser descarregat",
+      "errorGeneratingZip": "S'ha produït un error generant el fitxer ZIP"
       },
     "es": {
       "mainTitle": "Biblioteca de proyectos JClic HTML5",
@@ -144,7 +154,12 @@
       "about": "Acerca de...",
       "continue": "Continuar",
       "unknownProject": "Proyecto desconocido:",
-      "errorLoading": "Se ha producido un error al leer:"
+      "errorLoading": "Se ha producido un error al leer:",
+      "preparingSCORM": "Se está preparando el archivo SCORM",
+      "downloadingIngredients": "Se están descargando los ingredientes del proyecto",
+      "pleaseWaitCompressing": "Se están comprimiendo los datos en un archivo ZIP. Por favor, espere.",
+      "zipFileAvailable": "Archivo ZIP generado con éxito y disponible para ser descargado",
+      "errorGeneratingZip": "Se ha producido un error al generar el archivo ZIP"
       }
   },
   "actLanguages": {
