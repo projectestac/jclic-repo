@@ -63,7 +63,8 @@
       "downloadingIngredients": "Downloading project ingredients",
       "pleaseWaitCompressing": "Compressing all data into a ZIP file. Please wait.",
       "zipFileAvailable": "ZIP file successfully generated and available for download",
-      "errorGeneratingZip": "Error generating ZIP file"
+      "errorGeneratingZip": "Error generating ZIP file",
+      "downloadFile": "Download file"
       },
     "ca": {
       "mainTitle": "Biblioteca de projectes JClic HTML5",
@@ -111,7 +112,8 @@
       "downloadingIngredients": "S'estan descarregant els ingredients del projecte",
       "pleaseWaitCompressing": "S'estan comprimint les dades en un fitxer ZIP. Espereu, si us plau.",
       "zipFileAvailable": "Fitxer ZIP generat amb èxit i disponible per ser descarregat",
-      "errorGeneratingZip": "S'ha produït un error generant el fitxer ZIP"
+      "errorGeneratingZip": "S'ha produït un error generant el fitxer ZIP",
+      "downloadFile": "Descarrega el fitxer"
       },
     "es": {
       "mainTitle": "Biblioteca de proyectos JClic HTML5",
@@ -159,7 +161,8 @@
       "downloadingIngredients": "Se están descargando los ingredientes del proyecto",
       "pleaseWaitCompressing": "Se están comprimiendo los datos en un archivo ZIP. Por favor, espere.",
       "zipFileAvailable": "Archivo ZIP generado con éxito y disponible para ser descargado",
-      "errorGeneratingZip": "Se ha producido un error al generar el archivo ZIP"
+      "errorGeneratingZip": "Se ha producido un error al generar el archivo ZIP",
+      "downloadFile": "Descargar el archivo"
       }
   },
   "actLanguages": {

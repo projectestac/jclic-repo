@@ -150,13 +150,13 @@ Custom property      | Description                       | Default
 
     <!-- Additional dialogs for sharing and downloading the project -->
     <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
-    <project-download id="downloadDlg" project="[[project]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
+    <project-download id="downloadDlg" project="[[project]]" labels="[[labels]]" repo-root="[[repoRoot]]"></project-share>
     
   </template>
 
   <script>
     class BigProjectCard extends Polymer.Element {
-      static get is() { return 'big-project-card'; }
+      static get is() { return 'big-project-card' }
 
       static get properties() {
         return {
@@ -186,66 +186,67 @@ Custom property      | Description                       | Default
       static get observers() {
         return [
           '_projectChanged(project, lang, repoRoot)'
-        ];
+        ]
       }
 
       // Fills the card fields when project data is set
       _projectChanged(prj, lang, repoRoot) {
-        this.$.cover.src = (prj && prj.cover && repoRoot) ? `${repoRoot}/${prj.path}/${prj.cover}` : '';
-        this.$.title.textContent = prj ? prj.title : '';
-        this.$.author.textContent = prj ? prj.author : '';
-        this.$.school.textContent = prj ? prj.school : '';
-        this.$.description.innerHTML = (prj && lang && prj.description) ? prj.description[lang] : '';
-        this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : '';
-        this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : '';
-        this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : '';
-        this.$.date.textContent = (prj && prj.date) ? prj.date : '';
-        this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : '';
-        this.$.installJava.disabled = !prj || !prj.instFile;
-        this.$.clicZone.disabled = !prj || !prj.clicZoneURL;
+        this.$.cover.src = (prj && prj.cover && repoRoot) ? `${repoRoot}/${prj.path}/${prj.cover}` : ''
+        this.$.title.textContent = prj ? prj.title : ''
+        this.$.author.textContent = prj ? prj.author : ''
+        this.$.school.textContent = prj ? prj.school : ''
+        this.$.description.innerHTML = (prj && lang && prj.description) ? prj.description[lang] : ''
+        this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : ''
+        this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : ''
+        this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : ''
+        this.$.date.textContent = (prj && prj.date) ? prj.date : ''
+        this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
+        this.$.installJava.disabled = !prj || !prj.instFile
+        this.$.clicZone.disabled = !prj || !prj.clicZoneURL
       }
 
       // Launches the project activities
       _tapPlay(ev) {
         if (this.project)
-          this.controller.playProject(this.project);
-        ev.stopPropagation();
+          this.controller.playProject(this.project)
+        ev.stopPropagation()
       }
 
       // Opens a link to a JNLP file that will start the installation of the project's Java version, when available
       _tapInstallJava() {
         if (this.project && this.project.instFile)
-          window.open(`https://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=${this.baseUrl}${this.repoRoot}/${this.project.path}/${this.project.instFile}`);
+          window.open(`https://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=${this.baseUrl}${this.repoRoot}/${this.project.path}/${this.project.instFile}`)
       }
 
       // Downloads the JClic project in SCORM format (not yet implemented!)
       _tapDownload() {
         if(this.project){
-          this.$.downloadDlg.$.dialog.open();
-          this.$.downloadDlg.prepareZipFile();
+          this.$.downloadDlg.$.dialog.open()
+          this.$.downloadDlg.prepareZipFile()
         }
       }
 
       // Redirects the navigation to the project's page in the legacy clicZone
       _tapClicZone() {
         if (this.project && this.project.clicZoneURL)
-          window.open(this.project.clicZoneURL, 'ClicZone');
+          window.open(this.project.clicZoneURL, 'ClicZone')
       }
 
       // Opens the `project-share` dialog
       _tapShare(ev) {
-        this.$.shareDlg.$.dialog.open();
+        this.$.shareDlg.$.dialog.open()
       }
 
       // Closes this dialog
       close() {
         if (this.$.shareDlg.$.dialog.opened)
-          this.$.shareDlg.$.dialog.close();
+          this.$.shareDlg.$.dialog.close()
         if (this.$.dialog.opened)
-          this.$.dialog.close();
+          this.$.dialog.close()
       }
     }
 
-    window.customElements.define(BigProjectCard.is, BigProjectCard);
+    window.customElements.define(BigProjectCard.is, BigProjectCard)
+    
   </script>
 </dom-module>
