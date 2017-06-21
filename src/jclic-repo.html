@@ -145,7 +145,6 @@ Some other functional components are also declared and included at this level:
       #mainContainer {
         background-color: var(--projects-list-background-color);
       }
-      
     </style>
 
     <app-drawer-layout fullbleed>
@@ -179,8 +178,8 @@ Some other functional components are also declared and included at this level:
     <paper-spinner-lite active="true" id="spinner" alt="[[labels.loading]]"></paper-spinner-lite>
 
     <!-- Project card, dynamically filled with the current project data -->
-    <big-project-card id="bigPrj" lang="[[lang]]" labels="[[labels]]" repo-root="[[repoRoot]]" base-url="[[baseUrl]]" settings="[[settings]]" controller="[[_getController()]]"
-      on-iron-overlay-opened="_dlgOpened"></big-project-card>
+    <big-project-card id="bigPrj" lang="[[lang]]" labels="[[labels]]" repo-root="[[repoRoot]]" base-url="[[baseUrl]]" settings="[[settings]]"
+      controller="[[_getController()]]" on-iron-overlay-opened="_dlgOpened"></big-project-card>
 
     <!-- Dialog used to set user perferences about ordering and full-screen displaying -->
     <user-settings id="userSettings" labels="[[labels]]" ordering="{{ordering}}" full-screen-player="{{fullScreenPlayer}}"></user-settings>
@@ -204,7 +203,7 @@ Some other functional components are also declared and included at this level:
           // Parametres passed via the `query` section of the current URL
           params: {
             type: Object,
-            value: {}
+            value: null
           },
           // Current two-letter language code selected by the user
           lang: {
@@ -226,6 +225,7 @@ Some other functional components are also declared and included at this level:
             type: String,
             computed: '_getBaseUrl()',
           },
+          currentProjectId: String,
         };
       }
 
@@ -249,7 +249,8 @@ Some other functional components are also declared and included at this level:
         return [
           '_checkPreferredLanguage(settings)',
           '_displayRequestedProject(projects, params)',
-          '_langSelected(lang)'
+          '_langSelected(lang)',
+          '_queryChanged(currentProjectId, filter, params)'
         ];
       }
 
@@ -265,7 +266,7 @@ Some other functional components are also declared and included at this level:
         path = path.substring(0, p) + '/';
         return window.location.origin + path;
       }
-      
+
       // Triggered when the user chooses a language
       _clickOnLang(e) {
         e.preventDefault()
@@ -300,6 +301,7 @@ Some other functional components are also declared and included at this level:
             this.$.spinner.active = false
             this.$.bigPrj.project = project
             this.$.bigPrj.$.dialog.open()
+            this.currentProjectId = project.path
           },
           // Promise rejected
           err => {
@@ -315,11 +317,13 @@ Some other functional components are also declared and included at this level:
         this.playerOptions.closeFn = this.playerClosed.bind(this)
         // Setting the `project` attribute of the `jclic-player` component opens automatically the player
         this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`
+        this.currentProjectId = prj.path
       }
 
       // Called by `jclic-player` when the user leaves the activities
       playerClosed() {
         this.$.player.project = null
+        this.currentProjectId = null
       }
 
       // called when a new dialog opens
@@ -334,11 +338,11 @@ Some other functional components are also declared and included at this level:
 
         // Read parameters passed to 'index.html'
         // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
-        if (window.location.search) {
-          this.params = window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-          if (this.params.logLevel)
-            this.playerOptions.logLevel = this.params.logLevel
-        }
+        this.params = window.location.search
+          ? window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+          : {}
+        if (this.params.logLevel)
+          this.playerOptions.logLevel = this.params.logLevel
       }
 
       // Try to determine the user's preferred language
@@ -352,7 +356,7 @@ Some other functional components are also declared and included at this level:
           if (this.lang)
             tries.push(this.lang)
           // If "lang=" was on location.search, check it
-          if (this.params.lang)
+          if (this.params && this.params.lang)
             tries.push(this.params.lang)
           // Add user's preferred languages, if any
           if (window.navigator.languages)
@@ -370,12 +374,28 @@ Some other functional components are also declared and included at this level:
 
       // Opens the big project card of the project passed as a parameter in the query section of the current URL
       _displayRequestedProject(projects, params) {
-        if (projects && projects.length > 0 && params && params.prj) {
-          if (projects.find(p => p.path === params.prj))
-            this.showProject(params.prj)
-          else
-            console.log(`Unknown project: ${params.prj}`)
-          params.prj = null
+        if (projects && params) {
+          if (projects.length > 0 && params.prj) {
+            if (projects.find(p => p.path === params.prj))
+              this.showProject(params.prj)
+            else
+              console.log(`Unknown project: ${params.prj}`)
+            params.prj = null
+          }
+          params.processed = true
+        }
+      }
+
+      _queryChanged(currentProjectId, filter, params) {
+        if (params && params.processed) {
+          let search = ''
+          if (currentProjectId)
+            search = `?prj=${currentProjectId}`
+          else if (filter) {
+
+          }
+          if (search !== window.location.search)
+            window.history.pushState({}, '', `index.html${search}`)
         }
       }
     }
