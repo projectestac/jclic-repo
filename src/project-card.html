@@ -131,12 +131,12 @@ Custom property | Description | Default
         @apply --project-card-play-button;
       }
     </style>
-    <paper-material id="card" animated="true" elevation="[[elevation]]" on-tap="_tap" on-mouseenter="_raise" on-mouseleave="_unraise">
+    <paper-material id="card" animated="true" elevation="[[elevation]]" on-click="_click" on-mouseenter="_raise" on-mouseleave="_unraise">
       <!-- Main area of the card, displaying the project's title, languages, play button and cover (as a background image) -->
       <div id="content" class="content">
         <template id="languages" is="dom-repeat" items="[[languages]]"><span class="language">[[item]]</span></template>
         <div id="title" class="title">[[project.title]]</div>
-        <paper-fab class="play-button" mini icon="av:play-arrow" title="[[labels.playText]]" role="button" on-tap="_play"></paper-fab>
+        <paper-fab class="play-button" mini icon="av:play-arrow" title="[[labels.playText]]" role="button" on-click="_play"></paper-fab>
       </div>
       <!-- Bottom area of the card, displaying the author(s) name -->
       <div id="author" class="one-line-text">[[project.author]]</div>
@@ -190,8 +190,8 @@ Custom property | Description | Default
         ev.stopPropagation();
       }
 
-      // Event handler called when ths user taps on the card
-      _tap() {
+      // Event handler called when the user clicks on the card
+      _click() {
         if (this.controller && this.project)
           this.controller.showProject(this.project.path);
       }

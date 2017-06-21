@@ -153,7 +153,7 @@ Some other functional components are also declared and included at this level:
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
         <projects-selector labels="[[labels]]" select-options="[[selectOptions]]" filter="{{filter}}"></projects-selector>
-        <paper-icon-button id="settings" icon="settings" title="[[labels.settings]]" on-tap="_tapUserSettings"></paper-icon-button>
+        <paper-icon-button id="settings" icon="settings" title="[[labels.settings]]" on-click="_setUserSettings"></paper-icon-button>
         <div class="numProjects">[[projects.length]] [[labels.projects]]</div>
       </app-drawer>
 
@@ -287,7 +287,7 @@ Some other functional components are also declared and included at this level:
       }
 
       // Triggered by settings button
-      _tapUserSettings() {
+      _setUserSettings() {
         this.$.userSettings.open()
       }
 

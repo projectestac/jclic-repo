@@ -115,19 +115,19 @@
         <div class="vertical-section-container">
           <div class="vertical-section">
             <paper-input id="linkToActivities" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-tap="_copy"></paper-icon-button>
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
           <div class="vertical-section">
             <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-tap="_copy"></paper-icon-button>
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
           <div class="vertical-section">
             <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-tap="_copy"></paper-icon-button>
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <div class="horizontal-section-container">
               <paper-radio-group selected="{{embedSize}}">
@@ -141,7 +141,7 @@
             <!-- WARNING: "img src" paths are always relative to the root document, not to this component! -->
             <img src="images/moodle-logo.png" class="moodle-logo">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-tap="_copy"></paper-icon-button>
+              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-click="_copy"></paper-icon-button>
             </paper-input>
           </div>
         </div>

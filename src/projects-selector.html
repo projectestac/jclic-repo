@@ -124,7 +124,7 @@ Custom property       | Description                          | Default
     <paper-input id="title" class="textInput" label="[[labels.title]]" value="{{filter.title}}" on-change="_updateFilter"></paper-input>
     <paper-input id="author" class="textInput" label="[[labels.author]]" value="{{filter.author}}" on-change="_updateFilter"></paper-input>
 
-    <paper-button raised class="search" on-tap="_updateFilter" id="searchBtn">
+    <paper-button raised class="search" on-click="_updateFilter" id="searchBtn">
       <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
       <span>[[labels.search]]</span>
     </paper-button>
