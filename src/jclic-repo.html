@@ -49,6 +49,7 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
 
+
 <link rel="import" href="shared-icons.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="repo-data.html">
@@ -57,6 +58,7 @@
 <link rel="import" href="big-project-card.html">
 <link rel="import" href="jclic-player.html">
 <link rel="import" href="user-settings.html">
+<link rel="import" href="info-pages.html">
 
 <!--
 
@@ -135,6 +137,12 @@ Some other functional components are also declared and included at this level:
         bottom: 0;
       }
 
+      #info {
+        position: absolute;
+        left: 32px;
+        bottom: 0;
+      }
+
       #spinner {
         position: fixed;
         top: 50%;
@@ -153,6 +161,7 @@ Some other functional components are also declared and included at this level:
       <app-drawer id="drawer" slot="drawer">
         <projects-selector labels="[[labels]]" select-options="[[selectOptions]]" filter="{{filter}}"></projects-selector>
         <paper-icon-button id="settings" icon="settings" title="[[labels.settings]]" on-click="_setUserSettings"></paper-icon-button>
+        <paper-icon-button id="info" icon="info" title="[[labels.about]]" on-click="_displayInfo"></paper-icon-button>
         <div class="numProjects">[[projects.length]] [[labels.projects]]</div>
       </app-drawer>
 
@@ -168,8 +177,15 @@ Some other functional components are also declared and included at this level:
             </div>
           </app-toolbar>
         </app-header>
-        <!-- Projects showcase -->
-        <projects-list name="projects" controller="[[_getController()]]" repo-root="[[repoRoot]]" projects="[[projects]]" labels="[[labels]]"></projects-list>
+        <iron-pages attr-for-selected="page" selected="[[page]]">
+          <section page="projects">
+            <!-- Projects showcase -->
+            <projects-list name="projects" controller="[[_getController()]]" repo-root="[[repoRoot]]" projects="[[projects]]" labels="[[labels]]"></projects-list>
+          </section>
+          <section page="info">
+            <info-pages lang="[[lang]]" labels="[[labels]]" page="{{page}}" main-page="projects"></info-pages>
+          </section>
+        </iron-pages>
       </app-header-layout>
 
     </app-drawer-layout>
@@ -226,6 +242,10 @@ Some other functional components are also declared and included at this level:
             computed: '_getBaseUrl()',
           },
           currentProjectId: String,
+          page: {
+            type: String,
+            value: 'projects',
+          }
         };
       }
 
@@ -290,6 +310,11 @@ Some other functional components are also declared and included at this level:
       // Triggered by settings button
       _setUserSettings() {
         this.$.userSettings.open()
+      }
+
+      // Triggered by info button
+      _displayInfo() {
+        this.page = 'info'
       }
 
       // Opens a big project card with a specific project data
@@ -388,6 +413,7 @@ Some other functional components are also declared and included at this level:
 
       _queryChanged(currentProjectId, filter, params) {
         if (params && params.processed) {
+          this.page = 'projects'
           let search = ''
           if (currentProjectId)
             search = `?prj=${currentProjectId}`
