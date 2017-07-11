@@ -100,8 +100,19 @@ Custom property   | Description                       | Default
       }
     </style>
 
-    <iron-pages attr-for-selected="language" selected="[[lang]]">
-      <section language="ca">
+    <!-- iron-pages attr-for-selected="language" selected="[[lang]]" -->
+          <template id="main" is="dom-repeat" items="[[info]]" on-dom-change="_domChange">
+            <paper-material elevation="2">
+              <h2>[[item.title]]</h2>
+              <a href="[[item.link]]"><img src="../images/[[item.icon]]" alt="[[item.title]]" class="appIcon"></a>
+              <template is="dom-repeat" items="[[item.text]]">
+                <p>[[item]]</p>
+              </template>
+            </paper-material>
+          </template>
+
+      
+      <!-- section language="ca">
 
         <paper-material elevation="2">
           <h2>Projecte JClic</h2>
@@ -273,8 +284,8 @@ Custom property   | Description                       | Default
             them in an Java applet (when allowed), or share them on social networks.</p>
         </paper-material>
 
-      </section>
-    </iron-pages>
+      </section -->
+    <!-- /iron-pages -->
 
     <div id="footer" class="horizontal layout">
       <social-buttons settings="[[settings]]" url="[[_getUrl()]]" imgurl="[[_getImgUrl()]]" text="[[labels.mainTitle]]" labels="[[labels]]"
@@ -285,7 +296,7 @@ Custom property   | Description                       | Default
   </template>
 
   <script>
-    class InfoPages extends Polymer.Element {
+    class InfoPages extends Polymer.MutableData(Polymer.Element) {
       static get is() { return 'info-pages' }
 
       static get properties() {
@@ -295,6 +306,7 @@ Custom property   | Description                       | Default
           // ----------------------------------------------------------------
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
+          info: Array,
           settings: Object,
           // -----------------------------------------------------------------
           // Properties used by this component but initialized in `jclic-repo`
@@ -325,6 +337,10 @@ Custom property   | Description                       | Default
       // Fires a custom `close` event
       _close(ev) {
         this.dispatchEvent(new CustomEvent('close'), ev)
+      }
+      
+      _domChange(ev) {
+        console.log(ev);
       }
     }
 

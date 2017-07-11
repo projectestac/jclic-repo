@@ -40,7 +40,7 @@
 <!-- [Unidecode](https://github.com/FGRibreau/node-unidecode) is used to ignore accents and special characters when comparing or sorting text -->
 <script src="../bower_components/bower-unidecode/unidecode.js"></script>
 
-<!-- 
+<!--
 
 This component encapsulates the main data operations needed by JClic Repo sites.
 
@@ -82,6 +82,12 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           labels: {
             type: Object,
             value: {},
+            notify: true
+          },
+          // Blocks of info text in the current app language
+          info: {
+            type: Array,
+            value: [],
             notify: true
           },
           // Current choices of languages, subjects and levels (expresed in the current language), used to filter the main project list
@@ -138,9 +144,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
         ];
       }
 
-      // Updates `labels` and `selectOptions` in order to reflect the current app language
+      // Updates `labels`, `info` and `selectOptions` in order to reflect the current app language
       _updateLang(settings, lang) {
         this.labels = settings && settings.labels && lang && settings.labels[lang] ? settings.labels[lang] : {};
+        this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang].content : [];
         this.selectOptions = {
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
           subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],

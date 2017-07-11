@@ -183,7 +183,7 @@ Some other functional components are also declared and included at this level:
           </section>
           <section page="info">
             <!-- Info pages -->
-            <info-pages settings="[[settings]]" lang="[[lang]]" labels="[[labels]]" on-close="_closeInfo"></info-pages>
+            <info-pages info="[[info]]" settings="[[settings]]" lang="[[lang]]" labels="[[labels]]" on-close="_closeInfo"></info-pages>
           </section>
         </iron-pages>
       </app-header-layout>
@@ -204,7 +204,7 @@ Some other functional components are also declared and included at this level:
     <jclic-player id="player" full-screen="[[fullScreenPlayer]]" options="[[playerOptions]]"></jclic-player>
 
     <!-- Auxiliary element used for miscellaneous operations related to the repository data -->
-    <repo-data id="repo" repo-root="{{repoRoot}}" settings="{{settings}}" lang="[[lang]]" labels="{{labels}}" select-options="{{selectOptions}}"
+    <repo-data id="repo" repo-root="{{repoRoot}}" settings="{{settings}}" lang="[[lang]]" labels="{{labels}}" info="{{info}}" select-options="{{selectOptions}}"
       projects="{{projects}}" filter="{{filter}}" ordering="{{ordering}}"></repo-data>
 
   </template>
@@ -262,6 +262,7 @@ Some other functional components are also declared and included at this level:
       `ordering`      | Object | Current ordering options
       `projects`      | Object | Ordered array containing the colection of projects matching the current filter settings
       `labels`        | Object | Current set of labels, titles and messages, translated into the current app language
+      `info`          | Object | Current set of settings for info-pages, translated into the current app language
       
       **/
 
