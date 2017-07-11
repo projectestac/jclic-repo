@@ -70,7 +70,7 @@ Custom property   | Description                         | Default
 
     <!-- The projects showcase -->
     <template id="cards" is="dom-repeat" items="[[_visibleProjects]]">
-      <project-card controller="[[controller]]" repo-root="[[repoRoot]]" project="[[item]]" labels="[[labels]]"></project-card>
+      <project-card repo-root="[[repoRoot]]" project="[[item]]" labels="[[labels]]" on-play="notifyEvent" on-show="notifyEvent"></project-card>
     </template>
 
     <!-- The scrolling controller -->
@@ -80,7 +80,7 @@ Custom property   | Description                         | Default
 
   <script>
     class ProjectsList extends Polymer.Element {
-      static get is() { return 'projects-list'; }
+      static get is() { return 'projects-list' }
 
       static get properties() {
         return {
@@ -99,8 +99,6 @@ Custom property   | Description                         | Default
             type: Number,
             value: 210
           },
-          // Link to `jclic-repo`, needed to build `project-card` elements and to identify the main and scrolling containers
-          controller: Object,
           // Link to the app main container, usually an `app-header-layout`
           mainContainer: Object,
           // Link to the scrolling region of the main container, usually the `#contentContainer` element of `app-header-layout`
@@ -120,56 +118,58 @@ Custom property   | Description                         | Default
       static get observers() {
         return [
           '_projectsUpdated(projects)',
-          '_controllerUpdated(controller)'
-        ];
+          '_containerUpdated(mainContainer)'
+        ]
       }
 
-      // Called when the `controllewr` property is initially set
-      _controllerUpdated(controller) {
-        if (controller && controller.$.mainContainer) {
-          this.mainContainer = controller.$.mainContainer;
-          if (this.mainContainer.$.contentContainer)
-            this.scrollingContainer = this.mainContainer.$.contentContainer;
-        }
+      // Notify `play` and `show` events from cards to `jclic-repo`
+      notifyEvent(ev) {
+        this.dispatchEvent(new CustomEvent(ev.type, { detail: ev.detail }))
+      }
+
+      // Called when the `mainContainer` property is initially set
+      _containerUpdated(mainContainer) {
+        if (mainContainer && mainContainer.$.contentContainer)
+          this.scrollingContainer = mainContainer.$.contentContainer
       }
 
       // Called when the `projects` array is updated.
       _projectsUpdated(projects) {
         // Remove all elements from `_visibleProjects`
-        this.splice('_visibleProjects', 0, this._visibleProjects.length + 1);
+        this.splice('_visibleProjects', 0, this._visibleProjects.length + 1)
         // Load more projects
         if (projects && projects.length > 0)
-          this.loadMoreProjects(this.getItemsPerPage());
+          this.loadMoreProjects(this.getItemsPerPage())
       }
 
       // Guess the number of `project-card` elements that fit in each row
       getCardsH() {
-        return this.mainContainer ? Math.ceil(this.mainContainer.offsetWidth / this.cardsWidth) : 20;
+        return this.mainContainer ? Math.ceil(this.mainContainer.offsetWidth / this.cardsWidth) : 20
       }
 
       // Guess the number of project cards that fits on the current page
       getItemsPerPage() {
-        const cardsH = this.getCardsH();
-        const cardsV = Math.ceil(this.mainContainer.offsetHeight / this.cardsWidth) + 1;
-        return Math.max(20, cardsH * cardsV);
+        const cardsH = this.getCardsH()
+        const cardsV = Math.ceil(this.mainContainer.offsetHeight / this.cardsWidth) + 1
+        return Math.max(20, cardsH * cardsV)
       }
 
       // Adds more elements to `_visibleProjects`, when available
       loadMoreProjects(num) {
         if (this.projects && this.projects.length > this._visibleProjects.length) {
           if (!num || isNaN(num))
-            num = 2 * this.getCardsH();
+            num = 2 * this.getCardsH()
 
-          var p = this._visibleProjects.length;
-          const lim = Math.min(this.projects.length, p + num);
+          var p = this._visibleProjects.length
+          const lim = Math.min(this.projects.length, p + num)
           while (p < lim)
-            this.push('_visibleProjects', this.projects[p++]);
+            this.push('_visibleProjects', this.projects[p++])
         }
-        this.$.scroll.clearTriggers();
+        this.$.scroll.clearTriggers()
       }
 
     }
 
-    window.customElements.define(ProjectsList.is, ProjectsList);
+    window.customElements.define(ProjectsList.is, ProjectsList)
   </script>
 </dom-module>

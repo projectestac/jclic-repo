@@ -149,8 +149,6 @@ Custom property | Description | Default
 
       static get properties() {
         return {
-          // The controller object, usually pointing to `jclic-repo`, used to launch the JClic player on request
-          controller: Object,
           // Object containing the data of the JClic project currently displayed on this card
           project: {
             type: Object,
@@ -175,38 +173,39 @@ Custom property | Description | Default
 
       // Sets the current project data
       _setProject(prj) {
-        this.setAttribute('aria-label', prj ? prj.title : '');
+        this.setAttribute('aria-label', prj ? prj.title : '')
         if (prj && prj.cover)
-          this.$.content.style.cssText = `background: no-repeat center/150% url("${this.repoRoot}/${prj.path}/${prj.cover}");`;
+          this.$.content.style.cssText = `background: no-repeat center/150% url("${this.repoRoot}/${prj.path}/${prj.cover}");`
         else
-          this.$.content.style.cssText = '';
-        this.$.title.style.cssText = prj.title ? '' : 'display:none;';
-        this.languages = (prj && prj.langCodes) ? prj.langCodes : [];
+          this.$.content.style.cssText = ''
+        this.$.title.style.cssText = prj.title ? '' : 'display:none;'
+        this.languages = (prj && prj.langCodes) ? prj.langCodes : []
       }
 
       // Event handler called by the play button
       _play(ev) {
-        this.controller.playProject(this.project);
-        ev.stopPropagation();
+        if (this.project)
+          this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
+        ev.stopPropagation()
       }
 
       // Event handler called when the user clicks on the card
       _click() {
-        if (this.controller && this.project)
-          this.controller.showProject(this.project.path);
+        if (this.project)
+          this.dispatchEvent(new CustomEvent('show', { detail: { path: this.project.path } }))
       }
 
       // Called on mouseenter
       _raise() {
-        this.elevation = 3;
+        this.elevation = 3
       }
 
       // Called on mouseleave
       _unraise() {
-        this.elevation = 1;
+        this.elevation = 1
       }
     }
 
-    window.customElements.define(ProjectCard.is, ProjectCard);
+    window.customElements.define(ProjectCard.is, ProjectCard)
   </script>
 </dom-module>

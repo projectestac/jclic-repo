@@ -287,5 +287,62 @@
         {"val" :"PRI", "text":"Primaria (6-12)"},
         {"val" :"SEC", "text":"Secundaria (12-16)"},
         {"val" :"BTX", "text":"Bachillerato (16-18)"}]
+  },
+  "info": {
+      "ca":{
+          "title": "",
+          "imgBase": "images",
+          "content": [
+              {
+                  "title": "Projecte JClic",
+                  "icon": "icon-main.svg",
+                  "link": "http://clic.xtec.cat/ca/jclic/index.htm",
+                  "text": [
+                      "El JClic és un projecte de programari lliure de la <a href=\"http://www.xtec.cat\">Xarxa Telemàtica Educativa de Catalunya</a> (XTEC) que permet crear diversos tipus d’activitats interactives com ara associacions, puzles, activitats de text, mots encreuats o sopes de lletres, a partir d’elements de text, gràfics i multimèdia.",
+                      "El programa compta amb una eina d'autor per crear les activitats, un reproductor que permet executar-les i un sistema d'informes que emmagatzema els resultats obtinguts pels alumnes. Tots aquests components, així com diverses guies i tutorials per aprendre a crear les activitats, es troben disponibles a la <a href=\"http://clic.xtec.cat/ca/jclic/download.htm\">zonaClic</a>",
+                      "El JClic és una aplicació Java que funciona en sistemes Linux, Windows i Mac OS. El codi font i la documentació tècnica de l'aplicació es troben disponibles a <a href=\"http://projectestac.github.io/jclic/\">GitHub</a>"
+                  ]
+              },
+              {
+                  "title": "JClic.js",
+                  "icon": "jclic-html5.svg",
+                  "link": "http://projectestac.github.io/jclic.js/",
+                  "text": [
+                      "Aquest és un projecte encara en fase de desenvolupament que pretén crear un nou reproductor d’activitats JClic totalment basat en <a href=\"http://www.w3.org/html/\">HTML5</a> (HTML + JavaScript + CSS3). L’objectiu és poder veure les activitats JClic en qualsevol navegador web modern (Firefox, Chrome, Safari…) sense cap connector especial. Això permetrà utilitzar el JClic en sistemes que no suporten Java, com ara Android, iOS, o ChromeOS, així com en els navegadors Google Chrome i MS Edge.",
+                      "El codi font i la documentació del projecte jclic.js es troben disponibles a <a href=\"http://projectestac.github.io/jclic.js/\">GitHub</a>. El projecte està obert a les aportacions de tots aquells que vulguin participar en el seu desenvolupament.",
+                      "El mòdul JClic Author ja permet l’exportació directa de les activitats a pàgines HTML5 amb JClic.js, així com a paquets SCORM"
+                  ]
+              },
+              {
+                  "title": "Biblioteca d'activitats JClic",
+                  "icon": "zonaclic-64.png",
+                  "link": "http://clic.xtec.cat/db/listact_ca.jsp",
+                  "text": [
+                      "Són molts els docents de diferents països que han utilitzat el JClic per crear materials interactius en diverses llengües i per a múltiples nivells, temes i àrees curriculars. Alguns d’aquests materials s’han anat recollint a la <a href=\"http://clic.xtec.cat/db/listact_ca.jsp\">biblioteca de projectes de la zonaClic</a> gràcies a la generositat dels seus autors, que han decidit compartir-los amb llicències Creative Commons permetent així la seva reutilització, traducció i adaptació a escenaris educatius diversos."
+                  ]
+              },
+              {
+                  "title": "JClic-repo",
+                  "icon": "jclicrepo-64.png",
+                  "link": "https://github.com/projectestac/jclic-repo",
+                  "text": [
+                      "Aquesta pàgina forma part de \"jclic-repo\", un nou projecte que té com a objectiu facilitar la publicació de col·leccions de projectes JClic en serveis d'allotjament web estàtic. El projecte utilitza la tecnologia de components web <a href=\"https://www.polymer-project.org\">Polymer</a>, i totes les seves fonts es troben també disponibles a <a href=\"https://github.com/projectestac/jclic-repo\">GitHub</a>.",
+                      "Aquesta instal·lació de jclic-repo conté una bona part dels més de 2.300 recursos de la biblioteca de projectes de la zonaClic. El cercador us permet filtrar els resultats per idioma, nivell educatiu, àrea curricular, títol o autoria. Fent clic damunt la targeta de cada projecte accedireu a una informació més detallada, des d’on podreu engegar les activitats en HTML5, obrir-les en un applet (sempre i quan el sistema suporti Java) o compartir-les a les xarxes socials."
+                  ]
+              }
+          ]
+      },
+      "en":{
+          "title": "",
+          "content": [
+
+          ]          
+      },
+      "es":{
+          "title": "",
+          "content": [
+
+          ]          
+      }
   }
 }

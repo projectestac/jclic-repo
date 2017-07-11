@@ -65,7 +65,7 @@
 This is the shell component of the basic JClic-repo app.
 
 It contains an `app-drawer-layout` with three main zones:
-- An `app-drawer` placed at left, containing a `projects-selector`
+- An `app-drawer` placed at left, containing a `projects-selector` and an `info-pages` component.
 - An `app-header` containing an `app-toolbar` with title and language selector
 - The main showcase of the JClic projects that form the repository, in a `projects-list` component.
 
@@ -123,24 +123,20 @@ Some other functional components are also declared and included at this level:
         bottom: 0;
       }
 
+      .footer {
+        color: var(--secondary-text-color);
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
       .numProjects {
         font-size: 10pt;
-        position: absolute;
-        bottom: 0;
-        right: 0;
         margin: 8px;
-      }
-
-      #settings {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-      }
-
-      #info {
-        position: absolute;
-        left: 32px;
-        bottom: 0;
+        text-align: right;
+        flex-grow: 2;
       }
 
       #spinner {
@@ -160,9 +156,11 @@ Some other functional components are also declared and included at this level:
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
         <projects-selector labels="[[labels]]" select-options="[[selectOptions]]" filter="{{filter}}"></projects-selector>
-        <paper-icon-button id="settings" icon="settings" title="[[labels.settings]]" on-click="_setUserSettings"></paper-icon-button>
-        <paper-icon-button id="info" icon="info" title="[[labels.about]]" on-click="_displayInfo"></paper-icon-button>
-        <div class="numProjects">[[projects.length]] [[labels.projects]]</div>
+        <div class="footer">
+          <paper-icon-button id="settings" icon="settings" title="[[labels.settings]]" on-click="_setUserSettings"></paper-icon-button>
+          <paper-icon-button id="info" icon="info" title="[[labels.about]]" on-click="_displayInfo"></paper-icon-button>
+          <span class="numProjects">[[projects.length]] [[labels.projects]]</span>
+        </div>
       </app-drawer>
 
       <!-- Main content -->
@@ -180,10 +178,12 @@ Some other functional components are also declared and included at this level:
         <iron-pages attr-for-selected="page" selected="[[page]]">
           <section page="projects">
             <!-- Projects showcase -->
-            <projects-list name="projects" controller="[[_getController()]]" repo-root="[[repoRoot]]" projects="[[projects]]" labels="[[labels]]"></projects-list>
+            <projects-list name="projects" main-container="[[_getMainContainer()]]" repo-root="[[repoRoot]]" projects="[[projects]]"
+              labels="[[labels]]" on-play="playProject" on-show="showProject"></projects-list>
           </section>
           <section page="info">
-            <info-pages lang="[[lang]]" labels="[[labels]]" page="{{page}}" main-page="projects"></info-pages>
+            <!-- Info pages -->
+            <info-pages settings="[[settings]]" lang="[[lang]]" labels="[[labels]]" on-close="_closeInfo"></info-pages>
           </section>
         </iron-pages>
       </app-header-layout>
@@ -195,7 +195,7 @@ Some other functional components are also declared and included at this level:
 
     <!-- Project card, dynamically filled with the current project data -->
     <big-project-card id="bigPrj" lang="[[lang]]" labels="[[labels]]" repo-root="[[repoRoot]]" base-url="[[baseUrl]]" settings="[[settings]]"
-      controller="[[_getController()]]" on-iron-overlay-opened="_dlgOpened"></big-project-card>
+      on-iron-overlay-opened="_dlgOpened" on-play="playProject"></big-project-card>
 
     <!-- Dialog used to set user perferences about ordering and full-screen displaying -->
     <user-settings id="userSettings" labels="[[labels]]" ordering="{{ordering}}" full-screen-player="{{fullScreenPlayer}}"></user-settings>
@@ -246,7 +246,7 @@ Some other functional components are also declared and included at this level:
             type: String,
             value: 'projects',
           }
-        };
+        }
       }
 
       /**
@@ -271,20 +271,20 @@ Some other functional components are also declared and included at this level:
           '_displayRequestedProject(projects, params)',
           '_langSelected(lang)',
           '_queryChanged(currentProjectId, filter, params)'
-        ];
+        ]
       }
 
-      // Utility function used to pass a reference of `this` to other components that need a JClic repo controller
-      _getController() {
-        return this
+      // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
+      _getMainContainer() {
+        return this.$.mainContainer
       }
 
       // Gets the URL used as a base for absolute links to projects
       _getBaseUrl() {
-        let path = window.location.pathname;
-        let p = path.lastIndexOf('/');
-        path = path.substring(0, p) + '/';
-        return window.location.origin + path;
+        let path = window.location.pathname
+        let p = path.lastIndexOf('/')
+        path = path.substring(0, p) + '/'
+        return window.location.origin + path
       }
 
       // Triggered when the user chooses a language
@@ -314,11 +314,24 @@ Some other functional components are also declared and included at this level:
 
       // Triggered by info button
       _displayInfo() {
+        const search = '?page=info'
+        if (search !== window.location.search)
+          window.history.pushState({}, '', `index.html${search}`)
         this.page = 'info'
+      }
+
+      // Called when the user closes the info pages
+      _closeInfo() {
+        this.page = 'projects'
+        if (window.location.search)
+          window.history.pushState({}, '', 'index.html')
       }
 
       // Opens a big project card with a specific project data
       showProject(path) {
+        // Check if `path` is a custom event fired by a project-card
+        if (path instanceof CustomEvent)
+          path = path.detail.path
         this.$.spinner.active = true
         this.$.repo.loadProject(path).then(
           // Promise OK
@@ -337,7 +350,11 @@ Some other functional components are also declared and included at this level:
 
       // Launches the project activities in a JClic player
       playProject(prj) {
-        this.$.bigPrj.close()
+        // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
+        if (prj instanceof CustomEvent) {
+          prj = prj.detail.project
+          this.$.bigPrj.close()
+        }
         // Request a call to `playerClosed` when the user leaves the JClic player
         this.playerOptions.closeFn = this.playerClosed.bind(this)
         // Setting the `project` attribute of the `jclic-player` component opens automatically the player
@@ -368,13 +385,15 @@ Some other functional components are also declared and included at this level:
           : {}
         if (this.params.logLevel)
           this.playerOptions.logLevel = this.params.logLevel
+        if (this.params.page && this.params.page === 'info')
+          this._displayInfo();
       }
 
       // Try to determine the user's preferred language
       _checkPreferredLanguage(settings) {
         if (settings && settings.languages && settings.languages.length) {
           // Stop waiting animation, if already running
-          this.$.spinner.active = false;
+          this.$.spinner.active = false
           // Create an array to store possible values
           var tries = []
           // If "lang=" was programatically set, check it
@@ -392,7 +411,7 @@ Some other functional components are also declared and included at this level:
           this.lang = (tries.find(v => settings.languages.find(l => v.indexOf(l.id) === 0) !== undefined) || 'en').substr(0, 2)
 
           // Workaround to set/unset the "langSelected" class to langItems in #langSelector when dom-repeat finishes
-          var thisRepo = this;
+          var thisRepo = this
           setTimeout(() => thisRepo._langSelected(), 100)
         }
       }

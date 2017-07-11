@@ -160,8 +160,6 @@ Custom property      | Description                       | Default
 
       static get properties() {
         return {
-          // The controller object, usually pointing to `jclic-repo`, used to launch the JClic player on request
-          controller: Object,
           // Object containing the data of the JClic project currently displayed on this card
           project: Object,
           // ----------------------------------------------------------------
@@ -208,7 +206,7 @@ Custom property      | Description                       | Default
       // Launches the project activities
       _tapPlay(ev) {
         if (this.project)
-          this.controller.playProject(this.project)
+          this.dispatchEvent(new CustomEvent('play', {detail: {project: this.project}}))
         ev.stopPropagation()
       }
 

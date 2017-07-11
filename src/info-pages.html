@@ -42,20 +42,70 @@
 <link rel="import" href="social-buttons.html">
 <link rel="import" href="shared-styles.html">
 
+<!--
+
+This component shows information about the project for each supported language.
+
+This information is structured in blocks, each one formed by a title, an icon and one or more paragraphs of text.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property   | Description                       | Default
+------------------|-----------------------------------|----------
+`--info-pages`    | Mixin applied to the info pages   | {}
+
+-->
+
+
 <dom-module id="info-pages">
   <template>
     <style include="shared-styles">
        :host {
+        font-size: 11pt;
         @apply --info-pages;
+      }
+
+      paper-material {
+        display: block;
+        position: relative;
+        margin: 10pt;
+        padding: 10pt;
+        padding-left: 64pt;
+        background-color: var(--primary-background-color);
+        color: var(--primary-text-color);
+      }
+
+      h2 {
+        color: var(--secondary-text-color);
+        text-transform: uppercase;
+      }
+
+      .appIcon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+        width: 64px;
+      }
+
+      #footer {
+        margin-left: 10pt;
+      }
+
+      #closeBtn {
+        position: absolute;
+        right: 0;
       }
     </style>
 
     <iron-pages attr-for-selected="language" selected="[[lang]]">
       <section language="ca">
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>Projecte JClic</h2>
-          <a href="http://clic.xtec.cat/ca/jclic/index.htm"><img src="../images/icon-main.svg" class="appIcon" alt="JClic"></a>
+          <a href="http://clic.xtec.cat/ca/jclic/index.htm"><img src="../images/icon-main.svg" alt="JClic" class="appIcon"></a>
           <p>El JClic és un projecte de programari lliure de la
             <a href="http://www.xtec.cat">Xarxa Telemàtica Educativa de Catalunya</a> (XTEC) que permet crear diversos tipus
             d’activitats interactives com ara associacions, puzles, activitats de text, mots encreuats o sopes de lletres,
@@ -68,7 +118,7 @@
             <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
         </paper-material>
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>jclic.js</h2>
           <a href="http://projectestac.github.io/jclic.js/"><img src="../images/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>Aquest és un projecte encara en fase de desenvolupament que pretén crear un nou reproductor d’activitats JClic
@@ -84,7 +134,7 @@
           </p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>Biblioteca d’activitats JClic</h2>
           <a href="http://clic.xtec.cat/db/listact_ca.jsp"><img src="../images/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Són molts els docents de diferents països que han utilitzat el JClic per crear materials interactius en diverses
@@ -96,7 +146,7 @@
           </p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>JClic-repo</h2>
           <a href="https://github.com/projectestac/jclic-repo"><img src="../images/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>Aquesta pàgina forma part de "jclic-repo", un nou projecte que té com a objectiu facilitar la publicació de col·leccions
@@ -110,19 +160,10 @@
             a les xarxes socials.</p>
         </paper-material>
 
-        <paper-material class="item warn" elevation="2">
-          <p><strong>Atenció</strong>: us trobeu en un espai provisional destinat principalment a la realització de proves per
-            facilitar el desenvolupament del jclic.js. Alguns tipus d’activitats encara no funcionen correctament en tots
-            els dispositius, i hi ha diverses funcionalitats encara no implementades. Podeu ajudar-nos notificant errors,
-            suggerint millores i proposant possibles solucions als espais de desenvolupament dels projectes <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
-            <a href="https://github.com/projectestac/jclic.js/issues">jclic.js</a> i
-            <a href="https://github.com/projectestac/jclic-repo/issues">jclic-repo</a>.</p>
-        </paper-material>
-
       </section>
       <section language="es">
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>Proyecto JClic</h2>
           <a href="http://clic.xtec.cat/es/jclic/index.htm"><img src="../images/icon-main.svg" class="appIcon" alt="JClic"></a>
           <p>JClic es un proyecto de software libre de la
@@ -138,7 +179,7 @@
             <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
         </paper-material>
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>jclic.js</h2>
           <a href="http://projectestac.github.io/jclic.js/"><img src="../images/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>Es un proyecto todavía en fase de desarrollo que pretende crear un nuevo reproductor de actividades JClic totalmente
@@ -153,7 +194,7 @@
             con jclic.js.</p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>Biblioteca de actividades JClic</h2>
           <a href="http://clic.xtec.cat/db/listact_es.jsp"><img src="../images/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Son muchos los docentes de distintos países que han utilizado JClic para crear materiales interactivos en diversas
@@ -164,7 +205,7 @@
             traducción y adaptación a escenarios educativos diversos.</p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>JClic-repo</h2>
           <a href="https://github.com/projectestac/jclic-repo"><img src="../images/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>Esta página forma parte de "jclic-repo", un nuevo proyecto que tiene como objetivo facilitar la publicación de
@@ -179,20 +220,10 @@
             o compartirlas en las redes sociales.</p>
         </paper-material>
 
-        <paper-material class="item warn" elevation="2">
-          <p><strong>Muy importante</strong>: Éste es un espacio provisional destinado principalmente a la realización de pruebas
-            para facilitar el desarrollo de jclic.js. Algunos tipos de actividades aún no funcionan correctamente en todos
-            los dispositivos, y hay diversas funcionalidades todavía no implementadas. Podéis ayudarnos notificando errores,
-            sugiriendo mejoras y proponiendo posibles soluciones en los espacios de desarrollo de los proyectos
-            <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
-            <a href="https://github.com/projectestac/jclic.js/issues">jclic.js</a> y
-            <a href="https://github.com/projectestac/jclic-repo/issues">jclic-repo</a>.</p>
-        </paper-material>
-
       </section>
       <section language="en">
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>JClic project</h2>
           <a href="http://clic.xtec.cat/en/jclic/index.htm"><img src="../images/icon-main.svg" class="appIcon" alt="JClic"></a>
           <p>JClic is a free software project from the
@@ -207,7 +238,7 @@
             available on <a href="http://projectestac.github.io/jclic/">GitHub</a>.</p>
         </paper-material>
 
-        <paper-material elevation="2" class="item">
+        <paper-material elevation="2">
           <h2>jclic.js</h2>
           <a href="http://projectestac.github.io/jclic.js/"><img src="../images/jclic-html5.svg" class="appIcon" alt="JClic.js"></a>
           <p>It's a project still under development which aims to create a new JClic player entirely based on <a href="http://www.w3.org/html/">HTML5</a>            (HTML + JavaScript + CSS3). The goal is to play JClic activities in any modern web browser (Firefox, Chrome,
@@ -220,7 +251,7 @@
           </p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>Library of JClic projects</h2>
           <a href="http://clic.xtec.cat/db/listact_en.jsp"><img src="../images/zonaclic-64.png" class="appIcon" alt="Biblioteca"></a>
           <p>Many teachers from different countries have used JClic to create interactive materials for a wide variety of levels,
@@ -230,7 +261,7 @@
           </p>
         </paper-material>
 
-        <paper-material class="item" elevation="2">
+        <paper-material elevation="2">
           <h2>JClic-repo</h2>
           <a href="https://github.com/projectestac/jclic-repo"><img src="../images/jclicrepo-64.png" class="appIcon" alt="JClic repo"></a>
           <p>This page is part of "jclic-repo", a new project that will facilitate the publication of collections of JClic projects
@@ -242,65 +273,61 @@
             them in an Java applet (when allowed), or share them on social networks.</p>
         </paper-material>
 
-        <paper-material class="item warn" elevation="2">
-          <p><strong>Warning</strong>: You are in a temporary site intended primarily for developing and testing jclic.js. Some
-            types of activities are not yet working on all devices, and some functions are not yet implemented. You can help
-            by reporting errors, suggesting improvements and proposing possible solutions to issues for <a href="https://github.com/projectestac/jclic/issues">JClic</a>,
-            <a href="https://github.com/projectestac/jclic.js/issues">JClic.js</a> and
-            <a href="https://github.com/projectestac/jclic-repo/issues">JClic-repo</a>.</p>
-        </paper-material>
-
       </section>
     </iron-pages>
-    <div id="footer" class="horizontal layout">
-      <social-buttons url="[[url]]" imgurl="[[img]]" text="[[title]]" labels="[[labels]]" lang="[[lang]]"></social-buttons>
-      <span class="flex"></span>
-      <paper-icon-button icon="close" title="[[labels.close]]" on-click="_clickClose"></paper-icon-button>
-    </div>
 
+    <div id="footer" class="horizontal layout">
+      <social-buttons settings="[[settings]]" url="[[_getUrl()]]" imgurl="[[_getImgUrl()]]" text="[[labels.mainTitle]]" labels="[[labels]]"
+        lang="[[lang]]"></social-buttons>
+      <paper-icon-button id="closeBtn" icon="close" title="[[labels.close]]" on-click="_close"></paper-icon-button>
+    </div>
 
   </template>
 
   <script>
     class InfoPages extends Polymer.Element {
-      static get is() { return 'info-pages'; }
+      static get is() { return 'info-pages' }
 
       static get properties() {
         return {
+          // ----------------------------------------------------------------
+          // Properties used by this component but initialized in `repo-data`
+          // ----------------------------------------------------------------
+          // Current set of labels, titles and messages, translated into the current app language
+          labels: Object,
+          settings: Object,
           // -----------------------------------------------------------------
           // Properties used by this component but initialized in `jclic-repo`
           // -----------------------------------------------------------------
           // Current two-letter language code selected by the user
           lang: String,
-          url: {
-            type: String,
-            value: 'https://clic.xtec.cat/repo'
-          },
-          img: {
-            type: String,
-            value: 'https://clic.xtec.cat/repo/icons/icon-192.png'
-          },
-          title: String,
-          labels: {
-            type: Object,
-            value: {}
-          },
-          mainPage: {
-            type: String,
-          },
-          page: {
-            type: String,
-            notify: true,
-          }
         }
       }
 
-      // Update the `page` variable
-      _clickClose() {
-        this.page = this.mainPage
+      // Gets the URL used as a base for absolute links to images and other sources
+      _getBaseUrl() {
+        let path = window.location.pathname
+        const p = path.lastIndexOf('/')
+        path = path.substring(0, p) + '/'
+        return window.location.origin + path
+      }
+
+      // URI of this info page (used in `social-buttons`)
+      _getUrl() {
+        return `${this._getBaseUrl()}index.html?page=info`
+      }
+
+      // The big JClic logo (used in `social-buttons`)
+      _getImgUrl() {
+        return `${this._getBaseUrl()}images/manifest/icon-512x512.png`
+      }
+
+      // Fires a custom `close` event
+      _close(ev) {
+        this.dispatchEvent(new CustomEvent('close'), ev)
       }
     }
 
-    window.customElements.define(InfoPages.is, InfoPages);
+    window.customElements.define(InfoPages.is, InfoPages)
   </script>
 </dom-module>
