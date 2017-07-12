@@ -431,13 +431,23 @@ Some other functional components are also declared and included at this level:
 
       // Opens the big project card of the project passed as a parameter in the query section of the current URL
       _displayRequestedProject(projects, params) {
-        if (projects && params) {
+        if (projects && projects.length > 0 && params) {
           if (projects.length > 0 && params.prj) {
             if (projects.find(p => p.path === params.prj))
               this.showProject(params.prj)
             else
               console.log(`Unknown project: ${params.prj}`)
             params.prj = null
+          }
+          else if(params.language || params.subject || params.level || params.title || params.author) {
+            this.$.selector.setFilter({
+              language: params.language || '*',
+              subject: params.subject || '*',
+              level: params.level || '*',
+              title: params.title || '',
+              author: params.author || '',
+            })
+            params.language = params.subject = params.level = params.title = params.author = null
           }
           params.processed = true
         }

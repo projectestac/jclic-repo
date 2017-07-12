@@ -150,9 +150,24 @@ Custom property       | Description                          | Default
 
       // Called on changes in any control. Updates selected members of the `filter` object
       _updateFilter(e) {
-        if (this.filter && e && e.detail && e.detail.item && e.detail.item.dataset.type)
-          this.filter[e.detail.item.dataset.type] = e.detail.item.dataset.val || '*'
-        this.notifyPath('filter')
+        if (this.filter && e && e.detail && e.detail.item && e.detail.item.dataset.type) {
+          const v = e.detail.item.dataset.val || '*'
+          if(this.filter[e.detail.item.dataset.type] !== v) {
+            this.filter[e.detail.item.dataset.type] = v
+            this.notifyPath('filter')
+          }
+        }
+      }
+      
+      setFilter(f) {
+        if(f.language !== this.filter.language || f.subject !== this.filter.subject ||
+           f.level !== this.filter.level || f.title !== this.filter.title || f.author !== this.filter.author) {
+          console.log(`Set filter ${f}`)
+          this.filter = f
+          this.$.dropLang.contentElement.selected = Math.max(0, this.selectOptions.langOptions.indexOf(f.language || '*'))
+          this.$.dropSubj.contentElement.selected = Math.max(0, this.selectOptions.subjOptions.indexOf(f.subject || '*'))
+          this.$.dropLev.contentElement.selected = Math.max(0, this.selectOptions.levelOptions.indexOf(f.level || '*'))
+        }
       }
     }
 

@@ -143,8 +143,11 @@ Filtering and ordering criteria is stored in special objects called `filter` and
         this.labels = settings && settings.labels && lang && settings.labels[lang] ? settings.labels[lang] : {};
         this.selectOptions = {
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
+          langOptions: (settings && settings.actLanguages && settings.actLanguages.options) ? settings.actLanguages.options : [],
           subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],
-          levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : []
+          subjOptions: (settings && settings.actSubjects && settings.actSubjects.options) ? settings.actSubjects.options : [],
+          levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : [],
+          levelOptions: (settings && settings.actLevels && settings.actLevels.options) ? settings.actLevels.options : [],
         }
       }
 
