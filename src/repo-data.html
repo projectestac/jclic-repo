@@ -84,12 +84,6 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             value: {},
             notify: true
           },
-          // Blocks of info text in the current app language
-          info: {
-            type: Array,
-            value: [],
-            notify: true
-          },
           // Current choices of languages, subjects and levels (expresed in the current language), used to filter the main project list
           selectOptions: {
             type: Object,
@@ -144,10 +138,9 @@ Filtering and ordering criteria is stored in special objects called `filter` and
         ];
       }
 
-      // Updates `labels`, `info` and `selectOptions` in order to reflect the current app language
+      // Updates `labels`, and `selectOptions` in order to reflect the current app language
       _updateLang(settings, lang) {
         this.labels = settings && settings.labels && lang && settings.labels[lang] ? settings.labels[lang] : {};
-        this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang].content : [];
         this.selectOptions = {
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
           subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],
