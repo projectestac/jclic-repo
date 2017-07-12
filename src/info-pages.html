@@ -1,5 +1,5 @@
 <!--
-  File    : user-settings.html
+  File    : info-pages.html
   Created : 24/05/2017
   By      : Francesc Busquets <francesc@gmail.com>
 
@@ -43,7 +43,7 @@
 
 <!--
 
-This component shows information about the project for each supported language.
+This component shows information about the JClic project in different languages.
 
 The real content displayed in this page is stored on the `info` section at `main.json`
 There should be one array of blocks for each supported language.
@@ -152,8 +152,9 @@ Custom property   | Description                       | Default
         ];
       }
 
+      // Sets the `info` array based on the current app language
       _updateContent(settings, lang) {
-        // Set the `info` array based on the current app language
+        
         this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang] : []
 
         // Skip this step when `info` is empty
@@ -191,9 +192,9 @@ Custom property   | Description                       | Default
       _close(ev) {
         this.dispatchEvent(new CustomEvent('close'), ev)
       }
-
     }
 
     window.customElements.define(InfoPages.is, InfoPages)
+
   </script>
 </dom-module>

@@ -63,7 +63,8 @@
 
   <script>
     class JClicPlayerElement extends Polymer.Element {
-      static get is() { return 'jclic-player'; }
+      
+      static get is() { return 'jclic-player' }
 
       static get properties() {
         return {
@@ -84,18 +85,19 @@
 
       _setProject(prj) {
         if (prj) {
-          this.style.display = 'block';
-          this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null);
+          this.style.display = 'block'
+          this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
           if (this.fullScreen)
-            this._currentPlayer.skin.setScreenFull(true);
+            this._currentPlayer.skin.setScreenFull(true)
         } else {
-          this.style.display = 'none';
+          this.style.display = 'none'
           if (this._currentPlayer)
-            this._currentPlayer.reset();
+            this._currentPlayer.reset()
         }
       }
     }
 
-    window.customElements.define(JClicPlayerElement.is, JClicPlayerElement);
+    window.customElements.define(JClicPlayerElement.is, JClicPlayerElement)
+
   </script>
 </dom-module>
