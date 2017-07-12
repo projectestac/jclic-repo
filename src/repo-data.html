@@ -220,8 +220,8 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           return (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
             && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
             && (!f.level || f.level === '*' || item.levelCodes.indexOf(f.level) >= 0)
-            && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim())) >= 0)
-            && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim())) >= 0)
+            && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0)
+            && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0)
         });
       }
 

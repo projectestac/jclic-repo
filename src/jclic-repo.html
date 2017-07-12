@@ -64,7 +64,7 @@
 
 This is the shell component of the basic JClic-repo app.
 
-It contains an `app-drawer-layout` with three main zones:
+The component contains an `app-drawer-layout` with three main zones:
 - An `app-drawer` placed at left, containing a `projects-selector` and an `info-pages` component.
 - An `app-header` containing an `app-toolbar` with title and language selector
 - The main showcase of the JClic projects that form the repository, in a `projects-list` component.
@@ -155,7 +155,7 @@ Some other functional components are also declared and included at this level:
 
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
-        <projects-selector labels="[[labels]]" select-options="[[selectOptions]]" filter="{{filter}}"></projects-selector>
+        <projects-selector id="selector" labels="[[labels]]" select-options="[[selectOptions]]" filter="{{filter}}"></projects-selector>
         <div class="footer">
           <paper-icon-button id="settingsBtn" icon="settings" title="[[labels.settings]]" on-click="_setUserSettings"></paper-icon-button>
           <paper-icon-button id="infoBtn" icon="info" title="[[labels.about]]" on-click="_displayInfo"></paper-icon-button>
@@ -195,7 +195,7 @@ Some other functional components are also declared and included at this level:
 
     <!-- Project card, dynamically filled with the current project data -->
     <big-project-card id="bigPrj" lang="[[lang]]" labels="[[labels]]" repo-root="[[repoRoot]]" base-url="[[baseUrl]]" settings="[[settings]]"
-      on-iron-overlay-opened="_dlgOpened" on-play="playProject"></big-project-card>
+      on-iron-overlay-opened="_dlgOpened" on-iron-overlay-closed="_projectClosed" on-play="playProject"></big-project-card>
 
     <!-- Dialog used to set user perferences about ordering and full-screen displaying -->
     <user-settings id="userSettings" labels="[[labels]]" ordering="{{ordering}}" full-screen-player="{{fullScreenPlayer}}"></user-settings>
@@ -241,7 +241,10 @@ Some other functional components are also declared and included at this level:
             type: String,
             computed: '_getBaseUrl()',
           },
+          // Relative path of current project
           currentProjectId: String,
+          // Main page to be display on the main app area
+          // Valid options are `projects` and `info`
           page: {
             type: String,
             value: 'projects',
@@ -270,7 +273,7 @@ Some other functional components are also declared and included at this level:
           '_checkPreferredLanguage(settings)',
           '_displayRequestedProject(projects, params)',
           '_langSelected(lang)',
-          '_queryChanged(currentProjectId, filter, params)'
+          '_queryChanged(currentProjectId, filter, params, lang)'
         ]
       }
 
@@ -291,6 +294,7 @@ Some other functional components are also declared and included at this level:
       _clickOnLang(e) {
         e.preventDefault()
         this.lang = this.settings.languages[e.model.index].id
+        this._queryChanged()
         return false
       }
 
@@ -314,7 +318,7 @@ Some other functional components are also declared and included at this level:
 
       // Triggered by info button
       _displayInfo() {
-        const search = '?page=info'
+        const search = `?lang=${this.lang}&page=info`
         if (search !== window.location.search)
           window.history.pushState({}, '', `index.html${search}`)
         this.page = 'info'
@@ -323,8 +327,7 @@ Some other functional components are also declared and included at this level:
       // Called when the user closes the info pages
       _closeInfo() {
         this.page = 'projects'
-        if (window.location.search)
-          window.history.pushState({}, '', 'index.html')
+        this._queryChanged()
       }
 
       // Opens a big project card with a specific project data
@@ -348,6 +351,14 @@ Some other functional components are also declared and included at this level:
           })
       }
 
+      // Called when `big-project-card` closes
+      _projectClosed() {
+        if (!this.$.player.project) {
+          this.currentProjectId = null;
+          this._queryChanged()
+        }
+      }
+
       // Launches the project activities in a JClic player
       playProject(prj) {
         // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
@@ -360,12 +371,14 @@ Some other functional components are also declared and included at this level:
         // Setting the `project` attribute of the `jclic-player` component opens automatically the player
         this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`
         this.currentProjectId = prj.path
+        this._queryChanged()
       }
 
       // Called by `jclic-player` when the user leaves the activities
       playerClosed() {
         this.$.player.project = null
         this.currentProjectId = null
+        this._queryChanged()
       }
 
       // called when a new dialog opens
@@ -386,7 +399,7 @@ Some other functional components are also declared and included at this level:
         if (this.params.logLevel)
           this.playerOptions.logLevel = this.params.logLevel
         if (this.params.page && this.params.page === 'info')
-          this._displayInfo();
+          this._displayInfo()
       }
 
       // Try to determine the user's preferred language
@@ -430,14 +443,17 @@ Some other functional components are also declared and included at this level:
         }
       }
 
-      _queryChanged(currentProjectId, filter, params) {
-        if (params && params.processed) {
+      _queryChanged() {
+        if (this.params && this.params.processed) {
           this.page = 'projects'
-          let search = ''
-          if (currentProjectId)
-            search = `?prj=${currentProjectId}`
-          else if (filter) {
-
+          let search = `?lang=${this.lang}`
+          if (this.currentProjectId)
+            search = `${search}&prj=${this.currentProjectId}`
+          else if (this.filter) {
+            ['language', 'subject', 'level', 'title', 'author'].forEach(f => {
+              if (this.filter[f] && this.filter[f] !== '*')
+                search = `${search}&${f}=${encodeURIComponent(this.filter[f])}`
+            })
           }
           if (search !== window.location.search)
             window.history.pushState({}, '', `index.html${search}`)

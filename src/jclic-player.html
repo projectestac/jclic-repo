@@ -39,8 +39,23 @@
 
 <!-- Load the latest JClic.js package from unpkg.com -->
 <script src="https://unpkg.com/jclic/dist/jclic.min.js"></script>
-<!-- script src="https://unpkg.com/jclic/dist/jclic.js"></script -->
-<!-- script src="../jclic.js"></script -->
+<!-- Alternative sources are:
+     - "../jclic.js"
+-->
+
+<!--
+
+This component just contains a JClic Player, used to launch the provided project.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property   | Description                       | Default
+------------------|-----------------------------------|----------
+`--jclic-player`  | Mixin applied to the host         | {}
+
+-->
 
 <dom-module id="jclic-player">
   <template>
@@ -63,17 +78,21 @@
 
   <script>
     class JClicPlayerElement extends Polymer.Element {
-      
+
       static get is() { return 'jclic-player' }
 
       static get properties() {
         return {
+          // Options passed to the JClic Player (see https://github.com/projectestac/jclic.js/blob/master/src/JClicPlayer.js#L122)
           options: Object,
+          // When `true`, the player will switch automatically to full screen, if available on current device
           fullScreen: Boolean,
+          // Project file to be loaded
           project: {
             type: String,
             observer: '_setProject',
           },
+          // Object of type JClicPlayer currently running (if any)
           _currentPlayer: {
             type: Object,
             value: null,
@@ -83,6 +102,7 @@
         }
       }
 
+      // Sets/unsets the JClic project to be launched on the player
       _setProject(prj) {
         if (prj) {
           this.style.display = 'block'

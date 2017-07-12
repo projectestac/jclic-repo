@@ -66,7 +66,6 @@ Custom property      | Description                       | Default
 
 -->
 
-
 <dom-module id="big-project-card">
   <template>
     <style include="shared-styles">
@@ -105,7 +104,7 @@ Custom property      | Description                       | Default
         padding-right: 4pt;
       }
     </style>
-    <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+    <paper-dialog id="dialog" modal entry-animation="scale-up-animation">
       <h2 id="title"></h2>
       <paper-dialog-scrollable>
         <!-- image source will be dynamically set in `_projectChanged` -->
