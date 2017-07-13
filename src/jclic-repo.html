@@ -448,6 +448,7 @@ Some other functional components are also declared and included at this level:
               author: params.author || '',
             })
             params.language = params.subject = params.level = params.title = params.author = null
+            this._queryChanged()
           }
           params.processed = true
         }
