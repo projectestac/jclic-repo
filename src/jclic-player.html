@@ -45,7 +45,8 @@
 
 <!--
 
-This component just contains a JClic Player, used to launch the provided project.
+This component contains a JClic Player and is used to launch the current JClic project. It's a full layer placed at top (z-index: 10),
+initially hidden (display: none)
 
 ### Styling
 
@@ -73,6 +74,7 @@ Custom property   | Description                       | Default
         z-index: 10;
       }
     </style>
+    <!-- JClic.js will build the player inside this div: -->
     <div id="player"></div>
   </template>
 
@@ -118,6 +120,5 @@ Custom property   | Description                       | Default
     }
 
     window.customElements.define(JClicPlayerElement.is, JClicPlayerElement)
-
   </script>
 </dom-module>

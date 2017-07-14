@@ -52,9 +52,25 @@
 <script src="../bower_components/clipboard.js/clipboard.js"></script>
 <!-- endbuild -->
 
-<!-- 
-  WARNING: File images/
 
+<!--
+
+This component offers the following sharing options for a given JClic project:
+
+- A direct link to the activities
+- A link to a `big-project-card`with information about the project
+- A clip of HTTML code, useful for embedding the project in a blog or site
+- A direct link to the main `.jclic` file, useful for Moodle
+
+Al options can be copied to the system's clipboard, or directly shared on social networks
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property      | Description                         | Default
+---------------------|-------------------------------------|----------
+`--project-share`    | Mixin applied to the full component | {}
 
 -->
 
@@ -113,18 +129,24 @@
       <h2><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div class="vertical-section-container">
+
+          <!-- Share a direct link to the activities -->
           <div class="vertical-section">
             <paper-input id="linkToActivities" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
               <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
+
+          <!-- Share a link to a `big-project-card` with information about the project -->
           <div class="vertical-section">
             <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
               <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
+
+          <!-- Share a clip of HTTML code, useful for embedding the project in a blog or site -->
           <div class="vertical-section">
             <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
               <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-click="_copy"></paper-icon-button>
@@ -137,47 +159,74 @@
               </paper-radio-group>
             </div>
           </div>
+
+          <!-- Share a direct link to main `.jclic` file, useful for Moodle -->
           <div class="vertical-section">
-            <!-- WARNING: "img src" paths are always relative to the root document, not to this component! -->
+            <!-- WARNING: "img src" paths are always relative to the root document, not to the component! -->
             <img src="images/moodle-logo.png" class="moodle-logo">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
               <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-click="_copy"></paper-icon-button>
             </paper-input>
           </div>
         </div>
+
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
       </div>
+
+      <!-- "toast" message box that will appear when copying any of the previous elements  -->
       <paper-toast id="copied">
         <div class="toast-msg">[[labels.copied]]</div>
       </paper-toast>
+
     </paper-dialog>
   </template>
 
   <script>
     class ProjectShare extends Polymer.Element {
-      static get is() { return 'project-share'; }
+      static get is() { return 'project-share' }
 
       static get properties() {
         return {
-          settings: Object,
+          // Current project
           project: Object,
-          repoRoot: String,
-          lang: String,
-          labels: Object,
-          // URL used as a base for absolute references to project's components
-          baseUrl: String,          
+          // Expression used as a project's title
           title: String,
+          // URL pointing to a JClic player launching the activities
           linkToActivities: String,
+          // URL pointing to a `big-project-card` with full project info
           linkToPage: String,
+          // URL pointing to a `.jclic` file, used by the JClic module for Moodle
           linkForMoodle: String,
+          // URL pointing to the project's cover image
           imgFullPath: String,
+          // Embeddable code that, when inserted on a blog or site, will create a JClic player launching the activities
           embedCode: String,
+          // Type of dimensions set on `embedCode`. Valid values are: `small` (640x390), `medium` (800x600) and `full` (100%)
           embedSize: {
             type: String,
             value: 'medium',
-          }
+          },
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `jclic-repo`:
+          // -----------------------------------------------------------------------------------
+          // URL used as a base for absolute references to project's components
+          baseUrl: String,
+          // Current two-letter language code selected by the user
+          lang: String,
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `repo-data`:
+          // -----------------------------------------------------------------------------------
+          // Main settings of the app, loaded at startup by `repo-data`
+          settings: Object,
+          // Relative path to the folder where the JClic projects of this repository are located
+          repoRoot: String,
+          // Current set of labels, titles and messages, translated into the current app language
+          labels: Object,
+
         }
       }
 
@@ -185,34 +234,36 @@
         return [
           '_projectChanged(project, repoRoot)',
           '_embedChanged(linkToActivities, embedSize)'
-        ];
+        ]
       }
 
+      // Called when the project is set or changed
       _projectChanged(prj, repoRoot) {
-        this.title = prj ? prj.title : '';
-        this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : '';
-        this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : '';
-        this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : '';
-        this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : '';
+        this.title = prj ? prj.title : ''
+        this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : ''
+        this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : ''
+        this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : ''
+        this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : ''
       }
 
+      // Called when the users selects a different size for `embedCode`
       _embedChanged(link, size) {
-        const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 };
-        this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : '';
+        const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 }
+        this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : ''
       }
 
+      // Puts into the system clipboard the data associated with the button generating the passed event
       _copy(ev) {
         if (ev.target && ev.target.dataset.value) {
           if (this.$.copied.opened)
-            this.$.copied.close();
-          this.$.copied.noCancelOnOutsideClick = false;
-          this.$.copied.positionTarget = ev.target;
-          clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied));
+            this.$.copied.close()
+          this.$.copied.noCancelOnOutsideClick = false
+          this.$.copied.positionTarget = ev.target
+          clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
         }
       }
-
     }
 
-    window.customElements.define(ProjectShare.is, ProjectShare);
+    window.customElements.define(ProjectShare.is, ProjectShare)
   </script>
 </dom-module>

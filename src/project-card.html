@@ -145,7 +145,7 @@ Custom property | Description | Default
 
   <script>
     class ProjectCard extends Polymer.Element {
-      static get is() { return 'project-card'; }
+      static get is() { return 'project-card' }
 
       static get properties() {
         return {
@@ -161,6 +161,7 @@ Custom property | Description | Default
             type: Number,
             value: 1,
           },
+          //
           // ----------------------------------------------------------------
           // Properties used by this component but initialized in `repo-data`
           // ----------------------------------------------------------------
@@ -197,7 +198,7 @@ Custom property | Description | Default
 
       // Called on mouseenter
       _raise() {
-        this.elevation = 3
+        this.elevation = 4
       }
 
       // Called on mouseleave

@@ -129,7 +129,7 @@ Custom property   | Description                       | Default
         return {
           // Current set of texts for info-pages, translated into the current app language
           info: Array,
-
+          //
           // ----------------------------------------------------------------
           // Properties used in this component but initialized in `repo-data`
           // ----------------------------------------------------------------
@@ -137,7 +137,7 @@ Custom property   | Description                       | Default
           labels: Object,
           // Main settings of the app, loaded at startup from `main.json`
           settings: Object,
-
+          //
           // -----------------------------------------------------------------
           // Properties used in this component but initialized in `jclic-repo`
           // -----------------------------------------------------------------
@@ -154,7 +154,7 @@ Custom property   | Description                       | Default
 
       // Sets the `info` array based on the current app language
       _updateContent(settings, lang) {
-        
+
         this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang] : []
 
         // Skip this step when `info` is empty
@@ -167,7 +167,7 @@ Custom property   | Description                       | Default
           for (let i = 0; i < p.length; i++)
             if (p[i].dataset.raw)
               p[i].innerHTML = p[i].dataset.raw
-        }        
+        }
       }
 
       // Gets the URL used as a base for absolute links to images and other sources
@@ -195,6 +195,5 @@ Custom property   | Description                       | Default
     }
 
     window.customElements.define(InfoPages.is, InfoPages)
-
   </script>
 </dom-module>

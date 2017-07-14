@@ -41,6 +41,39 @@
 
 <link rel="import" href="shared-styles.html">
 
+<!--
+
+This component allows to share a specific content on the following social networks:
+
+- Facebook
+- Google+
+- Pinterest
+- Twitter
+
+It also builds a button pointing to a `mailto:` link, useful for sharing the content by e-mail.
+
+The following element attributes must be specified about the content to share:
+
+- An URL pointing to the main content (`url`)
+- The URL of a caption image (`imgurl`)
+- A brief description of the content (`text`)
+
+Also, the following fields should be supplied in `settings`:
+
+- A valid Facebook API ID, in `facebookShareID` (see https://developers.facebook.com/docs/apps/register)
+- A valid twitter ID for the sender, in `twitterVia`
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property      | Description                         | Default
+---------------------|-------------------------------------|----------
+`--social-buttons`   | Mixin applied to the full component | {}
+
+-->
+
+<!-- SVG icons of the supported social networks -->
 <iron-iconset-svg name="sbtn" size="24">
   <svg>
     <defs>
@@ -101,29 +134,40 @@
 
   <script>
     class SocialButtons extends Polymer.Element {
-      static get is() { return 'social-buttons'; }
+      static get is() { return 'social-buttons' }
 
       static get properties() {
         return {
-          settings: Object,
+          // URL of shared resource
           url: String,
+          // URL of the caption image
           imgurl: String,
+          // Brief description of the shared resource
           text: String,
-          labels: Object,
+          // Computed links to social networks:
           linkToFacebook: String,
           linkToGooglePlus: String,
           linkToPinterest: String,
           linkToTwitter: String,
           linkToMail: String,
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `repo-data`:
+          // -----------------------------------------------------------------------------------
+          // Main settings of the app, loaded at startup from `main.json`
+          settings: Object,
+          // Current set of labels, titles and messages, translated into the current app language
+          labels: Object,          
         }
       }
 
       static get observers() {
         return [
           '_computeLinks(settings, url, imgurl, text, labels)'
-        ];
+        ]
       }
 
+      // Computes the link to be used with each social network, based on the current resource data
       _computeLinks(settings, url, imgurl, text, labels) {
         if (settings && url && imgurl && text && labels) {
           const
@@ -135,18 +179,18 @@
             eText = encodeURIComponent(text),
             eDesc = encodeURIComponent(labels.check),
             eRedirect = encodeURIComponent(settings.facebookRedirect || window.location.href),
-            eMailBody = encodeURIComponent(`${text}\n\n${labels.check}:\n${url}`);
+            eMailBody = encodeURIComponent(`${text}\n\n${labels.check}:\n${url}`)
 
-          this.linkToFacebook = `https://www.facebook.com/dialog/feed?app_id=${eFBId}&link=${eUrl}&picture=${eImg}&name=${eText}&description=${eDesc}&redirect_uri=${eRedirect}`;
-          this.linkToGooglePlus = `https://plus.google.com/share?url=${eUrl}`;
-          this.linkToPinterest = `https://pinterest.com/pin/create/button/?url=${eUrl}&media=${eImg}&description=${eDesc}`;
-          this.linkToTwitter = `https://twitter.com/intent/tweet?text=${eText}&url=${eUrl}&hashtags=${eHash}&via=${eTWVia}`;
-          this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`;
+          this.linkToFacebook = `https://www.facebook.com/dialog/feed?app_id=${eFBId}&link=${eUrl}&picture=${eImg}&name=${eText}&description=${eDesc}&redirect_uri=${eRedirect}`
+          this.linkToGooglePlus = `https://plus.google.com/share?url=${eUrl}`
+          this.linkToPinterest = `https://pinterest.com/pin/create/button/?url=${eUrl}&media=${eImg}&description=${eDesc}`
+          this.linkToTwitter = `https://twitter.com/intent/tweet?text=${eText}&url=${eUrl}&hashtags=${eHash}&via=${eTWVia}`
+          this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`
         }
       }
-
     }
 
-    window.customElements.define(SocialButtons.is, SocialButtons);
+    window.customElements.define(SocialButtons.is, SocialButtons)
+
   </script>
 </dom-module>

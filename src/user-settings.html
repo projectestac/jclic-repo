@@ -71,7 +71,7 @@
         background-color: var(--dark-primary-color);
       }
 
-      paper-material > h4 {
+      paper-material>h4 {
         margin-top: 0;
         margin-bottom: 8pt;
       }
@@ -79,7 +79,6 @@
       paper-listbox {
         background-color: var(--light-primary-color);
       }
-
     </style>
 
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
@@ -111,59 +110,77 @@
 
   <script>
     class UserSettings extends Polymer.MutableData(Polymer.Element) {
-      static get is() { return 'user-settings'; }
+      static get is() { return 'user-settings' }
 
       static get properties() {
         return {
-          // Control labels, already localized
-          labels: Object,
+          // When checked (and allowed by the system) activities will be displayed at full screen
           _fullScreen: Boolean,
+          // Current value selected in the `order field` listbox
           _order: Number,
+          // When checked, items will be ordered from Z to A
           _orderInv: Boolean,
+          // Computed field indicating if full screen mode is available on the current browser
           _noFullScreenAvailable: {
             type: Boolean,
             value: () => !document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled,
           },
+          // Valid options for `field` in `ordering`
           orderOptions: {
             type: Object,
             value: () => ['date', 'title', 'author'],
           },
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `repo-data`:
+          // -----------------------------------------------------------------------------------
+          // Current set of labels, titles and messages, translated into the current app language
+          labels: Object,          
           // Ordering criteria: {field: '', inv: false}
           ordering: {
             type: Object,
             notify: true,
           },
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `jclic-repo`:
+          // -----------------------------------------------------------------------------------
+          // Flag indicating whether JClic player has to open in full-screen mode or just inside the current window
           fullScreenPlayer: {
             type: Boolean,
             notify: true,
-          },
+          },          
         }
       }
 
+      // Gets a label for a specific item translated into the current language
       _getLabel(labels, item) {
-        return labels ? (labels[item] || item) : '';
+        return labels ? (labels[item] || item) : ''
       }
 
+      // Opens the dialog
       open() {
-        this._fullScreen = this.fullScreenPlayer;
-        this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0;
-        this._orderInv = this.ordering ? this.ordering.inv || false : false;
-        this.$.dialog.open();
+        this._fullScreen = this.fullScreenPlayer
+        this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0
+        this._orderInv = this.ordering ? this.ordering.inv || false : false
+        this.$.dialog.open()
       }
 
+      // Caalled when the user cancels the dialog
       _cancel() {
-        this.$.dialog.close();
+        this.$.dialog.close()
       }
 
+      // Called when the user clicks on OK
       _ok() {
-        this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen;
-        this.ordering.field = this.orderOptions[this._order];
-        this.ordering.inv = this._orderInv;
-        this.notifyPath('ordering');
-        this.$.dialog.close();
+        this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen
+        this.ordering.field = this.orderOptions[this._order]
+        this.ordering.inv = this._orderInv
+        this.notifyPath('ordering')
+        this.$.dialog.close()
       }
     }
 
-    window.customElements.define(UserSettings.is, UserSettings);
+    window.customElements.define(UserSettings.is, UserSettings)
   </script>
 </dom-module>

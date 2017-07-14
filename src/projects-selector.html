@@ -89,16 +89,15 @@ Custom property       | Description                          | Default
         @apply --search-button;
       }
 
-      h4 {
+      h3 {
         color: var(--secondary-text-color);
-        margin-bottom: 0;
       }
     </style>
 
-    <h4>[[labels.searchTitle]]</h4>
+    <h3>[[labels.searchTitle]]</h3>
 
     <paper-dropdown-menu-light id="dropLang" label="[[labels.languages]]">
-      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readFilterValues">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readInputFieldValues">
         <template is="dom-repeat" items="[[selectOptions.languages]]">
           <paper-item data-type="language" data-val$="[[item.val]]">[[item.text]]</paper-item>
         </template>
@@ -106,7 +105,7 @@ Custom property       | Description                          | Default
     </paper-dropdown-menu-light>
 
     <paper-dropdown-menu-light id="dropSubj" label="[[labels.subjects]]">
-      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readFilterValues">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readInputFieldValues">
         <template is="dom-repeat" items="[[selectOptions.subjects]]">
           <paper-item data-type="subject" data-val$="[[item.val]]">[[item.text]]</paper-item>
         </template>
@@ -114,17 +113,17 @@ Custom property       | Description                          | Default
     </paper-dropdown-menu-light>
 
     <paper-dropdown-menu-light id="dropLev" label="[[labels.levels]]">
-      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readFilterValues">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" on-iron-select="readInputFieldValues">
         <template is="dom-repeat" items="[[selectOptions.levels]]">
           <paper-item data-type="level" data-val$="[[item.val]]">[[item.text]]</paper-item>
         </template>
       </paper-listbox>
     </paper-dropdown-menu-light>
 
-    <paper-input id="title" class="textInput" label="[[labels.title]]" on-change="readFilterValues"></paper-input>
-    <paper-input id="author" class="textInput" label="[[labels.author]]" on-change="readFilterValues"></paper-input>
+    <paper-input id="title" class="textInput" label="[[labels.title]]" on-change="readInputFieldValues"></paper-input>
+    <paper-input id="author" class="textInput" label="[[labels.author]]" on-change="readInputFieldValues"></paper-input>
 
-    <paper-button raised class="search" on-click="readFilterValues" id="searchBtn">
+    <paper-button raised class="search" on-click="readInputFieldValues" id="searchBtn">
       <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
       <span>[[labels.search]]</span>
     </paper-button>
@@ -136,51 +135,63 @@ Custom property       | Description                          | Default
       static get is() { return 'projects-selector' }
       static get properties() {
         return {
-          // Current set of labels, titles and messages, translated into the current app language. Initialized and updated in `repo-data`.
-          labels: Object,
-          // Current choices of languages, subjects and levels, expresed in the current language and used to filter the main project list. Initialized and updated in `repo-data`.
+          // Flag to disable the main event listener while input fields are programatically updated
+          _updatingFields: {
+            type: Boolean,
+            value: false,
+          },
+          //
+          // -----------------------------------------------------------------------------------
+          // Other variables used in this component but declared and initialized in `repo-data`:
+          // -----------------------------------------------------------------------------------
+          // Current set of labels, titles and messages, translated into the current app language.
+          labels: Object,          
+          // Current choices of languages, subjects and levels, expresed in the current language and used to filter the main project list.
           selectOptions: Object,
-          // Current set of filter and search options. Also initialized and updated in `repo-data`.
+          // Current set of filtering and searching options.
           filter: {
             type: Object,
             notify: true,
           },
-          // Array with the field names currently used in `filter`
-          filterFields: {
-            type: Array,
-            value: () => { return ['language', 'subject', 'level', 'title', 'author'] },
-          }
         }
       }
 
       // Checks if the content of the provided object `f` is equivalent to the current filter settings
       // Returns `true` when `this.filter` has not been created, or when the value of any of its fields differs from the value of the same field in `f`
       filterDiffers(f) {
-        return !this.filter || this.filterFields.find(ff => this.filter[ff] !== f[ff])
+        return !this.filter || ['language', 'subject', 'level', 'title', 'author'].find(ff => this.filter[ff] !== f[ff])
       }
 
-      // Reads the values stored in the form controls, and sets a new value for `this.flter` if any difference is found
-      readFilterValues(ev) {
-        const f = {
-          language: this.$.dropLang.contentElement.selectedItem ? this.$.dropLang.contentElement.selectedItem.dataset.val : '*',
-          subject: this.$.dropSubj.contentElement.selectedItem ? this.$.dropSubj.contentElement.selectedItem.dataset.val : '*',
-          level: this.$.dropLev.contentElement.selectedItem ? this.$.dropLev.contentElement.selectedItem.dataset.val : '*',
-          title: this.$.title.value || '',
-          author: this.$.author.value || '',
+      // Reads the values stored in the form controls, and updates `this.flter` if needed
+      readInputFieldValues(ev) {
+        if (!this._updatingFields) {
+          const f = {
+            language: this.$.dropLang.contentElement.selectedItem ? this.$.dropLang.contentElement.selectedItem.dataset.val : '*',
+            subject: this.$.dropSubj.contentElement.selectedItem ? this.$.dropSubj.contentElement.selectedItem.dataset.val : '*',
+            level: this.$.dropLev.contentElement.selectedItem ? this.$.dropLev.contentElement.selectedItem.dataset.val : '*',
+            title: this.$.title.value || '',
+            author: this.$.author.value || '',
+          }
+          if (this.filterDiffers(f))
+            this.filter = f
         }
-        if(this.filterDiffers(f))
-          this.filter = f
       }
 
       // Sets a new value for `this.filter` and updates the form controls accordingly
       setFilter(f) {
         if (this.filterDiffers(f)) {
-          this.filter = f
+          // Disable event listener flag
+          this._updatingFields = true
+          // Fill-in input fields with the new values
           this.$.dropLang.contentElement.selected = this.selectOptions.findIndex('languages', f.language || '*')
           this.$.dropSubj.contentElement.selected = this.selectOptions.findIndex('subjects', f.subject || '*')
           this.$.dropLev.contentElement.selected = this.selectOptions.findIndex('levels', f.level || '*')
           this.$.title.value = f.title || ''
           this.$.author.value = f.author || ''
+          // Update `this.filter`
+          this.filter = f
+          // Re-enable event listener flag
+          this._updatingFields = false
         }
       }
     }

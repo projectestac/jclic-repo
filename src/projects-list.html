@@ -103,6 +103,7 @@ Custom property   | Description                         | Default
           mainContainer: Object,
           // Link to the scrolling region of the main container, usually the `#contentContainer` element of `app-header-layout`
           scrollingContainer: Object,
+          //
           // ----------------------------------------------------------------
           // Properties used in this component but initialized in `repo-data`
           // ----------------------------------------------------------------
@@ -167,7 +168,6 @@ Custom property   | Description                         | Default
         }
         this.$.scroll.clearTriggers()
       }
-
     }
 
     window.customElements.define(ProjectsList.is, ProjectsList)
