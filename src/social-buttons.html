@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
@@ -133,11 +133,9 @@ Custom property      | Description                         | Default
   </template>
 
   <script>
-    class SocialButtons extends Polymer.Element {
-      static get is() { return 'social-buttons' }
-
-      static get properties() {
-        return {
+    Polymer({
+      is: 'social-buttons',
+      properties: {
           // URL of shared resource
           url: String,
           // URL of the caption image
@@ -157,18 +155,14 @@ Custom property      | Description                         | Default
           // Main settings of the app, loaded at startup from `main.json`
           settings: Object,
           // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,          
-        }
-      }
-
-      static get observers() {
-        return [
+          labels: Object,
+      },
+      observers: [
           '_computeLinks(settings, url, imgurl, text, labels)'
-        ]
-      }
+      ],
 
       // Computes the link to be used with each social network, based on the current resource data
-      _computeLinks(settings, url, imgurl, text, labels) {
+      _computeLinks: function(settings, url, imgurl, text, labels) {
         if (settings && url && imgurl && text && labels) {
           const
             eFBId = encodeURIComponent(settings.facebookShareID),
@@ -188,9 +182,7 @@ Custom property      | Description                         | Default
           this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`
         }
       }
-    }
-
-    window.customElements.define(SocialButtons.is, SocialButtons)
+    });
 
   </script>
 </dom-module>

@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -154,11 +154,9 @@ Custom property      | Description                       | Default
   </template>
 
   <script>
-    class BigProjectCard extends Polymer.Element {
-      static get is() { return 'big-project-card' }
-
-      static get properties() {
-        return {
+    Polymer({
+      is: 'big-project-card',
+      properties: {
           // Object containing the data of the JClic project currently displayed on this card
           project: Object,
           //
@@ -178,18 +176,13 @@ Custom property      | Description                       | Default
           // Properties used by this component but initialized in `jclic-repo`
           // -----------------------------------------------------------------
           // Current two-letter language code selected by the user
-          lang: String,
-        }
-      }
-
-      static get observers() {
-        return [
+          lang: String,        
+      },
+      observers: [
           '_projectChanged(project, lang, repoRoot)'
-        ]
-      }
-
+      ],
       // Fill-in the card fields when project data is set
-      _projectChanged(prj, lang, repoRoot) {
+      _projectChanged: function(prj, lang, repoRoot) {
         this.$.cover.src = (prj && prj.cover && repoRoot) ? `${repoRoot}/${prj.path}/${prj.cover}` : ''
         this.$.title.textContent = prj ? prj.title : ''
         this.$.author.textContent = prj ? prj.author : ''
@@ -202,50 +195,48 @@ Custom property      | Description                       | Default
         this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
         this.$.installJava.disabled = !prj || !prj.instFile
         this.$.clicZone.disabled = !prj || !prj.clicZoneURL
-      }
+      },
 
       // Launches the project activities
-      _tapPlay(ev) {
+      _tapPlay: function(ev) {
         if (this.project)
           this.dispatchEvent(new CustomEvent('play', {detail: {project: this.project}}))
         ev.stopPropagation()
-      }
+      },
 
       // Opens a link to a JNLP file that will start the installation of the project's Java version, when available
-      _tapInstallJava() {
+      _tapInstallJava: function() {
         if (this.project && this.project.instFile)
           window.open(`https://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=${this.baseUrl}${this.repoRoot}/${this.project.path}/${this.project.instFile}`)
-      }
+      },
 
       // Downloads the JClic project in SCORM format (not yet implemented!)
-      _tapDownload() {
+      _tapDownload: function() {
         if(this.project){
           this.$.downloadDlg.$.dialog.open()
           this.$.downloadDlg.prepareZipFile()
         }
-      }
+      },
 
       // Redirects the navigation to the project's page in the legacy clicZone
-      _tapClicZone() {
+      _tapClicZone: function() {
         if (this.project && this.project.clicZoneURL)
           window.open(this.project.clicZoneURL, 'ClicZone')
-      }
+      },
 
       // Opens the `project-share` dialog
-      _tapShare(ev) {
+      _tapShare: function(ev) {
         this.$.shareDlg.$.dialog.open()
-      }
+      },
 
       // Closes this dialog
-      close() {
+      close: function() {
         if (this.$.shareDlg.$.dialog.opened)
           this.$.shareDlg.$.dialog.close()
         if (this.$.dialog.opened)
           this.$.dialog.close()
       }
-    }
+    });
 
-    window.customElements.define(BigProjectCard.is, BigProjectCard)
-    
   </script>
 </dom-module>

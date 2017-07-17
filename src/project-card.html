@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 
@@ -49,14 +49,14 @@ This is a small card with basic information about a specific JClic project. This
 
 The following custom properties and mixins are available for styling:
 
-Custom property | Description | Default
-----------------|-------------|----------
-`--project-card-content-height` | The initial height of the content area | `170px`
-`--project-card-title` | Mixin applied to the title | `{}`
-`--project-card-language-box` | Mixin applied to the small boxes displaying the project's language(s) | `{}`
-`--project-card-author` | Mixin applied to the card bottom area, where the author(s) name appear | `{}`
-`--project-card-play-button` | Mixin applied to the play button | `{}`
-`--project-card` | Mixin applied to the project card | `{}`
+Custom property                 | Description                                                            | Default
+--------------------------------|------------------------------------------------------------------------|--------
+`--project-card-content-height` | The initial height of the content area                                 | `170px`
+`--project-card-title`          | Mixin applied to the title                                             | `{}`
+`--project-card-language-box`   | Mixin applied to the small boxes displaying the project's language(s)  | `{}`
+`--project-card-author`         | Mixin applied to the card bottom area, where the author(s) name appear | `{}`
+`--project-card-play-button`    | Mixin applied to the play button                                       | `{}`
+`--project-card`                | Mixin applied to the project card                                      | `{}`
 
 -->
 
@@ -144,13 +144,14 @@ Custom property | Description | Default
   </template>
 
   <script>
-    class ProjectCard extends Polymer.Element {
-      static get is() { return 'project-card' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'project-card',
+      properties: {
           // Object containing the data of the JClic project currently displayed on this card
-          project: Object,
+          project: {
+            type: Object
+          },
           // Project languages, represented as an array of two-letter language codes
           languages: Object,
           // Current elevation of the `paper-material` container
@@ -165,53 +166,47 @@ Custom property | Description | Default
           // Relative path to the folder where the JClic projects of this repository are located
           repoRoot: String,
           // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,
-        }
-      }
-
-      static get observers() {
-        return [
-          '_setProject(repoRoot, project)'
-        ]
-      }
-
+          labels: Object,        
+      },
+      observers: [
+        '_setProject(repoRoot, project)'
+      ],
       // Sets the current project data
-      _setProject(repoRoot, prj) {
-        if (repoRoot && prj) {
-          this.setAttribute('aria-label', prj ? prj.title : '')
-          if (prj && prj.cover)
-            this.$.content.style.cssText = `background: no-repeat center/150% url("${repoRoot}/${prj.path}/${prj.cover}");`
-          else
-            this.$.content.style.cssText = ''
-          this.$.title.style.cssText = prj.title ? '' : 'display:none;'
-          this.languages = (prj && prj.langCodes) ? prj.langCodes : []
+      _setProject: function(repoRoot, prj) {
+        if(repoRoot && prj) {
+        this.setAttribute('aria-label', prj ? prj.title : '')
+        if (prj && prj.cover)
+          this.$.content.style.cssText = `background: no-repeat center/150% url("${repoRoot}/${prj.path}/${prj.cover}");`
+        else
+          this.$.content.style.cssText = ''
+        this.$.title.style.cssText = prj.title ? '' : 'display:none;'
+        this.languages = (prj && prj.langCodes) ? prj.langCodes : []
         }
-      }
+      },
 
       // Event handler called by the play button
-      _play(ev) {
+      _play: function(ev) {
         if (this.project)
           this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
         ev.stopPropagation()
-      }
+      },
 
       // Event handler called when the user clicks on the card
-      _click() {
+      _click: function() {
         if (this.project)
           this.dispatchEvent(new CustomEvent('show', { detail: { path: this.project.path } }))
-      }
+      },
 
       // Called on mouseenter
-      _raise() {
+      _raise: function() {
         this.elevation = 4
-      }
+      },
 
       // Called on mouseleave
-      _unraise() {
+      _unraise: function() {
         this.elevation = 1
       }
-    }
+    });
 
-    window.customElements.define(ProjectCard.is, ProjectCard)
   </script>
 </dom-module>

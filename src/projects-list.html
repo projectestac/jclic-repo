@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-scroll-threshold/iron-scroll-threshold.html">
 
 <link rel="import" href="shared-styles.html">
@@ -79,11 +79,10 @@ Custom property   | Description                          | Default
   </template>
 
   <script>
-    class ProjectsList extends Polymer.Element {
-      static get is() { return 'projects-list' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'projects-list',
+      properties: {
           // Collection of projects currently present on the showcase. Will grow as container scrolls down.
           _visibleProjects: {
             type: Array,
@@ -113,50 +112,46 @@ Custom property   | Description                          | Default
           labels: Object,
           // Ordered array containing the colection of projects matching the current filter settings
           projects: Array,
-        }
-      }
-
-      static get observers() {
-        return [
+      },
+      observers: [
           '_projectsUpdated(projects)',
           '_containerUpdated(mainContainer)'
-        ]
-      }
+      ],
 
       // Notify `play` and `show` events from cards to `jclic-repo`
-      notifyEvent(ev) {
+      notifyEvent: function(ev) {
         this.dispatchEvent(new CustomEvent(ev.type, { detail: ev.detail }))
-      }
+      },
 
       // Called when the `mainContainer` property is initially set
-      _containerUpdated(mainContainer) {
+      _containerUpdated: function(mainContainer) {
         if (mainContainer && mainContainer.$.contentContainer)
           this.scrollingContainer = mainContainer.$.contentContainer
-      }
+      },
 
       // Called when the `projects` array is updated.
-      _projectsUpdated(projects) {
+      _projectsUpdated: function(projects) {
         // Remove all elements from `_visibleProjects`
         this.splice('_visibleProjects', 0, this._visibleProjects.length + 1)
         // Load more projects
         if (projects && projects.length > 0)
           this.loadMoreProjects(this.getItemsPerPage())
-      }
+      },
 
       // Guess the number of `project-card` elements that fit in each row
-      getCardsH() {
+      getCardsH: function() {
         return this.mainContainer ? Math.ceil(this.mainContainer.offsetWidth / this.cardsWidth) : 20
-      }
+      },
 
       // Guess the number of project cards that fits on the current page
-      getItemsPerPage() {
+      getItemsPerPage: function() {
         const cardsH = this.getCardsH()
         const cardsV = Math.ceil(this.mainContainer.offsetHeight / this.cardsWidth) + 1
         return Math.max(20, cardsH * cardsV)
-      }
+      },
 
       // Adds more elements to `_visibleProjects`, when available
-      loadMoreProjects(num) {
+      loadMoreProjects: function(num) {
         if (this.projects && this.projects.length > this._visibleProjects.length) {
           if (!num || isNaN(num))
             num = 2 * this.getCardsH()
@@ -167,9 +162,8 @@ Custom property   | Description                          | Default
             this.push('_visibleProjects', this.projects[p++])
         }
         this.$.scroll.clearTriggers()
-      }
-    }
+      }      
+    });
 
-    window.customElements.define(ProjectsList.is, ProjectsList)
   </script>
 </dom-module>

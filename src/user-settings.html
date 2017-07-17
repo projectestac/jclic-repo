@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
@@ -62,7 +62,6 @@ Custom property   | Description                          | Default
 `--user-settings` | Mixin applied to the settings dialog | {}
 
 -->
-
 
 <dom-module id="user-settings">
   <template>
@@ -128,11 +127,10 @@ Custom property   | Description                          | Default
   </template>
 
   <script>
-    class UserSettings extends Polymer.Element {
-      static get is() { return 'user-settings' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'user-settings',
+      properties: {
           // When checked (and allowed by the system) activities will be displayed at full screen
           _fullScreen: Boolean,
           // Current value selected in the `order field` listbox
@@ -168,38 +166,36 @@ Custom property   | Description                          | Default
           fullScreenPlayer: {
             type: Boolean,
             notify: true,
-          },          
-        }
-      }
+          },        
+      },
 
       // Gets a label for a specific item translated into the current language
-      _getLabel(labels, item) {
+      _getLabel: function(labels, item) {
         return labels ? (labels[item] || item) : ''
-      }
+      },
 
       // Opens the dialog
-      open() {
+      open: function() {
         this._fullScreen = this.fullScreenPlayer
         this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0
         this._orderInv = this.ordering ? this.ordering.inv || false : false
         this.$.dialog.open()
-      }
+      },
 
       // Caalled when the user cancels the dialog
-      _cancel() {
+      _cancel: function() {
         this.$.dialog.close()
-      }
+      },
 
       // Called when the user clicks on OK
-      _ok() {
+      _ok: function() {
         this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen
         this.ordering.field = this.orderOptions[this._order]
         this.ordering.inv = this._orderInv
         this.notifyPath('ordering')
         this.$.dialog.close()
       }
-    }
-
-    window.customElements.define(UserSettings.is, UserSettings)
+    });
+    
   </script>
 </dom-module>

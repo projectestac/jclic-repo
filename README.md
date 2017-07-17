@@ -4,7 +4,7 @@
 This is a single-page HTML5 application used to publish repositories of JClic projects. A big instance of jclic-repo is
 currently running at [http://clic.xtec.cat/repo]
 
-Built with [Polymer 2.0](https://www.polymer-project.org/) web components
+Built with [Polymer](https://www.polymer-project.org/) web components. This branch is a backport to __Polymer 1__ of `master` branch, based on __Polymer 2__, made for compatibility with legacy browsers.
 
 ## How to check and build jclic-repo
 

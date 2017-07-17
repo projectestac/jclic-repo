@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -144,11 +144,9 @@ Custom property      | Description                         | Default
   </template>
 
   <script>
-    class ProjectDownload extends Polymer.Element {
-      static get is() { return 'project-download' }
-
-      static get properties() {
-        return {
+    Polymer({
+      is: 'project-download',
+      properties: {
           // Object containing the data of the JClic project currently displayed on this card
           project: Object,
           // zipFile is a BLOB containing the compressed data
@@ -169,26 +167,22 @@ Custom property      | Description                         | Default
           repoRoot: String,
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
-        }
-      }
-
-      static get observers() {
-        return [
+      },
+      observers: [
           '_projectSet(project)',
           '_fileChanged(zipFile)'
-        ]
-      }
+      ],
 
       // A new project has been set, so clear the current zipFile (if any)
-      _projectSet(project) {
+      _projectSet: function(project) {
         if (project) {
           // This will invoke `_fileChanged`
           this.zipFile = null
         }
-      }
+      },
 
       // Monitors changes in `zipFile`, enabling and disabling the `cancel` and `download` buttons accordingly
-      _fileChanged(zipFile) {
+      _fileChanged: function(zipFile) {
         if (zipFile) {
           this.$.cancelBtn.style.display = 'none'
           this.$.downloadBtn.style.display = 'flex'
@@ -196,11 +190,11 @@ Custom property      | Description                         | Default
           this.$.cancelBtn.style.display = 'flex'
           this.$.downloadBtn.style.display = 'none'
         }
-      }
+      },
 
       // This is the main method of this component: checks the current project, downloads all its components and prepares
       // a compressed BLOB ready to be served as a ZIP file
-      prepareZipFile() {
+      prepareZipFile: function() {
 
         // Clear current dialog
         this._clearDlg()
@@ -301,10 +295,10 @@ Custom property      | Description                         | Default
               this.log_status = ''
             })
         }
-      }
+      },
 
       // Cancels the downloading of project ingredients
-      _cancelDownload() {
+      _cancelDownload: function() {
         this._clearDlg()
         this.$.dialog.close()
         if (this._xhrs) {
@@ -321,30 +315,30 @@ Custom property      | Description                         | Default
           this._xhrs = null
         }
         this.zipFile = null
-      }
+      },
 
       // Clears current dialog messages
-      _clearDlg() {
+      _clearDlg: function() {
         this.log_msg = ''
         this.log_status = ''
         this.log_err = ''
         this._initProgress()
-      }
+      },
 
       // Gives the resulting BLOB simulating the downloading of a ZIP file
-      _downloadFile() {
+      _downloadFile: function() {
         if (this.zipFile) {
           // `saveAs` provided by [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
           window.saveAs(this.zipFile, this.zipFileName)
           this._cancelDownload()
         }
-      }
+      },
 
       // Inits the progress bar with a maximum value
-      _initProgress(max = 0) {
+      _initProgress: function(max = 0) {
         this.$.progress.value = 0
         this.$.progress.max = max
-      }
+      },
 
       /**
        * Retrieves the content of a remote file as a binary object
@@ -354,7 +348,7 @@ Custom property      | Description                         | Default
        * This modified version returns an `XMLHttpRequest` object (or `null` in case of error)
        * that can be useful for cancelling pending transactions at user request
        **/
-      static getBinaryContent(path, callback) {
+      getBinaryContent: function(path, callback) {
         let xhr = null
         try {
           xhr = new XMLHttpRequest()
@@ -387,9 +381,7 @@ Custom property      | Description                         | Default
         }
         return xhr
       }
-    }
-
-    window.customElements.define(ProjectDownload.is, ProjectDownload)
+    });
 
   </script>
 </dom-module>

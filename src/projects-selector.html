@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
@@ -131,10 +131,9 @@ Custom property       | Description                          | Default
   </template>
 
   <script>
-    class ProjectsSelector extends Polymer.Element {
-      static get is() { return 'projects-selector' }
-      static get properties() {
-        return {
+    Polymer({
+      is: 'projects-selector',
+      properties: {
           // Flag to disable the main event listener while input fields are programatically updated
           _updatingFields: {
             type: Boolean,
@@ -152,18 +151,17 @@ Custom property       | Description                          | Default
           filter: {
             type: Object,
             notify: true,
-          },
-        }
-      }
+          },        
+      },
 
       // Checks if the content of the provided object `f` is equivalent to the current filter settings
       // Returns `true` when `this.filter` has not been created, or when the value of any of its fields differs from the value of the same field in `f`
-      filterDiffers(f) {
+      filterDiffers: function(f) {
         return !this.filter || ['language', 'subject', 'level', 'title', 'author'].find(ff => this.filter[ff] !== f[ff])
-      }
+      },
 
       // Reads the values stored in the form controls, and updates `this.flter` if needed
-      readInputFieldValues(ev) {
+      readInputFieldValues: function(ev) {
         if (!this._updatingFields) {
           const f = {
             language: this.$.dropLang.contentElement.selectedItem ? this.$.dropLang.contentElement.selectedItem.dataset.val : '*',
@@ -175,10 +173,10 @@ Custom property       | Description                          | Default
           if (this.filterDiffers(f))
             this.filter = f
         }
-      }
+      },
 
       // Sets a new value for `this.filter` and updates the form controls accordingly
-      setFilter(f) {
+      setFilter: function(f) {
         if (this.filterDiffers(f)) {
           // Disable event listener flag
           this._updatingFields = true
@@ -194,8 +192,7 @@ Custom property       | Description                          | Default
           this._updatingFields = false
         }
       }
-    }
+    });
 
-    window.customElements.define(ProjectsSelector.is, ProjectsSelector)
   </script>
 </dom-module>

@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
@@ -163,7 +163,7 @@ Custom property      | Description                         | Default
           <!-- Share a direct link to main `.jclic` file, useful for Moodle -->
           <div class="vertical-section">
             <!-- WARNING: "img src" paths are always relative to the root document, not to the component! -->
-            <img src="images/moodle-logo.png" class="moodle-logo">
+            <img src="../images/moodle-logo.png" class="moodle-logo">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
               <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-click="_copy"></paper-icon-button>
             </paper-input>
@@ -184,11 +184,10 @@ Custom property      | Description                         | Default
   </template>
 
   <script>
-    class ProjectShare extends Polymer.Element {
-      static get is() { return 'project-share' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'project-share',
+      properties: {
           // Current project
           project: Object,
           // Expression used as a project's title
@@ -226,34 +225,30 @@ Custom property      | Description                         | Default
           repoRoot: String,
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
+        
+      },
 
-        }
-      }
-
-      static get observers() {
-        return [
+      observers: [
           '_projectChanged(project, repoRoot)',
           '_embedChanged(linkToActivities, embedSize)'
-        ]
-      }
-
+      ],
       // Called when the project is set or changed
-      _projectChanged(prj, repoRoot) {
+      _projectChanged: function(prj, repoRoot) {
         this.title = prj ? prj.title : ''
         this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : ''
         this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : ''
         this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : ''
         this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : ''
-      }
+      },
 
       // Called when the users selects a different size for `embedCode`
-      _embedChanged(link, size) {
+      _embedChanged: function(link, size) {
         const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 }
         this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : ''
-      }
+      },
 
       // Puts into the system clipboard the data associated with the button generating the passed event
-      _copy(ev) {
+      _copy: function(ev) {
         if (ev.target && ev.target.dataset.value) {
           if (this.$.copied.opened)
             this.$.copied.close()
@@ -262,8 +257,7 @@ Custom property      | Description                         | Default
           clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
         }
       }
-    }
-
-    window.customElements.define(ProjectShare.is, ProjectShare)
+    });
+    
   </script>
 </dom-module>

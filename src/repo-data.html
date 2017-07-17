@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-request.html">
 <!-- [Unidecode](https://github.com/FGRibreau/node-unidecode) is used to ignore accents and special characters when comparing or sorting text -->
@@ -63,15 +63,14 @@ Filtering and ordering criteria is stored in special objects called `filter` and
 
   <template>
     <!-- This component automatically loads `main.json` into `this.settings`, triggering the actions needed to fill-up the repository -->
-    <iron-ajax auto url="main.json" handle-as="json" last-response="{{settings}}"></iron-ajax>
+    <iron-ajax auto url="../main.json" handle-as="json" last-response="{{settings}}"></iron-ajax>
   </template>
 
   <script>
-    class RepoData extends Polymer.Element {
-      static get is() { return 'repo-data' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'repo-data',
+      properties: {
           // Main settings of the app, loaded at startup from `main.json`
           settings: {
             type: Object,
@@ -119,27 +118,13 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             type: String,
             notify: true
           }
-        }
-      }
-
-      /**
-      
-      Other variables used in this component but declared and initialized by `jclic-repo`:
-      
-      Variable name   | Type   | Description
-      ----------------|--------|------------------------------------------------------
-      `lang`          | String | Current two-letter language code selected by the user
-      
-      **/
-
-      static get observers() {
-        return [
+      },
+      observers: [
           '_updateLang(settings, lang)',
-        ];
-      }
+      ],
 
       // Updates `labels`, and `selectOptions` in order to reflect the current app language
-      _updateLang(settings, lang) {
+      _updateLang: function(settings, lang) {
         this.labels = settings && settings.labels && lang && settings.labels[lang] ? settings.labels[lang] : {};
         this.selectOptions = {
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
@@ -147,10 +132,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : [],
           findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value)
         }
-      }
+      },
 
       // Called when settings are loaded for first time
-      _settingsLoaded() {
+      _settingsLoaded: function() {
         if (this.settings && this.settings.index) {
           // Set the base path for all projects
           this.repoRoot = this.settings.index.path
@@ -165,10 +150,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             // Error:
             err => console.log('Error loading projects.json:', err))
         }
-      }
+      },
 
       // Called when the index of the project's repository has been loaded
-      _projectsLoaded(projects = []) {
+      _projectsLoaded: function(projects = []) {
         // Check and update projects
         projects.forEach(prj => {
           // Set default values to undefined properties:
@@ -192,10 +177,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
 
         // Initialize the main `projects` array
         this.projects = this._allProjects = projects
-      }
+      },
 
       // Loads a specific `project.json` file, returning a Promise
-      loadProject(path) {
+      loadProject: function(path) {
         const thisRepo = this
         return new Promise(function (resolve, reject) {
           const request = document.createElement('iron-request')
@@ -213,10 +198,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             err => reject(err)
             );
         });
-      }
+      },
 
       // Filters the list of current projects according to the criteria established in `filter`
-      _filterChanged(f) {
+      _filterChanged: function(f) {
         this.projects = (this._allProjects || []).filter(item => {
           return (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
             && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
@@ -224,10 +209,10 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0)
             && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0)
         });
-      }
+      },
 
       // Sorts the `_allProjects` elements according to the current ordering criteria
-      _orderingChanged(ord) {
+      _orderingChanged: function(ord) {
         if (this._allProjects) {
           const field = ord ? ord.field : ''
           const inv = ord && ord.inv ? -1 : 1
@@ -239,8 +224,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           this._filterChanged(this.filter)
         }
       }
-    }
-
-    window.customElements.define(RepoData.is, RepoData)
+    });
+    
   </script>
 </dom-module>

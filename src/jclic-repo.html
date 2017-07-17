@@ -34,13 +34,15 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<!-- link rel="import" href="../bower_components/app-route/app-location.html" -->
+<!-- link rel="import" href="../bower_components/app-route/app-route.html" -->
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -208,12 +210,9 @@ Some other functional components are also declared and included at this level:
   </template>
 
   <script>
-    class JClicRepo extends Polymer.Element {
-
-      static get is() { return 'jclic-repo' }
-
-      static get properties() {
-        return {
+    Polymer({
+      is: 'jclic-repo',
+      properties: {
           // Parametres passed via the `query` section of the current URL
           params: {
             type: Object,
@@ -264,131 +263,126 @@ Some other functional components are also declared and included at this level:
           projects: Object,
           // Current set of labels, titles and messages, translated into the current app language
           labels: Object,
-        }
-      }
-
-      static get observers() {
-        return [
+        },
+        observers: [
           '_checkPreferredLanguage(settings)',
           '_checkParams(projects, params)',
           '_langSelected(lang)',
           '_queryChanged(currentProjectId, filter, params, lang)'
-        ]
-      }
-
-      // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
-      _getMainContainer() {
-        return this.$.mainContainer
-      }
+        ],
+              // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
+      _getMainContainer: function() {
+        return this.$.mainContainer;
+      },
 
       // Gets the URL used as a base for absolute links to projects
-      _getBaseUrl() {
-        let path = window.location.pathname
-        let p = path.lastIndexOf('/')
-        path = path.substring(0, p) + '/'
-        return window.location.origin + path
-      }
+      _getBaseUrl: function() {
+        var path = window.location.pathname;
+        var p = path.lastIndexOf('/');
+        path = path.substring(0, p) + '/';
+        return window.location.origin + path;
+      },
 
       // Triggered when the user chooses a language
-      _clickOnLang(e) {
-        e.preventDefault()
-        this.lang = this.settings.languages[e.model.index].id
-        this._queryChanged()
-        return false
-      }
+      _clickOnLang: function(e) {
+        e.preventDefault();
+        this.lang = this.settings.languages[e.model.index].id;
+        this._queryChanged();
+        return false;
+      },
 
       // Updates the language selector, displaying in bold type the current one
-      _langSelected(lang) {
-        lang = lang || this.lang
+      _langSelected: function(lang) {
+        lang = lang || this.lang;
         if (lang) {
           this.$.langSelector.querySelectorAll('.langItem').forEach(l => {
             if (l.id === lang)
-              l.classList.add('currentLang')
+              l.classList.add('currentLang');
             else
-              l.classList.remove('currentLang')
+              l.classList.remove('currentLang');
           })
         }
-      }
+      },
 
       // Triggered by settings button
-      _setUserSettings() {
-        this.$.userSettings.open()
-      }
+      _setUserSettings: function() {
+        this.$.userSettings.open();
+      },
 
       // Triggered by info button
-      _displayInfo() {
-        const search = `?lang=${this.lang}&page=info`
+      _displayInfo: function() {
+        const search = `?lang=${this.lang}&page=info`;
         if (search !== window.location.search)
-          window.history.pushState({}, '', `index.html${search}`)
-        this.page = 'info'
-      }
+          window.history.pushState({}, '', `index.html${search}`);
+        this.page = 'info';
+      },
 
       // Called when the user closes the info pages
-      _closeInfo() {
-        this.page = 'projects'
-        this._queryChanged()
-      }
+      _closeInfo: function() {
+        this.page = 'projects';
+        this._queryChanged();
+      },
 
       // Opens a big project card with a specific project data
-      showProject(path) {
+      showProject: function(path) {
         // Check if `path` is a custom event fired by a project-card
         if (path instanceof CustomEvent)
-          path = path.detail.path
-        this.$.spinner.active = true
+          path = path.detail.path;
+        this.$.spinner.active = true;
         this.$.repo.loadProject(path).then(
           // Promise OK
           project => {
-            this.$.spinner.active = false
-            this.$.bigPrj.project = project
-            this.$.bigPrj.$.dialog.open()
-            this.currentProjectId = project.path
+            this.$.spinner.active = false;
+            this.$.bigPrj.project = project;
+            this.$.bigPrj.$.dialog.open();
+            this.currentProjectId = project.path;
           },
           // Promise rejected
           err => {
-            this.$.spinner.active = false
-            console.log(`Error loading project ${path}: ${err}`)
+            this.$.spinner.active = false;
+            console.log(`Error loading project ${path}: ${err}`);
           })
-      }
+      },
 
       // Called when `big-project-card` is closed
-      _projectClosed() {
+      _projectClosed: function() {
         if (!this.$.player.project) {
-          this.currentProjectId = null
-          this._queryChanged()
+          this.currentProjectId = null;
+          this._queryChanged();
         }
-      }
+      },
 
       // Launches the project activities
-      playProject(prj) {
+      playProject: function(prj) {
         // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
         if (prj instanceof CustomEvent) {
-          prj = prj.detail.project
-          this.$.bigPrj.close()
+          prj = prj.detail.project;
+          this.$.bigPrj.close();
         }
         // Request a call to `playerClosed` when the user leaves the JClic player
-        this.playerOptions.closeFn = this.playerClosed.bind(this)
+        this.playerOptions.closeFn = this.playerClosed.bind(this);
         // Setting the `project` attribute of the `jclic-player` component opens automatically the player
-        this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`
-        this.currentProjectId = prj.path
-        this._queryChanged()
-      }
+        this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`;
+        this.currentProjectId = prj.path;
+        this._queryChanged();
+      },
 
       // Called by `jclic-player` when the user leaves the activities
-      playerClosed() {
-        this.$.player.project = null
-        this.currentProjectId = null
-        this._queryChanged()
-      }
+      playerClosed: function() {
+        this.$.player.project = null;
+        this.currentProjectId = null;
+        this._queryChanged();
+      },
 
       // called when a new dialog opens
-      _dlgOpened() {
+      _dlgOpened: function() {
         // Force a `resize` event to adjust the real size of dialogs even after its content has been modified
         setTimeout(() => dispatchEvent(new Event('resize')), 100)
-      }
+      },
 
       // Called by Polymer when all components have been initialized
-      ready() {
-        super.ready()
+      ready: function() {
+        //super.ready()
 
         // Read the parameters passed on the `search` section of current URL, if any
         // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
@@ -399,10 +393,10 @@ Some other functional components are also declared and included at this level:
           this.playerOptions.logLevel = this.params.logLevel
         if (this.params.page && this.params.page === 'info')
           this._displayInfo()
-      }
+      },
 
       // Try to determine the user's preferred language
-      _checkPreferredLanguage(settings) {
+      _checkPreferredLanguage: function(settings) {
         if (settings && settings.languages && settings.languages.length) {
           // Stop waiting animation, if already running
           this.$.spinner.active = false
@@ -426,10 +420,10 @@ Some other functional components are also declared and included at this level:
           var thisRepo = this
           setTimeout(() => thisRepo._langSelected(), 100)
         }
-      }
+      },
 
       // Opens the big project card of the project passed as a parameter in the query section of the current URL
-      _checkParams(projects, params) {
+      _checkParams: function(projects, params) {
         if (projects && projects.length > 0 && params) {
           if (projects.length > 0 && params.prj) {
             if (projects.find(p => p.path === params.prj))
@@ -451,10 +445,10 @@ Some other functional components are also declared and included at this level:
           }
           params.processed = true
         }
-      }
+      },
 
       // Updates the current window URL with the params needed to reproduce current state
-      _queryChanged() {
+      _queryChanged: function() {
         if (this.params && this.params.processed) {
           this.page = 'projects'
           let search = `?lang=${this.lang}`
@@ -470,8 +464,7 @@ Some other functional components are also declared and included at this level:
             window.history.pushState({}, '', `index.html${search}`)
         }
       }
-    }
+    });
 
-    window.customElements.define(JClicRepo.is, JClicRepo)
   </script>
 </dom-module>

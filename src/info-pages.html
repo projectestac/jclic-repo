@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 
@@ -122,11 +122,10 @@ Custom property   | Description                       | Default
   </template>
 
   <script>
-    class InfoPages extends Polymer.Element {
-      static get is() { return 'info-pages' }
 
-      static get properties() {
-        return {
+    Polymer({
+      is: 'info-pages',
+      properties: {
           // Current set of texts for info-pages, translated into the current app language
           info: Array,
           //
@@ -142,18 +141,13 @@ Custom property   | Description                       | Default
           // Properties used in this component but initialized in `jclic-repo`
           // -----------------------------------------------------------------
           // Current two-letter language code selected by the user
-          lang: String,
-        }
-      }
-
-      static get observers() {
-        return [
+          lang: String,        
+      },
+      observers: [
           '_updateContent(settings, lang)',
-        ];
-      }
-
+      ],
       // Sets the `info` array based on the current app language
-      _updateContent(settings, lang) {
+      _updateContent: function(settings, lang) {
 
         this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang] : []
 
@@ -168,32 +162,32 @@ Custom property   | Description                       | Default
             if (p[i].dataset.raw)
               p[i].innerHTML = p[i].dataset.raw
         }
-      }
+      },
 
       // Gets the URL used as a base for absolute links to images and other sources
-      _getBaseUrl() {
+      _getBaseUrl: function() {
         let path = window.location.pathname
         const p = path.lastIndexOf('/')
         path = path.substring(0, p) + '/'
         return window.location.origin + path
-      }
+      },
 
       // URI of this info page (used in `social-buttons`)
-      _getUrl() {
+      _getUrl: function() {
         return `${this._getBaseUrl()}index.html?page=info`
-      }
+      },
 
       // The big JClic logo (used in `social-buttons`)
-      _getImgUrl() {
+      _getImgUrl: function() {
         return `${this._getBaseUrl()}images/manifest/icon-512x512.png`
-      }
+      },
 
       // Fires a custom `close` event
-      _close(ev) {
+      _close: function(ev) {
         this.dispatchEvent(new CustomEvent('close'), ev)
       }
-    }
 
-    window.customElements.define(InfoPages.is, InfoPages)
+    });
+
   </script>
 </dom-module>

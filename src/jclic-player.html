@@ -34,7 +34,7 @@
   @licend
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 
 <!-- Load the latest JClic.js package from unpkg.com -->
@@ -79,12 +79,9 @@ Custom property   | Description                       | Default
   </template>
 
   <script>
-    class JClicPlayerElement extends Polymer.Element {
-
-      static get is() { return 'jclic-player' }
-
-      static get properties() {
-        return {
+    Polymer({
+      is: 'jclic-player',
+      properties: {
           // Options passed to the JClic Player (see https://github.com/projectestac/jclic.js/blob/master/src/JClicPlayer.js#L122)
           options: Object,
           // When `true`, the player will switch automatically to full screen, if available on current device
@@ -100,12 +97,10 @@ Custom property   | Description                       | Default
             value: null,
             reflectToAttribute: false,
             notify: false,
-          }
-        }
-      }
-
+          }        
+      },
       // Sets/unsets the JClic project to be launched on the player
-      _setProject(prj) {
+      _setProject: function(prj) {
         if (prj) {
           this.style.display = 'block'
           this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
@@ -116,9 +111,8 @@ Custom property   | Description                       | Default
           if (this._currentPlayer)
             this._currentPlayer.reset()
         }
-      }
-    }
+      }      
+    });
 
-    window.customElements.define(JClicPlayerElement.is, JClicPlayerElement)
   </script>
 </dom-module>
