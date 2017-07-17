@@ -105,7 +105,7 @@ Custom property   | Description                       | Default
       <paper-material elevation="2">
         <h2>[[item.title]]</h2>
         <template is="dom-if" if="[[item.icon]]">
-          <a href="[[item.link]]"><img src="../[[settings.infoImgBasePath]]/[[item.icon]]" alt="[[item.title]]" class="appIcon"></a>
+          <a href="[[item.link]]"><img src="[[settings.infoImgBasePath]]/[[item.icon]]" alt="[[item.title]]" class="appIcon"></a>
         </template>
         <template is="dom-repeat" items="[[item.text]]">
           <p data-raw$="[[item]]">[[item]]</p>
