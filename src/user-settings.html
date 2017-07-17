@@ -45,6 +45,25 @@
 
 <link rel="import" href="shared-styles.html">
 
+<!--
+
+This element opens a dialog with few input fields allowing users to set:
+
+- The ordering criteria of projects list (by creation date, title or author name)
+- The ordering direction: normal (recent projects first, alphabetic order on names) or reversed.
+- A flag indicating that JClic projects should always open at full screen, if available.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property   | Description                          | Default
+------------------|--------------------------------------|----------
+`--user-settings` | Mixin applied to the settings dialog | {}
+
+-->
+
+
 <dom-module id="user-settings">
   <template>
     <style include="shared-styles">
