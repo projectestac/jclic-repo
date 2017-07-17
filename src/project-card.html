@@ -150,10 +150,7 @@ Custom property | Description | Default
       static get properties() {
         return {
           // Object containing the data of the JClic project currently displayed on this card
-          project: {
-            type: Object,
-            observer: '_setProject'
-          },
+          project: Object,
           // Project languages, represented as an array of two-letter language codes
           languages: Object,
           // Current elevation of the `paper-material` container
@@ -172,15 +169,23 @@ Custom property | Description | Default
         }
       }
 
+      static get observers() {
+        return [
+          '_setProject(repoRoot, project)'
+        ]
+      }
+
       // Sets the current project data
-      _setProject(prj) {
-        this.setAttribute('aria-label', prj ? prj.title : '')
-        if (prj && prj.cover)
-          this.$.content.style.cssText = `background: no-repeat center/150% url("${this.repoRoot}/${prj.path}/${prj.cover}");`
-        else
-          this.$.content.style.cssText = ''
-        this.$.title.style.cssText = prj.title ? '' : 'display:none;'
-        this.languages = (prj && prj.langCodes) ? prj.langCodes : []
+      _setProject(repoRoot, prj) {
+        if (repoRoot && prj) {
+          this.setAttribute('aria-label', prj ? prj.title : '')
+          if (prj && prj.cover)
+            this.$.content.style.cssText = `background: no-repeat center/150% url("${repoRoot}/${prj.path}/${prj.cover}");`
+          else
+            this.$.content.style.cssText = ''
+          this.$.title.style.cssText = prj.title ? '' : 'display:none;'
+          this.languages = (prj && prj.langCodes) ? prj.langCodes : []
+        }
       }
 
       // Event handler called by the play button
