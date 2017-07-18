@@ -113,16 +113,7 @@ Custom property      | Description                         | Default
         height: 18pt;
         margin-top: 8px;
       }
-      /* Workaround for https://github.com/PolymerElements/paper-toast/issues/88 */
 
-      .toast-msg {
-        position: relative;
-        margin-top: 0.3em;
-        top: 50%;
-        left: 50%;
-        float: left;
-        transform: translate(-50%, 50%);
-      }
     </style>
 
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
@@ -133,7 +124,7 @@ Custom property      | Description                         | Default
           <!-- Share a direct link to the activities -->
           <div class="vertical-section">
             <paper-input id="linkToActivities" label="[[labels.linkToActivities]]" readonly="true" value="[[linkToActivities]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-click="_copy"></paper-icon-button>
+              <paper-icon-button suffix slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToActivities]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToActivities]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
@@ -141,7 +132,7 @@ Custom property      | Description                         | Default
           <!-- Share a link to a `big-project-card` with information about the project -->
           <div class="vertical-section">
             <paper-input label="[[labels.linkToProject]]" readonly="true" value="[[linkToPage]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-click="_copy"></paper-icon-button>
+              <paper-icon-button suffix slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkToPage]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <social-buttons settings="[[settings]]" url="[[linkToPage]]" imgurl="[[imgFullPath]]" text="[[title]]" labels="[[labels]]"></social-buttons>
           </div>
@@ -149,7 +140,7 @@ Custom property      | Description                         | Default
           <!-- Share a clip of HTTML code, useful for embedding the project in a blog or site -->
           <div class="vertical-section">
             <paper-input label="[[labels.embedCode]]" readonly="true" value="[[embedCode]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-click="_copy"></paper-icon-button>
+              <paper-icon-button suffix slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[embedCode]]" on-click="_copy"></paper-icon-button>
             </paper-input>
             <div class="horizontal-section-container">
               <paper-radio-group selected="{{embedSize}}">
@@ -165,7 +156,7 @@ Custom property      | Description                         | Default
             <!-- WARNING: "img src" paths are always relative to the root document, not to the component! -->
             <img src="../images/moodle-logo.png" class="moodle-logo">
             <paper-input label="[[labels.linkForMoodle]]" readonly="true" value="[[linkForMoodle]]">
-              <paper-icon-button slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-click="_copy"></paper-icon-button>
+              <paper-icon-button suffix slot="suffix" icon="content-copy" title="[[labels.copy]]" data-value$="[[linkForMoodle]]" on-click="_copy"></paper-icon-button>
             </paper-input>
           </div>
         </div>
@@ -235,7 +226,10 @@ Custom property      | Description                         | Default
       // Called when the project is set or changed
       _projectChanged: function(prj, repoRoot) {
         this.title = prj ? prj.title : ''
-        this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : ''
+        const indexFile = prj && prj.files && repoRoot ? prj.files.find(f => /^(.*\/)*index.html$/.test(f)) : null
+        this.linkToActivities = prj && repoRoot ?
+          (indexFile ? `${this.baseUrl}${repoRoot}/${prj.path}/${indexFile}` : `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}`)
+          : ''
         this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : ''
         this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : ''
         this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : ''
@@ -249,12 +243,12 @@ Custom property      | Description                         | Default
 
       // Puts into the system clipboard the data associated with the button generating the passed event
       _copy: function(ev) {
-        if (ev.target && ev.target.dataset.value) {
+        if (ev.target && ev.target.parentElement && ev.target.parentElement.dataset.value) {
           if (this.$.copied.opened)
             this.$.copied.close()
           this.$.copied.noCancelOnOutsideClick = false
           this.$.copied.positionTarget = ev.target
-          clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
+          clipboard.copy(ev.target.parentElement.dataset.value).then(this.$.copied.open.bind(this.$.copied))
         }
       }
     });

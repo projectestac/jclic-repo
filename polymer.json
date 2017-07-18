@@ -10,7 +10,8 @@
   "extraDependencies": [
     "manifest.json",
     "main.json",
-    "bower_components/webcomponentsjs/*.js"
+    "bower_components/webcomponentsjs/*.js",
+    "bower_components/es6-promise-polyfill/promise.js"
   ],
   "lint": {
     "rules": [
@@ -35,10 +36,6 @@
       "addServiceWorker": true,
       "addPushManifest": true,
       "insertPrefetchLinks": true      
-    },
-    {
-      "name": "es6",
-      "preset": "es6-bundled"
     }
   ]
 }

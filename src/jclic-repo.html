@@ -236,7 +236,7 @@ Some other functional components are also declared and included at this level:
           // URL used as a base for absolute references to project's components
           baseUrl: {
             type: String,
-            computed: '_getBaseUrl()',
+            computed: '_getBaseUrl(settings)',
           },
           // Relative path of current project
           currentProjectId: String,
@@ -272,83 +272,83 @@ Some other functional components are also declared and included at this level:
         ],
               // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
       _getMainContainer: function() {
-        return this.$.mainContainer;
+        return this.$.mainContainer
       },
 
       // Gets the URL used as a base for absolute links to projects
       _getBaseUrl: function() {
-        var path = window.location.pathname;
-        var p = path.lastIndexOf('/');
-        path = path.substring(0, p) + '/';
-        return window.location.origin + path;
+        var path = window.location.pathname
+        return window.location.origin + path.substring(0, path.lastIndexOf('/')) + '/'
       },
 
       // Triggered when the user chooses a language
       _clickOnLang: function(e) {
-        e.preventDefault();
-        this.lang = this.settings.languages[e.model.index].id;
-        this._queryChanged();
-        return false;
+        e.preventDefault()
+        this.lang = this.settings.languages[e.model.index].id
+        this._queryChanged()
+        return false
       },
 
       // Updates the language selector, displaying in bold type the current one
       _langSelected: function(lang) {
-        lang = lang || this.lang;
+        lang = lang || this.lang
         if (lang) {
-          this.$.langSelector.querySelectorAll('.langItem').forEach(l => {
+          const langs = this.$.langSelector.querySelectorAll('.langItem')
+          for(let i=0; i<langs.length; i++){
+            const l = langs[i]
             if (l.id === lang)
-              l.classList.add('currentLang');
+              l.classList.add('currentLang')
             else
-              l.classList.remove('currentLang');
-          })
+              l.classList.remove('currentLang')
+          }
         }
       },
 
       // Triggered by settings button
       _setUserSettings: function() {
-        this.$.userSettings.open();
+        this.$.userSettings.open()
       },
 
       // Triggered by info button
       _displayInfo: function() {
-        const search = `?lang=${this.lang}&page=info`;
+        const search = `?lang=${this.lang}&page=info`
         if (search !== window.location.search)
-          window.history.pushState({}, '', `index.html${search}`);
-        this.page = 'info';
+          window.history.pushState({}, '', `index.html${search}`)
+        this.page = 'info'
       },
 
       // Called when the user closes the info pages
       _closeInfo: function() {
-        this.page = 'projects';
-        this._queryChanged();
+        this.page = 'projects'
+        this._queryChanged()
       },
 
       // Opens a big project card with a specific project data
       showProject: function(path) {
         // Check if `path` is a custom event fired by a project-card
         if (path instanceof CustomEvent)
-          path = path.detail.path;
-        this.$.spinner.active = true;
+          path = path.detail.path
+        this.$.spinner.active = true
         this.$.repo.loadProject(path).then(
           // Promise OK
           project => {
-            this.$.spinner.active = false;
-            this.$.bigPrj.project = project;
-            this.$.bigPrj.$.dialog.open();
-            this.currentProjectId = project.path;
+            this.$.spinner.active = false
+            this.$.bigPrj.project = project
+            this.$.bigPrj.$.dialog.open()
+            this.currentProjectId = project.path
           },
           // Promise rejected
           err => {
-            this.$.spinner.active = false;
-            console.log(`Error loading project ${path}: ${err}`);
+            this.$.spinner.active = false
+            console.log(`Error loading project ${path}: ${err}`)
           })
       },
 
       // Called when `big-project-card` is closed
       _projectClosed: function() {
         if (!this.$.player.project) {
-          this.currentProjectId = null;
-          this._queryChanged();
+          this.currentProjectId = null
+          this._queryChanged()
         }
       },
 
@@ -356,22 +356,22 @@ Some other functional components are also declared and included at this level:
       playProject: function(prj) {
         // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
         if (prj instanceof CustomEvent) {
-          prj = prj.detail.project;
-          this.$.bigPrj.close();
+          prj = prj.detail.project
+          this.$.bigPrj.close()
         }
         // Request a call to `playerClosed` when the user leaves the JClic player
-        this.playerOptions.closeFn = this.playerClosed.bind(this);
+        this.playerOptions.closeFn = this.playerClosed.bind(this)
         // Setting the `project` attribute of the `jclic-player` component opens automatically the player
-        this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`;
-        this.currentProjectId = prj.path;
-        this._queryChanged();
+        this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`
+        this.currentProjectId = prj.path
+        this._queryChanged()
       },
 
       // Called by `jclic-player` when the user leaves the activities
       playerClosed: function() {
-        this.$.player.project = null;
-        this.currentProjectId = null;
-        this._queryChanged();
+        this.$.player.project = null
+        this.currentProjectId = null
+        this._queryChanged()
       },
 
       // called when a new dialog opens
@@ -464,7 +464,7 @@ Some other functional components are also declared and included at this level:
             window.history.pushState({}, '', `index.html${search}`)
         }
       }
-    });
+    })
 
   </script>
 </dom-module>

@@ -249,7 +249,7 @@ Custom property      | Description                         | Default
               let xhr
               var filePromise = new Promise((resolve, reject) => {
                 // Call the static method `getBinaryContent` (see below), where the promise will be finally fullfilled or rejected
-                xhr = ProjectDownload.getBinaryContent(basePath + file, (err, data) => {
+                xhr = this.getBinaryContent(basePath + file, (err, data) => {
                   if (err)
                     reject(err)
                   else {

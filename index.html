@@ -83,8 +83,127 @@
     }
   </script>
 
-  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <!-- Not used in Polymer 1  -->
+  <!-- script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script -->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- File needed when building with Polymer CLI, not included in webcomponentsjs#0.7.24.
+       Must be manually copied from webcomponents#1.0.2 or later -->
+  <!-- build:js bower_components/webcomponentsjs/custom-elements-es5-adapter.js -->
+  <script src="bower_components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <!-- endbuild -->
+
+  <!-- Polyfill for "Promise" -->
+  <!-- build:js bower_components/es6-promise-polyfill/promise.js -->
+  <script src="bower_components/es6-promise-polyfill/promise.js"></script>
+  <!-- endbuild -->
+
+  <!-- Polyfill for ES6 Array methods not handled by babel in Polymer CLI -->
+  <script type="text/javascript">
+    if (!Array.prototype.find) {
+      Array.prototype.find = function (predicate) {
+        if (this === null) {
+          throw new TypeError('Array.prototype.find called on null or undefined');
+        }
+        if (typeof predicate !== 'function') {
+          throw new TypeError('predicate must be a function');
+        }
+        var list = Object(this);
+        var length = list.length >>> 0;
+        var thisArg = arguments[1];
+        var value;
+
+        for (var i = 0; i < length; i++) {
+          value = list[i];
+          if (predicate.call(thisArg, value, i, list)) {
+            return value;
+          }
+        }
+        return undefined;
+      };
+    }
+
+    if (!Array.prototype.forEach) {
+      Array.prototype.forEach = function (callback, thisArg) {
+        var T, k;
+
+        if (this == null) {
+          throw new TypeError(' this is null or not defined');
+        }
+
+        // 1. Assignem a O el resultat de cridar ToObject tot passant-li el valor de |this| com a argument.
+        var O = Object(this);
+
+        // 2. lenValue representa el resultat de cridar el mètode intern Get de O amb l'argument "length".
+        // 3. Assignem a len el valor ToUint32(lenValue).
+        var len = O.length >>> 0;
+
+        // 4. Si IsCallable(callback) és false, llençem una excepció TypeError.
+        // Vegeu: http://es5.github.com/#x9.11
+        if (typeof callback !== "function") {
+          throw new TypeError(callback + ' no és una funció');
+        }
+
+        // 5. Si s'ha passat thisArg com a aragument, assignem el seu valor a la variable T, en qualsevol altre cas deixem T com a undefined.
+        if (arguments.length > 1) {
+          T = thisArg;
+        }
+
+        // 6. Assignem 0 a la variable k
+        k = 0;
+
+        // 7. Repetir, mentre k < len
+        while (k < len) {
+
+          var kValue;
+
+          // a. Assignem ToString(k) a Pk.
+          //   Aquest comportament és implícit per a operands al cantó esquerra (de l'anglés LHS o Left-Hand-Side) de l'operador "in"This is implicit for LHS operands of the in operator
+          // b. Assignem el resultat de cridar el mètode intern HasProperty de O amb l'argument Pk a la variable kPresent
+          //   Podem combinar aquest pas amb c
+          // c. Si kPresent és true, llavors...
+          if (k in O) {
+
+            // i. Assignem a kValue el resultat de cridar el mètode intern Get de l'objecte O amb l'argument Pk.
+            kValue = O[k];
+
+            // ii. Cridem el mètode intern "call" del callback tot passant-li T com a valor de "this"
+            // així com una llista d'arguments que conté kValue, k i 0
+            callback.call(T, kValue, k, O);
+          }
+          // d. Incrementem el valor de k en 1.
+          k++;
+        }
+        // 8. retornem undefined
+      };
+    }
+
+    if (!Array.prototype.findIndex) {
+      Array.prototype.findIndex = function (predicate) {
+        if (this === null) {
+          throw new TypeError('Array.prototype.findIndex called on null or undefined');
+        }
+        if (typeof predicate !== 'function') {
+          throw new TypeError('predicate must be a function');
+        }
+        var list = Object(this);
+        var length = list.length >>> 0;
+        var thisArg = arguments[1];
+        var value;
+
+        for (var i = 0; i < length; i++) {
+          value = list[i];
+          if (predicate.call(thisArg, value, i, list)) {
+            return i;
+          }
+        }
+        return -1;
+      };
+    }
+  </script>
 
   <!-- Load application shell -->
   <link rel="import" href="src/jclic-repo.html">
