@@ -240,7 +240,10 @@ Custom property      | Description                         | Default
       // Called when the project is set or changed
       _projectChanged(prj, repoRoot) {
         this.title = prj ? prj.title : ''
-        this.linkToActivities = prj && repoRoot ? `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}` : ''
+        const indexFile = prj && prj.files && repoRoot ? prj.files.find(f => /^(.*\/)*index.html$/.test(f)) : null
+        this.linkToActivities = prj && repoRoot ?
+          (indexFile ? `${this.baseUrl}${repoRoot}/${prj.path}/${indexFile}` : `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}`)
+          : ''
         this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : ''
         this.imgFullPath = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}` : ''
         this.linkForMoodle = prj && repoRoot ? `${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}` : ''

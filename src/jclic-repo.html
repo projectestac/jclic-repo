@@ -237,7 +237,7 @@ Some other functional components are also declared and included at this level:
           // URL used as a base for absolute references to project's components
           baseUrl: {
             type: String,
-            computed: '_getBaseUrl()',
+            computed: '_getBaseUrl(settings)',
           },
           // Relative path of current project
           currentProjectId: String,
@@ -284,9 +284,7 @@ Some other functional components are also declared and included at this level:
       // Gets the URL used as a base for absolute links to projects
       _getBaseUrl() {
         let path = window.location.pathname
-        let p = path.lastIndexOf('/')
-        path = path.substring(0, p) + '/'
-        return window.location.origin + path
+        return window.location.origin + path.substring(0, path.lastIndexOf('/')) + '/'
       }
 
       // Triggered when the user chooses a language
