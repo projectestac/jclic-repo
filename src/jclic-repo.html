@@ -213,76 +213,78 @@ Some other functional components are also declared and included at this level:
     Polymer({
       is: 'jclic-repo',
       properties: {
-          // Parametres passed via the `query` section of the current URL
-          params: {
-            type: Object,
-            value: null
-          },
-          // Current two-letter language code selected by the user
-          lang: {
-            type: String,
-            notify: true
-          },
-          // Flag indicating whether JClic player has to open in full-screen mode or just inside the current window
-          fullScreenPlayer: {
-            type: Boolean,
-            value: false
-          },
-          // Miscellaneous options passed to JClic player
-          playerOptions: {
-            type: Object,
-            value: {}
-          },
-          // URL used as a base for absolute references to project's components
-          baseUrl: {
-            type: String,
-            computed: '_getBaseUrl(settings)',
-          },
-          // Relative path of current project
-          currentProjectId: String,
-          // Main page to be display on the main app area. Valid options are: `projects` and `info`
-          page: {
-            type: String,
-            value: 'projects',
-          },
-          //
-          // -----------------------------------------------------------------------------------
-          // Other variables used in this component but declared and initialized in `repo-data`:
-          // -----------------------------------------------------------------------------------
-          // Relative path to the folder where the JClic projects of this repository are located
-          repoRoot: String,
-          // Main settings of the app, loaded at startup from `main.json`
-          settings: Object,
-          // Current choices of languages, subjects and levels, expresed in the current language and used to filter the main project list
-          selectOptions: Object,
-          // Current set of filtering and searching options
-          filter: Object,
-          // Current ordering options
-          ordering: Object,
-          // Ordered array containing the colection of projects matching the current filter settings
-          projects: Object,
-          // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,
+        // Parametres passed via the `query` section of the current URL
+        params: {
+          type: Object,
+          value: null
         },
-        observers: [
-          '_checkPreferredLanguage(settings)',
-          '_checkParams(projects, params)',
-          '_langSelected(lang)',
-          '_queryChanged(currentProjectId, filter, params, lang)'
-        ],
-              // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
-      _getMainContainer: function() {
+        // Current two-letter language code selected by the user
+        lang: {
+          type: String,
+          notify: true
+        },
+        // Flag indicating whether JClic player has to open in full-screen mode or just inside the current window
+        fullScreenPlayer: {
+          type: Boolean,
+          value: false
+        },
+        // Miscellaneous options passed to JClic player
+        playerOptions: {
+          type: Object,
+          value: {}
+        },
+        // URL used as a base for absolute references to project's components
+        baseUrl: {
+          type: String,
+          computed: '_getBaseUrl(settings)',
+        },
+        // Relative path of current project
+        currentProjectId: String,
+        // Main page to be display on the main app area. Valid options are: `projects` and `info`
+        page: {
+          type: String,
+          value: 'projects',
+        },
+        //
+        // -----------------------------------------------------------------------------------
+        // Other variables used in this component but declared and initialized in `repo-data`:
+        // -----------------------------------------------------------------------------------
+        // Relative path to the folder where the JClic projects of this repository are located
+        repoRoot: String,
+        // Main settings of the app, loaded at startup from `main.json`
+        settings: Object,
+        // Current choices of languages, subjects and levels, expresed in the current language and used to filter the main project list
+        selectOptions: Object,
+        // Current set of filtering and searching options
+        filter: Object,
+        // Current ordering options
+        ordering: Object,
+        // Ordered array containing the colection of projects matching the current filter settings
+        projects: Object,
+        // Current set of labels, titles and messages, translated into the current app language
+        labels: Object,
+      },
+      observers: [
+        '_checkPreferredLanguage(settings)',
+        '_checkParams(projects, params)',
+        '_langSelected(lang)',
+        '_queryChanged(filter)',
+        '_queryChanged(currentProjectId, params, lang)'
+      ],
+
+      // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
+      _getMainContainer: function () {
         return this.$.mainContainer
       },
 
       // Gets the URL used as a base for absolute links to projects
-      _getBaseUrl: function() {
+      _getBaseUrl: function () {
         var path = window.location.pathname
         return window.location.origin + path.substring(0, path.lastIndexOf('/')) + '/'
       },
 
       // Triggered when the user chooses a language
-      _clickOnLang: function(e) {
+      _clickOnLang: function (e) {
         e.preventDefault()
         this.lang = this.settings.languages[e.model.index].id
         this._queryChanged()
@@ -290,11 +292,11 @@ Some other functional components are also declared and included at this level:
       },
 
       // Updates the language selector, displaying in bold type the current one
-      _langSelected: function(lang) {
+      _langSelected: function (lang) {
         lang = lang || this.lang
         if (lang) {
           const langs = this.$.langSelector.querySelectorAll('.langItem')
-          for(let i=0; i<langs.length; i++){
+          for (let i = 0; i < langs.length; i++) {
             const l = langs[i]
             if (l.id === lang)
               l.classList.add('currentLang')
@@ -305,12 +307,12 @@ Some other functional components are also declared and included at this level:
       },
 
       // Triggered by settings button
-      _setUserSettings: function() {
+      _setUserSettings: function () {
         this.$.userSettings.open()
       },
 
       // Triggered by info button
-      _displayInfo: function() {
+      _displayInfo: function () {
         const search = `?lang=${this.lang}&page=info`
         if (search !== window.location.search)
           window.history.pushState({}, '', `index.html${search}`)
@@ -318,13 +320,13 @@ Some other functional components are also declared and included at this level:
       },
 
       // Called when the user closes the info pages
-      _closeInfo: function() {
+      _closeInfo: function () {
         this.page = 'projects'
         this._queryChanged()
       },
 
       // Opens a big project card with a specific project data
-      showProject: function(path) {
+      showProject: function (path) {
         // Check if `path` is a custom event fired by a project-card
         if (path instanceof CustomEvent)
           path = path.detail.path
@@ -345,7 +347,7 @@ Some other functional components are also declared and included at this level:
       },
 
       // Called when `big-project-card` is closed
-      _projectClosed: function() {
+      _projectClosed: function () {
         if (!this.$.player.project) {
           this.currentProjectId = null
           this._queryChanged()
@@ -353,7 +355,7 @@ Some other functional components are also declared and included at this level:
       },
 
       // Launches the project activities
-      playProject: function(prj) {
+      playProject: function (prj) {
         // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
         if (prj instanceof CustomEvent) {
           prj = prj.detail.project
@@ -368,20 +370,20 @@ Some other functional components are also declared and included at this level:
       },
 
       // Called by `jclic-player` when the user leaves the activities
-      playerClosed: function() {
+      playerClosed: function () {
         this.$.player.project = null
         this.currentProjectId = null
         this._queryChanged()
       },
 
       // called when a new dialog opens
-      _dlgOpened: function() {
+      _dlgOpened: function () {
         // Force a `resize` event to adjust the real size of dialogs even after its content has been modified
         setTimeout(() => dispatchEvent(new Event('resize')), 100)
       },
 
       // Called by Polymer when all components have been initialized
-      ready: function() {
+      ready: function () {
         //super.ready()
 
         // Read the parameters passed on the `search` section of current URL, if any
@@ -396,7 +398,7 @@ Some other functional components are also declared and included at this level:
       },
 
       // Try to determine the user's preferred language
-      _checkPreferredLanguage: function(settings) {
+      _checkPreferredLanguage: function (settings) {
         if (settings && settings.languages && settings.languages.length) {
           // Stop waiting animation, if already running
           this.$.spinner.active = false
@@ -423,7 +425,7 @@ Some other functional components are also declared and included at this level:
       },
 
       // Opens the big project card of the project passed as a parameter in the query section of the current URL
-      _checkParams: function(projects, params) {
+      _checkParams: function (projects, params) {
         if (projects && projects.length > 0 && params) {
           if (projects.length > 0 && params.prj) {
             if (projects.find(p => p.path === params.prj))
@@ -448,8 +450,8 @@ Some other functional components are also declared and included at this level:
       },
 
       // Updates the current window URL with the params needed to reproduce current state
-      _queryChanged: function() {
-        if (this.params && this.params.processed) {
+      _queryChanged: function () {
+        if (this.lang && this.params && this.params.processed) {
           this.page = 'projects'
           let search = `?lang=${this.lang}`
           if (this.currentProjectId)
@@ -465,6 +467,5 @@ Some other functional components are also declared and included at this level:
         }
       }
     })
-
   </script>
 </dom-module>

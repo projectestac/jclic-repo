@@ -83,6 +83,7 @@ Custom property       | Description                          | Default
 
       paper-item {
         min-height: 32px;
+        cursor: pointer;
       }
 
       #searchBtn {
@@ -127,7 +128,7 @@ Custom property       | Description                          | Default
     <paper-input id="title" class="textInput" label="[[labels.title]]" on-change="readInputFieldValues"></paper-input>
     <paper-input id="author" class="textInput" label="[[labels.author]]" on-change="readInputFieldValues"></paper-input>
 
-    <paper-button raised class="search" on-click="readInputFieldValues" id="searchBtn">
+    <paper-button raised class="search" on-click="_clickOnSearchBtn" id="searchBtn">
       <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
       <span>[[labels.search]]</span>
     </paper-button>
@@ -164,8 +165,13 @@ Custom property       | Description                          | Default
         return !this.filter || ['language', 'subject', 'level', 'title', 'author'].find(ff => this.filter[ff] !== f[ff])
       },
 
+      // Click on `search` button force a filter update
+      _clickOnSearchBtn: function(){
+        this.readInputFieldValues(true)
+      },
+
       // Reads the values stored in the form controls, and updates `this.flter` if needed
-      readInputFieldValues: function(ev) {
+      readInputFieldValues: function(forceFilterUpdate) {
         if (!this._updatingFields) {
           const f = {
             language: this.$.dropLang.contentElement.selectedItem ? this.$.dropLang.contentElement.selectedItem.dataset.val : '*',
@@ -174,7 +180,7 @@ Custom property       | Description                          | Default
             title: this.$.title.value || '',
             author: this.$.author.value || '',
           }
-          if (this.filterDiffers(f))
+          if (forceFilterUpdate === true || this.filterDiffers(f))
             this.filter = f
         }
       },

@@ -157,10 +157,11 @@ Custom property   | Description                       | Default
           this.$.main.render()
           // Update the content of paragraphs with anchor links and other HTML tags filtered out by Polymer
           // (each "p" element has its real HTML content stored in a "data-raw" attribute)
-          const p = this.root.querySelectorAll('p')
-          for (let i = 0; i < p.length; i++)
+          const p = this.root.host.querySelectorAll('p')
+          for (let i = 0; i < p.length; i++) {
             if (p[i].dataset.raw)
               p[i].innerHTML = p[i].dataset.raw
+          }
         }
       },
 
