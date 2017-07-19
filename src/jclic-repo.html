@@ -453,7 +453,7 @@ Some other functional components are also declared and included at this level:
 
       // Updates the current window URL with the params needed to reproduce current state
       _queryChanged() {
-        if (this.params && this.params.processed) {
+        if (this.lang && this.params && this.params.processed) {
           this.page = 'projects'
           let search = `?lang=${this.lang}`
           if (this.currentProjectId)
