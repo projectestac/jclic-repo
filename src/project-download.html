@@ -224,7 +224,7 @@ Custom property      | Description                         | Default
           let subdir = lastSepPos >= 0 ? this.project.mainFile.substring(0, lastSepPos + 1) : ''
           // Escape all the special characters -/\^$*+?.()[]{} in `subdir`. This usually will just replace '/' by '\/' and '.' by '\.'
           subdir = subdir.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-          // Build a regExp used to remove all referenmces to `subdir` in `project.json`
+          // Build a regExp used to remove all references to `subdir` in `project.json`
           const pathToRemove = new RegExp(subdir, 'g')
 
           // Make a normalized copy of 'project'
