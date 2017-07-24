@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic Repo",
-  "description": "Dynamic repository of JClic activities",
+  "description": "Dynamic repository of JClic HTML5 activities",
   "author": "Francesc Busquets <francesc@gmail.com>",
   "version": "0.3.1",
   "homepage": "http://projectestac.github.io/jclic-repo",
@@ -23,6 +23,8 @@
     "jclic",
     "JClic",
     "java",
+    "javascript",
+    "polymer",
     "html5",
     "education",
     "game",
