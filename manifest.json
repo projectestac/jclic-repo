@@ -1,8 +1,8 @@
 {
   "lang": "en",
-  "name": "Repository of JClic activities",
-  "short_name": "JClic Library",
-  "start_url": "/index.html",
+  "name": "Library of JClic HTML5 activities",
+  "short_name": "JClic library",
+  "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#2196F3",
   "background_color": "#eeeeee",
@@ -12,6 +12,11 @@
       "sizes": "192x192",
       "type": "image/png"
     },
+    {
+      "src": "images/manifest/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },    
     {
       "src": "images/manifest/icon-512x512.png",
       "sizes": "512x512",
