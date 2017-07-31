@@ -41,8 +41,6 @@
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<!-- link rel="import" href="../bower_components/app-route/app-location.html" -->
-<!-- link rel="import" href="../bower_components/app-route/app-route.html" -->
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -92,6 +90,11 @@ Some other functional components are also declared and included at this level:
 
       app-header paper-icon-button {
         --paper-icon-button-ink-color: var(--text-primary-color);
+      }
+
+      #mainTitle {
+        overflow-x: auto;
+        text-overflow: ellipsis;
       }
 
       #langSelector {
@@ -165,7 +168,7 @@ Some other functional components are also declared and included at this level:
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>[[labels.mainTitle]]</div>
+            <div main-title id="mainTitle">[[labels.mainTitle]]</div>
             <div id="langSelector">
               <template is="dom-repeat" items="[[settings.languages]]"><a href="#" class="langItem" id="[[item.id]]" title="[[item.name]]" on-click="_clickOnLang">[[item.id]]</a></template>
             </div>
