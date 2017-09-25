@@ -82,26 +82,30 @@ Custom property   | Description                       | Default
     Polymer({
       is: 'jclic-player',
       properties: {
-          // Options passed to the JClic Player (see https://github.com/projectestac/jclic.js/blob/master/src/JClicPlayer.js#L122)
-          options: Object,
-          // When `true`, the player will switch automatically to full screen, if available on current device
-          fullScreen: Boolean,
-          // Project file to be loaded
-          project: {
-            type: String,
-            observer: '_setProject',
-          },
-          // Object of type JClicPlayer currently running (if any)
-          _currentPlayer: {
-            type: Object,
-            value: null,
-            reflectToAttribute: false,
-            notify: false,
-          }        
+        // Options passed to the JClic Player (see https://github.com/projectestac/jclic.js/blob/master/src/JClicPlayer.js#L122)
+        options: Object,
+        // When `true`, the player will switch automatically to full screen, if available on current device
+        fullScreen: Boolean,
+        // When `true`, activities should open in a new tab
+        newTab: Boolean,
+        // Project file to be loaded
+        project: {
+          type: String,
+          observer: '_setProject',
+        },
+        // Object of type JClicPlayer currently running (if any)
+        _currentPlayer: {
+          type: Object,
+          value: null,
+          reflectToAttribute: false,
+          notify: false,
+        }
       },
       // Sets/unsets the JClic project to be launched on the player
-      _setProject: function(prj) {
-        if (prj) {
+      _setProject: function (prj) {
+        if (prj && this.newTab)
+          window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK')
+        else if (prj) {
           this.style.display = 'block'
           this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
           if (this.fullScreen)
@@ -111,8 +115,7 @@ Custom property   | Description                       | Default
           if (this._currentPlayer)
             this._currentPlayer.reset()
         }
-      }      
+      }
     });
-
   </script>
 </dom-module>
