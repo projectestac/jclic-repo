@@ -104,6 +104,11 @@ Custom property   | Description                          | Default
       <h2>[[labels.settings]]</h2>
       <paper-dialog-scrollable>
         <paper-material elevation="1">
+          <paper-toggle-button checked="{{_openInNewTab}}">
+            <span>[[labels.openInNewTab]]</span>
+          </paper-toggle-button>
+        </paper-material>
+        <paper-material elevation="1">
           <paper-toggle-button checked="{{_fullScreen}}" disabled="[[_noFullScreenAvailable]]">
             <span>[[labels.fullScreen]]</span>
           </paper-toggle-button>
@@ -135,6 +140,8 @@ Custom property   | Description                          | Default
         return {
           // When checked (and allowed by the system) activities will be displayed at full screen
           _fullScreen: Boolean,
+          // When checked, activities will be opened in a separate tab
+          _openInNewTab: Boolean,
           // Current value selected in the `order field` listbox
           _order: Number,
           // When checked, items will be ordered from Z to A
@@ -168,7 +175,12 @@ Custom property   | Description                          | Default
           fullScreenPlayer: {
             type: Boolean,
             notify: true,
-          },          
+          },
+        // Flag indicating whether JClic player has to open in new tab          
+          openPlayerInNewTab: {
+            type: Boolean,
+            notify: true,
+          },                    
         }
       }
 
@@ -180,6 +192,7 @@ Custom property   | Description                          | Default
       // Opens the dialog
       open() {
         this._fullScreen = this.fullScreenPlayer
+        this._openInNewTab = this.openPlayerInNewTab
         this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0
         this._orderInv = this.ordering ? this.ordering.inv || false : false
         this.$.dialog.open()
@@ -193,6 +206,7 @@ Custom property   | Description                          | Default
       // Called when the user clicks on OK
       _ok() {
         this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen
+        this.openPlayerInNewTab = this._openInNewTab
         this.ordering.field = this.orderOptions[this._order]
         this.ordering.inv = this._orderInv
         this.notifyPath('ordering')

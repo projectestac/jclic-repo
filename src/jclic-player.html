@@ -89,6 +89,8 @@ Custom property   | Description                       | Default
           options: Object,
           // When `true`, the player will switch automatically to full screen, if available on current device
           fullScreen: Boolean,
+          // When `true`, activities should open in a new tab
+          newTab: Boolean,
           // Project file to be loaded
           project: {
             type: String,
@@ -106,7 +108,9 @@ Custom property   | Description                       | Default
 
       // Sets/unsets the JClic project to be launched on the player
       _setProject(prj) {
-        if (prj) {
+        if (prj && this.newTab)
+          window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK')
+        else if (prj) {
           this.style.display = 'block'
           this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
           if (this.fullScreen)
