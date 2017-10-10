@@ -24,7 +24,7 @@
     "JClic",
     "java",
     "javascript",
-    "polymer",    
+    "polymer",
     "html5",
     "education",
     "game",
@@ -34,9 +34,9 @@
     "activities"
   ],
   "devDependencies": {
-    "eslint": "^3.12.0",
-    "eslint-config-google": "^0.7.1",
-    "eslint-plugin-html": "^2.0.3"
+    "eslint": "^4.8.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-html": "^3.2.2"
   },
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",

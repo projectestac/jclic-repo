@@ -232,7 +232,7 @@ Some other functional components are also declared and included at this level:
           // Flag indicating whether JClic player has to open in new tab
           openPlayerInNewTab: {
             type: Boolean,
-            value: false
+            value: true
           },
           // Miscellaneous options passed to JClic player
           playerOptions: {
@@ -392,6 +392,9 @@ Some other functional components are also declared and included at this level:
       // Called by Polymer when all components have been initialized
       ready() {
         super.ready()
+
+        // Read settings from local storage
+        this.$.userSettings.readFromLocalStorage();
 
         // Read the parameters passed on the `search` section of current URL, if any
         // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
