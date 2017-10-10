@@ -185,6 +185,26 @@ Custom property   | Description                          | Default
         return labels ? (labels[item] || item) : ''
       },
 
+      // Read settings from browser's local storage
+      readFromLocalStorage: function() {
+        const storage = window.localStorage
+        this.fullScreenPlayer = storage.getItem('fullScreenPlayer') === 'true'
+        this.openPlayerInNewTab = storage.getItem('openPlayerInNewTab') !== 'false'
+        const field = storage.getItem('ordering.field')
+        if(field)
+          this.ordering.field = field
+        this.ordering.inv = storage.getItem('ordering.inv') === 'true'
+      },
+
+      // Save settings to browser's local storage
+      saveToLocalStorage: function() {
+        const storage = window.localStorage
+        storage.setItem('fullScreenPlayer', false || this.fullScreenPlayer)
+        storage.setItem('openPlayerInNewTab', false || this.openPlayerInNewTab)
+        storage.setItem('ordering.field', this.ordering.field || '')
+        storage.setItem('ordering.inv', false || this.ordering.inv)
+      },
+
       // Opens the dialog
       open: function() {
         this._fullScreen = this.fullScreenPlayer
@@ -207,6 +227,7 @@ Custom property   | Description                          | Default
         this.ordering.inv = this._orderInv
         this.notifyPath('ordering')
         this.$.dialog.close()
+        this.saveToLocalStorage()
       }
     });
     
