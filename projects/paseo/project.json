@@ -39,6 +39,9 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "passeig"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",

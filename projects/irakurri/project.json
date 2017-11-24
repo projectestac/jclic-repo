@@ -27,6 +27,16 @@
   "levelCodes": [
     "INF"
   ],
+  "descriptors": {
+    "ca": "lectura, llengua castellana, llengua basca",
+    "es": "lectura, lengua castellana, lengua vasca",
+    "en": "reading, Spanish language, Basque language"
+  },
+  "descCodes": [
+    125,
+    132,
+    922
+  ],
   "description": {
     "en": "Bilingual program in Spanish and euskera designed for students in the beginning stages of reading. It is based on relationships between texts and figures.",
     "ca": "Programa bilingüe euskera-espanyol d'iniciació a la lectura, dirigit a l'alumnat d'educació infantil. Es basa en la relació figura-text. Té quatre possibilitats: relacionar figura-text, ordenar figures un cop llegit el text, buscar les vocals perdudes i, donada una figura, escriure el seu nom. \n<br> Irakurketa hasteko programa bat da, Haur Hezkuntzako ikasleentzako zuzendua, 5 eta 4 urteko ikasleeentzat. Programak duen ezagarri nagusia testua eta irudiaren arteko lotura aurkitzea da. Euskeraz eta gasteliaz dago.",

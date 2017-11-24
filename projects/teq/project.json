@@ -27,6 +27,14 @@
   "levelCodes": [
     "INF"
   ],
+  "descriptors": {
+    "ca": "lectoescriptura",
+    "es": "lectoescritura",
+    "en": "reading and writting skills"
+  },
+  "descCodes": [
+    920
+  ],
   "description": {
     "en": "Clic activities about basic concepts on time, space and quantity: day and night, always and never, above and down, inside and outside, plenty and empty, equal and different, etc.",
     "ca": "El TEQ és un clic de conceptes bàsics de Temps, Espai i Quantitat o comparació. Està adreçat a nens i nenes de 3, 4 i 5 anys i opcionalment a educació especial. Creat a base d'imatge fotogràfica i suport sonor, que donen molt atractiu a les activitats. L'aplicació té com a objectiu fixar els conceptes bàsics que es treballen i iniciar-se a la lectoescriptura de paraules a través del so. També pretén que els nens i nenes relacionin la imatge amb el so. Els conceptes treballats en els 9 paquets d'activitats són: \n<table border=\"1\" cellpadding=\"5\" cellspacing=\"0\" style=\"font-size: 9pt;\"> \n <tbody>\n  <tr>\n   <td>&nbsp;</td>\n   <td><b>Temps</b></td>\n   <td><b>Espai</b></td>\n   <td><b>Quantitat</b></td>\n  </tr> \n  <tr>\n   <td><b>3 anys</b></td>\n   <td>dia/nit<br>sempre/mai</td>\n   <td>dalt/baix<br>dins/fora</td>\n   <td>ple/buit<br>igual/diferent</td>\n  </tr> \n  <tr>\n   <td><b>4 anys</b></td>\n   <td>primera/última<br>ràpid/lent</td>\n   <td>a sobre/a sota<br>amunt/avall<br>davant/darrere</td>\n   <td>gran/mitjana/petit<br>moltes/poques<br>més que/menys que</td>\n  </tr> \n  <tr>\n   <td><b>5 anys</b></td>\n   <td>matí/tarda<br>ahir/avui/demà<br>abans/després</td>\n   <td>dreta/esquerra<br>al voltant/al mig<br>més a prop/més lluny</td>\n   <td>llarg/curt<br>meitat/sencera<br>ampla/estreta</td>\n  </tr> \n </tbody>\n</table>",
@@ -37,6 +45,10 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "dek",
+    "teqes"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",

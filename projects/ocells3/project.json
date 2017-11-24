@@ -26,6 +26,15 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "ocells, animals",
+    "es": "pájaros, animals",
+    "en": "birds, animales"
+  },
+  "descCodes": [
+    92,
+    1456
+  ],
   "description": {
     "en": "This project includes different activities with different modalities in order to publicize different birds from Catalonia.",
     "ca": "En aquest projecte d'activitats JClic s'inclouen diferents activitats amb diferents modalitats per tal de donar a conèixer diferents ocells de Catalunya.",

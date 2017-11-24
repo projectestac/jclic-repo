@@ -27,6 +27,15 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "càlcul, càlcul mental",
+    "es": "cálculo, cálculo mental",
+    "en": "calculation, mental arithmetic"
+  },
+  "descCodes": [
+    702,
+    930
+  ],
   "description": {
     "en": "Mathematic activities with dominoes. This package contains:\n<br> \n<ul> \n <li>Fill series </li>\n <li>Sort out tokens </li>\n <li>Additions </li>\n <li>Find couples </li>\n <li>Find relationships </li>\n <li>etc. </li>\n</ul>",
     "ca": "Conjunt de 16 paquets d'activitats amb exercicis matemàtics plantejats amb les fitxes del dòmino: \n<ul> \n <li>Completar sèries </li>\n <li>Ordenar fitxes </li>\n <li>Sumar </li>\n <li>Trobar parelles </li>\n <li>Relacionar </li>\n <li>Assenyalar </li>\n <li>... </li>\n</ul>",
@@ -37,6 +46,10 @@
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "superdfr",
+    "superdom"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",

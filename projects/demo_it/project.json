@@ -27,6 +27,15 @@
   "levelCodes": [
     ""
   ],
+  "descriptors": {
+    "ca": "informàtica educativa, programari",
+    "es": "informática educativa, software",
+    "en": "educative computer science, software"
+  },
+  "descCodes": [
+    738,
+    744
+  ],
   "description": {
     "en": "The main objective of this project is to show samples of the diverse types of activities and the main features of JClic. The project is organized in two parts: first, there is a sequence for each one of the basic types of activities (puzzles, associations, scrambled letters, crossword and text activities). In the second part there is a review of the new features of JClic compared to the previous version, Clic 3.0.",
     "ca": "L'únic objectiu d'aquest projecte és mostrar els diversos tipus d'activitats i les principals funcionalitats del JClic.El projecte està organitzat en dues parts: a la primera hi ha una seqüència per a cada un dels tipus bàsics d'activitats (trencaclosques, associacions, sopes de lletres, mots encreuats i activitats de text) i a la segona es fa un repàs de les principals novetats del JClic respecte a la versió anterior, Clic 3.0.",
@@ -37,6 +46,13 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "demo",
+    "demo_de",
+    "demo_eng",
+    "demo_esp",
+    "demo_pt"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",

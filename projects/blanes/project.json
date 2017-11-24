@@ -27,6 +27,16 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "arquitectura, escultura, Blanes",
+    "es": "arquitectura, escultura, Blanes",
+    "en": "architecture, sculpture, Blanes"
+  },
+  "descCodes": [
+    2,
+    37,
+    1385
+  ],
   "description": {
     "en": "Project of activities about the sculptures of Blanes and its authors. This activity is a part of a didactic web page about Blanes: \n<a href=\"http://www.xtec.net/~lbartron/\">\"L'art al carrer. Itinerari didàctic per les escultures de Blanes\"</a>",
     "ca": "Projecte d'activitats sobre les escultures de Blanes, els seus autors i personatges emblemàtics de la vila.\n<p> Forma part d'una web molt més àmplia, <a href=\"http://www.xtec.net/~lbartron/\">\"L'art al carrer. Itinerari didàctic per les escultures de Blanes\"</a>, amb propostes de diferents àrees del currículum a partir de l'element motivador de l'art al carrer. </p>",

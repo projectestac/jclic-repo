@@ -27,6 +27,15 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "audició musical, instrument musical",
+    "es": "audición musical, instrumento musical",
+    "en": "musical hearing, musical instrument"
+  },
+  "descCodes": [
+    718,
+    724
+  ],
   "description": {
     "en": "This package is a set of activities addressed to pupils of primary school, based on the instruments of the symphonic orchestra.\n<p> The pictures are taken from <a href=\"http://www.supermusics.com\" target=\"_blank\">supermusics</a>. </p>",
     "ca": "Aquest paquet és un conjunt d'activitats adreçades als alumnes de cicle mitjà per descobrir els instruments que formen l'orquestra simfònica.\n<p> També és pretén que coneguin aquesta agrupació instrumental i que gaudeixen de l'audició musical i del reconeixement dels instruments.</p>\n<p> Les imatges provenen de <a href=\"http://www.supermusics.com\" target=\"_blank\">supermúsics</a>. </p>",

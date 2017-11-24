@@ -27,6 +27,16 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "llengua anglesa, ortografia, vocabulari",
+    "es": "lengua inglesa, ortografía, vocabulario",
+    "en": "English language, spelling, vocabulary"
+  },
+  "descCodes": [
+    667,
+    672,
+    673
+  ],
   "description": {
     "en": "Project of activities in English about: \n<ul> \n <li>weather </li>\n <li>seasons </li>\n <li>months </li>\n <li>week days </li>\n</ul>",
     "ca": "Projecte d'activitats per a l'àrea de llengua anglesa a cicle superior de primària per treballar vocabulari sobre: \n<ul> \n <li>el temps </li>\n <li>les estacions </li>\n <li>els mesos </li>\n <li>els dies de la setmana </li>\n</ul>",

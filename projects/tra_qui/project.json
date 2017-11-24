@@ -28,6 +28,16 @@
     "SEC",
     "BTX"
   ],
+  "descriptors": {
+    "ca": "societat, transport, tecnologia química",
+    "es": "sociedad, transporte, tecnología química",
+    "en": "society, transport, chemical technology"
+  },
+  "descCodes": [
+    344,
+    354,
+    754
+  ],
   "description": {
     "en": "Project addressed to students of \n<i>CFGM de Planta química</i> associated with transport of materials in chemical plant. \n<p> It serves as a review after each unit of matter or complete. Do not want to be exhaustive, but give the student a idea if understood their training. </p>",
     "ca": "Projecte adreçat a alumnes de \n<b>CFGM de Planta química</b> associat al mòdul de transport de materials en planta química.\n<p> Serveix com a repàs després de cada unitat o de la matèria completa. No vol ser exhaustiu, sino donar a l'alumne/a una idea de si ha comprès la formació rebuda. </p>",

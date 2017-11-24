@@ -28,6 +28,16 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "aprenentatge de la llengua, càlcul, tauró",
+    "es": "aprendizaje de la lengua, cálculo, tiburón",
+    "en": "learning of the language, calculation, shark"
+  },
+  "descCodes": [
+    110,
+    702,
+    1438
+  ],
   "description": {
     "en": "Project of activities about sharks addressed to kindergarten: \n<ul> \n <li>habitat of sharks </li>\n <li>parts of sharks </li>\n <li>Adds with sharks  </li>\n</ul>",
     "ca": "Projecte d'activitats sobre els taurons adreçat a cicle inicial. Al llarg del projecte trobem activitats de diferents temàtiques: \n<ul> \n <li>hàbitat dels taurons </li>\n <li>parts dels taurons </li>\n <li>comptar taurons </li>\n</ul>",

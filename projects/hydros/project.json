@@ -28,6 +28,16 @@
   "levelCodes": [
     "SEC"
   ],
+  "descriptors": {
+    "ca": "llengua anglesa, vocabulari, La Terra",
+    "es": "lengua inglesa, vocabulario, La Tierra",
+    "en": "English language, vocabulary, The Earth"
+  },
+  "descCodes": [
+    667,
+    673,
+    1331
+  ],
   "description": {
     "en": "Theses JClic activities belong to the unit of \"The hydrosphere\" which students are taught using English as a communication tool. The activities are aimed at the student to learn the vocabulary of the unit and some simple processes.",
     "ca": "Les activitats aquí presentades pertanyen a la unitat didàctica \"La hidrosfera\" que s'imparteix als alumnes utilitzant l'anglès com a eina de comunicació. Les activitats tenen com a objectiu que l'alumne/a aprengui el vocabulari en anglès de la unitat i alguns processos senzills.",

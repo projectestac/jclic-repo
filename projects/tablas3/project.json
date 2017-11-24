@@ -27,6 +27,15 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "aprenentatge de la matemàtica, taules de multiplicar",
+    "es": "aprendizaje de la matemática, tablas de multiplicar",
+    "en": "learning of the mathematical one, multiplication tables"
+  },
+  "descCodes": [
+    700,
+    908
+  ],
   "description": {
     "en": "Project of JClic activities to practice multiplication tables 2 to 9.",
     "ca": "Projecte d'activitats JClic per practicar les taules de multiplicar del 2 al 9.",

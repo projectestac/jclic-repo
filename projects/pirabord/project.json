@@ -30,6 +30,16 @@
     "INF",
     "PRI"
   ],
+  "descriptors": {
+    "ca": "aprenentatge de la llengua, transport, nombres enters",
+    "es": "aprendizaje de la lengua, transporte, números enteros",
+    "en": "learning of the language, transport, integers"
+  },
+  "descCodes": [
+    110,
+    354,
+    1321
+  ],
   "description": {
     "en": "Project of activities to learn the Pirates' world. It's used as a steering theme which embraces the body parts, the transport media, the pirates' elements, the quantity notion form 1 to 6, the geometric figures (circle, square, triangle and rectangle), reading and writing the word \"pirate\" and other meaningful words, and at the end one pirate song.",
     "ca": "Projecte d'activitats per conèixer el món dels Pirates. A partir d'aquest centre d'interès es treballen les parts bàsiques del cos, els mitjans de transport, els elements pirates, la noció de quantitat de l'1 al 6, les figures geomètriques (cercle, quadrat, triangle i rectangle), la lectoescriptura de la paraula \"pirata\" i d'altres paraules significatives, i per últim trobem l'audició d'una cançó pirata.",
@@ -40,6 +50,9 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "pirab_eu"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",

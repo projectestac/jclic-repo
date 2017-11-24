@@ -29,6 +29,26 @@
     "INF",
     "PRI"
   ],
+  "descriptors": {
+    "ca": "antic règim, aristocràcia, artesania, arts i oficis, classes socials, colònies, comerç, cultura popular, història, història de la vida quotidiana, il·lustració, representació del temps, vida quotidiana",
+    "es": "antiguo régimen, aristocracia, artesanía, arte y oficios, clases sociales, colonias, comercio, cultura popular, historia, historia de la vida cotidiana, ilustración, representación del tiempo, vida cotidiana",
+    "en": "old regime, aristocracy, crafts, art and offices, social classes, colonies, commerce, popular culture, history, history of the daily life, illustration, representation of the time, daily life"
+  },
+  "descCodes": [
+    158,
+    162,
+    165,
+    166,
+    179,
+    183,
+    184,
+    196,
+    246,
+    251,
+    263,
+    326,
+    361
+  ],
   "description": {
     "en": "<p>This project of activities is a tribute to \"the chocolate panel\", made 300 years ago to decorate the gardens of the palace of the Marquis of Alella (near Barcelona). This ceramic panel, very well preserved, tells us about customs and daily life in the eighteenth century.</p> \n<p>The project is organized in two main blocks:</p> \n<ol> \n <li>The look</li> \n <ul> \n  <li>About the panel</li> \n  <li>Characters</li> \n  <li>The place</li> \n  <li>Actions</li> \n  <li>Personal items</li> \n  <li>Puzzles</li> \n </ul> \n <li>Beyond the look</li> \n <ul> \n  <li>The passage of time</li> \n  <li>Customs</li> \n  <li>Society</li> \n  <li>Chocolate</li> \n  <li>From cocoa to chocolate</li> \n  <li>Chocolate in the world</li> \n  <li>Ancestors</li> \n  <li>To learn more...</li> \n </ul>\n</ol>",
     "ca": "<p>Aquest projecte d'activitats és un petit homenatge al \"plafó de la xocolatada\", creat ara fa 300 anys per decorar els jardins del palau del Marquès d'Alella. Aquest plafó ceràmic, molt ben conservat, ens parla dels costums i la vida quotidiana al segle XVIII.</p> \n<p>El projecte s'organitza en dos grans blocs:</p> \n<ol> \n <li>La mirada</li> \n <ul> \n  <li>Dades del plafó</li> \n  <li>Personatges</li> \n  <li>El lloc</li> \n  <li>Accions</li> \n  <li>Els objectes personals</li> \n  <li>Trencaclosques</li> \n </ul> \n <li>Més enllà de la mirada</li> \n <ul> \n  <li>El pas del temps</li> \n  <li>Els costums</li> \n  <li>La societat</li> \n  <li>La xocolata</li> \n  <li>Del cacau a la xocolata</li> \n  <li>La xocolata al món</li> \n  <li>Els ancestres</li> \n  <li>Per saber-ne més...</li> \n </ul>\n</ol>",

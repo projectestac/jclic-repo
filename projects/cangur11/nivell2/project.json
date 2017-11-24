@@ -28,6 +28,18 @@
     "SEC",
     "BTX"
   ],
+  "descriptors": {
+    "ca": "càlcul, combinatòria, geometria, lògica, probabilitat",
+    "es": "cálculo, combinatoria, geometría, lógica, probabilidad",
+    "en": "calculation, combinatory, geometry, logic, probability"
+  },
+  "descCodes": [
+    702,
+    703,
+    708,
+    711,
+    714
+  ],
   "description": {
     "en": "These projects allows you to do the Cangur Test\n<a href=\"http://cangur.org/cangur/cang2011/index.htm\"> Cangur</a> interactively. It's self-correcting. It also provides the solutions of each of the 30 tests. It also shows a final report of activities with the total number of right answers and the time spent. \n<p> The statements have been prepared by the Cangur Commission <a href=\"http://www.iecat.net/institucio/societats/SCMatematiques/index.asp\">Catalan Society of Mathematics</a> - Le Kangourou sans frontières. </p>",
     "ca": "Aquest projecte permet fer la prova \n<a href=\"http://cangur.org/cangur/cang2011/index.htm\">Cangur</a> de forma interactiva. És autocorrectiu i dóna una resolució de cadascuna de les 30 qüestions. També mostra un informe final d'activitats amb el nombre total d'encerts i el temps emprat.\n<p> Enunciats cedits per la Comissió Cangur de la <a href=\"http://www.iecat.net/institucio/societats/SCMatematiques/index.asp\">Societat Catalana de Matemàtiques</a> - Le Kangourou sans frontières. </p>",
@@ -38,6 +50,11 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "cangur11/nivell1",
+    "cangur11/nivell3",
+    "cangur11/nivell4"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.png",
   "thumbnail": "thumb.png",

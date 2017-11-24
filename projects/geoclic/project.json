@@ -4,12 +4,12 @@
   "school": "Institut Manuel Carrasco i Formiguera Barcelona",
   "date": "02/07/08",
   "languages": {
-    "en": "Italian",
-    "ca": "italià",
-    "es": "italiano"
+    "en": "Catalan",
+    "ca": "català",
+    "es": "catalán"
   },
   "langCodes": [
-    "it"
+    "ca"
   ],
   "areas": {
     "en": "Mathematics",
@@ -49,8 +49,8 @@
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
   "relatedTo": [
-    "geoclic",
     "geoclice",
+    "geoclici",
     "geoclien",
     "geoclifr",
     "geoklik",
@@ -62,8 +62,8 @@
   "zipFile": "jclic/test.jclic.zip",
   "instFile": "jclic/test.jclic.inst",
   "clicZoneId": 1308,
-  "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1308",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geoclici/jclic/test.jclic.zip",
+  "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=1308",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geoclic/jclic/test.jclic.zip",
   "meta_langs": [
     "ca",
     "es",

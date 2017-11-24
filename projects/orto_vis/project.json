@@ -27,6 +27,21 @@
   "levelCodes": [
     "PRI"
   ],
+  "descriptors": {
+    "ca": "aprenentatge de la llengua, comprensió escrita, comprensió oral, didàctica de la llengua, fonètica, llengua, llengua catalana, semàntica",
+    "es": "aprendizaje de la lengua, comprensión escrita, comprensión oral, didáctica de la lengua, fonética, lengua, lengua catalana, semántica",
+    "en": "learning of the language, written understanding, oral understanding, didactics of the language, phonetics, language, Catalan language, semantics"
+  },
+  "descCodes": [
+    110,
+    111,
+    112,
+    117,
+    121,
+    128,
+    133,
+    147
+  ],
   "description": {
     "en": "This project includes several activities related with common words proposed in the work \n<i>Ortografia sense esforç</i> (Spelling effortlessly) by Daniel Gabarró.\n<p> The first block is a sample of activities with simple words. The second block according to the difficulty of words is a little higher. In the third block there activities of these words (and other). </p>",
     "ca": "Aquest projecte recull diferents activitats relacionades, entre d'altres, amb les paraules d'ús comú que es proposen en el treball Ortografia sense esforç de Daniel Gabarró. Amb aquestes es vol afavorir el treball i millora de la memòria visual i per tant de l'ortografia.\n<p> En un primer bloc hi ha una mostra de possibles activitats de paraules senzilles (no tenen accent). En el segon bloc la dificultat de les paraules és una mica més elevada. En el tercer bloc hi ha activitats d'aplicació d'aquestes paraules (i altres) en textos. </p>",
@@ -54,6 +69,7 @@
     "cover.png",
     "project.json",
     "thumb.png",
+    "dontexists.png",
     "jclic.js/test.jclic",
     "jclic.js/index.html",
     "jclic.js/test.jclic.js",

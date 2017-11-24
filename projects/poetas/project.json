@@ -28,6 +28,15 @@
     "PRI",
     "SEC"
   ],
+  "descriptors": {
+    "ca": "aprenentatge de la literatura, literatura llatinoamericana",
+    "es": "aprendizaje de la literatura, literatura latinoamericana",
+    "en": "learning of Literature, Latin American Literature"
+  },
+  "descCodes": [
+    611,
+    637
+  ],
   "description": {
     "en": "Activity package about the biography of two Chilean poets awarded with the Nobel Prize: Pablo Neruda and Gabriela Mistral \n<br> A way to introduce children to poetry and creation.",
     "ca": "Paquet d'activitats relacionades amb les biografies de dos poetes xilens i Premi Nobel de Literatura, Pablo Neruda i Gabriela Mistral. \n<br> Una manera d'apropar als nens a la poesia i a la creació.",

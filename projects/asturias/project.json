@@ -29,6 +29,16 @@
     "SEC",
     "BTX"
   ],
+  "descriptors": {
+    "ca": "agricultura, societat, transport",
+    "es": "agricultura, sociedad, transporte",
+    "en": "agriculture, society, transport"
+  },
+  "descCodes": [
+    154,
+    344,
+    354
+  ],
   "description": {
     "en": "This project refers to the region of Asturias in Spain. The activities deal with various aspects of the region: geography, economy, traditions, history, population, nature and institutions.",
     "ca": "Aquest projecte fa referència a la Comunitat d'Astúries. Ens presenta diversos aspectes de la comunitat: \n<ul> \n <li>geografia </li>\n <li>economia </li>\n <li>tradicions </li>\n <li>història </li>\n <li>població </li>\n <li>naturalesa </li>\n <li>institucions </li>\n</ul>",

@@ -28,6 +28,15 @@
     "INF",
     "PRI"
   ],
+  "descriptors": {
+    "ca": "fonaments de les matemàtiques, lògica",
+    "es": "fundamentos de las matemáticas, lógica",
+    "en": "foundations of the mathematics, logic"
+  },
+  "descCodes": [
+    707,
+    711
+  ],
   "description": {
     "en": "This activity pack works on the ordering and serialization of various elements.",
     "ca": "Aquest paquet d'activitats està pensat per treballar diversos aspectes de l'ordenació i la seriació d'elements. Hi trobareu 15 activitats de tres tipus barrejades al llarg del paquet: copiar una sèrie d'elements, trobar l'element que falta i ordenar segons un criteri.\n<br> Cal tenir l'ordinador configurat per a 256 colors.",
@@ -38,6 +47,10 @@
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "serieak",
+    "seriegal"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",

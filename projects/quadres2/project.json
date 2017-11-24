@@ -27,6 +27,16 @@
   "levelCodes": [
     "INF"
   ],
+  "descriptors": {
+    "ca": "creativitat, dibuix, composició",
+    "es": "creatividad, dibujo, composición",
+    "en": "creativity, drawing, composition"
+  },
+  "descCodes": [
+    430,
+    432,
+    1433
+  ],
   "description": {
     "en": "Children in second grade primary school in Santa Susanna have created some pictures and have drawn them in Paint. In addition, they have invented a name for their works. This JClic contains activities where they have to relate the paintings with the corresponding names, puzzles or memory activities.",
     "ca": "Els nens i nenes de segon de primària de l'escola Santa Susanna han creat uns quadres i els han dibuixat amb el Paint. A més a més, han posat imaginació i s'han inventat un nom per les seves obres. Aquest JClic conté activitats on s'han de relacionar els quadres amb els noms corresponents, puzles o activitats de memòria.",

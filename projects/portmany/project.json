@@ -28,6 +28,14 @@
     "INF",
     "PRI"
   ],
+  "descriptors": {
+    "ca": "Sant Antoni de Portmany",
+    "es": "Sant Antoni de Portmany",
+    "en": "Sant Antoni de Portmany"
+  },
+  "descCodes": [
+    1398
+  ],
   "description": {
     "en": "Project of activities about Sant Antoni (Balearic Islands). The project has two parts: \n<ul> \n <li>infantile education </li>\n <li>primary education  </li>\n</ul>",
     "ca": "Projecte d'activitats sobre el municipi eivissenc de Sant Antoni de Portmany. El projecte es divideix en dues parts: \n<ul> \n <li>9 activitats variades d'educació infantil amb imatges del municipi. </li>\n <li>17 activitats de primària referents a aspectes bàsics del municipi, dels pobles que hi pertanyen, de la cultura i les plantes... </li>\n</ul>",

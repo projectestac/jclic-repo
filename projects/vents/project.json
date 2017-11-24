@@ -27,6 +27,14 @@
   "levelCodes": [
     "SEC"
   ],
+  "descriptors": {
+    "ca": "meteorologia",
+    "es": "meteorología",
+    "en": "meteorology"
+  },
+  "descCodes": [
+    89
+  ],
   "description": {
     "en": "The sixth part of the serial has the wind as main topic covering usual and wild behaviour. Through the first part of the package, centred in Catalonia, the pupils learn the wind naming according to the origin as well as its main features. It's also explained the wind intensity and direction from meteorological maps and it's disclosed the Beafort scale.\n<br> Next, the package is focused in the wild phenomena of the wind: the hurricanes and tornados. The package deals with the causes, features, structure and the measurement scales followed by curious associated facts like country naming and some freak anecdotes.\n<br> In these pages you will find the other parts of the serie: \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=1096\">L'atmosfera</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2860\">La previsió meteorològica</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2022\">Observem i mesurem</a>, \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2460\">A bots i barrals</a> and \n<a href=\"http://clic.xtec.net/db/act_en.jsp?id=2861\">Llamp de rellamp</a>.",
     "ca": "El sisè títol de la sèrie té com a protagonistes els vents, tant en la seva forma habitual com en la violenta. En la primera part del paquet, centrada a Catalunya, els alumnes aprenen a denominar-los segons el seu origen i a conèixer les seves característiques. També aprenen a veure la seva intensitat i direcció a partir de mapes meteorològics i descobreixen l'escala de Beaufort.\n<br> Tot seguit es passen a treballar les dues manifestacions violentes del fenomen: els huracans i els tornados. Dedicant-se a treballar les seves causes, característiques, estructura, escales de medició i tot un seguit de fets curiosos que van des de les denominacions a diversos països fins a les anècdotes més estrafolàries.\n<br> En aquestes pàgines es troben les altres parts de la sèrie temps de temps: \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=1096\">L'atmosfera</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2860\">La previsió meteorològica</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2022\">Observem i mesurem</a>, \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2460\">A bots i barrals</a> i \n<a href=\"http://clic.xtec.net/db/act_ca.jsp?id=2861\">Llamp de rellamp</a>.",

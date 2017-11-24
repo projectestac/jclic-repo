@@ -27,6 +27,15 @@
   "levelCodes": [
     "SEC"
   ],
+  "descriptors": {
+    "ca": "història, història per períodes",
+    "es": "historia, historia por periodos",
+    "en": "history, history per periods"
+  },
+  "descCodes": [
+    246,
+    259
+  ],
   "description": {
     "en": "The activities about \"The stages of history\" are directed to Highschool students in particular. They deal with social, economic and politic aspects besides the visualization of images of all the stages here represented: Paleolitic, neolitic, ancient age, middle ages, modern age and the present day.",
     "ca": "Les activitats sobre \"Les etapes de la història\" estan enfocades per a nivells de primer o segon cicle d'ESO. Tracten temes socials, econòmics i polítics a més de visualitzar imatges de cada una de les Etapes: Paleolític, Neolític, Edat antiga, Edat mitjana, Edat moderna i Edat contemporània. \n<br> És recomana configurar la pantalla a 1024x768",
@@ -37,6 +46,9 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
+  "relatedTo": [
+    "etapes"
+  ],
   "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
