@@ -69,7 +69,7 @@ Custom property      | Description                       | Default
 <dom-module id="big-project-card">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         line-height: initial;
         @apply --big-project-card;
       }
@@ -125,6 +125,10 @@ Custom property      | Description                       | Default
             <td class="label"><span>[[labels.levels]]</span>:</td>
             <td id="levels"></td>
           </tr>
+          <tr id="trDescriptors">
+            <td class="label"><span>[[labels.descriptors]]</span>:</td>
+            <td id="descriptors"></td>
+          </tr>
           <tr>
             <td class="label"><span>[[labels.date]]</span>:</td>
             <td id="date"></td>
@@ -148,41 +152,42 @@ Custom property      | Description                       | Default
     </paper-dialog>
 
     <!-- Additional dialogs for sharing and downloading the project -->
-    <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
+    <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]"
+      repo-root="[[repoRoot]]"></project-share>
     <project-download id="downloadDlg" project="[[project]]" labels="[[labels]]" repo-root="[[repoRoot]]"></project-share>
-    
+
   </template>
 
   <script>
     Polymer({
       is: 'big-project-card',
       properties: {
-          // Object containing the data of the JClic project currently displayed on this card
-          project: Object,
-          //
-          // ----------------------------------------------------------------
-          // Properties used by this component but initialized in `repo-data`
-          // ----------------------------------------------------------------
-          // URL used as a base for absolute references to project's components
-          baseUrl: String,
-          // Relative path to the folder where the JClic projects of this repository are located
-          repoRoot: String,
-          // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,
-          //  Main settings of the app, loaded at startup from `main.json`          
-          settings: Object,
-          //
-          // -----------------------------------------------------------------
-          // Properties used by this component but initialized in `jclic-repo`
-          // -----------------------------------------------------------------
-          // Current two-letter language code selected by the user
-          lang: String,        
+        // Object containing the data of the JClic project currently displayed on this card
+        project: Object,
+        //
+        // ----------------------------------------------------------------
+        // Properties used by this component but initialized in `repo-data`
+        // ----------------------------------------------------------------
+        // URL used as a base for absolute references to project's components
+        baseUrl: String,
+        // Relative path to the folder where the JClic projects of this repository are located
+        repoRoot: String,
+        // Current set of labels, titles and messages, translated into the current app language
+        labels: Object,
+        //  Main settings of the app, loaded at startup from `main.json`          
+        settings: Object,
+        //
+        // -----------------------------------------------------------------
+        // Properties used by this component but initialized in `jclic-repo`
+        // -----------------------------------------------------------------
+        // Current two-letter language code selected by the user
+        lang: String,
       },
       observers: [
-          '_projectChanged(project, lang, repoRoot)'
+        '_projectChanged(project, lang, repoRoot)'
       ],
       // Fill-in the card fields when project data is set
-      _projectChanged: function(prj, lang, repoRoot) {
+      _projectChanged: function (prj, lang, repoRoot) {
         this.$.cover.src = (prj && prj.cover && repoRoot) ? `${repoRoot}/${prj.path}/${prj.cover}` : ''
         this.$.title.textContent = prj ? prj.title : ''
         this.$.author.textContent = prj ? prj.author : ''
@@ -191,6 +196,11 @@ Custom property      | Description                       | Default
         this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : ''
         this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : ''
         this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : ''
+        this.$.descriptors.textContent = (prj && lang && prj.descriptors) ? prj.descriptors[lang] : ''
+        if (this.$.descriptors.textContent)
+          this.$.trDescriptors.classList.remove('hidden')
+        else
+          this.$.trDescriptors.classList.add('hidden')
         this.$.date.textContent = (prj && prj.date) ? prj.date : ''
         this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
         this.$.installJava.disabled = !prj || !prj.instFile
@@ -198,39 +208,39 @@ Custom property      | Description                       | Default
       },
 
       // Launches the project activities
-      _tapPlay: function(ev) {
+      _tapPlay: function (ev) {
         if (this.project)
-          this.dispatchEvent(new CustomEvent('play', {detail: {project: this.project}}))
+          this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
         ev.stopPropagation()
       },
 
       // Opens a link to a JNLP file that will start the installation of the project's Java version, when available
-      _tapInstallJava: function() {
+      _tapInstallJava: function () {
         if (this.project && this.project.instFile)
           window.open(`https://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=${this.baseUrl}${this.repoRoot}/${this.project.path}/${this.project.instFile}`)
       },
 
       // Downloads the JClic project in SCORM format (not yet implemented!)
-      _tapDownload: function() {
-        if(this.project){
+      _tapDownload: function () {
+        if (this.project) {
           this.$.downloadDlg.$.dialog.open()
           this.$.downloadDlg.prepareZipFile()
         }
       },
 
       // Redirects the navigation to the project's page in the legacy clicZone
-      _tapClicZone: function() {
+      _tapClicZone: function () {
         if (this.project && this.project.clicZoneURL)
           window.open(this.project.clicZoneURL, 'ClicZone')
       },
 
       // Opens the `project-share` dialog
-      _tapShare: function(ev) {
+      _tapShare: function (ev) {
         this.$.shareDlg.$.dialog.open()
       },
 
       // Closes this dialog
-      close: function() {
+      close: function () {
         if (this.$.shareDlg.$.dialog.opened)
           this.$.shareDlg.$.dialog.close()
         if (this.$.dialog.opened)
