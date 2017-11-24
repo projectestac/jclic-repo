@@ -69,7 +69,7 @@ Custom property      | Description                       | Default
 <dom-module id="big-project-card">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         line-height: initial;
         @apply --big-project-card;
       }
@@ -114,23 +114,33 @@ Custom property      | Description                       | Default
         <p id="description"></p>
         <table class="data">
           <tr>
-            <td class="label"><span>[[labels.languages]]</span>:</td>
+            <td class="label">
+              <span>[[labels.languages]]</span>:</td>
             <td id="languages"></td>
           </tr>
           <tr>
-            <td class="label"><span>[[labels.subjects]]</span>:</td>
+            <td class="label">
+              <span>[[labels.subjects]]</span>:</td>
             <td id="areas"></td>
           </tr>
           <tr>
-            <td class="label"><span>[[labels.levels]]</span>:</td>
+            <td class="label">
+              <span>[[labels.levels]]</span>:</td>
             <td id="levels"></td>
           </tr>
+          <tr id="trDescriptors">
+            <td class="label">
+              <span>[[labels.descriptors]]</span>:</td>
+            <td id="descriptors"></td>
+          </tr>
           <tr>
-            <td class="label"><span>[[labels.date]]</span>:</td>
+            <td class="label">
+              <span>[[labels.date]]</span>:</td>
             <td id="date"></td>
           </tr>
           <tr>
-            <td class="label"><span>[[labels.license]]</span>:</td>
+            <td class="label">
+              <span>[[labels.license]]</span>:</td>
             <td id="license"></td>
           </tr>
         </table>
@@ -148,9 +158,10 @@ Custom property      | Description                       | Default
     </paper-dialog>
 
     <!-- Additional dialogs for sharing and downloading the project -->
-    <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]" repo-root="[[repoRoot]]"></project-share>
+    <project-share id="shareDlg" settings="[[settings]]" project="[[project]]" lang="[[lang]]" labels="[[labels]]" base-url="[[baseUrl]]"
+      repo-root="[[repoRoot]]"></project-share>
     <project-download id="downloadDlg" project="[[project]]" labels="[[labels]]" repo-root="[[repoRoot]]"></project-share>
-    
+
   </template>
 
   <script>
@@ -198,6 +209,11 @@ Custom property      | Description                       | Default
         this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : ''
         this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : ''
         this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : ''
+        this.$.descriptors.textContent = (prj && lang && prj.descriptors) ? prj.descriptors[lang] : ''
+        if (this.$.descriptors.textContent)
+          this.$.trDescriptors.classList.remove('hidden')
+        else
+          this.$.trDescriptors.classList.add('hidden')
         this.$.date.textContent = (prj && prj.date) ? prj.date : ''
         this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
         this.$.installJava.disabled = !prj || !prj.instFile
@@ -207,7 +223,7 @@ Custom property      | Description                       | Default
       // Launches the project activities
       _tapPlay(ev) {
         if (this.project)
-          this.dispatchEvent(new CustomEvent('play', {detail: {project: this.project}}))
+          this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
         ev.stopPropagation()
       }
 
@@ -219,7 +235,7 @@ Custom property      | Description                       | Default
 
       // Downloads the JClic project in SCORM format (not yet implemented!)
       _tapDownload() {
-        if(this.project){
+        if (this.project) {
           this.$.downloadDlg.$.dialog.open()
           this.$.downloadDlg.prepareZipFile()
         }
@@ -246,6 +262,6 @@ Custom property      | Description                       | Default
     }
 
     window.customElements.define(BigProjectCard.is, BigProjectCard)
-    
+
   </script>
 </dom-module>
