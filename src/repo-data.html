@@ -71,60 +71,60 @@ Filtering and ordering criteria is stored in special objects called `filter` and
     Polymer({
       is: 'repo-data',
       properties: {
-          // Main settings of the app, loaded at startup from `main.json`
-          settings: {
-            type: Object,
-            observer: '_settingsLoaded',
-            notify: true
-          },
-          // Current set of labels, titles and messages, translated into the current app language
-          labels: {
-            type: Object,
-            value: {},
-            notify: true
-          },
-          // Current choices of languages, subjects and levels (expresed in the current language), used to filter the main project list
-          selectOptions: {
-            type: Object,
-            value: () => { return { languages: [], subjects: [], levels: [], } },
-            notify: true,
-          },
-          // Array containing the full project list of the repository, for internal use only
-          _allProjects: {
-            type: Array
-          },
-          // Ordered array containing the colection of projects matching the current filter settings
-          projects: {
-            type: Array,
-            value: () => [],
-            notify: true
-          },
-          // Current set of filtering and searching options
-          filter: {
-            type: Object,
-            value: () => { return { language: '', subject: '', level: '', title: '', author: '' } },
-            observer: '_filterChanged',
-            notify: true,
-          },
-          // Current ordering options
-          ordering: {
-            type: Object,
-            value: () => { return { field: '', inv: false } },
-            observer: '_orderingChanged',
-            notify: true,
-          },
-          // Relative path to the folder where the JClic projects of this repository are located
-          repoRoot: {
-            type: String,
-            notify: true
-          }
+        // Main settings of the app, loaded at startup from `main.json`
+        settings: {
+          type: Object,
+          observer: '_settingsLoaded',
+          notify: true
+        },
+        // Current set of labels, titles and messages, translated into the current app language
+        labels: {
+          type: Object,
+          value: {},
+          notify: true
+        },
+        // Current choices of languages, subjects and levels (expresed in the current language), used to filter the main project list
+        selectOptions: {
+          type: Object,
+          value: () => { return { languages: [], subjects: [], levels: [], } },
+          notify: true,
+        },
+        // Array containing the full project list of the repository, for internal use only
+        _allProjects: {
+          type: Array
+        },
+        // Ordered array containing the colection of projects matching the current filter settings
+        projects: {
+          type: Array,
+          value: () => [],
+          notify: true
+        },
+        // Current set of filtering and searching options
+        filter: {
+          type: Object,
+          value: () => { return { language: '', subject: '', level: '', title: '', author: '' } },
+          observer: '_filterChanged',
+          notify: true,
+        },
+        // Current ordering options
+        ordering: {
+          type: Object,
+          value: () => { return { field: '', inv: false } },
+          observer: '_orderingChanged',
+          notify: true,
+        },
+        // Relative path to the folder where the JClic projects of this repository are located
+        repoRoot: {
+          type: String,
+          notify: true
+        }
       },
       observers: [
-          '_updateLang(settings, lang)',
+        '_updateLang(settings, lang)',
       ],
 
       // Updates `labels`, and `selectOptions` in order to reflect the current app language
-      _updateLang: function(settings, lang) {
+      _updateLang: function (settings, lang) {
         this.labels = settings && settings.labels && lang && settings.labels[lang] ? settings.labels[lang] : {};
         this.selectOptions = {
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
@@ -135,7 +135,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
       },
 
       // Called when settings are loaded for first time
-      _settingsLoaded: function() {
+      _settingsLoaded: function () {
         if (this.settings && this.settings.index) {
           // Set the base path for all projects
           this.repoRoot = this.settings.index.path
@@ -153,7 +153,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
       },
 
       // Called when the index of the project's repository has been loaded
-      _projectsLoaded: function(projects = []) {
+      _projectsLoaded: function (projects = []) {
         // Check and update projects
         projects.forEach(prj => {
           // Set default values to undefined properties:
@@ -180,7 +180,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
       },
 
       // Loads a specific `project.json` file, returning a Promise
-      loadProject: function(path) {
+      loadProject: function (path) {
         const thisRepo = this
         return new Promise(function (resolve, reject) {
           const request = document.createElement('iron-request')
@@ -191,6 +191,8 @@ Filtering and ordering criteria is stored in special objects called `filter` and
             // Success:
             xhr => {
               const project = xhr.response
+              if (project.relatedTo)
+                project.relatedTitles = project.relatedTo.map(p => thisRepo._getProjectTitle(p))
               project.path = path
               resolve(project)
             },
@@ -200,8 +202,17 @@ Filtering and ordering criteria is stored in special objects called `filter` and
         });
       },
 
+      // Returns the project title for a specific path
+      _getProjectTitle: function (path) {
+        const prj = (this._allProjects && path) ? this._allProjects.find(p => p.path === path) : null
+        var title = prj ? prj.title : path
+        if (prj && title.indexOf('(') < 0 && prj.langCodes && prj.langCodes.length > 0)
+          title = `${title} (${prj.langCodes.join(', ')})`
+        return title
+      },
+
       // Filters the list of current projects according to the criteria established in `filter`
-      _filterChanged: function(f) {
+      _filterChanged: function (f) {
         this.projects = (this._allProjects || []).filter(item => {
           return (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
             && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
@@ -212,7 +223,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
       },
 
       // Sorts the `_allProjects` elements according to the current ordering criteria
-      _orderingChanged: function(ord) {
+      _orderingChanged: function (ord) {
         if (this._allProjects) {
           const field = ord ? ord.field : ''
           const inv = ord && ord.inv ? -1 : 1
@@ -225,6 +236,6 @@ Filtering and ordering criteria is stored in special objects called `filter` and
         }
       }
     });
-    
+
   </script>
 </dom-module>
