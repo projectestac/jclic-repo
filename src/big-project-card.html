@@ -102,7 +102,14 @@ Custom property      | Description                       | Default
         font-weight: bold;
         color: var(--secondary-text-color, #7E7E7E);
         padding-right: 4pt;
+        vertical-align: top;
       }
+
+      #related ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
     </style>
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation">
       <h2 id="title"></h2>
@@ -142,6 +149,11 @@ Custom property      | Description                       | Default
             <td class="label">
               <span>[[labels.license]]</span>:</td>
             <td id="license"></td>
+          </tr>
+          <tr id="trRelated">
+            <td class="label">
+              <span>[[labels.relatedProjects]]</span>:</td>
+            <td id="related"></td>
           </tr>
         </table>
       </paper-dialog-scrollable>
@@ -209,13 +221,27 @@ Custom property      | Description                       | Default
         this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : ''
         this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : ''
         this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : ''
-        this.$.descriptors.textContent = (prj && lang && prj.descriptors) ? prj.descriptors[lang] : ''
-        if (this.$.descriptors.textContent)
+
+        if (prj && lang && prj.descriptors) {
+          this.$.descriptors.textContent = prj.descriptors[lang]
           this.$.trDescriptors.classList.remove('hidden')
-        else
+        } else {
+          this.$.descriptors.textContent = ''
           this.$.trDescriptors.classList.add('hidden')
+        }
+
         this.$.date.textContent = (prj && prj.date) ? prj.date : ''
         this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
+
+        if (prj && prj.relatedTo) {
+          var relatedList = prj.relatedTo.map((rel, index) => `<li><a href="?prj=${rel}">${prj.relatedTitles[index]}</a></li>`)
+          this.$.related.innerHTML = `<ul>${relatedList.join('\n')}</ul>`
+          this.$.trRelated.classList.remove('hidden')
+        } else {
+          this.$.related.innerHTML = ''
+          this.$.trRelated.classList.add('hidden')
+        }
+        
         this.$.installJava.disabled = !prj || !prj.instFile
         this.$.clicZone.disabled = !prj || !prj.clicZoneURL
       }

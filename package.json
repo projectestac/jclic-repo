@@ -34,7 +34,7 @@
     "activities"
   ],
   "devDependencies": {
-    "eslint": "^4.11.0",
+    "eslint": "^4.12.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^3.2.2"
   },
