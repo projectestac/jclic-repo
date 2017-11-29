@@ -11,10 +11,39 @@
 /* eslint-env node */
 
 module.exports = {
+  cacheId: 'main_repository',
   staticFileGlobs: [
-    '/index.html',
+    '/index.htm',
+    '/index.html*',
+    '/main.json',
     '/manifest.json',
+    '/images/*',
+    '/src/jclic-repo.html',
     '/bower_components/webcomponentsjs/*',
+    '/bower_components/es6-promise-polyfill/*',
   ],
   navigateFallback: 'index.html',
+  ignoreUrlParametersMatching: [/./],
+  runtimeCaching: [{
+    urlPattern: /^https:\/\/unpkg\.com\//,
+    handler: 'cacheFirst',
+  },
+  {
+    urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+    handler: 'cacheFirst',
+  },
+  {
+    urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,
+    handler: 'fastest',
+  },
+  {
+    urlPattern: /^https?:\/\/[\w\.]*\/projects\/[\w\/\.]*\/(project\.json|cover\.(jpg|png|gif))/,
+    handler: 'cacheFirst',
+    options: {
+      cache: {
+        maxEntries: 800,
+        name: 'projects-cache',
+      },
+    },
+  }],
 };
