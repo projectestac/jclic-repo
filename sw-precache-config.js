@@ -33,7 +33,7 @@ module.exports = {
     handler: 'cacheFirst',
   },
   {
-    urlPattern: /^https?:\/\/[\w\.]*\/projects\/projects.json/,
+    urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,
     handler: 'fastest',
   },
   {
