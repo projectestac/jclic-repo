@@ -67,7 +67,7 @@ Custom property       | Description                          | Default
 <dom-module id="projects-selector">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         display: block;
         padding: 1em;
         @apply --projects-selector;
@@ -122,6 +122,7 @@ Custom property       | Description                          | Default
 
     <paper-input id="title" class="textInput" label="[[labels.title]]" on-change="readInputFieldValues"></paper-input>
     <paper-input id="author" class="textInput" label="[[labels.author]]" on-change="readInputFieldValues"></paper-input>
+    <paper-input id="description" class="textInput" label="[[labels.description]]" on-change="readInputFieldValues"></paper-input>
 
     <paper-button raised class="search" on-click="_clickOnSearchBtn" id="searchBtn">
       <iron-icon icon="search" class="small" style="margin-right: 4px;"></iron-icon>
@@ -159,7 +160,7 @@ Custom property       | Description                          | Default
       // Checks if the content of the provided object `f` is equivalent to the current filter settings
       // Returns `true` when `this.filter` has not been created, or when the value of any of its fields differs from the value of the same field in `f`
       filterDiffers(f) {
-        return !this.filter || ['language', 'subject', 'level', 'title', 'author'].find(ff => this.filter[ff] !== f[ff])
+        return !this.filter || ['language', 'subject', 'level', 'title', 'author', 'description'].find(ff => this.filter[ff] !== f[ff])
       }
 
       // Click on `search` button force a filter update
@@ -176,6 +177,7 @@ Custom property       | Description                          | Default
             level: this.$.dropLev.contentElement.selectedItem ? this.$.dropLev.contentElement.selectedItem.dataset.val : '*',
             title: this.$.title.value || '',
             author: this.$.author.value || '',
+            description: this.$.description.value || '',
           }
           if (forceFilterUpdate === true || this.filterDiffers(f))
             this.filter = f
@@ -183,7 +185,13 @@ Custom property       | Description                          | Default
       }
 
       // Sets a new value for `this.filter` and updates the form controls accordingly
-      setFilter(f) {
+      setFilter(f) {        
+        // Show/hide the description field
+        if (this.selectOptions && this.selectOptions.fullTextEnabled)
+          this.$.description.classList.remove('hidden')
+        else
+          this.$.description.classList.add('hidden')
+
         if (this.filterDiffers(f)) {
           // Disable event listener flag
           this._updatingFields = true
@@ -193,6 +201,7 @@ Custom property       | Description                          | Default
           this.$.dropLev.contentElement.selected = this.selectOptions.findIndex('levels', f.level || '*')
           this.$.title.value = f.title || ''
           this.$.author.value = f.author || ''
+          this.$.description.value = f.description || ''
           // Update `this.filter`
           this.filter = f
           // Re-enable event listener flag

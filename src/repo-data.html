@@ -94,6 +94,16 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           _allProjects: {
             type: Array,
           },
+          // Last query launched to the full-text search engine
+          _lastDescription: {
+            type: String,
+            value: ''
+          },
+          // List of project paths matching the last query launched to the full-text search engine
+          _selectedPaths: {
+            type: Array,
+            value: null
+          },
           // Ordered array containing the colection of projects matching the current filter settings
           projects: {
             type: Array,
@@ -103,7 +113,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           // Current set of filtering and searching options
           filter: {
             type: Object,
-            value: () => { return { language: '', subject: '', level: '', title: '', author: '' } },
+            value: () => { return { language: '', subject: '', level: '', title: '', author: '', description: '' } },
             observer: '_filterChanged',
             notify: true,
           },
@@ -145,7 +155,8 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           languages: (settings && settings.actLanguages && settings.actLanguages[lang]) ? settings.actLanguages[lang] : [],
           subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],
           levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : [],
-          findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value)
+          findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value),
+          fullTextEnabled: this.settings && this.settings.searchService
         }
       }
 
@@ -228,8 +239,34 @@ Filtering and ordering criteria is stored in special objects called `filter` and
 
       // Filters the list of current projects according to the criteria established in `filter`
       _filterChanged(f) {
+        if (this.settings && this.settings.searchService && f.description && f.description !== this._lastDescription) {
+          this._lastDescription = f.description;
+          const request = document.createElement('iron-request')
+          request.send({
+            url: `${this.settings.searchService}?q=${encodeURIComponent(f.description)}&lang=${this.lang}`,
+            handleAs: 'json'
+          }).then(
+            // Success:
+            xhr => {
+              this._selectedPaths = xhr.response
+              this._applyFilter(f, this._selectedPaths)
+            },
+            // Error:
+            err => console.log(`Error in full-text query: ${err}`)
+            )
+          return;
+        }
+        else if (this._lastDescription && !f.description) {
+          this._lastDescription = '';
+          this._selectedPaths = null;
+        }
+        this._applyFilter(f, this._selectedPaths);
+      }
+
+      _applyFilter(f, selection) {
         this.projects = (this._allProjects || []).filter(item => {
-          return (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
+          return (selection === null || selection.indexOf(item.path) >= 0)
+            && (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
             && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
             && (!f.level || f.level === '*' || item.levelCodes.indexOf(f.level) >= 0)
             && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0)
