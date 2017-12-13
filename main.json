@@ -5,7 +5,6 @@
     "file": "projects.json"
   },
   "searchService": "",
-  "searchService-devel": "../db/repo-search/index.php",
   "facebookShareID": "1917838468440790",
   "facebookRedirect": "https://facebook.com",
   "twitterVia": "jclic",
