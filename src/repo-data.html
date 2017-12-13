@@ -243,7 +243,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           this._lastDescription = f.description;
           const request = document.createElement('iron-request')
           request.send({
-            url: `${this.settings.searchService}?q=${encodeURIComponent(f.description)}&lang=${this.lang}`,
+            url: `${this.settings.searchService}?lang=${this.lang}&method=boolean&q=${encodeURIComponent(f.description)}`,
             handleAs: 'json'
           }).then(
             // Success:
