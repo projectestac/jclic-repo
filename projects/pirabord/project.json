@@ -53,19 +53,19 @@
   "relatedTo": [
     "pirab_eu"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/pirabord.jclic.zip",
+  "instFile": "jclic/pirabord.jclic.inst",
   "clicZoneId": 3449,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3449",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/pirabord/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/pirabord/jclic/pirabord.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

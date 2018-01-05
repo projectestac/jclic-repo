@@ -38,19 +38,19 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/colors2.jclic.zip",
+  "instFile": "jclic/colors2.jclic.inst",
   "clicZoneId": 3315,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3315",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/colors2/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/colors2/jclic/colors2.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

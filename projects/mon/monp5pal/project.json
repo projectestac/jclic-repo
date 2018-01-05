@@ -42,19 +42,19 @@
     "mon/monp4",
     "mon/monp5"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/monp5pal.jclic.zip",
+  "instFile": "jclic/monp5pal.jclic.inst",
   "clicZoneId": 3330,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3330",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/mon/monp5pal/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/mon/monp5pal/jclic/monp5pal.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

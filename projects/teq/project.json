@@ -49,19 +49,19 @@
     "dek",
     "teqes"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/teq.jclic.zip",
+  "instFile": "jclic/teq.jclic.inst",
   "clicZoneId": 1027,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=1027",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/teq/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/teq/jclic/teq.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.jpg",
     "project.json",

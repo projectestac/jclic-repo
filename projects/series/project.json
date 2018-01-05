@@ -51,19 +51,19 @@
     "serieak",
     "seriegal"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/series.jclic.zip",
+  "instFile": "jclic/series.jclic.inst",
   "clicZoneId": 1294,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=1294",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/series/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/series/jclic/series.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

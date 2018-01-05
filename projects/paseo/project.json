@@ -1,5 +1,5 @@
 {
-  "title": "Un passeig pel JClic",
+  "title": "Un paseo por JClic",
   "author": "Pere Cornellà Canals",
   "school": "Institut Celrà Celrà (Gironès)",
   "date": "10/10/07",
@@ -42,19 +42,19 @@
   "relatedTo": [
     "passeig"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/paseo.jclic.zip",
+  "instFile": "jclic/paseo.jclic.inst",
   "clicZoneId": 3118,
   "clicZoneURL": "http://clic.xtec.cat/db/act_es.jsp?id=3118",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/paseo/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/paseo/jclic/paseo.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.jpg",
     "project.json",

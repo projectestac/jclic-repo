@@ -53,19 +53,19 @@
     "demo_esp",
     "demo_pt"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/demo_it.jclic.zip",
+  "instFile": "jclic/demo_it.jclic.inst",
   "clicZoneId": 2740,
   "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=2740",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/demo_it/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/demo_it/jclic/demo_it.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.jpg",
     "project.json",

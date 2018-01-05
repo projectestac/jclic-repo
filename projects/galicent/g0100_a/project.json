@@ -1,5 +1,5 @@
 {
-  "title": "Galí: Català central (COM S'ESCRIU? COM ES PRONUNCIA? (Iniciació))",
+  "title": "Galí: Català central - Com s'escriu? Com es pronuncia? (iniciació)",
   "author": "Josep Pi, Lluïsa Bruch, Maria Areny i Montserrat Torra Dibuixos: GANG, estudi multidisciplinari Programació: Francesc Busquets Veu: Carles Martínez, Enregistraments sonors del curs audiovisual Digui Digui i Neus Sendra",
   "date": "08/09/09",
   "languages": {
@@ -73,19 +73,19 @@
     "galioc/g0600_a",
     "galioc/g0600_b"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/g0101a_intro.jclic.zip",
+  "instFile": "jclic/g0101a.jclic.inst",
   "clicZoneId": 3568,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3568",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/galicent/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/galicent/jclic/g0101a_intro.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

@@ -59,19 +59,19 @@
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "en": "Licensed under a Creative Commons license <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.png",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/ini.jclic.zip",
+  "instFile": "jclic/ini.jclic.inst",
   "clicZoneId": 3843,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3843",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/xocol/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/xocol/jclic/ini.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.png",
     "project.json",

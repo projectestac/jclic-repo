@@ -1,5 +1,5 @@
 {
-  "title": "Geoclic",
+  "title": "Geoclic (italiano)",
   "author": "Jaume Bartrolí Brugués Col·laboració: Antonia Martínez Guirao",
   "school": "Institut Manuel Carrasco i Formiguera Barcelona",
   "date": "02/07/08",
@@ -56,19 +56,19 @@
     "geoklik",
     "xeoclic"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/geoclici.jclic.zip",
+  "instFile": "jclic/geoclici.jclic.inst",
   "clicZoneId": 1308,
   "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1308",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geoclici/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geoclici/jclic/geoclici.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

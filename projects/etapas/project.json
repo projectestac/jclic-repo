@@ -1,5 +1,5 @@
 {
-  "title": "Les etapes de la història",
+  "title": "Las etapas de la historia",
   "author": "David Font Mampel",
   "school": "IES Josep Miquel Guàrdia Alaior (Menorca)",
   "date": "18/12/02",
@@ -49,19 +49,19 @@
   "relatedTo": [
     "etapes"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/etapas.jclic.zip",
+  "instFile": "jclic/etapas.jclic.inst",
   "clicZoneId": 1443,
   "clicZoneURL": "http://clic.xtec.cat/db/act_es.jsp?id=1443",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/etapas/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/etapas/jclic/etapas.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",

@@ -28,6 +28,16 @@
     "INF",
     "PRI"
   ],
+  "descriptors": {
+    "ca": "cultura popular, societat, festes populars",
+    "es": "cultura popular, sociedad, Fiestas populares",
+    "en": "popular culture, society, Traditionals festivals"
+  },
+  "descCodes": [
+    196,
+    344,
+    1455
+  ],
   "description": {
     "en": "Project of activities about the \n<i>Geganters de Terrassa</i> (Giants of Terrassa): \n<ul> \n <li>giants </li>\n <li>bigheaded </li>\n <li>giants team </li>\n <li>the construction of a giant </li>\n <li><i>Terrassa, city of giants 2015</i> </li>\n</ul>",
     "ca": "Material didàctic per a nens i nenes sobre els Geganters de Terrassa amb activitats sobre: \n<ul> \n <li>gegants i gegantons </li>\n <li>capgrossos </li>\n <li>colla gegantera (geganters, uniformitat, músiques i balls i festes) </li>\n <li>construcció d'un gegant </li>\n <li>Terrassa, ciutat gegantera 2015  </li>\n</ul>",
@@ -38,19 +48,19 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.png",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/geg_terr.jclic.zip",
+  "instFile": "jclic/geg_terr.jclic.inst",
   "clicZoneId": 3893,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3893",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geg_terr/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/geg_terr/jclic/geg_terr.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.png",
     "project.json",

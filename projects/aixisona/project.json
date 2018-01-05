@@ -46,19 +46,19 @@
     "ca": "Aquesta obra està sota una llicència de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>",
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.jpg",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/aixisona.jclic.zip",
+  "instFile": "jclic/aixisona.jclic.inst",
   "clicZoneId": 2300,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=2300",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/aixisona/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/aixisona/jclic/aixisona.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.jpg",
     "project.json",

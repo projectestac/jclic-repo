@@ -55,19 +55,19 @@
     "cangur11/nivell3",
     "cangur11/nivell4"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.png",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/cangur11_1.jclic.zip",
+  "instFile": "jclic/cangur11_1.jclic.inst",
   "clicZoneId": 3784,
   "clicZoneURL": "http://clic.xtec.cat/db/act_ca.jsp?id=3784",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/cangur11/jclic/nivell1/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/cangur11/jclic/nivell1/cangur11_1.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.png",
     "project.json",

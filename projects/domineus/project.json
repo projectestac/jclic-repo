@@ -1,5 +1,5 @@
 {
-  "title": "El superdòmino",
+  "title": "Superdominoa",
   "author": "Toni Miquel Mollà",
   "school": "CP Crist de la Pau Sant Joan d'Alacant (Alacantí)",
   "date": "10/11/03",
@@ -50,19 +50,19 @@
     "superdfr",
     "superdom"
   ],
-  "mainFile": "jclic.js/test.jclic",
   "cover": "cover.gif",
   "thumbnail": "thumb.png",
-  "zipFile": "jclic/test.jclic.zip",
-  "instFile": "jclic/test.jclic.inst",
+  "zipFile": "jclic/domineus.jclic.zip",
+  "instFile": "jclic/domineus.jclic.inst",
   "clicZoneId": 1360,
   "clicZoneURL": "http://clic.xtec.cat/db/act_en.jsp?id=1360",
-  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/domineus/jclic/test.jclic.zip",
+  "clicZoneAppletURL": "http://clic.xtec.cat/db/jclicApplet.jsp?project=http://clic.xtec.cat/projects/domineus/jclic/domineus.jclic.zip",
   "meta_langs": [
     "ca",
     "es",
     "en"
   ],
+  "mainFile": "jclic.js/test.jclic",
   "files": [
     "cover.gif",
     "project.json",
