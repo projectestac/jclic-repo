@@ -156,7 +156,7 @@ Filtering and ordering criteria is stored in special objects called `filter` and
           subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],
           levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : [],
           findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value),
-          fullTextEnabled: this.settings && this.settings.searchService
+          fullTextEnabled: this.settings && this.settings.searchService ? true : false
         }
       }
 

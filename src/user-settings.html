@@ -67,7 +67,7 @@ Custom property   | Description                          | Default
 <dom-module id="user-settings">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         @apply --user-settings;
       }
 
@@ -149,7 +149,7 @@ Custom property   | Description                          | Default
           // Computed field indicating if full screen mode is available on the current browser
           _noFullScreenAvailable: {
             type: Boolean,
-            value: () => !document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled,
+            value: () => (!document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled) ? true : false,
           },
           // Valid options for `field` in `ordering`
           orderOptions: {
@@ -161,7 +161,7 @@ Custom property   | Description                          | Default
           // Other variables used in this component but declared and initialized in `repo-data`:
           // -----------------------------------------------------------------------------------
           // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,          
+          labels: Object,
           // Ordering criteria: {field: '', inv: false}
           ordering: {
             type: Object,
@@ -176,11 +176,11 @@ Custom property   | Description                          | Default
             type: Boolean,
             notify: true,
           },
-        // Flag indicating whether JClic player has to open in new tab          
+          // Flag indicating whether JClic player has to open in new tab          
           openPlayerInNewTab: {
             type: Boolean,
             notify: true,
-          },                    
+          },
         }
       }
 
@@ -195,7 +195,7 @@ Custom property   | Description                          | Default
         this.fullScreenPlayer = storage.getItem('fullScreenPlayer') === 'true'
         this.openPlayerInNewTab = storage.getItem('openPlayerInNewTab') !== 'false'
         const field = storage.getItem('ordering.field')
-        if(field)
+        if (field)
           this.ordering.field = field
         this.ordering.inv = storage.getItem('ordering.inv') === 'true'
       }
@@ -225,7 +225,7 @@ Custom property   | Description                          | Default
 
       // Called when the user clicks on OK
       _ok() {
-        this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen
+        this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen ? true : false
         this.openPlayerInNewTab = this._openInNewTab
         this.ordering.field = this.orderOptions[this._order]
         this.ordering.inv = this._orderInv
