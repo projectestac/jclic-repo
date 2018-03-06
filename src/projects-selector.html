@@ -157,6 +157,21 @@ Custom property       | Description                          | Default
         }
       }
 
+      static get observers() {
+        return [
+          '_checkFullTextEnabled(selectOptions)',
+        ]
+      }
+
+      // Enables or disables full text search input field
+      _checkFullTextEnabled(selectOptions) {
+        // Show/hide the description field
+        if (selectOptions && selectOptions.fullTextEnabled)
+          this.$.description.classList.remove('hidden')
+        else
+          this.$.description.classList.add('hidden')        
+      }
+
       // Checks if the content of the provided object `f` is equivalent to the current filter settings
       // Returns `true` when `this.filter` has not been created, or when the value of any of its fields differs from the value of the same field in `f`
       filterDiffers(f) {
@@ -186,12 +201,6 @@ Custom property       | Description                          | Default
 
       // Sets a new value for `this.filter` and updates the form controls accordingly
       setFilter(f) {
-        // Show/hide the description field
-        if (this.selectOptions && this.selectOptions.fullTextEnabled)
-          this.$.description.classList.remove('hidden')
-        else
-          this.$.description.classList.add('hidden')
-
         if (this.filterDiffers(f)) {
           // Disable event listener flag
           this._updatingFields = true
