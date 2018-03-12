@@ -49,7 +49,7 @@
 <link rel="import" href="social-buttons.html">
 
 <!-- build:js ../bower_components/clipboard.js/clipboard.js -->
-<script src="../bower_components/clipboard.js/clipboard.js"></script>
+<script src="../bower_components/clipboard.js/build/clipboard-polyfill.js"></script>
 <!-- endbuild -->
 
 
@@ -262,7 +262,7 @@ Custom property      | Description                         | Default
             this.$.copied.close()
           this.$.copied.noCancelOnOutsideClick = false
           this.$.copied.positionTarget = ev.target
-          clipboard.copy(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
+          clipboard.writeText(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
         }
       }
 
