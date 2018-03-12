@@ -41,8 +41,6 @@
 
 <link rel="import" href="shared-styles.html">
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
 <!--
 
 This component allows to share a specific content on the following social networks:
@@ -51,6 +49,7 @@ This component allows to share a specific content on the following social networ
 - Google+
 - Pinterest
 - Twitter
+- Google Classroom
 
 It also builds a button pointing to a `mailto:` link, useful for sharing the content by e-mail.
 
@@ -95,6 +94,15 @@ Custom property      | Description                         | Default
       <g id="mail">
         <path d="M 4 2 C 2.895 2 2 2.895 2 4 L 2 20 C 2 21.105 2.895 22 4 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 4 C 22 2.89 21.1 2 20 2 L 4 2 z M 6.664 6.941 L 17.635 6.941 C 18.389 6.941 19.008 7.498 19.008 8.176 L 19.008 15.574 C 19.008 16.252 18.389 16.807 17.635 16.807 L 6.664 16.807 C 5.910 16.807 5.293 16.252 5.293 15.574 L 5.301 8.176 C 5.301 7.498 5.910 6.941 6.664 6.941 z M 6.664 8.176 L 6.664 9.408 L 12.150 12.490 L 17.635 9.408 L 17.635 8.176 L 12.150 11.258 L 6.664 8.176 z"/>
       </g>
+      <g id="classroom" transform="scale(0.42),translate(4,4)">
+        <rect id="Rectangle-1-Copy-8" fill="#FFC112" x="0" y="0" width="48" height="48"></rect>
+        <rect id="Rectangle-1-Copy-11" fill="#21A465" x="4" y="4" width="40" height="40"></rect>
+        <g id="Shape-Copy-2-+-Shape-Copy" transform="translate(8, 16)">
+          <path d="M28,6 C28,4.896 27.104,4 26,4 C24.896,4 24,4.896 24,6 C24,7.104 24.896,8 26,8 C27.104,8 28,7.104 28,6 Z M26,9 C23.108,9 20,10.419 20,12.175 L20,14 L32,14 L32,12.175 C32,10.419 28.892,9 26,9 L26,9 Z M8,6 C8,4.896 7.104,4 6,4 C4.896,4 4,4.896 4,6 C4,7.104 4.896,8 6,8 C7.104,8 8,7.104 8,6 Z M6,9 C3.108,9 0,10.419 0,12.175 L0,14 L12,14 L12,12.175 C12,10.4194 8.892,9 6,9 L6,9 Z" id="Shape-Copy-2" fill="#57BB8A"></path>
+          <path d="M16.002,6 C17.657,6 19,4.657 19,3 C19,1.345 17.657,0 16.002,0 C14.345,0 13,1.345 13,3 C13,4.657 14.345,6 16.002,6 L16.002,6 Z M8.171,11.667 L8.171,14 L24,14 L24,11.667 C24,9.088 19.901,7 16.086,7 C12.270,7 8.171,9.088 8.171,11.667 Z" id="Shape-Copy" fill="#F7F7F7"></path>
+        </g>
+        <polygon id="Shape" fill="#F1F1F1" points="28 41 40 41 40 44 28 44"></polygon>
+      </g>
     </defs>
   </svg>
 </iron-iconset-svg>
@@ -138,27 +146,16 @@ Custom property      | Description                         | Default
         color: inherit;
       }
 
-      .classroom {
-        vertical-align: bottom !important;
-        margin-bottom: 2px !important;
-        display: none;
-      }
-
     </style>
     <a href="[[linkToFacebook]]" target="_blank"><paper-icon-button class="social facebook" icon="sbtn:facebook-box" title="Facebook"></paper-icon-button></a>
     <a href="[[linkToGooglePlus]]" target="_blank"><paper-icon-button class="social googleplus" icon="sbtn:google-plus-box" title="Google Plus"></paper-icon-button></a>
     <a href="[[linkToPinterest]]" target="_blank"><paper-icon-button class="social pinterest" icon="sbtn:pinterest-box" title="Pinterest"></paper-icon-button></a>
     <a href="[[linkToTwitter]]" target="_blank"><paper-icon-button class="social twitter" icon="sbtn:twitter-box" title="Twitter"></paper-icon-button></a>
     <a href="[[linkToMail]]" target="_blank"><paper-icon-button class="social email" icon="sbtn:mail" title="email"></paper-icon-button></a>
-    <div class="social classroom" id="gclassroom" title="Add to Classroom"></div>
+    <a href="[[linkToClassroom]]" target="_blank" id="classroom" class="hidden"><paper-icon-button class="social classroom" icon="sbtn:classroom" title="Add to Classroom"></paper-icon-button></a>
   </template>
 
   <script>
-    // Needed by "Add to Classroom" button
-    window.___gcfg = {
-      parsetags: 'explicit'
-    }
-
     class SocialButtons extends Polymer.Element {
       static get is() { return 'social-buttons' }
 
@@ -181,6 +178,7 @@ Custom property      | Description                         | Default
           linkToPinterest: String,
           linkToTwitter: String,
           linkToMail: String,
+          linkToClassroom: String,
           //
           // -----------------------------------------------------------------------------------
           // Other variables used in this component but declared and initialized in `repo-data`:
@@ -217,9 +215,12 @@ Custom property      | Description                         | Default
           this.linkToPinterest = `https://pinterest.com/pin/create/button/?url=${eUrl}&media=${eImg}&description=${eDesc}`
           this.linkToTwitter = `https://twitter.com/intent/tweet?text=${eText}&url=${eUrl}&hashtags=${eHash}&via=${eTWVia}`
           this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`
-
-          if (gapi && url && this.withClassroom)
-            gapi.sharetoclassroom.render(this.$.gclassroom, { url, size: 24 })
+          if(this.withClassroom){
+            this.linkToClassroom = `https://classroom.google.com/u/0/share?url=${eUrl}`
+            this.$.classroom.classList.remove('hidden')
+          } else {
+            this.$.classroom.classList.add('hidden')
+          }
         }
       }
     }
