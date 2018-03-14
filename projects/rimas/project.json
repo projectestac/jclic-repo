@@ -51,6 +51,9 @@
     "en"
   ],
   "mainFile": "jclic.js/test.jclic",
+  "activities": 16,
+  "mediaFiles": 64,
+  "totalSize": 3315191,
   "files": [
     "cover.png",
     "project.json",
