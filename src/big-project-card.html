@@ -111,10 +111,21 @@ Custom property      | Description                       | Default
         padding-left: 20px;
       }
 
+      #license {
+        line-height: 110%;
+        font-size: 90%;
+        font-style: italic;
+      }
+
+      #cclogo {
+        margin: 3px 10px 5px 0;
+        float: left;
+      }
+
       @media screen and (max-width: 700px) {
         #dialog {
           max-width: 100vw;
-          margin: 10px;
+          margin: 5px;
         }
         .label {
           min-width: 3rem;
@@ -168,7 +179,10 @@ Custom property      | Description                       | Default
           <tr>
             <td class="label">
               <span>[[labels.license]]</span>:</td>
-            <td id="license"></td>
+            <td id="license">
+              <img id="cclogo" src="images/cclogo.png" alt="">
+              <div id="licenseText"></div>
+            </td>
           </tr>
           <tr id="trRelated">
             <td class="label">
@@ -184,7 +198,6 @@ Custom property      | Description                       | Default
         <paper-icon-button id="download" mini icon="file-download" title="[[labels.downloadText]]" on-tap="_tapDownload"></paper-icon-button>
         <paper-icon-button id="clicZone" mini icon="av:video-library" title="[[labels.linkClicZoneText]]" on-tap="_tapClicZone"></paper-icon-button>
         <paper-icon-button id="share" mini icon="social:share" id="share" title="[[labels.shareText]]" on-tap="_tapShare"></paper-icon-button>
-        <span class="flex"></span>
         <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
       </div>
     </paper-dialog>
@@ -251,7 +264,12 @@ Custom property      | Description                       | Default
         }
 
         this.$.date.textContent = (prj && prj.date) ? prj.date : ''
-        this.$.license.innerHTML = (prj && lang && prj.license) ? prj.license[lang] : ''
+        const licenseText = (prj && lang && prj.license) ? prj.license[lang] : ''
+        this.$.licenseText.innerHTML = licenseText
+        if (licenseText && /Creative Commons/i.test(licenseText))
+          this.$.cclogo.classList.remove('hidden')
+        else
+          this.$.cclogo.classList.add('hidden')
 
         if (prj && prj.relatedTo) {
           var relatedList = prj.relatedTo.map((rel, index) => `<li><a href="?prj=${rel}">${prj.relatedTitles[index]}</a></li>`)
