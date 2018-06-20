@@ -80,7 +80,7 @@ Custom property      | Description                       | Default
 
       #cover {
         float: right;
-        margin: 5px 0 5px 5px;
+        margin: 5px 0 15px 15px;
         max-width: 50%;
         cursor: pointer;
       }
@@ -251,7 +251,9 @@ Custom property      | Description                       | Default
         this.$.title.textContent = prj ? prj.title : ''
         this.$.author.textContent = prj ? prj.author : ''
         this.$.school.textContent = prj ? prj.school : ''
-        this.$.description.innerHTML = (prj && lang && prj.description) ? prj.description[lang] : ''
+        // Replace newlines with '<br>' in description only when no HTML tags are present
+        const desc = (prj && lang && prj.description) ? prj.description[lang] : ''
+        this.$.description.innerHTML =  /<\w*>/.test(desc) ? desc : desc.replace(/\n/g, '<br>\n')
         this.$.languages.textContent = (prj && lang && prj.languages) ? prj.languages[lang] : ''
         this.$.areas.textContent = (prj && lang && prj.areas) ? prj.areas[lang] : ''
         this.$.levels.textContent = (prj && lang && prj.levels) ? prj.levels[lang] : ''
