@@ -84,11 +84,13 @@ Custom property      | Description                         | Default
 
       #dialog {
         max-width: 500px;
+        margin: 24px;
       }
 
       @media (min-width: 601px) {
         #dialog {
           min-width: 500px;
+          margin: 24px 40px;
         }
       }
 
@@ -126,7 +128,7 @@ Custom property      | Description                         | Default
     </style>
 
     <paper-dialog id="dialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-      <h2><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
+      <h2 class="wrap"><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div class="vertical-section-container">
 

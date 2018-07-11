@@ -193,11 +193,11 @@ Custom property      | Description                       | Default
         </table>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <!-- Buttons with several actions related to the current project-->
+        <!-- Buttons with actions related to the current project-->
         <paper-icon-button id="play" mini icon="av:play-circle-filled" title="[[labels.playText]]" on-tap="_tapPlay"></paper-icon-button>
         <paper-icon-button id="installJava" mini icon="maps:local-cafe" title="[[labels.installText]]" on-tap="_tapInstallJava"></paper-icon-button>
         <paper-icon-button id="download" mini icon="file-download" title="[[labels.downloadText]]" on-tap="_tapDownload"></paper-icon-button>
-        <paper-icon-button id="clicZone" mini icon="av:video-library" title="[[labels.linkClicZoneText]]" on-tap="_tapClicZone"></paper-icon-button>
+        <!-- paper-icon-button id="clicZone" mini icon="av:video-library" title="[[labels.linkClicZoneText]]" on-tap="_tapClicZone"></paper-icon-button -->
         <paper-icon-button id="share" mini icon="social:share" id="share" title="[[labels.shareText]]" on-tap="_tapShare"></paper-icon-button>
         <paper-icon-button dialog-dismiss icon="close" title="[[labels.close]]"></paper-icon-button>
       </div>
@@ -300,7 +300,7 @@ Custom property      | Description                       | Default
         }
 
         this.$.installJava.disabled = !prj || !prj.instFile
-        this.$.clicZone.disabled = !prj || !prj.clicZoneURL
+        //this.$.clicZone.disabled = !prj || !prj.clicZoneURL
       }
 
       // Launches the project activities
@@ -324,11 +324,11 @@ Custom property      | Description                       | Default
         }
       }
 
-      // Redirects the navigation to the project's page in the legacy clicZone
-      _tapClicZone() {
-        if (this.project && this.project.clicZoneURL)
-          window.open(this.project.clicZoneURL, 'ClicZone')
-      }
+      // Redirects the navigation to the project's page in the legacy clicZone      
+      // _tapClicZone() {
+      //    if (this.project && this.project.clicZoneURL)
+      //      window.open(this.project.clicZoneURL, 'ClicZone')
+      //  }
 
       // Opens the `project-share` dialog
       _tapShare(ev) {
