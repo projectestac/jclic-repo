@@ -41,7 +41,7 @@ module.exports = {
     handler: 'cacheFirst',
     options: {
       cache: {
-        maxEntries: 800,
+        maxEntries: 3000,
         name: 'projects-cache',
       },
     },

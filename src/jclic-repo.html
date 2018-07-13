@@ -345,6 +345,7 @@ Some other functional components are also declared and included at this level:
             this.$.bigPrj.project = project
             this.$.bigPrj.$.dialog.open()
             this.currentProjectId = project.path
+            document.querySelector('title').innerHTML = `${this.labels.mainTitle}: ${project.title}`
           },
           // Promise rejected
           err => {
@@ -358,6 +359,7 @@ Some other functional components are also declared and included at this level:
         if (!this.$.player.project) {
           this.currentProjectId = null
           this._queryChanged()
+          document.querySelector('title').innerHTML = this.labels.mainTitle
         }
       }
 

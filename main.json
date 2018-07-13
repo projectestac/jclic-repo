@@ -16,8 +16,8 @@
   "defaultLanguage": "en",
   "labels": {
     "en": {
-      "mainTitle": "JClic HTML5 projects library",
-      "mainDescription": "Temporary site to test the new JClic HTML5 player",
+      "mainTitle": "Library of JClic activities",
+      "mainDescription": "Library of educational activities created with JClic",
       "ok": "OK",
       "cancel": "Cancel",
       "searchTitle": "Search activities",
@@ -71,8 +71,8 @@
       "fileSize": "Size"
       },
     "ca": {
-      "mainTitle": "Biblioteca de projectes JClic HTML5",
-      "mainDescription": "Espai provisional de proves del nou motor HTML5 del JClic",
+      "mainTitle": "Biblioteca d'activitats JClic",
+      "mainDescription": "Biblioteca d'activitats educatives creades amb el JClic",
       "ok": "D'acord",
       "cancel": "Cancel·la",
       "searchTitle": "Cerca activitats",
@@ -126,8 +126,8 @@
       "fileSize": "Mida"
       },
     "es": {
-      "mainTitle": "Biblioteca de proyectos JClic HTML5",
-      "mainDescription": "Espacio provisional de pruebas del nuevo motor HTML5 de JClic",
+      "mainTitle": "Biblioteca de actividades JClic",
+      "mainDescription": "Biblioteca de actividades educativas creadas con JClic",
       "ok": "Aceptar",
       "cancel": "Cancelar",
       "searchTitle": "Buscar actividades",
