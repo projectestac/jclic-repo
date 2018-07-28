@@ -75,7 +75,8 @@
   <meta name="msapplication-tap-highlight" content="no">
 
   <!-- Load and register pre-caching Service Worker -->
-  <script>
+  <script type="module">
+    import './src/jclic-repo.js';
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js');
@@ -83,11 +84,20 @@
     }
   </script>
 
+  <script src="node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  <script src="node_modules/file-saver/FileSaver.js"></script>
+  
   <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <script>
+    // Force all polyfills on
+    if (window.customElements) window.customElements.forcePolyfill = true;
+    ShadyDOM = { force: true };
+    ShadyCSS = { shimcssproperties: true };
+  </script>
+  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
   <!-- Load application shell -->
-  <link rel="import" href="src/jclic-repo.html">
+  <script type="module" src="./src/jclic-repo.js"></script>
 
   <!-- Global styles for body -->
   <style>

@@ -1,4 +1,4 @@
-<!--
+/**
   File    : project-card.html
   Created : 27/04/2017
   By      : Francesc Busquets <francesc@gmail.com>
@@ -32,16 +32,8 @@
   Licence for the specific language governing permissions and limitations
   under the Licence.
   @licend
--->
-
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-
-<link rel="import" href="shared-styles.html">
-<link rel="import" href="shared-icons.html">
-
-<!--
+*/
+/*
 
 This is a small card with basic information about a specific JClic project. This cards are usually placed on a `projects-list` element.
 
@@ -58,10 +50,22 @@ Custom property | Description | Default
 `--project-card-play-button` | Mixin applied to the play button | `{}`
 `--project-card` | Mixin applied to the project card | `{}`
 
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
-<dom-module id="project-card">
-  <template>
+import '@polymer/paper-material/paper-material.js';
+import '@polymer/paper-fab/paper-fab.js';
+import './shared-styles.js';
+import './shared-icons.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+class ProjectCard extends PolymerElement {
+  static get template() {
+    return html`
     <style include="shared-styles">
        :host {
         display: inline-block;
@@ -136,82 +140,79 @@ Custom property | Description | Default
       <div id="content" class="content">
         <template id="languages" is="dom-repeat" items="[[languages]]"><span class="language">[[item]]</span></template>
         <div id="title" class="title">[[project.title]]</div>
-        <paper-fab class="play-button" mini icon="av:play-arrow" title="[[labels.playText]]" role="button" on-click="_play"></paper-fab>
+        <paper-fab class="play-button" mini="" icon="av:play-arrow" title="[[labels.playText]]" role="button" on-click="_play"></paper-fab>
       </div>
       <!-- Bottom area of the card, displaying the author(s) name -->
       <div id="author" class="one-line-text">[[project.author]]</div>
     </paper-material>
-  </template>
+`;
+  }
 
-  <script>
-    class ProjectCard extends Polymer.Element {
-      static get is() { return 'project-card' }
+  static get is() { return 'project-card' }
 
-      static get properties() {
-        return {
-          // Object containing the data of the JClic project currently displayed on this card
-          project: Object,
-          // Project languages, represented as an array of two-letter language codes
-          languages: Object,
-          // Current elevation of the `paper-material` container
-          elevation: {
-            type: Number,
-            value: 1,
-          },
-          //
-          // ----------------------------------------------------------------
-          // Properties used by this component but initialized in `repo-data`
-          // ----------------------------------------------------------------
-          // Relative path to the folder where the JClic projects of this repository are located
-          repoRoot: String,
-          // Current set of labels, titles and messages, translated into the current app language
-          labels: Object,
-        }
-      }
-
-      static get observers() {
-        return [
-          '_setProject(repoRoot, project)'
-        ]
-      }
-
-      // Sets the current project data
-      _setProject(repoRoot, prj) {
-        if (repoRoot && prj) {
-          this.setAttribute('aria-label', prj ? prj.title : '')
-          if (prj && prj.cover)
-            this.$.content.style.cssText = `background: no-repeat center/150% url("${repoRoot}/${prj.path}/${prj.cover}");`
-          else
-            this.$.content.style.cssText = ''
-          this.$.title.style.cssText = prj.title ? '' : 'display:none;'
-          this.languages = (prj && prj.langCodes) ? prj.langCodes : []
-        }
-      }
-
-      // Event handler called by the play button
-      _play(ev) {
-        if (this.project)
-          this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
-        ev.stopPropagation()
-      }
-
-      // Event handler called when the user clicks on the card
-      _click() {
-        if (this.project)
-          this.dispatchEvent(new CustomEvent('show', { detail: { path: this.project.path } }))
-      }
-
-      // Called on mouseenter
-      _raise() {
-        this.elevation = 4
-      }
-
-      // Called on mouseleave
-      _unraise() {
-        this.elevation = 1
-      }
+  static get properties() {
+    return {
+      // Object containing the data of the JClic project currently displayed on this card
+      project: Object,
+      // Project languages, represented as an array of two-letter language codes
+      languages: Object,
+      // Current elevation of the `paper-material` container
+      elevation: {
+        type: Number,
+        value: 1,
+      },
+      //
+      // ----------------------------------------------------------------
+      // Properties used by this component but initialized in `repo-data`
+      // ----------------------------------------------------------------
+      // Relative path to the folder where the JClic projects of this repository are located
+      repoRoot: String,
+      // Current set of labels, titles and messages, translated into the current app language
+      labels: Object,
     }
+  }
 
-    window.customElements.define(ProjectCard.is, ProjectCard)
-  </script>
-</dom-module>
+  static get observers() {
+    return [
+      '_setProject(repoRoot, project)'
+    ]
+  }
+
+  // Sets the current project data
+  _setProject(repoRoot, prj) {
+    if (repoRoot && prj) {
+      this.setAttribute('aria-label', prj ? prj.title : '')
+      if (prj && prj.cover)
+        this.$.content.style.cssText = `background: no-repeat center/150% url("${repoRoot}/${prj.path}/${prj.cover}");`
+      else
+        this.$.content.style.cssText = ''
+      this.$.title.style.cssText = prj.title ? '' : 'display:none;'
+      this.languages = (prj && prj.langCodes) ? prj.langCodes : []
+    }
+  }
+
+  // Event handler called by the play button
+  _play(ev) {
+    if (this.project)
+      this.dispatchEvent(new CustomEvent('play', { detail: { project: this.project } }))
+    ev.stopPropagation()
+  }
+
+  // Event handler called when the user clicks on the card
+  _click() {
+    if (this.project)
+      this.dispatchEvent(new CustomEvent('show', { detail: { path: this.project.path } }))
+  }
+
+  // Called on mouseenter
+  _raise() {
+    this.elevation = 4
+  }
+
+  // Called on mouseleave
+  _unraise() {
+    this.elevation = 1
+  }
+}
+
+window.customElements.define(ProjectCard.is, ProjectCard)

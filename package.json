@@ -1,24 +1,5 @@
 {
-  "name": "jclic-repo",
-  "title": "JClic Repo",
   "description": "Dynamic repository of JClic activities",
-  "author": "Francesc Busquets <francesc@gmail.com>",
-  "version": "0.3.1",
-  "homepage": "http://projectestac.github.io/jclic-repo",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/projectestac/jclic-repo.git"
-  },
-  "bugs": {
-    "url": "https://github.com/projectestac/jclic-repo/issues"
-  },
-  "licenses": [
-    {
-      "type": "EUPL-1.1",
-      "url": "https://spdx.org/licenses/EUPL-1.1.html"
-    }
-  ],
-  "license": "EUPL-1.1",
   "keywords": [
     "jclic",
     "JClic",
@@ -33,13 +14,72 @@
     "puzzles",
     "activities"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projectestac/jclic-repo.git"
+  },
+  "homepage": "http://projectestac.github.io/jclic-repo",
+  "name": "jclic-repo",
+  "title": "JClic Repo",
+  "author": "Francesc Busquets <francesc@gmail.com>",
+  "version": "1.3.0",
+  "bugs": {
+    "url": "https://github.com/projectestac/jclic-repo/issues"
+  },
+  "licenses": [
+    {
+      "type": "EUPL-1.1",
+      "url": "https://spdx.org/licenses/EUPL-1.1.html"
+    }
+  ],
+  "license": "EUPL-1.1",
   "devDependencies": {
     "eslint": "^4.18.2",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-html": "^4.0.3"
+    "eslint-plugin-html": "^4.0.3",
+    "wct-browser-legacy": "^1.0.1"
   },
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "npm run lint && polymer test"
+  },
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  },
+  "dependencies": {
+    "@polymer/app-layout": "^3.0.0-pre.18",
+    "@polymer/iron-ajax": "^3.0.0-pre.18",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.18",
+    "@polymer/iron-icon": "^3.0.0-pre.18",
+    "@polymer/iron-icons": "^3.0.0-pre.18",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.18",
+    "@polymer/iron-localstorage": "^3.0.0-pre.18",
+    "@polymer/iron-media-query": "^3.0.0-pre.18",
+    "@polymer/iron-pages": "^3.0.0-pre.18",
+    "@polymer/iron-scroll-threshold": "^3.0.0-pre.18",
+    "@polymer/iron-selector": "^3.0.0-pre.18",
+    "@polymer/paper-button": "^3.0.0-pre.18",
+    "@polymer/paper-dialog": "^3.0.0-pre.18",
+    "@polymer/paper-dialog-scrollable": "^3.0.0-pre.18",
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.18",
+    "@polymer/paper-fab": "^3.0.0-pre.18",
+    "@polymer/paper-icon-button": "^3.0.0-pre.18",
+    "@polymer/paper-item": "^3.0.0-pre.18",
+    "@polymer/paper-listbox": "^3.0.0-pre.18",
+    "@polymer/paper-material": "^3.0.0-pre.18",
+    "@polymer/paper-progress": "^3.0.0-pre.18",
+    "@polymer/paper-radio-group": "^3.0.0-pre.18",
+    "@polymer/paper-spinner": "^3.0.0-pre.18",
+    "@polymer/paper-toast": "^3.0.0-pre.18",
+    "@polymer/paper-toggle-button": "^3.0.0-pre.18",
+    "@polymer/polymer": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "clipboard-polyfill": "^2.4.7",
+    "file-saver": "^1.3.8",
+    "jszip": "^3.1.5",
+    "web-animations-js": "^2.3.1"
   }
 }
