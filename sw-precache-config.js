@@ -1,29 +1,27 @@
 /**
- * @license
- * Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ * Options for Service Worker Precache
+ * See: https://github.com/GoogleChromeLabs/sw-precache
  */
 
 /* eslint-env node */
 
 module.exports = {
-  cacheId: 'main_repository',
+  cacheId: 'jclic-repo',
+  clientsClaim: true,
+  directoryIndex: 'index.html',
   staticFileGlobs: [
-    '/index.htm',
     '/index.html*',
     '/main.json',
     '/manifest.json',
     '/images/*',
-    '/src/jclic-repo.html',
-    '/bower_components/webcomponentsjs/*',
-    '/bower_components/es6-promise-polyfill/*',
+    '/src/jclic-repo.js',
+    '/node_modules/@webcompnents/webcomponentsjs/webcomponents-loader.js',
+    '/node_modules/@webcompnents/webcomponentsjs/bundles/*',
+    '/node_modules/@webcompnents/webcomponentsjs/entrypoints/*',
   ],
   navigateFallback: 'index.html',
   ignoreUrlParametersMatching: [/./],
+  importScripts: [],
   runtimeCaching: [{
     urlPattern: /^https:\/\/unpkg\.com\//,
     handler: 'cacheFirst',
