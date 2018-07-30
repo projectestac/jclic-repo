@@ -11,7 +11,7 @@
 
   @source https://github.com/projectestac/jclic-repo
   
-  Based on "Polymer Starter Kit v2.0"
+  Originally based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
@@ -76,8 +76,6 @@
 
   <!-- Load and register pre-caching Service Worker -->
   <script type="module">
-    // WTF?
-    // import './src/jclic-repo.js';    
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js');
@@ -85,9 +83,8 @@
     }
   </script>
 
-  <script src="node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
-  <script src="node_modules/file-saver/FileSaver.js"></script>
-
+  <!-- script src="./node_modules/web-animations-js/web-animations-next-lite.min.js"></script -->
+  
   <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
   <script>
     // Force all polyfills on

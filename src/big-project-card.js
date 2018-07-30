@@ -62,8 +62,8 @@ import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-dialog-scrollable/paper-dialog-scrollable.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@polymer/neon-animation/animations/scale-up-animation.js';
-import '@polymer/neon-animation/animations/fade-out-animation.js';
+// import '@polymer/neon-animation/animations/scale-up-animation.js';
+// import '@polymer/neon-animation/animations/fade-out-animation.js';
 import './shared-icons.js';
 import './shared-styles.js';
 import './project-share.js';
@@ -137,7 +137,8 @@ class BigProjectCard extends PolymerElement {
         }
       }
     </style>
-    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation">
+    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" -->
+    <paper-dialog id="dialog" modal="">
       <h2 id="title"></h2>
       <paper-dialog-scrollable>
         <!-- image source will be dynamically set in \`_projectChanged\` -->

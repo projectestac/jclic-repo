@@ -1,6 +1,7 @@
 {
   "extends": ["eslint:recommended", "google"],
   "parserOptions": {
+    "sourceType": "module",
     "ecmaVersion": 6
   },
   "env": {
@@ -15,7 +16,15 @@
     "no-var": "off",
     "require-jsdoc": "off",
     "max-len": "off",
-    "no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "object-curly-spacing": "off",
+    "padded-blocks": "off",
+    "arrow-parens": "off",
+    "curly": "off",
+    "no-console": "off",
+    "valid-jsdoc": "off",
+    "block-spacing": "off",
+    "spaced-comment": "off"
   },
   "globals": {
     "Polymer": true

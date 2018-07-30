@@ -34,7 +34,7 @@
   ],
   "license": "EUPL-1.1",
   "devDependencies": {
-    "eslint": "^4.18.2",
+    "eslint": "^5.2.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^4.0.3",
     "wct-browser-legacy": "^1.0.1"

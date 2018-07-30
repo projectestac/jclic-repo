@@ -56,7 +56,7 @@ Custom property       | Description                          | Default
 */
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
-import '@polymer/neon-animation/neon-animations.js';
+//import '@polymer/neon-animation/neon-animations.js';
 
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-listbox/paper-listbox.js';

@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,6 +33,7 @@
   under the Licence.
   @licend
 */
+
 /*
 
 This component makes easy to download all the components of a JClic project in a single ZIP file.
@@ -58,11 +59,9 @@ Custom property      | Description                         | Default
 `--project-download` | Mixin applied to the full component | {}
 
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+
+/* global Promise */
+
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-dialog/paper-dialog.js';
@@ -76,8 +75,8 @@ import './shared-icons.js';
 import './shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-//import 'jszip';
-import '../node_modules/jszip/dist/jszip';
+import { saveAs } from './utils/FileSaver.js';
+import JSZip from './utils/jszip.js';
 
 class ProjectDownload extends PolymerElement {
   static get template() {
@@ -127,7 +126,8 @@ class ProjectDownload extends PolymerElement {
       }
     </style>
 
-    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
+    <paper-dialog id="dialog" modal="">
       <h2><span>[[labels.download]]</span> "<span>[[project.title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div id="msg"><span>[[log_msg]]</span></div>
@@ -149,7 +149,7 @@ class ProjectDownload extends PolymerElement {
 `;
   }
 
-  static get is() { return 'project-download' }
+  static get is() { return 'project-download'; }
 
   static get properties() {
     return {
@@ -173,32 +173,32 @@ class ProjectDownload extends PolymerElement {
       repoRoot: String,
       // Current set of labels, titles and messages, translated into the current app language
       labels: Object,
-    }
+    };
   }
 
   static get observers() {
     return [
       '_projectSet(project)',
-      '_fileChanged(zipFile)'
-    ]
+      '_fileChanged(zipFile)',
+    ];
   }
 
   // A new project has been set, so clear the current zipFile (if any)
   _projectSet(project) {
     if (project) {
       // This will invoke `_fileChanged`
-      this.zipFile = null
+      this.zipFile = null;
     }
   }
 
   // Monitors changes in `zipFile`, enabling and disabling the `cancel` and `download` buttons accordingly
   _fileChanged(zipFile) {
     if (zipFile) {
-      this.$.cancelBtn.style.display = 'none'
-      this.$.downloadBtn.style.display = 'flex'
+      this.$.cancelBtn.style.display = 'none';
+      this.$.downloadBtn.style.display = 'flex';
     } else {
-      this.$.cancelBtn.style.display = 'flex'
-      this.$.downloadBtn.style.display = 'none'
+      this.$.cancelBtn.style.display = 'flex';
+      this.$.downloadBtn.style.display = 'none';
     }
   }
 
@@ -207,147 +207,146 @@ class ProjectDownload extends PolymerElement {
   prepareZipFile() {
 
     // Clear current dialog
-    this._clearDlg()
+    this._clearDlg();
 
     // Run only if `project` is not null
     if (this.project) {
 
-      this.log_msg = this.labels.preparingSCORM
+      this.log_msg = this.labels.preparingSCORM;
 
       // This is where the ingredients will be stored
-      const zip = new JSZip()
+      const zip = new JSZip();
 
       // Get the zip file name from the last part of the project path
-      const basePath = `${this.repoRoot || '.'}/${this.project.path}/`
-      const fileParts = basePath.split('/')
-      this.zipFileName = `${fileParts[fileParts.length - 2]}.scorm.zip`
+      const basePath = `${this.repoRoot || '.'}/${this.project.path}/`;
+      const fileParts = basePath.split('/');
+      this.zipFileName = `${fileParts[fileParts.length - 2]}.scorm.zip`;
 
       // Detect if the main `.jclic` file resides into a subdirectory (usually 'jclic.js/' in projects published on the clicZone library)
       // We will remove this subdirectory in the resulting ZIP file, thus simplifying its internal structure
-      const lastSepPos = this.project.mainFile.lastIndexOf('/')
-      let subdir = lastSepPos >= 0 ? this.project.mainFile.substring(0, lastSepPos + 1) : ''
+      const lastSepPos = this.project.mainFile.lastIndexOf('/');
+      let subdir = lastSepPos >= 0 ? this.project.mainFile.substring(0, lastSepPos + 1) : '';
       // Escape all the special characters -/\^$*+?.()[]{} in `subdir`. This usually will just replace '/' by '\/' and '.' by '\.'
-      subdir = subdir.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+      subdir = subdir.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       // Build a regExp used to remove all references to `subdir` in `project.json`
-      const pathToRemove = new RegExp(subdir, 'g')
+      const pathToRemove = new RegExp(subdir, 'g');
 
       // Make a normalized copy of 'project'
-      const prj = JSON.parse(JSON.stringify(this.project).replace(pathToRemove, ''))
+      const prj = JSON.parse(JSON.stringify(this.project).replace(pathToRemove, ''));
       // Delete some fields added by `repo-data`
-      delete prj.path
-      delete prj.titleCmp
-      delete prj.authorCmp
-      delete prj.dateCmp
+      delete prj.path;
+      delete prj.titleCmp;
+      delete prj.authorCmp;
+      delete prj.dateCmp;
 
       // Add the modified 'project.json' to the ZIP file
-      zip.file('project.json', JSON.stringify(prj, null, ' '), {})
+      zip.file('project.json', JSON.stringify(prj, null, ' '), {});
 
       // Here we will start downloading ingredients
-      this.log_msg = this.labels.downloadingIngredients
+      this.log_msg = this.labels.downloadingIngredients;
 
       // The 'minus-one' here is because one of the files (`project.json`) has already been pushed to `zip` and don't be downloaded again
-      this._initProgress(this.project.files.length - 1)
+      this._initProgress(this.project.files.length - 1);
 
       // Save all download requests on an array of `Promise` objects
       // Save also an array of `XMLHttpRequest`, useful to abort the pending requests
-      this._xhrs = []
-      const promises = []
+      this._xhrs = [];
+      const promises = [];
       this.project.files
         // exclude `project.json`, already stored in the zip file
         .filter(f => f !== 'project.json')
         .forEach(file => {
-          let xhr
+          let xhr;
           var filePromise = new Promise((resolve, reject) => {
             // Call the static method `getBinaryContent` (see below), where the promise will be finally fullfilled or rejected
             xhr = ProjectDownload.getBinaryContent(basePath + file, (err, data) => {
               if (err)
-                reject(err)
+                reject(err);
               else {
-                this.log_status = file
+                this.log_status = file;
                 // Compress and save the resulting data in `zip`
-                zip.file(file.replace(pathToRemove, ''), data, { binary: true })
-                this.$.progress.value++
-                resolve(true)
+                zip.file(file.replace(pathToRemove, ''), data, { binary: true });
+                this.$.progress.value++;
+                resolve(true);
               }
-            })
-            if (this._xhrs)
-              this._xhrs.push(xhr)
-          })
-          promises.push(filePromise)
-        })
+            });
+            if (this._xhrs) { this._xhrs.push(xhr); }
+          });
+          promises.push(filePromise);
+        });
 
       // Wait for all promises to be fulfilled
       Promise.all(promises).then(
         // Success (_data is an array of `true`, not used)
         _data => {
           // The process has successfully finished, so clear the references to XMLHttpRequests
-          this._xhrs = null
+          this._xhrs = null;
           // Generate a zip BLOB and store it on `zipFile`
-          this.log_msg = this.labels.pleaseWaitCompressing
-          this.log_status = ''
+          this.log_msg = this.labels.pleaseWaitCompressing;
+          this.log_status = '';
           zip.generateAsync({ type: 'blob' }).then(
             // On success
             blob => {
-              this.log_msg = this.labels.zipFileAvailable
+              this.log_msg = this.labels.zipFileAvailable;
               // This assignment will launch `_fileChanged`
-              this.zipFile = blob
+              this.zipFile = blob;
             },
             // On error
             err => {
-              this.log_err = `${this.labels.errorGeneratingZip}: ${err}`
+              this.log_err = `${this.labels.errorGeneratingZip}: ${err}`;
             }
-          )
+          );
         },
         // Rejected with error code
         err => {
-          this._xhrs = null
-          this.log_err = err
-          this.log_status = ''
-        })
+          this._xhrs = null;
+          this.log_err = err;
+          this.log_status = '';
+        });
     }
   }
 
   // Cancels the downloading of project ingredients
   _cancelDownload() {
-    this._clearDlg()
-    this.$.dialog.close()
+    this._clearDlg();
+    this.$.dialog.close();
     if (this._xhrs) {
       this._xhrs.forEach(xhr => {
         if (xhr.readyState < 4) {
           try {
-            xhr.abort()
+            xhr.abort();
           } catch (err) {
             // Should not occur
-            console.log(`Error cancelling XHR: ${err}`)
+            console.log(`Error cancelling XHR: ${err}`);
           }
         }
-      })
-      this._xhrs = null
+      });
+      this._xhrs = null;
     }
-    this.zipFile = null
+    this.zipFile = null;
   }
 
   // Clears current dialog messages
   _clearDlg() {
-    this.log_msg = ''
-    this.log_status = ''
-    this.log_err = ''
-    this._initProgress()
+    this.log_msg = '';
+    this.log_status = '';
+    this.log_err = '';
+    this._initProgress();
   }
 
   // Gives the resulting BLOB simulating the downloading of a ZIP file
   _downloadFile() {
     if (this.zipFile) {
       // `saveAs` provided by [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
-      saveAs(this.zipFile, this.zipFileName)
-      this._cancelDownload()
+      saveAs(this.zipFile, this.zipFileName);
+      this._cancelDownload();
     }
   }
 
   // Inits the progress bar with a maximum value
   _initProgress(max = 0) {
-    this.$.progress.value = 0
-    this.$.progress.max = max
+    this.$.progress.value = 0;
+    this.$.progress.max = max;
   }
 
   /**
@@ -357,40 +356,40 @@ class ProjectDownload extends PolymerElement {
    *
    * This modified version returns an `XMLHttpRequest` object (or `null` in case of error)
    * that can be useful for cancelling pending transactions at user request
+   *
    **/
   static getBinaryContent(path, callback) {
-    let xhr = null
+    let xhr = null;
     try {
-      xhr = new XMLHttpRequest()
-      xhr.open('GET', path, true)
-      if ("responseType" in xhr)
-        xhr.responseType = "arraybuffer"
+      xhr = new XMLHttpRequest();
+      xhr.open('GET', path, true);
+      if ('responseType' in xhr)
+        xhr.responseType = 'arraybuffer';
       if (xhr.overrideMimeType)
-        xhr.overrideMimeType("text/plain; charset=x-user-defined")
+        xhr.overrideMimeType('text/plain; charset=x-user-defined');
 
-      xhr.onreadystatechange = function (evt) {
+      xhr.onreadystatechange = function(evt) {
         if (xhr.readyState === 4) {
           if (xhr.status === 200 || xhr.status === 0) {
-            let file = null
-            let err = null
+            let file = null;
+            let err = null;
             try {
               // for xhr.responseText, the 0xFF mask is applied by JSZip
-              file = xhr.response || xhr.responseText
+              file = xhr.response || xhr.responseText;
             } catch (e) {
-              err = new Error(e)
+              err = new Error(e);
             }
-            callback(err, file)
-          } else
-            callback(new Error(`downloading "${path}": ${this.status} - ${this.statusText}`), null)
+            callback(err, file);
+          } else { callback(new Error(`downloading "${path}": ${this.status} - ${this.statusText}`), null); }
         }
-      }
-      xhr.send()
+      };
+      xhr.send();
     } catch (e) {
-      xhr = null
-      callback(new Error(e), null)
+      xhr = null;
+      callback(new Error(e), null);
     }
-    return xhr
+    return xhr;
   }
 }
 
-window.customElements.define(ProjectDownload.is, ProjectDownload)
+window.customElements.define(ProjectDownload.is, ProjectDownload);

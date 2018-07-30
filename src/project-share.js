@@ -130,7 +130,8 @@ class ProjectShare extends PolymerElement {
       }
     </style>
 
-    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
+    <paper-dialog id="dialog" modal="">
       <h2><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div class="vertical-section-container">

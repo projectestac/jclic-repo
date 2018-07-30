@@ -103,7 +103,8 @@ class UserSettings extends PolymerElement {
       }
     </style>
 
-    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
+    <paper-dialog id="dialog" modal="">
       <h2>[[labels.settings]]</h2>
       <paper-dialog-scrollable>
         <paper-material elevation="1">

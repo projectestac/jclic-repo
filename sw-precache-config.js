@@ -15,33 +15,38 @@ module.exports = {
     '/manifest.json',
     '/images/*',
     '/src/jclic-repo.js',
-    '/node_modules/@webcompnents/webcomponentsjs/webcomponents-loader.js',
-    '/node_modules/@webcompnents/webcomponentsjs/bundles/*',
-    '/node_modules/@webcompnents/webcomponentsjs/entrypoints/*',
+    '/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
+    '/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+    '/node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce.js',
   ],
   navigateFallback: 'index.html',
   ignoreUrlParametersMatching: [/./],
   importScripts: [],
-  runtimeCaching: [{
-    urlPattern: /^https:\/\/unpkg\.com\//,
-    handler: 'cacheFirst',
-  },
-  {
-    urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-    handler: 'cacheFirst',
-  },
-  {
-    urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,
-    handler: 'fastest',
-  },
-  {
-    urlPattern: /^https?:\/\/[\w\.]*\/projects\/[\w\/\.]*\/(project\.json|cover\.(jpg|png|gif))/,
-    handler: 'cacheFirst',
-    options: {
-      cache: {
-        maxEntries: 800,
-        name: 'projects-cache',
-      },
+  runtimeCaching: [
+    {
+      urlPattern: /^https?:\/\/[\w\/\.]*\/node_modules\/@webcomponents\/webcomponentsjs\/(bundles|entrypoints)\//,
+      handler: 'cacheFirst',
     },
-  }],
+    {
+      urlPattern: /^https:\/\/unpkg\.com\//,
+      handler: 'cacheFirst',
+    },
+    {
+      urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+      handler: 'cacheFirst',
+    },
+    {
+      urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,
+      handler: 'fastest',
+    },
+    {
+      urlPattern: /^https?:\/\/[\w\.]*\/projects\/[\w\/\.]*\/(project\.json|cover\.(jpg|png|gif))/,
+      handler: 'cacheFirst',
+      options: {
+        cache: {
+          maxEntries: 800,
+          name: 'projects-cache',
+        },
+      },
+    }],
 };
