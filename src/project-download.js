@@ -35,7 +35,6 @@
 */
 
 /*
-
 This component makes easy to download all the components of a JClic project in a single ZIP file.
 
 It downloads the components one by one as a raw binary chunks of data, then compresses all data in memory
@@ -57,7 +56,6 @@ The following custom properties and mixins are available for styling:
 Custom property      | Description                         | Default
 ---------------------|-------------------------------------|----------
 `--project-download` | Mixin applied to the full component | {}
-
 */
 
 /* global Promise */
@@ -126,8 +124,7 @@ class ProjectDownload extends PolymerElement {
       }
     </style>
 
-    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
-    <paper-dialog id="dialog" modal="">
+    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2><span>[[labels.download]]</span> "<span>[[project.title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div id="msg"><span>[[log_msg]]</span></div>

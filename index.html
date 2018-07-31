@@ -42,8 +42,8 @@
   <meta name="generator" content="Polymer Starter Kit">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>JClic HTML5 activities library</title>
-  <meta name="description" content="Library of JClic HTML5 activities">
+  <title>Library of JClic activities</title>
+  <meta name="description" content="Library of JClic activities">
 
   <link rel="icon" href="images/favicon.ico">
 
@@ -83,8 +83,10 @@
     }
   </script>
 
-  <!-- script src="./node_modules/web-animations-js/web-animations-next-lite.min.js"></script -->
-  
+  <!-- See: https://github.com/PolymerElements/paper-swatch-picker/issues/36 -->
+  <script src="./node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  <script src="./node_modules/clipboard-polyfill/build/clipboard-polyfill.js"></script>
+
   <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
   <script>
     // Force all polyfills on
@@ -92,7 +94,7 @@
     ShadyDOM = { force: true };
     ShadyCSS = { shimcssproperties: true };
   </script>
-  <!-- script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script -->
+
   <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script>
 
   <!-- Load application shell -->

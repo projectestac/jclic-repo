@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This component provides user input controls for searching specific content in the repository of JClic projects.
 The search criteria is dynamically stored in a compound object called `filter`, usually provided by `repo-data`.
 Changes in this object should trigger a refresh in the main projects showcase.
@@ -47,16 +47,9 @@ Custom property       | Description                          | Default
 ----------------------|--------------------------------------|----------
 `--search-button`     | Mixin applied to the "Search" button | `{}`
 `--projects-selector` | Mixin applied to the selector        | `{}`
+*/
 
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
-//import '@polymer/neon-animation/neon-animations.js';
 
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -137,7 +130,8 @@ class ProjectsSelector extends PolymerElement {
 `;
   }
 
-  static get is() { return 'projects-selector' }
+  static get is() { return 'projects-selector'; }
+
   static get properties() {
     return {
       // Flag to disable the main event listener while input fields are programatically updated
@@ -158,33 +152,33 @@ class ProjectsSelector extends PolymerElement {
         type: Object,
         notify: true,
       },
-    }
+    };
   }
 
   static get observers() {
     return [
       '_checkFullTextEnabled(selectOptions)',
-    ]
+    ];
   }
 
   // Enables or disables full text search input field
   _checkFullTextEnabled(selectOptions) {
     // Show/hide the description field
     if (selectOptions && selectOptions.fullTextEnabled)
-      this.$.description.classList.remove('hidden')
+      this.$.description.classList.remove('hidden');
     else
-      this.$.description.classList.add('hidden')        
+      this.$.description.classList.add('hidden');
   }
 
   // Checks if the content of the provided object `f` is equivalent to the current filter settings
   // Returns `true` when `this.filter` has not been created, or when the value of any of its fields differs from the value of the same field in `f`
   filterDiffers(f) {
-    return !this.filter || ['language', 'subject', 'level', 'title', 'author', 'description'].find(ff => this.filter[ff] !== f[ff])
+    return !this.filter || ['language', 'subject', 'level', 'title', 'author', 'description'].find(ff => this.filter[ff] !== f[ff]);
   }
 
   // Click on `search` button force a filter update
   _clickOnSearchBtn() {
-    this.readInputFieldValues(true)
+    this.readInputFieldValues(true);
   }
 
   // Reads the values stored in the form controls, and updates `this.flter` if needed
@@ -197,9 +191,9 @@ class ProjectsSelector extends PolymerElement {
         title: this.$.title.value || '',
         author: this.$.author.value || '',
         description: this.$.description.value || '',
-      }
+      };
       if (forceFilterUpdate === true || this.filterDiffers(f))
-        this.filter = f
+        this.filter = f;
     }
   }
 
@@ -207,20 +201,20 @@ class ProjectsSelector extends PolymerElement {
   setFilter(f) {
     if (this.filterDiffers(f)) {
       // Disable event listener flag
-      this._updatingFields = true
+      this._updatingFields = true;
       // Fill-in input fields with the new values
-      this.$.dropLang.contentElement.selected = this.selectOptions.findIndex('languages', f.language || '*')
-      this.$.dropSubj.contentElement.selected = this.selectOptions.findIndex('subjects', f.subject || '*')
-      this.$.dropLev.contentElement.selected = this.selectOptions.findIndex('levels', f.level || '*')
-      this.$.title.value = f.title || ''
-      this.$.author.value = f.author || ''
-      this.$.description.value = f.description || ''
+      this.$.dropLang.contentElement.selected = this.selectOptions.findIndex('languages', f.language || '*');
+      this.$.dropSubj.contentElement.selected = this.selectOptions.findIndex('subjects', f.subject || '*');
+      this.$.dropLev.contentElement.selected = this.selectOptions.findIndex('levels', f.level || '*');
+      this.$.title.value = f.title || '';
+      this.$.author.value = f.author || '';
+      this.$.description.value = f.description || '';
       // Update `this.filter`
-      this.filter = f
+      this.filter = f;
       // Re-enable event listener flag
-      this._updatingFields = false
+      this._updatingFields = false;
     }
   }
 }
 
-window.customElements.define(ProjectsSelector.is, ProjectsSelector)
+window.customElements.define(ProjectsSelector.is, ProjectsSelector);

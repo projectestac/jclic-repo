@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,10 +33,8 @@
   under the Licence.
   @licend
 */
-/* build:js ../bower_components/clipboard.js/clipboard.js */
-/* endbuild */
-/*
 
+/*
 This component offers the following sharing options for a given JClic project:
 
 - A direct link to the activities
@@ -53,13 +51,8 @@ The following custom properties and mixins are available for styling:
 Custom property      | Description                         | Default
 ---------------------|-------------------------------------|----------
 `--project-share`    | Mixin applied to the full component | {}
+*/
 
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-dialog/paper-dialog.js';
@@ -75,8 +68,8 @@ import './shared-icons.js';
 import './social-buttons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-// import 'clipboard-polyfill';
-// import '../node_modules/clipboard-polyfill/build/clipboard-polyfill';
+/* clipboard-polyfill should be imported in `index.html` */
+/* global clipboard */
 
 class ProjectShare extends PolymerElement {
   static get template() {
@@ -89,11 +82,13 @@ class ProjectShare extends PolymerElement {
 
       #dialog {
         max-width: 500px;
+        margin: 24px;
       }
 
       @media (min-width: 601px) {
         #dialog {
           min-width: 500px;
+          margin: 24px 40px;
         }
       }
 
@@ -130,9 +125,8 @@ class ProjectShare extends PolymerElement {
       }
     </style>
 
-    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
-    <paper-dialog id="dialog" modal="">
-      <h2><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
+    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <h2 class="wrap"><span>[[labels.share]]</span> "<span>[[title]]</span>"</h2>
       <paper-dialog-scrollable>
         <div class="vertical-section-container">
 
@@ -190,7 +184,7 @@ class ProjectShare extends PolymerElement {
 `;
   }
 
-  static get is() { return 'project-share' }
+  static get is() { return 'project-share'; }
 
   static get properties() {
     return {
@@ -232,52 +226,52 @@ class ProjectShare extends PolymerElement {
       // Current set of labels, titles and messages, translated into the current app language
       labels: Object,
 
-    }
+    };
   }
 
   static get observers() {
     return [
       '_projectChanged(project, repoRoot)',
-      '_embedChanged(linkToActivities, embedSize)'
-    ]
+      '_embedChanged(linkToActivities, embedSize)',
+    ];
   }
 
   // Called when the project is set or changed
   _projectChanged(prj, repoRoot) {
-    this.title = prj ? prj.title : ''
-    const indexFile = prj && prj.files && repoRoot ? prj.files.find(f => /^(.*\/)*index.html$/.test(f)) : null
+    this.title = prj ? prj.title : '';
+    const indexFile = prj && prj.files && repoRoot ? prj.files.find(f => /^(.*\/)*index.html$/.test(f)) : null;
     this.linkToActivities = prj && repoRoot ?
       (indexFile ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${indexFile}`) : `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}`)
-      : ''
-    this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : ''
-    this.imgFullPath = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}`) : ''
-    this.linkForMoodle = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}`) : ''
+      : '';
+    this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : '';
+    this.imgFullPath = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}`) : '';
+    this.linkForMoodle = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}`) : '';
   }
 
   // Called when the users selects a different size for `embedCode`
   _embedChanged(link, size) {
-    const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 }
-    this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : ''
+    const dim = size === 'small' ? { w: 640, h: 390 } : size === 'full' ? { w: '100%', h: '100%' } : { w: 800, h: 600 };
+    this.embedCode = link ? `<iframe width="${dim.w}" height="${dim.h}" frameborder="0" allowFullScreen="true" src="${link}"></iframe>` : '';
   }
 
   // Puts into the system clipboard the data associated with the button generating the passed event
   _copy(ev) {
     if (ev.target && ev.target.dataset.value) {
       if (this.$.copied.opened)
-        this.$.copied.close()
-      this.$.copied.noCancelOnOutsideClick = false
-      this.$.copied.positionTarget = ev.target
-      clipboard.writeText(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied))
+        this.$.copied.close();
+      this.$.copied.noCancelOnOutsideClick = false;
+      this.$.copied.positionTarget = ev.target;
+      clipboard.writeText(ev.target.dataset.value).then(this.$.copied.open.bind(this.$.copied));
     }
   }
 
   // Simplifies URL expressions with a `dot-dot` (`/../`) fragment
   _sp(s) {
     // Middle parenthesis gets `dor-dot` and previous path with all slashes (like `/repo/../` in `https://clic.xtec.cat/repo/../projects/myproject`)
-    const re = /(.*)(\/\w*\/\.\.\/)(.*)/
+    const re = /(.*)(\/\w*\/\.\.\/)(.*)/;
     // Get only the first ($1) and last ($3) fragments, replacing the middle one ($2) by a single slash (`\/`)
-    return (s && re.test(s)) ? s.replace(re, '$1\/$3') : s
+    return (s && re.test(s)) ? s.replace(re, '$1\/$3') : s;
   }
 }
 
-window.customElements.define(ProjectShare.is, ProjectShare)
+window.customElements.define(ProjectShare.is, ProjectShare);

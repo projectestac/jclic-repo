@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This is the shell component of the basic JClic-repo app.
 
 The component contains an `app-drawer-layout` with three main zones:
@@ -48,13 +48,8 @@ Some other functional components are also declared and included at this level:
 - An `user-settings` dialog
 - A `jclic-player` component, used to launch the JClic activities on request
 - A `repo-data` component, without any graphic element, responsible of data retrieval and orchestration.
+*/
 
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/app-layout/app-drawer/app-drawer.js';
@@ -208,34 +203,34 @@ class JClicRepo extends PolymerElement {
 `;
   }
 
-  static get is() { return 'jclic-repo' }
+  static get is() { return 'jclic-repo'; }
 
   static get properties() {
     return {
       // Parametres passed via the `query` section of the current URL
       params: {
         type: Object,
-        value: null
+        value: null,
       },
       // Current two-letter language code selected by the user
       lang: {
         type: String,
-        notify: true
+        notify: true,
       },
       // Flag indicating whether JClic player has to open in full-screen mode or just inside the current window
       fullScreenPlayer: {
         type: Boolean,
-        value: false
+        value: false,
       },
       // Flag indicating whether JClic player has to open in new tab
       openPlayerInNewTab: {
         type: Boolean,
-        value: true
+        value: true,
       },
       // Miscellaneous options passed to JClic player
       playerOptions: {
         type: Object,
-        value: {}
+        value: {},
       },
       // URL used as a base for absolute references to project's components
       baseUrl: {
@@ -267,7 +262,7 @@ class JClicRepo extends PolymerElement {
       projects: Object,
       // Current set of labels, titles and messages, translated into the current app language
       labels: Object,
-    }
+    };
   }
 
   static get observers() {
@@ -275,87 +270,89 @@ class JClicRepo extends PolymerElement {
       '_checkPreferredLanguage(settings)',
       '_checkParams(projects, params)',
       '_langSelected(lang)',
-      '_queryChanged(currentProjectId, filter, params, lang)'
-    ]
+      '_queryChanged(currentProjectId, filter, params, lang)',
+    ];
   }
 
   // Used to pass `mainContainer` to `projects-list` (needed for dynamic scrolling)
   _getMainContainer() {
-    return this.$.mainContainer
+    return this.$.mainContainer;
   }
 
   // Gets the URL used as a base for absolute links to projects
   _getBaseUrl() {
-    let path = window.location.pathname
-    return window.location.origin + path.substring(0, path.lastIndexOf('/')) + '/'
+    let path = window.location.pathname;
+    return `${window.location.origin}${path.substring(0, path.lastIndexOf('/'))}/`;
   }
 
   // Triggered when the user chooses a language
   _clickOnLang(e) {
-    e.preventDefault()
-    this.lang = this.settings.languages[e.model.index].id
-    this._queryChanged()
-    return false
+    e.preventDefault();
+    this.lang = this.settings.languages[e.model.index].id;
+    this._queryChanged();
+    return false;
   }
 
   // Updates the language selector, displaying in bold type the current one
   _langSelected(lang) {
-    lang = lang || this.lang
+    lang = lang || this.lang;
     if (lang) {
       this.$.langSelector.querySelectorAll('.langItem').forEach(l => {
         if (l.id === lang)
-          l.classList.add('currentLang')
+          l.classList.add('currentLang');
         else
-          l.classList.remove('currentLang')
-      })
+          l.classList.remove('currentLang');
+      });
     }
   }
 
   // Triggered by settings button
   _setUserSettings() {
-    this.$.userSettings.open()
+    this.$.userSettings.open();
   }
 
   // Triggered by info button
   _displayInfo() {
-    const search = `?lang=${this.lang}&page=info`
+    const search = `?lang=${this.lang}&page=info`;
     if (search !== window.location.search)
-      window.history.pushState({}, '', `index.html${search}`)
-    this.page = 'info'
+      window.history.pushState({}, '', `index.html${search}`);
+    this.page = 'info';
   }
 
   // Called when the user closes the info pages
   _closeInfo() {
-    this.page = 'projects'
-    this._queryChanged()
+    this.page = 'projects';
+    this._queryChanged();
   }
 
   // Opens a big project card with a specific project data
   showProject(path) {
     // Check if `path` is a custom event fired by a project-card
     if (path instanceof CustomEvent)
-      path = path.detail.path
-    this.$.spinner.active = true
+      path = path.detail.path;
+    this.$.spinner.active = true;
     this.$.repo.loadProject(path).then(
       // Promise OK
       project => {
-        this.$.spinner.active = false
-        this.$.bigPrj.project = project
-        this.$.bigPrj.$.dialog.open()
-        this.currentProjectId = project.path
+        this.$.spinner.active = false;
+        this.$.bigPrj.project = project;
+        this.$.bigPrj.$.dialog.open();
+        this.currentProjectId = project.path;
+        document.querySelector('title').innerHTML = `${this.labels.mainTitle}: ${project.title}`;
       },
       // Promise rejected
       err => {
-        this.$.spinner.active = false
-        console.log(`Error loading project ${path}: ${err}`)
-      })
+        this.$.spinner.active = false;
+        console.log(`Error loading project ${path}: ${err}`);
+      });
   }
 
   // Called when `big-project-card` is closed
   _projectClosed() {
     if (!this.$.player.project) {
-      this.currentProjectId = null
-      this._queryChanged()
+      this.currentProjectId = null;
+      this._queryChanged();
+      document.querySelector('title').innerHTML = this.labels.mainTitle;
     }
   }
 
@@ -363,33 +360,33 @@ class JClicRepo extends PolymerElement {
   playProject(prj) {
     // Check if `prj` is a custom event fired by a `project-card` or a `big-project-card`
     if (prj instanceof CustomEvent) {
-      prj = prj.detail.project
-      this.$.bigPrj.close()
+      prj = prj.detail.project;
+      this.$.bigPrj.close();
     }
     // Request a call to `playerClosed` when the user leaves the JClic player
-    this.playerOptions.closeFn = this.playerClosed.bind(this)
+    this.playerOptions.closeFn = this.playerClosed.bind(this);
     // Setting the `project` attribute of the `jclic-player` component opens automatically the player
-    this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`
-    this.currentProjectId = prj.path
-    this._queryChanged()
+    this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`;
+    this.currentProjectId = prj.path;
+    this._queryChanged();
   }
 
   // Called by `jclic-player` when the user leaves the activities
   playerClosed() {
-    this.$.player.project = null
-    this.currentProjectId = null
-    this._queryChanged()
+    this.$.player.project = null;
+    this.currentProjectId = null;
+    this._queryChanged();
   }
 
   // called when a new dialog opens
   _dlgOpened() {
     // Force a `resize` event to adjust the real size of dialogs even after its content has been modified
-    setTimeout(() => dispatchEvent(new Event('resize')), 100)
+    setTimeout(() => dispatchEvent(new Event('resize')), 100);
   }
 
   // Called by Polymer when all components have been initialized
   ready() {
-    super.ready()
+    super.ready();
 
     // Read settings from local storage
     this.$.userSettings.readFromLocalStorage();
@@ -398,37 +395,37 @@ class JClicRepo extends PolymerElement {
     // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
     this.params = window.location.search
       ? window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-      : {}
+      : {};
     if (this.params.logLevel)
-      this.playerOptions.logLevel = this.params.logLevel
+      this.playerOptions.logLevel = this.params.logLevel;
     if (this.params.page && this.params.page === 'info')
-      this._displayInfo()
+      this._displayInfo();
   }
 
   // Try to determine the user's preferred language
   _checkPreferredLanguage(settings) {
     if (settings && settings.languages && settings.languages.length) {
       // Stop waiting animation, if already running
-      this.$.spinner.active = false
+      this.$.spinner.active = false;
       // Create an array to store possible values
-      var tries = []
+      var tries = [];
       // If "lang=" was programatically set, check it
       if (this.lang)
-        tries.push(this.lang)
+        tries.push(this.lang);
       // If "lang=" was on location.search, check it
       if (this.params && this.params.lang)
-        tries.push(this.params.lang)
+        tries.push(this.params.lang);
       // Add user's preferred languages, if any
       if (window.navigator.languages)
-        tries = tries.concat(window.navigator.languages)
+        tries = tries.concat(window.navigator.languages);
       // Add the navigator main language, if defined
       if (window.navigator.language)
-        tries.push(window.navigator.language)
-      this.lang = (tries.find(v => settings.languages.find(l => v.indexOf(l.id) === 0) !== undefined) || 'en').substr(0, 2)
+        tries.push(window.navigator.language);
+      this.lang = (tries.find(v => settings.languages.find(l => v.indexOf(l.id) === 0) !== undefined) || 'en').substr(0, 2);
 
       // Workaround to set/unset the "langSelected" class to langItems in #langSelector when dom-repeat finishes
-      var thisRepo = this
-      setTimeout(() => thisRepo._langSelected(), 100)
+      var thisRepo = this;
+      setTimeout(() => thisRepo._langSelected(), 100);
     }
   }
 
@@ -437,10 +434,10 @@ class JClicRepo extends PolymerElement {
     if (projects && projects.length > 0 && params) {
       if (projects.length > 0 && params.prj) {
         if (projects.find(p => p.path === params.prj))
-          this.showProject(params.prj)
+          this.showProject(params.prj);
         else
-          console.log(`Unknown project: ${params.prj}`)
-        params.prj = null
+          console.log(`Unknown project: ${params.prj}`);
+        params.prj = null;
       }
       else if (params.language || params.subject || params.level || params.title || params.author) {
         this.$.selector.setFilter({
@@ -449,31 +446,31 @@ class JClicRepo extends PolymerElement {
           level: params.level || '*',
           title: params.title || '',
           author: params.author || '',
-        })
-        params.language = params.subject = params.level = params.title = params.author = null
-        this._queryChanged()
+        });
+        params.language = params.subject = params.level = params.title = params.author = null;
+        this._queryChanged();
       }
-      params.processed = true
+      params.processed = true;
     }
   }
 
   // Updates the current window URL with the params needed to reproduce current state
   _queryChanged() {
     if (this.lang && this.params && this.params.processed) {
-      this.page = 'projects'
-      let search = `?lang=${this.lang}`
+      this.page = 'projects';
+      let search = `?lang=${this.lang}`;
       if (this.currentProjectId)
-        search = `${search}&prj=${this.currentProjectId}`
+        search = `${search}&prj=${this.currentProjectId}`;
       else if (this.filter) {
         ['language', 'subject', 'level', 'title', 'author'].forEach(f => {
           if (this.filter[f] && this.filter[f] !== '*')
-            search = `${search}&${f}=${encodeURIComponent(this.filter[f])}`
-        })
+            search = `${search}&${f}=${encodeURIComponent(this.filter[f])}`;
+        });
       }
       if (search !== window.location.search)
-        window.history.pushState({}, '', `index.html${search}`)
+        window.history.pushState({}, '', `index.html${search}`);
     }
   }
 }
 
-window.customElements.define(JClicRepo.is, JClicRepo)
+window.customElements.define(JClicRepo.is, JClicRepo);

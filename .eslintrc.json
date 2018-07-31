@@ -24,7 +24,9 @@
     "no-console": "off",
     "valid-jsdoc": "off",
     "block-spacing": "off",
-    "spaced-comment": "off"
+    "spaced-comment": "off",
+    "camelcase": "warn",
+    "space-before-function-paren": "off"
   },
   "globals": {
     "Polymer": true

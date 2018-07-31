@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This component shows information about the JClic project in different languages.
 
 The real content displayed in this page is stored on the `info` section at `main.json`
@@ -50,11 +50,7 @@ Custom property   | Description                       | Default
 `--info-pages`    | Mixin applied to the info pages   | {}
 
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-material/paper-material.js';
@@ -123,7 +119,7 @@ class InfoPages extends PolymerElement {
 `;
   }
 
-  static get is() { return 'info-pages' }
+  static get is() { return 'info-pages'; }
 
   static get properties() {
     return {
@@ -143,7 +139,7 @@ class InfoPages extends PolymerElement {
       // -----------------------------------------------------------------
       // Current two-letter language code selected by the user
       lang: String,
-    }
+    };
   }
 
   static get observers() {
@@ -155,43 +151,43 @@ class InfoPages extends PolymerElement {
   // Sets the `info` array based on the current app language
   _updateContent(settings, lang) {
 
-    this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang] : []
+    this.info = settings && settings.info && lang && settings.info[lang] ? settings.info[lang] : [];
 
     // Skip this step when `info` is empty
     if (this.info.length) {
       // Force synchronous rendering of the main `dom-repeat` template
-      this.$.main.render()
+      this.$.main.render();
       // Update the content of paragraphs with anchor links and other HTML tags filtered out by Polymer
       // (each "p" element has its real HTML content stored in a "data-raw" attribute)
-      const p = this.root.querySelectorAll('p')
+      const p = this.root.querySelectorAll('p');
       for (let i = 0; i < p.length; i++)
         if (p[i].dataset.raw)
-          p[i].innerHTML = p[i].dataset.raw
+          p[i].innerHTML = p[i].dataset.raw;
     }
   }
 
   // Gets the URL used as a base for absolute links to images and other sources
   _getBaseUrl() {
-    let path = window.location.pathname
-    const p = path.lastIndexOf('/')
-    path = path.substring(0, p) + '/'
-    return window.location.origin + path
+    let path = window.location.pathname;
+    const p = path.lastIndexOf('/');
+    path = path.substring(0, p) + '/';
+    return window.location.origin + path;
   }
 
   // URI of this info page (used in `social-buttons`)
   _getUrl() {
-    return `${this._getBaseUrl()}index.html?page=info`
+    return `${this._getBaseUrl()}index.html?page=info`;
   }
 
   // The big JClic logo (used in `social-buttons`)
   _getImgUrl() {
-    return `${this._getBaseUrl()}images/manifest/icon-512x512.png`
+    return `${this._getBaseUrl()}images/manifest/icon-512x512.png`;
   }
 
   // Fires a custom `close` event
   _close(ev) {
-    this.dispatchEvent(new CustomEvent('close'), ev)
+    this.dispatchEvent(new CustomEvent('close'), ev);
   }
 }
 
-window.customElements.define(InfoPages.is, InfoPages)
+window.customElements.define(InfoPages.is, InfoPages);

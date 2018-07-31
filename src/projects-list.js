@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This is where the `project-card` elements of current projects will be displayed.
 The `_visibleProjects` property contains the list of projects currently included in the showcase.
 projects are dynamically loaded and added to `_visibleProjects` as the the container scrolls down.
@@ -48,19 +48,15 @@ The following custom properties and mixins are available for styling:
 Custom property   | Description                          | Default
 ------------------|--------------------------------------|----------
 `--projects-list` | Mixin applied to the project's list  | {}
+*/
 
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/iron-scroll-threshold/iron-scroll-threshold.js';
 import './shared-styles.js';
 import './project-card.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
 class ProjectsList extends PolymerElement {
   static get template() {
     return html`
@@ -82,7 +78,7 @@ class ProjectsList extends PolymerElement {
 `;
   }
 
-  static get is() { return 'projects-list' }
+  static get is() { return 'projects-list'; }
 
   static get properties() {
     return {
@@ -99,7 +95,7 @@ class ProjectsList extends PolymerElement {
       // Regular of the `project-card` elements, including margins
       cardsWidth: {
         type: Number,
-        value: 210
+        value: 210,
       },
       // Link to the app main container, usually an `app-header-layout`
       mainContainer: Object,
@@ -115,61 +111,61 @@ class ProjectsList extends PolymerElement {
       labels: Object,
       // Ordered array containing the colection of projects matching the current filter settings
       projects: Array,
-    }
+    };
   }
 
   static get observers() {
     return [
       '_projectsUpdated(projects)',
-      '_containerUpdated(mainContainer)'
-    ]
+      '_containerUpdated(mainContainer)',
+    ];
   }
 
   // Notify `play` and `show` events from cards to `jclic-repo`
   notifyEvent(ev) {
-    this.dispatchEvent(new CustomEvent(ev.type, { detail: ev.detail }))
+    this.dispatchEvent(new CustomEvent(ev.type, { detail: ev.detail }));
   }
 
   // Called when the `mainContainer` property is initially set
   _containerUpdated(mainContainer) {
     if (mainContainer && mainContainer.$.contentContainer)
-      this.scrollingContainer = mainContainer.$.contentContainer
+      this.scrollingContainer = mainContainer.$.contentContainer;
   }
 
   // Called when the `projects` array is updated.
   _projectsUpdated(projects) {
     // Remove all elements from `_visibleProjects`
-    this.splice('_visibleProjects', 0, this._visibleProjects.length + 1)
+    this.splice('_visibleProjects', 0, this._visibleProjects.length + 1);
     // Load more projects
     if (projects && projects.length > 0)
-      this.loadMoreProjects(this.getItemsPerPage())
+      this.loadMoreProjects(this.getItemsPerPage());
   }
 
   // Guess the number of `project-card` elements that fit in each row
   getCardsH() {
-    return this.mainContainer ? Math.ceil(this.mainContainer.offsetWidth / this.cardsWidth) : 20
+    return this.mainContainer ? Math.ceil(this.mainContainer.offsetWidth / this.cardsWidth) : 20;
   }
 
   // Guess the number of project cards that fits on the current page
   getItemsPerPage() {
-    const cardsH = this.getCardsH()
-    const cardsV = Math.ceil(this.mainContainer.offsetHeight / this.cardsWidth) + 1
-    return Math.max(20, cardsH * cardsV)
+    const cardsH = this.getCardsH();
+    const cardsV = Math.ceil(this.mainContainer.offsetHeight / this.cardsWidth) + 1;
+    return Math.max(20, cardsH * cardsV);
   }
 
   // Adds more elements to `_visibleProjects`, when available
   loadMoreProjects(num) {
     if (this.projects && this.projects.length > this._visibleProjects.length) {
       if (!num || isNaN(num))
-        num = 2 * this.getCardsH()
+        num = 2 * this.getCardsH();
 
-      var p = this._visibleProjects.length
-      const lim = Math.min(this.projects.length, p + num)
+      var p = this._visibleProjects.length;
+      const lim = Math.min(this.projects.length, p + num);
       while (p < lim)
-        this.push('_visibleProjects', this.projects[p++])
+        this.push('_visibleProjects', this.projects[p++]);
     }
-    this.$.scroll.clearTriggers()
+    this.$.scroll.clearTriggers();
   }
 }
 
-window.customElements.define(ProjectsList.is, ProjectsList)
+window.customElements.define(ProjectsList.is, ProjectsList);

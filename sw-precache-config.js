@@ -15,6 +15,8 @@ module.exports = {
     '/manifest.json',
     '/images/*',
     '/src/jclic-repo.js',
+    '/node_modules/web-animations-js/web-animations-next-lite.min.js',
+    '/node_modules/clipboard-polyfill/build/clipboard-polyfill.js',
     '/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
     '/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
     '/node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce.js',
@@ -44,7 +46,7 @@ module.exports = {
       handler: 'cacheFirst',
       options: {
         cache: {
-          maxEntries: 800,
+          maxEntries: 3000,
           name: 'projects-cache',
         },
       },

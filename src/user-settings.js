@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This element opens a dialog with few input fields allowing users to set:
 
 - The ordering criteria of projects list (by creation date, title or author name)
@@ -48,13 +48,8 @@ The following custom properties and mixins are available for styling:
 Custom property   | Description                          | Default
 ------------------|--------------------------------------|----------
 `--user-settings` | Mixin applied to the settings dialog | {}
+*/
 
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-dialog/paper-dialog.js';
@@ -66,6 +61,7 @@ import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-toggle-button/paper-toggle-button.js';
 import './shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
 class UserSettings extends PolymerElement {
   static get template() {
     return html`
@@ -103,8 +99,7 @@ class UserSettings extends PolymerElement {
       }
     </style>
 
-    <!-- paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation" -->
-    <paper-dialog id="dialog" modal="">
+    <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
       <h2>[[labels.settings]]</h2>
       <paper-dialog-scrollable>
         <paper-material elevation="1">
@@ -137,7 +132,7 @@ class UserSettings extends PolymerElement {
 `;
   }
 
-  static get is() { return 'user-settings' }
+  static get is() { return 'user-settings'; }
 
   static get properties() {
     return {
@@ -179,63 +174,63 @@ class UserSettings extends PolymerElement {
         type: Boolean,
         notify: true,
       },
-      // Flag indicating whether JClic player has to open in new tab          
+      // Flag indicating whether JClic player has to open in new tab
       openPlayerInNewTab: {
         type: Boolean,
         notify: true,
       },
-    }
+    };
   }
 
   // Gets a label for a specific item translated into the current language
   _getLabel(labels, item) {
-    return labels ? (labels[item] || item) : ''
+    return labels ? (labels[item] || item) : '';
   }
 
   // Read settings from browser's local storage
   readFromLocalStorage() {
-    const storage = window.localStorage
-    this.fullScreenPlayer = storage.getItem('fullScreenPlayer') === 'true'
-    this.openPlayerInNewTab = storage.getItem('openPlayerInNewTab') !== 'false'
-    const field = storage.getItem('ordering.field')
+    const storage = window.localStorage;
+    this.fullScreenPlayer = storage.getItem('fullScreenPlayer') === 'true';
+    this.openPlayerInNewTab = storage.getItem('openPlayerInNewTab') !== 'false';
+    const field = storage.getItem('ordering.field');
     if (field)
-      this.ordering.field = field
-    this.ordering.inv = storage.getItem('ordering.inv') === 'true'
+      this.ordering.field = field;
+    this.ordering.inv = storage.getItem('ordering.inv') === 'true';
   }
 
   // Save settings to browser's local storage
   saveToLocalStorage() {
-    const storage = window.localStorage
-    storage.setItem('fullScreenPlayer', false || this.fullScreenPlayer)
-    storage.setItem('openPlayerInNewTab', false || this.openPlayerInNewTab)
-    storage.setItem('ordering.field', this.ordering.field || '')
-    storage.setItem('ordering.inv', false || this.ordering.inv)
+    const storage = window.localStorage;
+    storage.setItem('fullScreenPlayer', false || this.fullScreenPlayer);
+    storage.setItem('openPlayerInNewTab', false || this.openPlayerInNewTab);
+    storage.setItem('ordering.field', this.ordering.field || '');
+    storage.setItem('ordering.inv', false || this.ordering.inv);
   }
 
   // Opens the dialog
   open() {
-    this._fullScreen = this.fullScreenPlayer
-    this._openInNewTab = this.openPlayerInNewTab
-    this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0
-    this._orderInv = this.ordering ? this.ordering.inv || false : false
-    this.$.dialog.open()
+    this._fullScreen = this.fullScreenPlayer;
+    this._openInNewTab = this.openPlayerInNewTab;
+    this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0;
+    this._orderInv = this.ordering ? this.ordering.inv || false : false;
+    this.$.dialog.open();
   }
 
   // Caalled when the user cancels the dialog
   _cancel() {
-    this.$.dialog.close()
+    this.$.dialog.close();
   }
 
   // Called when the user clicks on OK
   _ok() {
-    this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen ? true : false
-    this.openPlayerInNewTab = this._openInNewTab
-    this.ordering.field = this.orderOptions[this._order]
-    this.ordering.inv = this._orderInv
-    this.notifyPath('ordering')
-    this.$.dialog.close()
-    this.saveToLocalStorage()
+    this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen ? true : false;
+    this.openPlayerInNewTab = this._openInNewTab;
+    this.ordering.field = this.orderOptions[this._order];
+    this.ordering.inv = this._orderInv;
+    this.notifyPath('ordering');
+    this.$.dialog.close();
+    this.saveToLocalStorage();
   }
 }
 
-window.customElements.define(UserSettings.is, UserSettings)
+window.customElements.define(UserSettings.is, UserSettings);

@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -35,7 +35,6 @@
 */
 
 /*
-
 This component encapsulates the main data operations needed by JClic Repo sites.
 
 The `iron-ajax` component loads the file "main.json" at startup. This file contains information about:
@@ -50,14 +49,10 @@ The repository index is also loaded using an `iron-request`, and stored into `_a
 The public list of currently selected projects is exposed through the public variable `projects`.
 
 Filtering and ordering criteria is stored in special objects called `filter` and `ordering`
-
 */
 
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+/* global Promise */
+
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/iron-ajax/iron-ajax.js';
@@ -66,7 +61,7 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 // import { unidecode } from 'unidecode';
 // Simplified version of 'unidecode', thanks to https://stackoverflow.com/a/37511463:
-const unidecode = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+const unidecode = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 class RepoData extends PolymerElement {
   static get template() {
@@ -76,7 +71,7 @@ class RepoData extends PolymerElement {
 `;
   }
 
-  static get is() { return 'repo-data' }
+  static get is() { return 'repo-data'; }
 
   static get properties() {
     return {
@@ -84,18 +79,18 @@ class RepoData extends PolymerElement {
       settings: {
         type: Object,
         observer: '_settingsLoaded',
-        notify: true
+        notify: true,
       },
       // Current set of labels, titles and messages, translated into the current app language
       labels: {
         type: Object,
         value: {},
-        notify: true
+        notify: true,
       },
       // Current choices of languages, subjects and levels (expresed in the current language), used to filter the main project list
       selectOptions: {
         type: Object,
-        value: () => { return { languages: [], subjects: [], levels: [], } },
+        value: () => { return { languages: [], subjects: [], levels: [] }; },
         notify: true,
       },
       // Array containing the full project list of the repository, for internal use only
@@ -105,49 +100,47 @@ class RepoData extends PolymerElement {
       // Last query launched to the full-text search engine
       _lastDescription: {
         type: String,
-        value: ''
+        value: '',
       },
       // List of project paths matching the last query launched to the full-text search engine
       _selectedPaths: {
         type: Array,
-        value: null
+        value: null,
       },
       // Ordered array containing the colection of projects matching the current filter settings
       projects: {
         type: Array,
         value: () => [],
-        notify: true
+        notify: true,
       },
       // Current set of filtering and searching options
       filter: {
         type: Object,
-        value: () => { return { language: '', subject: '', level: '', title: '', author: '', description: '' } },
+        value: () => { return { language: '', subject: '', level: '', title: '', author: '', description: '' }; },
         observer: '_filterChanged',
         notify: true,
       },
       // Current ordering options
       ordering: {
         type: Object,
-        value: () => { return { field: '', inv: false } },
+        value: () => { return { field: '', inv: false }; },
         observer: '_orderingChanged',
         notify: true,
       },
       // Relative path to the folder where the JClic projects of this repository are located
       repoRoot: {
         type: String,
-        notify: true
-      }
-    }
+        notify: true,
+      },
+    };
   }
 
   /**
-  
   Other variables used in this component but declared and initialized by `jclic-repo`:
-  
+
   Variable name   | Type   | Description
   ----------------|--------|------------------------------------------------------
   `lang`          | String | Current two-letter language code selected by the user
-  
   **/
 
   static get observers() {
@@ -164,25 +157,25 @@ class RepoData extends PolymerElement {
       subjects: (settings && settings.actSubjects && settings.actSubjects[lang]) ? settings.actSubjects[lang] : [],
       levels: (settings && settings.actLevels && settings.actLevels[lang]) ? settings.actLevels[lang] : [],
       findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value),
-      fullTextEnabled: settings && settings.searchService ? true : false
-    }
+      fullTextEnabled: settings && settings.searchService ? true : false,
+    };
   }
 
   // Called when settings are loaded for first time
   _settingsLoaded() {
     if (this.settings && this.settings.index) {
       // Set the base path for all projects
-      this.repoRoot = this.settings.index.path
+      this.repoRoot = this.settings.index.path;
       // Load `projects.json`
-      const request = document.createElement('iron-request')
+      const request = document.createElement('iron-request');
       request.send({
         url: `${this.repoRoot}/${this.settings.index.file}`,
-        handleAs: 'json'
+        handleAs: 'json',
       }).then(
         // Success:
         xhr => this._projectsLoaded(xhr.response),
         // Error:
-        err => console.log('Error loading projects.json:', err))
+        err => console.log('Error loading projects.json:', err));
     }
   }
 
@@ -191,44 +184,44 @@ class RepoData extends PolymerElement {
     // Check and update projects
     projects.forEach(prj => {
       // Set default values to undefined properties:
-      prj.langCodes = prj.langCodes || []
-      prj.areaCodes = prj.areaCodes || []
-      prj.levelCodes = prj.levelCodes || []
-      prj.title = prj.title || ''
-      prj.author = prj.author || ''
-      prj.date = prj.date || '00/00/00'
+      prj.langCodes = prj.langCodes || [];
+      prj.areaCodes = prj.areaCodes || [];
+      prj.levelCodes = prj.levelCodes || [];
+      prj.title = prj.title || '';
+      prj.author = prj.author || '';
+      prj.date = prj.date || '00/00/00';
 
       // Create two _lowercase plain text_ members, without accents nor special characters, used for filtering and sorting:
-      prj.titleCmp = unidecode(prj.title).trim().toLowerCase()
-      prj.authorCmp = unidecode(prj.author).trim().toLowerCase()
+      prj.titleCmp = unidecode(prj.title).trim().toLowerCase();
+      prj.authorCmp = unidecode(prj.author).trim().toLowerCase();
 
       // Build a simple, sortable string for the project's date
       // Years beggining with '9' are computed as 199x, otherwise are 20xx
       // Also, add a random number to avoid false equivalences when ordering
-      const d = prj.date.split('/')
-      prj.dateCmp = (d.length === 3 ? `${d[2] && d[2].charAt(0) === '9' ? '19' : '20'}${d[2]}${d[1]}${d[0]}` : '00000000') + Math.floor(10 + Math.random() * 90)
+      const d = prj.date.split('/');
+      prj.dateCmp = (d.length === 3 ? `${d[2] && d[2].charAt(0) === '9' ? '19' : '20'}${d[2]}${d[1]}${d[0]}` : '00000000') + Math.floor(10 + Math.random() * 90);
     });
 
     // Initialize the main `projects` array
-    this.projects = this._allProjects = projects
+    this.projects = this._allProjects = projects;
   }
 
   // Loads a specific `project.json` file, returning a Promise
   loadProject(path) {
-    const thisRepo = this
-    return new Promise(function (resolve, reject) {
-      const request = document.createElement('iron-request')
+    const thisRepo = this;
+    return new Promise(function(resolve, reject) {
+      const request = document.createElement('iron-request');
       request.send({
         url: `${thisRepo.repoRoot}/${path}/project.json`,
-        handleAs: 'json'
+        handleAs: 'json',
       }).then(
         // Success:
         xhr => {
-          const project = xhr.response
-          project.path = path
+          const project = xhr.response;
+          project.path = path;
           if (project.relatedTo)
-            project.relatedTitles = project.relatedTo.map(p => thisRepo._getProjectTitle(p))
-          resolve(project)
+            project.relatedTitles = project.relatedTo.map(p => thisRepo._getProjectTitle(p));
+          resolve(project);
         },
         // Error:
         err => reject(err)
@@ -238,30 +231,30 @@ class RepoData extends PolymerElement {
 
   // Returns the project title for a specific path
   _getProjectTitle(path) {
-    const prj = (this._allProjects && path) ? this._allProjects.find(p => p.path === path) : null
-    var title = prj ? prj.title : path
+    const prj = (this._allProjects && path) ? this._allProjects.find(p => p.path === path) : null;
+    var title = prj ? prj.title : path;
     if (prj && title.indexOf('(') < 0 && prj.langCodes && prj.langCodes.length > 0)
-      title = `${title} (${prj.langCodes.join(', ')})`
-    return title
+      title = `${title} (${prj.langCodes.join(', ')})`;
+    return title;
   }
 
   // Filters the list of current projects according to the criteria established in `filter`
   _filterChanged(f) {
     if (this.settings && this.settings.searchService && f.description && f.description !== this._lastDescription) {
       this._lastDescription = f.description;
-      const request = document.createElement('iron-request')
+      const request = document.createElement('iron-request');
       request.send({
         url: `${this.settings.searchService}?lang=${this.lang}&method=boolean&q=${encodeURIComponent(f.description)}`,
-        handleAs: 'json'
+        handleAs: 'json',
       }).then(
         // Success:
         xhr => {
-          this._selectedPaths = xhr.response
-          this._applyFilter(f, this._selectedPaths)
+          this._selectedPaths = xhr.response;
+          this._applyFilter(f, this._selectedPaths);
         },
         // Error:
         err => console.log(`Error in full-text query: ${err}`)
-      )
+      );
       return;
     }
     else if (this._lastDescription && !f.description) {
@@ -278,23 +271,23 @@ class RepoData extends PolymerElement {
         && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
         && (!f.level || f.level === '*' || item.levelCodes.indexOf(f.level) >= 0)
         && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0)
-        && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0)
+        && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0);
     });
   }
 
   // Sorts the `_allProjects` elements according to the current ordering criteria
   _orderingChanged(ord) {
     if (this._allProjects) {
-      const field = ord ? ord.field : ''
-      const inv = ord && ord.inv ? -1 : 1
+      const field = ord ? ord.field : '';
+      const inv = ord && ord.inv ? -1 : 1;
       this._allProjects.sort((a, b) => {
         return (field === 'date' ? a.dateCmp.localeCompare(b.dateCmp) * -1 :
           field === 'title' ? a.titleCmp.localeCompare(b.titleCmp) :
-            field === 'author' ? a.authorCmp.localeCompare(b.authorCmp) : 0) * inv
-      })
-      this._filterChanged(this.filter)
+            field === 'author' ? a.authorCmp.localeCompare(b.authorCmp) : 0) * inv;
+      });
+      this._filterChanged(this.filter);
     }
   }
 }
 
-window.customElements.define(RepoData.is, RepoData)
+window.customElements.define(RepoData.is, RepoData);

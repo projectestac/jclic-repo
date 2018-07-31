@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -33,8 +33,8 @@
   under the Licence.
   @licend
 */
-/*
 
+/*
 This component allows to share a specific content on the following social networks:
 
 - Facebook
@@ -66,12 +66,7 @@ Custom property      | Description                         | Default
 `--social-buttons`   | Mixin applied to the full component | {}
 
 */
-/* SVG icons of the supported social networks */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -79,9 +74,9 @@ import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
 import './shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">
+const documentContainer = document.createElement('template');
+documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">
   <svg>
     <defs>
       <g id="facebook-box">
@@ -111,8 +106,8 @@ $_documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">
     </defs>
   </svg>
 </iron-iconset-svg>`;
+document.head.appendChild(documentContainer.content);
 
-document.head.appendChild($_documentContainer.content);
 class SocialButtons extends PolymerElement {
   static get template() {
     return html`
@@ -163,7 +158,7 @@ class SocialButtons extends PolymerElement {
 `;
   }
 
-  static get is() { return 'social-buttons' }
+  static get is() { return 'social-buttons'; }
 
   static get properties() {
     return {
@@ -193,42 +188,41 @@ class SocialButtons extends PolymerElement {
       settings: Object,
       // Current set of labels, titles and messages, translated into the current app language
       labels: Object,
-    }
+    };
   }
 
   static get observers() {
     return [
-      '_computeLinks(settings, url, imgurl, text, labels)'
-    ]
+      '_computeLinks(settings, url, imgurl, text, labels)',
+    ];
   }
 
   // Computes the link to be used with each social network, based on the current resource data
   _computeLinks(settings, url, imgurl, text, labels) {
     if (settings && url && imgurl && text && labels) {
-      const
-        eFBId = encodeURIComponent(settings.facebookShareID),
-        eHash = encodeURIComponent(settings.shareHashtags.join(',')),
-        eTWVia = encodeURIComponent(settings.twitterVia),
-        eUrl = encodeURIComponent(url),
-        eImg = encodeURIComponent(imgurl),
-        eText = encodeURIComponent(text),
-        eDesc = encodeURIComponent(labels.check),
-        eRedirect = encodeURIComponent(settings.facebookRedirect || window.location.href),
-        eMailBody = encodeURIComponent(`${text}\n\n${labels.check}:\n${url}`)
+      const eFBId = encodeURIComponent(settings.facebookShareID);
+      const eHash = encodeURIComponent(settings.shareHashtags.join(','));
+      const eTWVia = encodeURIComponent(settings.twitterVia);
+      const eUrl = encodeURIComponent(url);
+      const eImg = encodeURIComponent(imgurl);
+      const eText = encodeURIComponent(text);
+      const eDesc = encodeURIComponent(labels.check);
+      const eRedirect = encodeURIComponent(settings.facebookRedirect || window.location.href);
+      const eMailBody = encodeURIComponent(`${text}\n\n${labels.check}:\n${url}`);
 
-      this.linkToFacebook = `https://www.facebook.com/dialog/feed?app_id=${eFBId}&link=${eUrl}&picture=${eImg}&name=${eText}&description=${eDesc}&redirect_uri=${eRedirect}`
-      this.linkToGooglePlus = `https://plus.google.com/share?url=${eUrl}`
-      this.linkToPinterest = `https://pinterest.com/pin/create/button/?url=${eUrl}&media=${eImg}&description=${eDesc}`
-      this.linkToTwitter = `https://twitter.com/intent/tweet?text=${eText}&url=${eUrl}&hashtags=${eHash}&via=${eTWVia}`
-      this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`
-      if(this.withClassroom){
-        this.linkToClassroom = `https://classroom.google.com/u/0/share?url=${eUrl}`
-        this.$.classroom.classList.remove('hidden')
+      this.linkToFacebook = `https://www.facebook.com/dialog/feed?app_id=${eFBId}&link=${eUrl}&picture=${eImg}&name=${eText}&description=${eDesc}&redirect_uri=${eRedirect}`;
+      this.linkToGooglePlus = `https://plus.google.com/share?url=${eUrl}`;
+      this.linkToPinterest = `https://pinterest.com/pin/create/button/?url=${eUrl}&media=${eImg}&description=${eDesc}`;
+      this.linkToTwitter = `https://twitter.com/intent/tweet?text=${eText}&url=${eUrl}&hashtags=${eHash}&via=${eTWVia}`;
+      this.linkToMail = `mailto:?subject=${eText}&body=${eMailBody}`;
+      if (this.withClassroom) {
+        this.linkToClassroom = `https://classroom.google.com/u/0/share?url=${eUrl}`;
+        this.$.classroom.classList.remove('hidden');
       } else {
-        this.$.classroom.classList.add('hidden')
+        this.$.classroom.classList.add('hidden');
       }
     }
   }
 }
 
-window.customElements.define(SocialButtons.is, SocialButtons)
+window.customElements.define(SocialButtons.is, SocialButtons);

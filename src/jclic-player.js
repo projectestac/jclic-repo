@@ -9,12 +9,12 @@
   https://clic.xtec.cat/repo
 
   @source https://github.com/projectestac/jclic-repo
-  
+
   Based on "Polymer Starter Kit v2.0"
     https://www.polymer-project.org
     Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
     http://polymer.github.io/LICENSE.txt
-  
+
   @license EUPL-1.1
   @licstart
   (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
@@ -37,8 +37,8 @@
 /* Alternative sources are:
      - "../jclic.js"
 */
-/*
 
+/*
 This component contains a JClic Player and is used to launch the current JClic project. It's a full layer placed at top (z-index: 10),
 initially hidden (display: none)
 
@@ -51,15 +51,12 @@ Custom property   | Description                       | Default
 `--jclic-player`  | Mixin applied to the host         | {}
 
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 import './shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
 class JClicPlayerElement extends PolymerElement {
   static get template() {
     return html`
@@ -82,7 +79,7 @@ class JClicPlayerElement extends PolymerElement {
 `;
   }
 
-  static get is() { return 'jclic-player' }
+  static get is() { return 'jclic-player'; }
 
   static get properties() {
     return {
@@ -103,25 +100,25 @@ class JClicPlayerElement extends PolymerElement {
         value: null,
         reflectToAttribute: false,
         notify: false,
-      }
-    }
+      },
+    };
   }
 
   // Sets/unsets the JClic project to be launched on the player
   _setProject(prj) {
     if (prj && this.newTab)
-      window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK')
+      window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK');
     else if (prj) {
-      this.style.display = 'block'
-      this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
+      this.style.display = 'block';
+      this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null);
       if (this.fullScreen)
-        this._currentPlayer.skin.setScreenFull(true)
+        this._currentPlayer.skin.setScreenFull(true);
     } else {
-      this.style.display = 'none'
+      this.style.display = 'none';
       if (this._currentPlayer)
-        this._currentPlayer.reset()
+        this._currentPlayer.reset();
     }
   }
 }
 
-window.customElements.define(JClicPlayerElement.is, JClicPlayerElement)
+window.customElements.define(JClicPlayerElement.is, JClicPlayerElement);

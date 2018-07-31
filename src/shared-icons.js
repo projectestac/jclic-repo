@@ -1,7 +1,49 @@
-import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
-const $_documentContainer = document.createElement('template');
+/**
+  File    : icons.html
+  Created : 13/04/2017
+  By      : Francesc Busquets <francesc@gmail.com>
 
-$_documentContainer.innerHTML = `<iron-iconset-svg name="icons" size="24">
+  JClic Repo
+  Static repository of JClic projects
+  https://projectestac.github.io/jclic-repo
+  https://clic.xtec.cat/repo
+
+  @source https://github.com/projectestac/jclic-repo
+
+  Based on "Polymer Starter Kit v2.0"
+    https://www.polymer-project.org
+    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+    http://polymer.github.io/LICENSE.txt
+
+  @license EUPL-1.1
+  @licstart
+  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+
+  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
+  the European Commission- subsequent versions of the EUPL (the "Licence");
+  You may not use this work except in compliance with the Licence.
+
+  You may obtain a copy of the Licence at:
+  https://joinup.ec.europa.eu/software/page/eupl
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  Licence for the specific language governing permissions and limitations
+  under the Licence.
+  @licend
+*/
+
+/*
+  Icons needed by the different components, defined here to avoid loading the full collection
+  included in https://www.webcomponents.org/element/PolymerElements/iron-icons
+*/
+
+import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
+
+const documentContainer = document.createElement('template');
+
+documentContainer.innerHTML = `<iron-iconset-svg name="icons" size="24">
   <svg>
     <defs>
 <g id="file-download"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path></g>
@@ -37,50 +79,5 @@ $_documentContainer.innerHTML = `<iron-iconset-svg name="icons" size="24">
   </svg>
 </iron-iconset-svg>`;
 
-document.head.appendChild($_documentContainer.content);
+document.head.appendChild(documentContainer.content);
 
-/**
-  File    : icons.html
-  Created : 13/04/2017
-  By      : Francesc Busquets <francesc@gmail.com>
-
-  JClic Repo
-  Static repository of JClic projects
-  https://projectestac.github.io/jclic-repo
-  https://clic.xtec.cat/repo
-
-  @source https://github.com/projectestac/jclic-repo
-  
-  Based on "Polymer Starter Kit v2.0"
-    https://www.polymer-project.org
-    Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-    http://polymer.github.io/LICENSE.txt
-  
-  @license EUPL-1.1
-  @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
-
-  Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
-  the European Commission- subsequent versions of the EUPL (the "Licence");
-  You may not use this work except in compliance with the Licence.
-
-  You may obtain a copy of the Licence at:
-  https://joinup.ec.europa.eu/software/page/eupl
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the Licence is distributed on an "AS IS" basis, WITHOUT
-  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-  Licence for the specific language governing permissions and limitations
-  under the Licence.
-  @licend
-*/
-/* 
-  Icons needed by the different components, defined here to avoid loading the full collection
-  included in https://www.webcomponents.org/element/PolymerElements/iron-icons
-*/
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-;
