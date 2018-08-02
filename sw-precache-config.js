@@ -13,14 +13,13 @@
 module.exports = {
   cacheId: 'main_repository',
   staticFileGlobs: [
-    '/index.htm',
-    '/index.html*',
+    '/index.html',
     '/main.json',
     '/manifest.json',
     '/images/*',
     '/src/jclic-repo.html',
-    '/bower_components/webcomponentsjs/*',
-    '/bower_components/es6-promise-polyfill/*',
+    '/bower_components/webcomponentsjs/custom-elements-es5-adapter.js',
+    '/bower_components/webcomponentsjs/webcomponents-loader.js',
   ],
   navigateFallback: 'index.html',
   ignoreUrlParametersMatching: [/./],
@@ -29,8 +28,8 @@ module.exports = {
     handler: 'cacheFirst',
   },
   {
-    urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-    handler: 'cacheFirst',
+    urlPattern: /^https:\/\/fonts\.[googleapis|gstatic]\.com\//,
+    handler: 'fastest',
   },
   {
     urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,

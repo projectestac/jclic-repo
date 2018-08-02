@@ -38,10 +38,7 @@
 <link rel="import" href="shared-styles.html">
 
 <!-- Load the latest JClic.js package from unpkg.com -->
-<script src="https://unpkg.com/jclic/dist/jclic.min.js"></script>
-<!-- Alternative sources are:
-     - "../jclic.js"
--->
+<script src="https://unpkg.com/jclic/dist/jclic.min.js" defer></script>
 
 <!--
 
@@ -110,7 +107,7 @@ Custom property   | Description                       | Default
       _setProject(prj) {
         if (prj && this.newTab)
           window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK')
-        else if (prj) {
+        else if (prj && window.JClicObject) {
           this.style.display = 'block'
           this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null)
           if (this.fullScreen)
