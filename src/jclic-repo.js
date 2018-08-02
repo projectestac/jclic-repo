@@ -268,7 +268,7 @@ class JClicRepo extends PolymerElement {
   static get observers() {
     return [
       '_checkPreferredLanguage(settings)',
-      '_checkParams(projects, params)',
+      '_checkParams(settings, params)',
       '_langSelected(lang)',
       '_queryChanged(currentProjectId, filter, params, lang)',
     ];
@@ -430,13 +430,10 @@ class JClicRepo extends PolymerElement {
   }
 
   // Opens the big project card of the project passed as a parameter in the query section of the current URL
-  _checkParams(projects, params) {
-    if (projects && projects.length > 0 && params) {
-      if (projects.length > 0 && params.prj) {
-        if (projects.find(p => p.path === params.prj))
-          this.showProject(params.prj);
-        else
-          console.log(`Unknown project: ${params.prj}`);
+  _checkParams(settings, params) {
+    if (settings && params) {
+      if (params.prj) {
+        this.showProject(params.prj);
         params.prj = null;
       }
       else if (params.language || params.subject || params.level || params.title || params.author) {

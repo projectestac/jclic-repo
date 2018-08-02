@@ -33,14 +33,13 @@
   under the Licence.
   @licend
 */
-/* Load the latest JClic.js package from unpkg.com */
-/* Alternative sources are:
-     - "../jclic.js"
-*/
 
 /*
 This component contains a JClic Player and is used to launch the current JClic project. It's a full layer placed at top (z-index: 10),
 initially hidden (display: none)
+
+"jclic.js" should be loaded at main level, including in "imndex.html" an statement like:
+<script src="https://unpkg.com/jclic/dist/jclic.min.js" defer></script>
 
 ### Styling
 
@@ -108,7 +107,7 @@ class JClicPlayerElement extends PolymerElement {
   _setProject(prj) {
     if (prj && this.newTab)
       window.open(prj.replace(/\/[^\/]*$/, '/index.html'), '_BLANK');
-    else if (prj) {
+    else if (prj && window.JClicObject) {
       this.style.display = 'block';
       this._currentPlayer = window.JClicObject.loadProject(this.$.player, prj, this.options || null);
       if (this.fullScreen)

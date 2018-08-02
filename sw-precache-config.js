@@ -1,5 +1,5 @@
 /**
- * Options for Service Worker Precache
+ * Options for the Service Worker Precache
  * See: https://github.com/GoogleChromeLabs/sw-precache
  */
 
@@ -34,8 +34,8 @@ module.exports = {
       handler: 'cacheFirst',
     },
     {
-      urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-      handler: 'cacheFirst',
+      urlPattern: /^https:\/\/fonts\.[googleapis|gstatic]\.com\//,
+      handler: 'fastest',
     },
     {
       urlPattern: /^https?:\/\/[\w\/\.]*\/projects\/projects.json/,
