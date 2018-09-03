@@ -203,7 +203,8 @@ class RepoData extends PolymerElement {
     });
 
     // Initialize the main `projects` array
-    this.projects = this._allProjects = projects;
+    this._allProjects = projects;
+    this._applyFilter(this.filter || {}, null);
   }
 
   // Loads a specific `project.json` file, returning a Promise
