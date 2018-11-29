@@ -22,7 +22,7 @@ const saveAs = self.saveAs || (function (view) {
   const doc = view.document;
 
   // only get URL when necessary in case Blob.js hasn't overridden it yet
-  const get_URL = () => view.URL || view.webkitURL || view;
+  const getURL = () => view.URL || view.webkitURL || view;
 
   const save_link = doc.createElementNS('http://www.w3.org/1999/xhtml', 'a');
   const can_use_save_link = 'download' in save_link;
@@ -41,7 +41,7 @@ const saveAs = self.saveAs || (function (view) {
   const revoke = file => {
     const revoker = () => {
       if (typeof file === 'string') // file is an object URL
-        get_URL().revokeObjectURL(file);
+        getURL().revokeObjectURL(file);
       else // file is a File
         file.remove();
     };
@@ -102,7 +102,7 @@ const saveAs = self.saveAs || (function (view) {
       }
       // don't create more object URLs than needed
       if (!object_url)
-        object_url = get_URL().createObjectURL(blob);
+        object_url = getURL().createObjectURL(blob);
 
       if (force)
         view.location.href = object_url;
@@ -120,7 +120,7 @@ const saveAs = self.saveAs || (function (view) {
     filesaver.readyState = filesaver.INIT;
 
     if (can_use_save_link) {
-      object_url = get_URL().createObjectURL(blob);
+      object_url = getURL().createObjectURL(blob);
       setTimeout(function () {
         save_link.href = object_url;
         save_link.download = name;
@@ -163,9 +163,6 @@ const saveAs = self.saveAs || (function (view) {
     null;
 
   return saveAs;
-}(
-  typeof self !== 'undefined' && self
-  || typeof window !== 'undefined' && window
-));
+}(typeof self !== 'undefined' && self || typeof window !== 'undefined' && window));
 
 export { saveAs };

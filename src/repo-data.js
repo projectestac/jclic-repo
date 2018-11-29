@@ -51,13 +51,10 @@ The public list of currently selected projects is exposed through the public var
 Filtering and ordering criteria is stored in special objects called `filter` and `ordering`
 */
 
-/* global Promise */
-
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/iron-ajax/iron-request.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 // import { unidecode } from 'unidecode';
 // Simplified version of 'unidecode', thanks to https://stackoverflow.com/a/37511463:
@@ -167,15 +164,12 @@ class RepoData extends PolymerElement {
       // Set the base path for all projects
       this.repoRoot = this.settings.index.path;
       // Load `projects.json`
-      const request = document.createElement('iron-request');
-      request.send({
+      document.createElement('iron-request').send({
         url: `${this.repoRoot}/${this.settings.index.file}`,
         handleAs: 'json',
-      }).then(
-        // Success:
-        xhr => this._projectsLoaded(xhr.response),
-        // Error:
-        err => console.log('Error loading projects.json:', err));
+      }).then(xhr => {
+        return this._projectsLoaded(xhr.response);
+      }).catch(err => console.log('Error loading projects.json:', err));
     }
   }
 
@@ -209,24 +203,18 @@ class RepoData extends PolymerElement {
 
   // Loads a specific `project.json` file, returning a Promise
   loadProject(path) {
-    const thisRepo = this;
-    return new Promise(function(resolve, reject) {
-      const request = document.createElement('iron-request');
-      request.send({
-        url: `${thisRepo.repoRoot}/${path}/project.json`,
-        handleAs: 'json',
-      }).then(
-        // Success:
-        xhr => {
-          const project = xhr.response;
-          project.path = path;
-          if (project.relatedTo)
-            project.relatedTitles = project.relatedTo.map(p => thisRepo._getProjectTitle(p));
-          resolve(project);
-        },
-        // Error:
-        err => reject(err)
-      );
+    //const thisRepo = this;
+    return document.createElement('iron-request').send({
+      url: `${this.repoRoot}/${path}/project.json`,
+      handleAs: 'json',
+    }).then(xhr => {
+      const project = xhr.response;
+      project.path = path;
+      if (project.relatedTo)
+        project.relatedTitles = project.relatedTo.map(p => this._getProjectTitle(p));
+      return project;
+    }).catch(err => {
+      console.log(`Error loading project: ${err}`);
     });
   }
 
@@ -243,19 +231,13 @@ class RepoData extends PolymerElement {
   _filterChanged(f) {
     if (this.settings && this.settings.searchService && f.description && f.description !== this._lastDescription) {
       this._lastDescription = f.description;
-      const request = document.createElement('iron-request');
-      request.send({
+      document.createElement('iron-request').send({
         url: `${this.settings.searchService}?lang=${this.lang}&method=boolean&q=${encodeURIComponent(f.description)}`,
         handleAs: 'json',
-      }).then(
-        // Success:
-        xhr => {
-          this._selectedPaths = xhr.response;
-          this._applyFilter(f, this._selectedPaths);
-        },
-        // Error:
-        err => console.log(`Error in full-text query: ${err}`)
-      );
+      }).then(xhr => {
+        this._selectedPaths = xhr.response;
+        this._applyFilter(f, this._selectedPaths);
+      }).catch(err => console.log(`Error in full-text query: ${err}`));
       return;
     }
     else if (this._lastDescription && !f.description) {

@@ -51,7 +51,7 @@ Some other functional components are also declared and included at this level:
 */
 
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
 import '@polymer/app-layout/app-header/app-header.js';
@@ -63,8 +63,8 @@ import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-spinner/paper-spinner-lite.js';
+import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
-import './shared-styles.js';
 import './repo-data.js';
 import './projects-list.js';
 import './projects-selector.js';
@@ -72,12 +72,12 @@ import './big-project-card.js';
 import './jclic-player.js';
 import './user-settings.js';
 import './info-pages.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class JClicRepo extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${sharedStyles}
+    <style>
        :host {
         display: block;
       }
@@ -281,7 +281,7 @@ class JClicRepo extends PolymerElement {
 
   // Gets the URL used as a base for absolute links to projects
   _getBaseUrl() {
-    let path = window.location.pathname;
+    const path = window.location.pathname;
     return `${window.location.origin}${path.substring(0, path.lastIndexOf('/'))}/`;
   }
 
@@ -331,20 +331,16 @@ class JClicRepo extends PolymerElement {
     if (path instanceof CustomEvent)
       path = path.detail.path;
     this.$.spinner.active = true;
-    this.$.repo.loadProject(path).then(
-      // Promise OK
-      project => {
-        this.$.spinner.active = false;
-        this.$.bigPrj.project = project;
-        this.$.bigPrj.$.dialog.open();
-        this.currentProjectId = project.path;
-        document.querySelector('title').innerHTML = `${this.labels.mainTitle}: ${project.title}`;
-      },
-      // Promise rejected
-      err => {
-        this.$.spinner.active = false;
-        console.log(`Error loading project ${path}: ${err}`);
-      });
+    this.$.repo.loadProject(path).then(project => {
+      this.$.spinner.active = false;
+      this.$.bigPrj.project = project;
+      this.$.bigPrj.$.dialog.open();
+      this.currentProjectId = project.path;
+      document.querySelector('title').innerHTML = `${this.labels.mainTitle}: ${project.title}`;
+    }).catch(err => {
+      this.$.spinner.active = false;
+      console.log(`Error loading project ${path}: ${err}`);
+    });
   }
 
   // Called when `big-project-card` is closed

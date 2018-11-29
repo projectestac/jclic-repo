@@ -72,7 +72,7 @@ import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
-import './shared-styles.js';
+import { sharedStyles } from './shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 const documentContainer = document.createElement('template');
@@ -111,7 +111,8 @@ document.head.appendChild(documentContainer.content);
 class SocialButtons extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${sharedStyles}
+    <style>
       :host {
         @apply --social-buttons;
       }

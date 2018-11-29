@@ -43,7 +43,8 @@ import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
 
 const documentContainer = document.createElement('template');
 
-documentContainer.innerHTML = `<iron-iconset-svg name="icons" size="24">
+documentContainer.innerHTML =
+`<iron-iconset-svg name="icons" size="24">
   <svg>
     <defs>
 <g id="file-download"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path></g>

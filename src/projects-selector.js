@@ -58,14 +58,15 @@ import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
-import './shared-styles.js';
+import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class ProjectsSelector extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${sharedStyles}
+    <style>
       :host {
         display: block;
         padding: 1em;

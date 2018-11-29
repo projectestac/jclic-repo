@@ -51,16 +51,16 @@ Custom property   | Description                          | Default
 */
 
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
-import '@polymer/iron-scroll-threshold/iron-scroll-threshold.js';
-import './shared-styles.js';
-import './project-card.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import '@polymer/iron-scroll-threshold/iron-scroll-threshold.js';
+import { sharedStyles } from './shared-styles.js';
+import './project-card.js';
 
 class ProjectsList extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    ${sharedStyles}
+    <style>
        :host {
         display: block;
         text-align: center;

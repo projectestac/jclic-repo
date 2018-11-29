@@ -36,85 +36,68 @@
 
 /* Styles sherd by all components */
 
-import '@polymer/polymer/polymer-element.js';
+//import '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/polymer-element.js';
 
-const documentContainer = document.createElement('template');
+// Colors obtained from https://www.materialpalette.com (excluding "paper-input")
+/**
+ *  Unused mixins (leave it commented while not used)
+ * --project-card-play-button: {};
+ * --search-button: {};
+ * --projects-list: {};
+ * --project-card: {};
+ * --project-card-title: {};
+ * --project-card-language-box: {};
+ * --project-card-author: {};
+ * --big-project-card: {};
+ * --project-share: {};
+ * --social-buttons: {};
+ * --projects-selector: {};
+ * --jclic-player {};
+ * --user-settings {};
+ * --info-pages {};
+ */
 
-documentContainer.innerHTML = `<dom-module id="shared-styles">
-  <template>
-    <style>
+export const sharedStyles = html`
+<style>
+  .wrap {
+    white-space: normal;
+  }
+
+  .hidden {
+    display: none;
+  }
        
-       .wrap {
-         white-space: normal;
-       }
+  :root {
+    --dark-primary-color: #1976D2;
+    --default-primary-color: #2196F3;
+    --light-primary-color: #BBDEFB;
+    --text-primary-color: #FFFFFF;
+    --accent-color: #536DFE;
+    --primary-background-color: #F8F8F8;
+    --primary-text-color: #212121;
+    --secondary-text-color: #757575;
+    --disabled-text-color: #BDBDBD;
+    --divider-color: #BDBDBD;
+    --error-color: red;
 
-       .hidden {
-         display: none;
-       }
-       
-       :root {
+    --drawer-menu-color: #f1f1f1;
+    --drawer-border-color: 1px solid #ccc;
+    --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
 
-        /* Colors obtained from https://www.materialpalette.com (excluding "paper-input") */
-        /* ----------------------------- */
-        --dark-primary-color: #1976D2;
-        --default-primary-color: #2196F3;
-        --light-primary-color: #BBDEFB;
-        --text-primary-color: #FFFFFF;
-        --accent-color: #536DFE;
-        --primary-background-color: #F8F8F8;
-        --primary-text-color: #212121;
-        --secondary-text-color: #757575;
-        --disabled-text-color: #BDBDBD;
-        --divider-color: #BDBDBD;
+    --paper-menu-background-color: #f1f1f1;
+    --menu-link-color: #111;
 
-        --error-color: red;
+    --app-drawer-width: 180pt;
+    --paper-dialog-background-color: var(--paper-menu-background-color);
+    --paper-listbox-background-color: #eee;
 
+    --paper-dialog-scrollable: {
+      padding-bottom: 10px;
+    };
 
-        /* Components */
-        /* paper-drawer-panel */
-        --drawer-menu-color: #f1f1f1;
-        --drawer-border-color: 1px solid #ccc;
-        --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
-
-        /* paper-menu */
-        --paper-menu-background-color: #f1f1f1;
-        --menu-link-color: #111;
-
-        /* ----------------------------- */
-        /* More components */
-        --app-drawer-width: 180pt;
-        --paper-dialog-background-color: var(--paper-menu-background-color);
-        --paper-listbox-background-color: #eee;
-
-        --paper-dialog-scrollable: {
-          padding-bottom: 10px;
-        };
-
-        /* Custom styles and shims */
-        --project-card-content-height: 170px;
-        --projects-list-background-color: var(--paper-menu-background-color);
-
-
-        /* Unused mixins (leave it commented while not used)
-        ----------------------------------------------------        
-        --project-card-play-button: {};
-        --search-button: {};
-        --projects-list: {};
-        --project-card: {};
-        --project-card-title: {};
-        --project-card-language-box: {};
-        --project-card-author: {};
-        --big-project-card: {};
-        --project-share: {};
-        --social-buttons: {};
-        --projects-selector: {};
-        --jclic-player {};
-        --user-settings {};
-        --info-pages {};
-        */
-      }
-    </style>
-  </template>
-</dom-module>`;
-
-document.head.appendChild(documentContainer.content);
+    --project-card-content-height: 170px;
+    --projects-list-background-color: var(--paper-menu-background-color);
+  }
+</style>
+`;
