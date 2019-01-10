@@ -67,13 +67,11 @@ Custom property      | Description                         | Default
 
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
 import { sharedStyles } from './shared-styles.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 const documentContainer = document.createElement('template');
 documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">

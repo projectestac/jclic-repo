@@ -51,10 +51,8 @@ Custom property   | Description                       | Default
 
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { sharedStyles } from './shared-styles.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class JClicPlayerElement extends PolymerElement {
   static get template() {

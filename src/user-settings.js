@@ -50,8 +50,7 @@ Custom property   | Description                          | Default
 `--user-settings` | Mixin applied to the settings dialog | {}
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-dialog-scrollable/paper-dialog-scrollable.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -60,7 +59,6 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-toggle-button/paper-toggle-button.js';
 import { sharedStyles } from './shared-styles.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class UserSettings extends PolymerElement {
   static get template() {

@@ -51,8 +51,7 @@ The public list of currently selected projects is exposed through the public var
 Filtering and ordering criteria is stored in special objects called `filter` and `ordering`
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/iron-ajax/iron-request.js';
 

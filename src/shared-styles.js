@@ -36,7 +36,6 @@
 
 /* Styles sherd by all components */
 
-//import '@polymer/polymer/polymer-element.js';
 import { html } from '@polymer/polymer/polymer-element.js';
 
 // Colors obtained from https://www.materialpalette.com (excluding "paper-input")
@@ -67,8 +66,8 @@ export const sharedStyles = html`
   .hidden {
     display: none;
   }
-       
-  :root {
+
+  html {
     --dark-primary-color: #1976D2;
     --default-primary-color: #2196F3;
     --light-primary-color: #BBDEFB;
@@ -92,12 +91,10 @@ export const sharedStyles = html`
     --paper-dialog-background-color: var(--paper-menu-background-color);
     --paper-listbox-background-color: #eee;
 
-    --paper-dialog-scrollable: {
-      padding-bottom: 10px;
-    };
-
     --project-card-content-height: 170px;
     --projects-list-background-color: var(--paper-menu-background-color);
+ 
+    --paper-dialog-scrollable: {padding-bottom: 10px};
   }
 </style>
 `;

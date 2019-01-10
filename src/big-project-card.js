@@ -52,7 +52,7 @@ Custom property      | Description                       | Default
 `--big-project-card` | Mixin applied to the project card | {}
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-dialog-scrollable/paper-dialog-scrollable.js';
@@ -63,7 +63,6 @@ import './shared-icons.js';
 import { sharedStyles } from './shared-styles.js';
 import './project-share.js';
 import './project-download.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class BigProjectCard extends PolymerElement {
   static get template() {
@@ -323,12 +322,6 @@ class BigProjectCard extends PolymerElement {
       this.$.downloadDlg.prepareZipFile();
     }
   }
-
-  // Redirects the navigation to the project's page in the legacy clicZone
-  // _tapClicZone() {
-  //   if (this.project && this.project.clicZoneURL)
-  //     window.open(this.project.clicZoneURL, 'ClicZone');
-  // }
 
   // Opens the `project-share` dialog
   _tapShare(ev) {

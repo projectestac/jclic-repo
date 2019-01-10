@@ -49,8 +49,7 @@ Custom property       | Description                          | Default
 `--projects-selector` | Mixin applied to the selector        | `{}`
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu-light.js';
@@ -60,7 +59,6 @@ import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
 import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class ProjectsSelector extends PolymerElement {
   static get template() {
@@ -75,10 +73,11 @@ class ProjectsSelector extends PolymerElement {
 
       paper-dropdown-menu-light {
         width: 100%;
-        --paper-item-min-height: 2em;
-        --paper-item: {
-          cursor: pointer;
-        }
+      }
+
+      paper-item {
+        min-height: 2em;
+        cursor: pointer;        
       }
 
       #searchBtn {

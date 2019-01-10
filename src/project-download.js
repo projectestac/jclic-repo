@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
   File    : project-download.html
   Created : 07/06/2017
@@ -60,7 +61,7 @@ Custom property      | Description                         | Default
 
 /* global Promise */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-dialog-scrollable/paper-dialog-scrollable.js';
@@ -71,7 +72,6 @@ import '@polymer/paper-progress/paper-progress.js';
 import '@polymer/iron-ajax/iron-request.js';
 import './shared-icons.js';
 import { sharedStyles } from './shared-styles.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 import { saveAs } from './utils/FileSaver.js';
 import JSZip from './utils/jszip.js';
@@ -250,9 +250,9 @@ class ProjectDownload extends PolymerElement {
       // Save also an array of `XMLHttpRequest`, useful to abort the pending requests
       this._xhrs = [];
       const promises = [];
-      this.project.files
-        // exclude `project.json`, already stored in the zip file
-        .filter(f => f !== 'project.json')
+
+      // exclude `project.json`, already stored in the zip file
+      this.project.files.filter(f => f !== 'project.json')
         .forEach(file => {
           let xhr;
           var filePromise = new Promise((resolve, reject) => {
@@ -366,7 +366,7 @@ class ProjectDownload extends PolymerElement {
       if (xhr.overrideMimeType)
         xhr.overrideMimeType('text/plain; charset=x-user-defined');
 
-      xhr.onreadystatechange = function(evt) {
+      xhr.onreadystatechange = function (evt) {
         if (xhr.readyState === 4) {
           if (xhr.status === 200 || xhr.status === 0) {
             let file = null;

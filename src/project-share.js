@@ -53,8 +53,7 @@ Custom property      | Description                         | Default
 `--project-share`    | Mixin applied to the full component | {}
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-dialog-scrollable/paper-dialog-scrollable.js';
 import '@polymer/paper-input/paper-input.js';
@@ -66,7 +65,6 @@ import '@polymer/paper-styles/typography.js';
 import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
 import './social-buttons.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 /* clipboard-polyfill should be imported in `index.html` */
 /* global clipboard */

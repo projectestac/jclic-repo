@@ -50,8 +50,7 @@ Custom property   | Description                          | Default
 `--projects-list` | Mixin applied to the project's list  | {}
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-scroll-threshold/iron-scroll-threshold.js';
 import { sharedStyles } from './shared-styles.js';
 import './project-card.js';

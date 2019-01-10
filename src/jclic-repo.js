@@ -50,8 +50,7 @@ Some other functional components are also declared and included at this level:
 - A `repo-data` component, without any graphic element, responsible of data retrieval and orchestration.
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
 import '@polymer/app-layout/app-header/app-header.js';
@@ -75,6 +74,7 @@ import './info-pages.js';
 
 class JClicRepo extends PolymerElement {
   static get template() {
+
     return html`
     ${sharedStyles}
     <style>

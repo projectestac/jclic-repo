@@ -51,13 +51,12 @@ Custom property | Description | Default
 `--project-card` | Mixin applied to the project card | `{}`
 */
 
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import { sharedStyles } from './shared-styles.js';
 
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-fab/paper-fab.js';
-import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class ProjectCard extends PolymerElement {
   static get template() {
