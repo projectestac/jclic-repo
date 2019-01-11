@@ -134,7 +134,7 @@ class ProjectCard extends PolymerElement {
     <paper-material id="card" animated="true" elevation="[[elevation]]" on-click="_click" on-mouseenter="_raise" on-mouseleave="_unraise">
       <!-- Main area of the card, displaying the project's title, languages, play button and cover (as a background image) -->
       <div id="content" class="content">
-        <template id="languages" is="dom-repeat" items="[[languages]]"><span class="language">[[item]]</span></template>
+        <template id="languages" is="dom-repeat" items="[[languages]]"><span class="language" title="[[item.text]]">[[item.val]]</span></template>
         <div id="title" class="title">[[project.title]]</div>
         <paper-fab class="play-button" mini="" icon="av:play-arrow" title="[[labels.playText]]" role="button" on-click="_play"></paper-fab>
       </div>
@@ -183,7 +183,7 @@ class ProjectCard extends PolymerElement {
       else
         this.$.content.style.cssText = '';
       this.$.title.style.cssText = prj.title ? '' : 'display:none;';
-      this.languages = (prj && prj.langCodes) ? prj.langCodes : [];
+      this.languages = (prj && prj.langCodes) ? prj.langCodes.map(k => this.labels.selectOptions.languages.find(o => o.val === k) || {val: k, text: ''}) : [];
     }
   }
 

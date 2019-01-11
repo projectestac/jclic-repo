@@ -376,8 +376,9 @@ class JClicRepo extends PolymerElement {
 
   // called when a new dialog opens
   _dlgOpened() {
-    // Force a `resize` event to adjust the real size of dialogs even after its content has been modified
-    setTimeout(() => dispatchEvent(new Event('resize')), 100);
+    // Adjust the real size of dialogs even after its content has been modified
+    // setTimeout(() => dispatchEvent(new Event('resize')), 100);
+    setTimeout(() => this.$.bigPrj.$.dialog.playAnimation({}), 100);
   }
 
   // Called by Polymer when all components have been initialized

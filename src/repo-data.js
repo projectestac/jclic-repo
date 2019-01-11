@@ -155,6 +155,7 @@ class RepoData extends PolymerElement {
       findIndex: (type, value) => this.selectOptions[type].findIndex(l => l.val === value),
       fullTextEnabled: settings && settings.searchService ? true : false,
     };
+    this.labels.selectOptions = this.selectOptions;
   }
 
   // Called when settings are loaded for first time
