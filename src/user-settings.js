@@ -226,7 +226,7 @@ class UserSettings extends PolymerElement {
     this.openPlayerInNewTab = this._openInNewTab;
     this.ordering.field = this.orderOptions[this._order];
     this.ordering.inv = this._orderInv;
-    this.notifyPath('ordering');
+    this.set('ordering', Object.assign({}, this.ordering));
     this.$.dialog.close();
     this.saveToLocalStorage();
   }

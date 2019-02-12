@@ -315,7 +315,7 @@ class BigProjectCard extends PolymerElement {
       window.open(`https://clic.xtec.cat/jnlp/jclic/install.jnlp?argument=${this.baseUrl}${this.repoRoot}/${this.project.path}/${this.project.instFile}`);
   }
 
-  // Downloads the JClic project in SCORM format (not yet implemented!)
+  // Downloads the JClic project in SCORM format
   _tapDownload() {
     if (this.project) {
       this.$.downloadDlg.$.dialog.open();
