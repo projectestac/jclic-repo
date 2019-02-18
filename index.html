@@ -83,10 +83,6 @@
     }
   </script>
 
-  <!-- See: https://github.com/PolymerElements/paper-swatch-picker/issues/36 -->
-  <script src="./node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
-  <script src="./node_modules/clipboard-polyfill/build/clipboard-polyfill.js"></script>
-
   <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
   <script>
     // Force all polyfills on
@@ -95,16 +91,17 @@
     ShadyCSS = { shimcssproperties: true };
   </script>
 
-  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script>
+  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <!-- See: https://github.com/PolymerElements/paper-swatch-picker/issues/36 -->
+  <script src="./node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  <script src="./node_modules/clipboard-polyfill/build/clipboard-polyfill.js"></script>
 
   <!-- Load application shell -->
   <!-- script type="module" src="./src/jclic-repo.js"></script -->
   <script type="module">
     WebComponents.waitFor(() => import('./src/jclic-repo.js'));
   </script>
-
-  <!-- Load JClic player async -->
-  <script src="https://unpkg.com/jclic/dist/jclic.min.js" defer></script>
 
   <!-- Global styles for body -->
   <style>

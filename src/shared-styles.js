@@ -52,7 +52,6 @@ import { html } from '@polymer/polymer/polymer-element.js';
  * --project-share: {};
  * --social-buttons: {};
  * --projects-selector: {};
- * --jclic-player {};
  * --user-settings {};
  * --info-pages {};
  */

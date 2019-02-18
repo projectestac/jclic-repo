@@ -46,7 +46,6 @@ Some other functional components are also declared and included at this level:
 - A `paper-spinner-lite`, used to display an animation while waiting for data
 - A `big-project-card` where the project's full description will be shown
 - An `user-settings` dialog
-- A `jclic-player` component, used to launch the JClic activities on request
 - A `repo-data` component, without any graphic element, responsible of data retrieval and orchestration.
 */
 
@@ -68,7 +67,6 @@ import './repo-data.js';
 import './projects-list.js';
 import './projects-selector.js';
 import './big-project-card.js';
-import './jclic-player.js';
 import './user-settings.js';
 import './info-pages.js';
 
@@ -193,10 +191,7 @@ class JClicRepo extends PolymerElement {
     <big-project-card id="bigPrj" lang="[[lang]]" labels="[[labels]]" repo-root="[[repoRoot]]" base-url="[[baseUrl]]" settings="[[settings]]" on-iron-overlay-opened="_dlgOpened" on-iron-overlay-closed="_projectClosed" on-play="playProject"></big-project-card>
 
     <!-- Dialog used to set user perferences about ordering and full-screen -->
-    <user-settings id="userSettings" labels="[[labels]]" ordering="{{ordering}}" full-screen-player="{{fullScreenPlayer}}" open-player-in-new-tab="{{openPlayerInNewTab}}"></user-settings>
-
-    <!-- A JClic player where the selected project will be launched at user's request -->
-    <jclic-player id="player" full-screen="[[fullScreenPlayer]]" new-tab="[[openPlayerInNewTab]]" options="[[playerOptions]]"></jclic-player>
+    <user-settings id="userSettings" labels="[[labels]]" ordering="{{ordering}}" full-screen-player="{{fullScreenPlayer}}"></user-settings>
 
     <!-- Auxiliary element used for miscellaneous operations related to the repository data -->
     <repo-data id="repo" repo-root="{{repoRoot}}" settings="{{settings}}" lang="[[lang]]" labels="{{labels}}" select-options="{{selectOptions}}" projects="{{projects}}" filter="{{filter}}" ordering="{{ordering}}"></repo-data>
@@ -221,11 +216,6 @@ class JClicRepo extends PolymerElement {
       fullScreenPlayer: {
         type: Boolean,
         value: false,
-      },
-      // Flag indicating whether JClic player has to open in new tab
-      openPlayerInNewTab: {
-        type: Boolean,
-        value: true,
       },
       // Miscellaneous options passed to JClic player
       playerOptions: {
@@ -345,11 +335,9 @@ class JClicRepo extends PolymerElement {
 
   // Called when `big-project-card` is closed
   _projectClosed() {
-    if (!this.$.player.project) {
-      this.currentProjectId = null;
-      this._queryChanged();
-      document.querySelector('title').innerHTML = this.labels.mainTitle;
-    }
+    this.currentProjectId = null;
+    this._queryChanged();
+    document.querySelector('title').innerHTML = this.labels.mainTitle;
   }
 
   // Launches the project activities
@@ -359,18 +347,14 @@ class JClicRepo extends PolymerElement {
       prj = prj.detail.project;
       this.$.bigPrj.close();
     }
-    // Request a call to `playerClosed` when the user leaves the JClic player
-    this.playerOptions.closeFn = this.playerClosed.bind(this);
-    // Setting the `project` attribute of the `jclic-player` component opens automatically the player
-    this.$.player.project = `${this.repoRoot}/${prj.path}/${prj.mainFile}`;
-    this.currentProjectId = prj.path;
-    this._queryChanged();
-  }
+    // Open "index.html" in new tab:
+    const prjUrl = `${this.repoRoot}/${prj.path}/${prj.mainFile}`;
+    const indexUrl = prjUrl.replace(/\/[^\/]*$/, '/index.html');
+    // TODO: Add playerOptions to indexUrl as query string
+    window.open(indexUrl, '_BLANK');
 
-  // Called by `jclic-player` when the user leaves the activities
-  playerClosed() {
-    this.$.player.project = null;
-    this.currentProjectId = null;
+    // Update query
+    this.currentProjectId = prj.path;
     this._queryChanged();
   }
 

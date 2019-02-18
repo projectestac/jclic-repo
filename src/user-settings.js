@@ -102,11 +102,6 @@ class UserSettings extends PolymerElement {
       <h2>[[labels.settings]]</h2>
       <paper-dialog-scrollable>
         <paper-material elevation="1">
-          <paper-toggle-button checked="{{_openInNewTab}}">
-            <span>[[labels.openInNewTab]]</span>
-          </paper-toggle-button>
-        </paper-material>
-        <paper-material elevation="1">
           <paper-toggle-button checked="{{_fullScreen}}" disabled="[[_noFullScreenAvailable]]">
             <span>[[labels.fullScreen]]</span>
           </paper-toggle-button>
@@ -137,8 +132,6 @@ class UserSettings extends PolymerElement {
     return {
       // When checked (and allowed by the system) activities will be displayed at full screen
       _fullScreen: Boolean,
-      // When checked, activities will be opened in a separate tab
-      _openInNewTab: Boolean,
       // Current value selected in the `order field` listbox
       _order: Number,
       // When checked, items will be ordered from Z to A
@@ -146,7 +139,9 @@ class UserSettings extends PolymerElement {
       // Computed field indicating if full screen mode is available on the current browser
       _noFullScreenAvailable: {
         type: Boolean,
-        value: () => (!document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled) ? true : false,
+        value: () => (!document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled)
+          ? true
+          : false,
       },
       // Valid options for `field` in `ordering`
       orderOptions: {
@@ -173,11 +168,6 @@ class UserSettings extends PolymerElement {
         type: Boolean,
         notify: true,
       },
-      // Flag indicating whether JClic player has to open in new tab
-      openPlayerInNewTab: {
-        type: Boolean,
-        notify: true,
-      },
     };
   }
 
@@ -190,7 +180,6 @@ class UserSettings extends PolymerElement {
   readFromLocalStorage() {
     const storage = window.localStorage;
     this.fullScreenPlayer = storage.getItem('fullScreenPlayer') === 'true';
-    this.openPlayerInNewTab = storage.getItem('openPlayerInNewTab') !== 'false';
     const field = storage.getItem('ordering.field');
     if (field)
       this.ordering.field = field;
@@ -201,7 +190,6 @@ class UserSettings extends PolymerElement {
   saveToLocalStorage() {
     const storage = window.localStorage;
     storage.setItem('fullScreenPlayer', false || this.fullScreenPlayer);
-    storage.setItem('openPlayerInNewTab', false || this.openPlayerInNewTab);
     storage.setItem('ordering.field', this.ordering.field || '');
     storage.setItem('ordering.inv', false || this.ordering.inv);
   }
@@ -209,7 +197,6 @@ class UserSettings extends PolymerElement {
   // Opens the dialog
   open() {
     this._fullScreen = this.fullScreenPlayer;
-    this._openInNewTab = this.openPlayerInNewTab;
     this._order = (this.ordering && this.ordering.field) ? this.orderOptions.indexOf(this.ordering.field) : 0;
     this._orderInv = this.ordering ? this.ordering.inv || false : false;
     this.$.dialog.open();
@@ -222,8 +209,7 @@ class UserSettings extends PolymerElement {
 
   // Called when the user clicks on OK
   _ok() {
-    this.fullScreenPlayer = this._fullScreenEnabled && this._fullScreen ? true : false;
-    this.openPlayerInNewTab = this._openInNewTab;
+    this.fullScreenPlayer = this._fullScreen && !this._noFullScreenAvailable ? true : false;
     this.ordering.field = this.orderOptions[this._order];
     this.ordering.inv = this._orderInv;
     this.set('ordering', Object.assign({}, this.ordering));
