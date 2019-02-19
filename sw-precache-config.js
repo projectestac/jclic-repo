@@ -42,7 +42,7 @@ module.exports = {
       handler: 'fastest',
     },
     {
-      urlPattern: /^https?:\/\/[\w\.]*\/projects\/[\w\/\.]*\/(project\.json|cover\.(jpg|png|gif))/,
+      urlPattern: /^https?:\/\/[\w\.]*\/projects\/[\w\/\.]*\/(project\.json|[^\/\.]*\.(jpg|png|gif))/,
       handler: 'cacheFirst',
       options: {
         cache: {
