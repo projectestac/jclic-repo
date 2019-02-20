@@ -61,8 +61,10 @@ class ProjectsList extends PolymerElement {
     ${sharedStyles}
     <style>
        :host {
-        display: block;
-        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        grid-gap: 1rem;
+        margin: 1rem;
         @apply --projects-list;
       }
     </style>

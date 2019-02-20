@@ -64,14 +64,7 @@ class ProjectCard extends PolymerElement {
     ${sharedStyles}
     <style>
        :host {
-        display: inline-block;
-        box-sizing: border-box;
         cursor: pointer;
-        text-align: left;
-        line-height: initial;
-        width: 200px;
-        margin: 8px;
-        vertical-align: top;
         background-color: white;
         border-radius: 2px;
         @apply --project-card;

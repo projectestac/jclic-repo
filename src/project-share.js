@@ -112,16 +112,7 @@ class ProjectShare extends PolymerElement {
         height: 18pt;
         margin-top: 8px;
       }
-      /* Workaround for https://github.com/PolymerElements/paper-toast/issues/88 */
 
-      .toast-msg {
-        position: relative;
-        margin-top: 0.3em;
-        top: 50%;
-        left: 50%;
-        float: left;
-        transform: translate(-50%, 50%);
-      }
     </style>
 
     <paper-dialog id="dialog" modal="" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
@@ -174,10 +165,8 @@ class ProjectShare extends PolymerElement {
         <paper-icon-button dialog-dismiss="" icon="close" title="[[labels.close]]"></paper-icon-button>
       </div>
 
-      <!-- "toast" message box that will appear when copying any of the previous elements  -->
-      <paper-toast id="copied">
-        <div class="toast-msg">[[labels.copied]]</div>
-      </paper-toast>
+      <!-- "toast" message box that will appear when copying any text elements  -->
+      <paper-toast id="copied" text="[[labels.copied]]" />
 
     </paper-dialog>
 `;
