@@ -34,12 +34,10 @@
   under the Licence.
   @licend
 -->
-
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Polymer Starter Kit">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
   <title>Library of JClic activities</title>
@@ -98,7 +96,6 @@
   <script src="./node_modules/clipboard-polyfill/build/clipboard-polyfill.js"></script>
 
   <!-- Load application shell -->
-  <!-- script type="module" src="./src/jclic-repo.js"></script -->
   <script type="module">
     WebComponents.waitFor(() => import('./src/jclic-repo.js'));
   </script>
@@ -115,6 +112,10 @@
 </head>
 
 <body>
+  <noscript>
+    <h3>JavaScript required</h3>
+    <p>We're sorry, but this Library of JClic Activities doesn't work properly without JavaScript enabled.</p>
+  </noscript>
   <jclic-repo></jclic-repo>
 </body>
 

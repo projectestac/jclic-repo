@@ -112,8 +112,8 @@ class JClicRepo extends PolymerElement {
       .currentLang {
         font-weight: 800;
       }
-      /* Workaround to avoid the default -120px bottom position in app-drawer: */
 
+      /* Workaround to avoid the default -120px bottom position in app-drawer: */
       #drawer {
         bottom: 0;
       }
@@ -163,7 +163,7 @@ class JClicRepo extends PolymerElement {
         <!-- Title bar -->
         <app-header slot="header" condenses="" reveals="" effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle=""></paper-icon-button>
+            <paper-icon-button icon="menu" title="[[labels.searchTitle]]" drawer-toggle=""></paper-icon-button>
             <div main-title="">[[labels.mainTitle]]</div>
             <div id="langSelector">
               <template is="dom-repeat" items="[[settings.languages]]"><a href="#" class="langItem" id="[[item.id]]" title="[[item.name]]" on-click="_clickOnLang">[[item.id]]</a></template>

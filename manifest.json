@@ -1,7 +1,7 @@
 {
   "lang": "en",
   "name": "Library of JClic HTML5 activities",
-  "short_name": "JClic library",
+  "short_name": "JClic",
   "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#2196F3",
