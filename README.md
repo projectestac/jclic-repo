@@ -1,10 +1,10 @@
 # jclic-repo
 **Static repository of JClic projects**
 
-This is a single-page HTML5 application used to publish repositories of JClic projects. A big instance of jclic-repo is
-currently running at [http://clic.xtec.cat/repo]
+This is a single-page HTML5 application used to publish repositories of [JClic](http://projectestac.github.io/jclic.js) projects. A big instance of jclic-repo is
+currently running at: [https://clic.xtec.cat/repo](https://clic.xtec.cat/repo)
 
-Built with [Polymer 2.0](https://www.polymer-project.org/) web components
+JClic-Repo has been built with [Polymer Library 3.0](https://polymer-library.polymer-project.org/) web components.
 
 ## How to check and build jclic-repo
 
@@ -16,28 +16,29 @@ on your system.
 If you work with Debian/Ubuntu, it's convenient to replace the original node.js packages for those provided by 
 [NodeSource](https://github.com/nodesource/distributions).
 
-**jclic-repo** was developed with Node.js Version 6.10, packaged by NodeSource.
+**jclic-repo** was developed with Node.js Version 10.15, packaged by NodeSource.
 
 To update `npm` to the latest version, run:
 
-```
-sudo npm install -g npm
+```bash
+$ sudo npm install -g npm
 ```
 
-We also use [Polymer CLI](https://www.polymer-project.org/2.0/docs/tools/polymer-cli) and [Bower](http://bower.io/) for package dependencies amd automation of building tasks.
-You must globally install these packages running:
+We also use the command-line tool [Polymer CLI](https://www.npmjs.com/package/polymer-cli).
 
-```
-sudo npm install -g bower polymer-cli
+You must globally install this package:
+
+```bash
+$ sudo npm install -g polymer-cli
 ```
 
 To install the remaining packages, just go to the project's root directory and run:
 
-```
-bower install
+```bash
+$ npm install
 ```
 
-This will install the Polymer web components and other required packages into `bower_components`
+This will install the Polymer web components and other required packages into `node_modules`
 
 The installation process can be long, so be patient.
 
@@ -47,17 +48,21 @@ branch on another directory and symlink `dist/default/projects` to it.
 
 From jclic-repo, launch:
 
-```
-cd ..
-git clone https://github.com/projectestac/jclic-repo.git --branch samples --single-branch jclic-repo-samples
-cd jclic-repo
-ln -s ../jclic-repo/samples/projects .
+```bash
+# Go one level below jclic-repo
+$ cd ..
+# Clone the samples branch
+$ git clone https://github.com/projectestac/jclic-repo.git --branch samples --single-branch jclic-repo-samples
+# Re-enter on jclic-repo
+$ cd jclic-repo
+# Create a symlink to the sample projects directory
+$ ln -s ../jclic-repo/samples/projects .
 ```
 
 To test the module and see the demo in your browser, just launch the test server running:
 
-```
-polymer serve
+```bash
+$ polymer serve
 ```
 
 The main parameters of the application (like title, language and the location of the `projects` folder)
