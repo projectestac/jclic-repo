@@ -41,7 +41,7 @@ $ cd ..
 $ git clone https://github.com/projectestac/jclic-repo.git --branch samples --single-branch jclic-repo-samples
 # Go back to jclic-repo and create a symlink to the sample projects directory:
 $ cd jclic-repo
-$ ln -s ../jclic-repo/samples/projects .
+$ ln -s ../jclic-repo-samples/projects .
 ```
 
 To test the module and see the demo in your browser, just launch the test server running:
