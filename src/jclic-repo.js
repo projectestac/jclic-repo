@@ -374,9 +374,9 @@ class JClicRepo extends PolymerElement {
 
     // Read the parameters passed on the `search` section of current URL, if any
     // From: http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
-    this.params = window.location.search
-      ? window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-      : {};
+    this.params = window.location.search ?
+      window.JSON.parse('{"' + window.decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}') :
+      {};
     if (this.params.logLevel)
       this.playerOptions.logLevel = this.params.logLevel;
     if (this.params.page && this.params.page === 'info')
@@ -425,7 +425,11 @@ class JClicRepo extends PolymerElement {
           title: params.title || '',
           author: params.author || '',
         });
-        params.language = params.subject = params.level = params.title = params.author = null;
+        params.language = null;
+        params.subject = null;
+        params.level = null;
+        params.title = null;
+        params.author = null;
         this._queryChanged();
       }
       params.processed = true;

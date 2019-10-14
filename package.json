@@ -34,10 +34,9 @@
   ],
   "license": "EUPL-1.1",
   "devDependencies": {
-    "eslint": "^5.14.1",
-    "eslint-config-google": "^0.12.0",
-    "eslint-plugin-html": "^5.0.3",
-    "wct-browser-legacy": "^1.0.2"
+    "eslint": "^6.5.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-html": "^6.0.0"
   },
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",
@@ -50,7 +49,7 @@
     "type-detect": "1.0.0"
   },
   "dependencies": {
-    "@polymer/app-layout": "^3.0.2",
+    "@polymer/app-layout": "^3.1.0",
     "@polymer/iron-ajax": "^3.0.1",
     "@polymer/iron-flex-layout": "^3.0.1",
     "@polymer/iron-icon": "^3.0.1",
@@ -72,14 +71,14 @@
     "@polymer/paper-material": "^3.0.1",
     "@polymer/paper-progress": "^3.0.1",
     "@polymer/paper-radio-group": "^3.0.1",
-    "@polymer/paper-spinner": "^3.0.1",
+    "@polymer/paper-spinner": "^3.0.2",
     "@polymer/paper-toast": "^3.0.1",
     "@polymer/paper-toggle-button": "^3.0.1",
-    "@polymer/polymer": "^3.1.0",
-    "@webcomponents/webcomponentsjs": "^2.2.7",
-    "clipboard-polyfill": "^2.7.0",
-    "file-saver": "^2.0.1",
-    "jszip": "^3.1.5",
-    "web-animations-js": "^2.3.1"
+    "@polymer/polymer": "^3.3.0",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
+    "clipboard-polyfill": "^2.8.6",
+    "file-saver": "^2.0.2",
+    "jszip": "^3.2.2",
+    "web-animations-js": "^2.3.2"
   }
 }

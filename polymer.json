@@ -15,8 +15,7 @@
     "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
     "node_modules/@webcomponents/webcomponentsjs/bundles/*",
     "node_modules/@webcomponents/webcomponentsjs/entrypoints/*",
-    "node_modules/web-animations-js/web-animations-next-lite.min.js",
-    "node_modules/clipboard-polyfill/build/clipboard-polyfill.js"
+    "node_modules/web-animations-js/web-animations-next-lite.min.js"
   ],
   "moduleResolution": "node",
   "npm": true,

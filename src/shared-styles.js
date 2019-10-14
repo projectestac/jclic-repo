@@ -66,7 +66,7 @@ export const sharedStyles = html`
     display: none;
   }
 
-  html {
+  :root {
     --dark-primary-color: #1976D2;
     --default-primary-color: #2196F3;
     --light-primary-color: #BBDEFB;

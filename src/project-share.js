@@ -66,8 +66,7 @@ import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
 import './social-buttons.js';
 
-/* clipboard-polyfill should be imported in `index.html` */
-/* global clipboard */
+import * as clipboard from 'clipboard-polyfill';
 
 class ProjectShare extends PolymerElement {
   static get template() {
@@ -229,8 +228,8 @@ class ProjectShare extends PolymerElement {
     this.title = prj ? prj.title : '';
     const indexFile = prj && prj.files && repoRoot ? prj.files.find(f => /^(.*\/)*index.html$/.test(f)) : null;
     this.linkToActivities = prj && repoRoot ?
-      (indexFile ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${indexFile}`) : `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}`)
-      : '';
+      (indexFile ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${indexFile}`) : `${this.baseUrl}player.html?${prj.path}/${prj.mainFile}`) :
+      '';
     this.linkToPage = prj && repoRoot ? `${this.baseUrl}index.html?prj=${prj.path}` : '';
     this.imgFullPath = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.cover}`) : '';
     this.linkForMoodle = prj && repoRoot ? this._sp(`${this.baseUrl}${repoRoot}/${prj.path}/${prj.mainFile}`) : '';
