@@ -18,7 +18,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 2000-2019 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -75,7 +75,7 @@ import './shared-icons.js';
 import { saveAs } from './utils/FileSaver.js';
 import JSZip from './utils/jszip.js';
 
-class ProjectDownload extends PolymerElement {
+export default class ProjectDownload extends PolymerElement {
   static get template() {
     return html`
     <style>

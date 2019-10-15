@@ -17,7 +17,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 20009 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -57,7 +57,7 @@ import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import './social-buttons.js';
 
-class InfoPages extends PolymerElement {
+export default class InfoPages extends PolymerElement {
   static get template() {
     return html`
     <style>

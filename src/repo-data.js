@@ -17,7 +17,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 2000-2019 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -59,7 +59,7 @@ import '@polymer/iron-ajax/iron-request.js';
 // Simplified version of 'unidecode', thanks to https://stackoverflow.com/a/37511463:
 const unidecode = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-class RepoData extends PolymerElement {
+export default class RepoData extends PolymerElement {
   static get template() {
     return html`
     <!-- This component automatically loads \`main.json\` into \`this.settings\`, triggering the actions needed to fill-up the repository -->
@@ -249,12 +249,12 @@ class RepoData extends PolymerElement {
 
   _applyFilter(f, selection) {
     this.projects = (this._allProjects || []).filter(item => {
-      return (selection === null || selection.indexOf(item.path) >= 0)
-        && (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0)
-        && (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0)
-        && (!f.level || f.level === '*' || item.levelCodes.indexOf(f.level) >= 0)
-        && (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0)
-        && (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0);
+      return (selection === null || selection.indexOf(item.path) >= 0) &&
+        (!f.language || f.language === '*' || item.langCodes.indexOf(f.language) >= 0) &&
+        (!f.subject || f.subject === '*' || item.areaCodes.indexOf(f.subject) >= 0) &&
+        (!f.level || f.level === '*' || item.levelCodes.indexOf(f.level) >= 0) &&
+        (!f.title || !f.title.trim() || item.titleCmp.indexOf(unidecode(f.title.trim()).toLowerCase()) >= 0) &&
+        (!f.author || !f.author.trim() || item.authorCmp.indexOf(unidecode(f.author.trim()).toLowerCase()) >= 0);
     });
   }
 

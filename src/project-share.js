@@ -17,7 +17,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 2000-2019 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -67,7 +67,7 @@ import './social-buttons.js';
 
 import * as clipboard from 'clipboard-polyfill';
 
-class ProjectShare extends PolymerElement {
+export default class ProjectShare extends PolymerElement {
   static get template() {
     return html`
     <style>

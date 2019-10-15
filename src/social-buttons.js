@@ -17,7 +17,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 2000-2019 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -105,7 +105,7 @@ documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">
 </iron-iconset-svg>`;
 document.head.appendChild(documentContainer.content);
 
-class SocialButtons extends PolymerElement {
+export default class SocialButtons extends PolymerElement {
   static get template() {
     return html`
     <style>
@@ -118,7 +118,7 @@ class SocialButtons extends PolymerElement {
         width: 28px;
         padding: 0;
         margin: 0;
-        color: var(--secondary-text-color, --primary-text-color);
+        color: var(--secondary-text-color, var(--primary-text-color));
       }
 
       .facebook {

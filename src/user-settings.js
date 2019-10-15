@@ -17,7 +17,7 @@
 
   @license EUPL-1.1
   @licstart
-  (c) 2000-2017 Catalan Educational Telematic Network (XTEC)
+  (c) 2000-2019 Catalan Educational Telematic Network (XTEC)
 
   Licensed under the EUPL, Version 1.1 or -as soon they will be approved by
   the European Commission- subsequent versions of the EUPL (the "Licence");
@@ -59,7 +59,7 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-toggle-button/paper-toggle-button.js';
 
-class UserSettings extends PolymerElement {
+export default class UserSettings extends PolymerElement {
   static get template() {
     return html`
     <style>
@@ -137,9 +137,9 @@ class UserSettings extends PolymerElement {
       // Computed field indicating if full screen mode is available on the current browser
       _noFullScreenAvailable: {
         type: Boolean,
-        value: () => (!document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled)
-          ? true
-          : false,
+        value: () => (!document.webkitFullscreenEnabled && !document.webkitCancelFullScreen && !document.mozFullScreenEnabled && !document.msFullscreenEnabled) ?
+          true :
+          false,
       },
       // Valid options for `field` in `ordering`
       orderOptions: {
