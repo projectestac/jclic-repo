@@ -52,7 +52,6 @@ Custom property | Description | Default
 */
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import { sharedStyles } from './shared-styles.js';
 
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-fab/paper-fab.js';
@@ -61,7 +60,6 @@ import './shared-icons.js';
 class ProjectCard extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
        :host {
         cursor: pointer;
@@ -176,7 +174,7 @@ class ProjectCard extends PolymerElement {
       else
         this.$.content.style.cssText = '';
       this.$.title.style.cssText = prj.title ? '' : 'display:none;';
-      this.languages = (prj && prj.langCodes) ? prj.langCodes.map(k => this.labels.selectOptions.languages.find(o => o.val === k) || {val: k, text: ''}) : [];
+      this.languages = (prj && prj.langCodes) ? prj.langCodes.map(k => this.labels.selectOptions.languages.find(o => o.val === k) || { val: k, text: '' }) : [];
     }
   }
 

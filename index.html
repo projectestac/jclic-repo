@@ -99,15 +99,90 @@
     WebComponents.waitFor(() => import('./src/jclic-repo.js'));
   </script>
 
+  <!-- custom-style element invokes the custom properties polyfill -->
+  <script type="module" src="./node_modules/@polymer/polymer/lib/elements/custom-style.js"></script>
+
+  <!-- Custom component styles -->
+  <custom-style>
+    <style>
+      .wrap {
+        white-space: normal;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      html {
+        --dark-primary-color: #1976D2;
+        --default-primary-color: #2196F3;
+        --light-primary-color: #BBDEFB;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #536DFE;
+        --primary-background-color: #F8F8F8;
+        --primary-text-color: #212121;
+        --secondary-text-color: #757575;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #BDBDBD;
+        --error-color: red;
+
+        --drawer-menu-color: #f1f1f1;
+        --drawer-border-color: 1px solid #ccc;
+        --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
+
+        --paper-menu-background-color: #f1f1f1;
+        --menu-link-color: #111;
+
+        --app-drawer-width: 180pt;
+        --paper-dialog-background-color: var(--paper-menu-background-color);
+        --paper-listbox-background-color: #eee;
+
+        --project-card-content-height: 170px;
+        --projects-list-background-color: var(--paper-menu-background-color);
+
+        --paper-dialog-scrollable: {
+          padding-bottom: 10px;
+        }
+
+        --project-card-play-button: {}
+
+        --search-button: {}
+
+        --projects-list: {}
+
+        --project-card: {}
+
+        --project-card-title: {}
+
+        --project-card-language-box: {}
+
+        --project-card-author: {}
+
+        --big-project-card: {}
+
+        --project-share: {}
+
+        --social-buttons: {}
+
+        --projects-selector: {}
+
+        --user-settings: {}
+
+        --info-pages: {}
+      }
+    </style>
+  </custom-style>
+
   <!-- Global styles for body -->
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', 'Noto', sans-serif;
       min-height: 100vh;
-      background-color: #eeeeee;
+      background-color: var(--drawer-menu-color);
     }
   </style>
+
 </head>
 
 <body>

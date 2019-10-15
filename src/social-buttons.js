@@ -71,7 +71,6 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
-import { sharedStyles } from './shared-styles.js';
 
 const documentContainer = document.createElement('template');
 documentContainer.innerHTML = `<iron-iconset-svg name="sbtn" size="24">
@@ -109,7 +108,6 @@ document.head.appendChild(documentContainer.content);
 class SocialButtons extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
       :host {
         @apply --social-buttons;

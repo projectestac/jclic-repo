@@ -60,14 +60,12 @@ import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/neon-animation/animations/scale-up-animation.js';
 import '@polymer/neon-animation/animations/fade-out-animation.js';
 import './shared-icons.js';
-import { sharedStyles } from './shared-styles.js';
 import './project-share.js';
 import './project-download.js';
 
 class BigProjectCard extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
       :host {
         line-height: initial;

@@ -71,7 +71,6 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-progress/paper-progress.js';
 import '@polymer/iron-ajax/iron-request.js';
 import './shared-icons.js';
-import { sharedStyles } from './shared-styles.js';
 
 import { saveAs } from './utils/FileSaver.js';
 import JSZip from './utils/jszip.js';
@@ -79,7 +78,6 @@ import JSZip from './utils/jszip.js';
 class ProjectDownload extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
        :host {
         @apply --project-download;

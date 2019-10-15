@@ -52,13 +52,11 @@ Custom property   | Description                          | Default
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-scroll-threshold/iron-scroll-threshold.js';
-import { sharedStyles } from './shared-styles.js';
 import './project-card.js';
 
 class ProjectsList extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
        :host {
         display: grid;

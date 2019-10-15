@@ -62,7 +62,6 @@ import '@polymer/paper-radio-group/paper-radio-group.js';
 import '@polymer/paper-radio-button/paper-radio-button.js';
 import '@polymer/paper-toast/paper-toast.js';
 import '@polymer/paper-styles/typography.js';
-import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
 import './social-buttons.js';
 
@@ -71,7 +70,6 @@ import * as clipboard from 'clipboard-polyfill';
 class ProjectShare extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
        :host {
         --paper-input-container-input-color: var(--secondary-text-color);

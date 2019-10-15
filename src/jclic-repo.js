@@ -61,7 +61,6 @@ import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-spinner/paper-spinner-lite.js';
-import { sharedStyles } from './shared-styles.js';
 import './shared-icons.js';
 import './repo-data.js';
 import './projects-list.js';
@@ -70,11 +69,10 @@ import './big-project-card.js';
 import './user-settings.js';
 import './info-pages.js';
 
-class JClicRepo extends PolymerElement {
+export default class JClicRepo extends PolymerElement {
   static get template() {
 
     return html`
-    ${sharedStyles}
     <style>
        :host {
         display: block;

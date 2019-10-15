@@ -58,12 +58,10 @@ import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-toggle-button/paper-toggle-button.js';
-import { sharedStyles } from './shared-styles.js';
 
 class UserSettings extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
       :host {
         @apply --user-settings;

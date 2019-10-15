@@ -11,8 +11,6 @@
  *
  */
 
-/* global self */
-
 const saveAs = self.saveAs || (function (view) {
   'use strict';
   // IE <10 is explicitly unsupported
@@ -65,9 +63,9 @@ const saveAs = self.saveAs || (function (view) {
   const auto_bom = blob => {
     // prepend BOM for UTF-8 XML and text/* types (including HTML)
     // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
-    return /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)
-      ? new Blob([String.fromCharCode(0xFEFF), blob], { type: blob.type })
-      : blob;
+    return /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type) ?
+      new Blob([String.fromCharCode(0xFEFF), blob], { type: blob.type }) :
+      blob;
   };
 
   const FileSaver = function (blob, name, no_auto_bom) {

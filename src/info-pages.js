@@ -56,12 +56,10 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-material/paper-material.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import './social-buttons.js';
-import { sharedStyles } from './shared-styles.js';
 
 class InfoPages extends PolymerElement {
   static get template() {
     return html`
-    ${sharedStyles}
     <style>
        :host {
         font-size: 11pt;
