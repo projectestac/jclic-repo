@@ -42,6 +42,19 @@
       "addServiceWorker": true,
       "addPushManifest": true,
       "insertPrefetchLinks": true      
+    },
+    {
+      "name": "es6",
+      "preset": "es6-bundled"
+    },
+    { 
+      "name": "dev",
+      "js": {"minify": false, "compile": false},
+      "css": {"minify": false},
+      "html": {"minify": false},
+      "bundle": false,
+      "addServiceWorker": true,
+      "addPushManifest": false
     }
   ]
 }
