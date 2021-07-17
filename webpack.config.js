@@ -48,6 +48,9 @@ const assetRules = [
   },
 ];
 
+/**
+ * Main config
+ */
 const config = {
   mode: 'production',
   entry: './src/index.js',
@@ -55,7 +58,6 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: `${pkg.name}.min.js`,
   },
-  //devtool: 'source-map',
   module: {
     rules: [
       {
@@ -79,21 +81,20 @@ const config = {
     contentBase: path.join(__dirname, 'test'),
     watchContentBase: true,
     compress: true,
-    port: 9001,
+    port: 8000,
     overlay: true,
-    public: 'localhost:9001',
+    public: 'localhost:8000',
   },
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
         extractComments: {
-          //condition: /^\!/,
           filename: `${pkg.name}.components.LICENSE`,
           banner: () => banner,
         },
         terserOptions: {
-          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+          // See: https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
         }
       }),
     ],
@@ -106,6 +107,9 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+
+  const prod = argv.mode === 'production';
+
   // Take environment variables from ".env.development", ".env.production"
   // or just ".env" when `mode` is not set
   config.plugins = [
@@ -116,5 +120,10 @@ module.exports = (env, argv) => {
       allowEmptyValues: true,
     })
   ];
+
+  // Create source maps only in production builds
+  if (prod)
+    config.devtool = 'source-map';
+
   return config;
 };

@@ -34,7 +34,7 @@ import ReactDOM from 'react-dom';
 import { StylesProvider, ThemeProvider, jssPreset } from '@material-ui/styles';
 import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { create } from 'jss';
-import RepoApp from './RepoApp';
+import RepoMain from './RepoMain';
 import merge from 'lodash/merge';
 import { parseStringSettings } from './utils';
 import { DEFAULT_THEME, DEFAULT_SETTINGS } from './settings';
@@ -61,7 +61,7 @@ export default class JClicRepo extends HTMLElement {
 
     // Create a pivot element, where ReactDOM will render the app,
     // and initialize it with our specific style (if set)
-    const mountPoint = document.createElement('span');
+    const mountPoint = document.createElement('div');
     const styleAttr = this.getAttribute('style');
     if (styleAttr)
       mountPoint.setAttribute('style', styleAttr);
@@ -83,7 +83,7 @@ export default class JClicRepo extends HTMLElement {
     ReactDOM.render(
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
-          <RepoApp {...{ settings }} />
+          <RepoMain {...{ settings }} />
         </ThemeProvider>
       </StylesProvider>,
       mountPoint);

@@ -83,8 +83,6 @@ export const DEFAULT_SETTINGS = {
   // Share buttons to be displayed, and metadata used when sharing
   shareSites: { twitter: true, facebook: true, telegram: true, whatsapp: true, pinterest: true, email: true, moodle: true, classroom: true },
   shareMeta: { hash: 'JClic,edu', via: 'xtec' },
-  // Key used in session storage and in the URL query to display a specific project
-  projectKey: process.env.PROJECT_KEY,
   // Key used for the language query param on the URL
   langKey: process.env.LANG_KEY,
   // Fallback language
@@ -102,7 +100,7 @@ export const DEFAULT_SETTINGS = {
   // Google OAuth2 API id
   googleOauth2Id: process.env.GOOGLE_OAUTH2_ID,
   // API base for user's library
-  userlibApi: process.env.USERLIB_API,  
+  userlibApi: process.env.USERLIB_API,
   // Facebook app id (used in share button)
   facebookId: process.env.FACEBOOK_ID,
   // Google Analytics code
@@ -113,6 +111,8 @@ export const DEFAULT_SETTINGS = {
   showTitle: process.env.SHOW_TITLE === 'false' ? false : true,
   // Show the subtitle
   showSubtitle: process.env.SHOW_SUBTITLE === 'false' ? false : true,
+  // Maximum number of parallel threads when downloading activities
+  maxThreads: Number(process.env.MAX_THREADS) || 20,
 };
 
 export default DEFAULT_SETTINGS;

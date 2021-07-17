@@ -72,15 +72,53 @@ export function parseStringSettings(data = {}) {
 /**
  * Updates window.history.state and the query params of current URL, thus allowing
  * to navigate between different app states
- * @param {object} project - Project to display, or `null` to show the projects list
- * @param {string} projectKey - Key used both as query param on the URL and on the history state object
+ * @param {string} act - Id of the project to display, or `null` to show the projects list
+ * @param {string} user - User id for user libraries, or null for main library
  * @param {boolean} replace - When `true`, the current state is replaced. Otherwise, a new state is pushed.
  */
-export function updateHistoryState(project, projectKey, replace = false) {
-  const id = project && project?.id || null;
+export function updateHistoryState(act, user, replace = false) {
   const url = new URL(window.location.href);
-  const searchParams = new URLSearchParams(url.search);
-  searchParams.set(projectKey, id || '');
-  url.search = searchParams.toString();
-  window.history[replace ? 'replaceState' : 'pushState']({ ...window.history.state, [projectKey]: id }, document.title, url);
+  url.searchParams.set('prj', act || '');
+  url.searchParams.set('user', user || '');
+  window.history[replace ? 'replaceState' : 'pushState']({ ...window.history.state, prj: act, user: user }, document.title, url);
+}
+
+/**
+ * Checks for network errors in fetch operations,
+ * and resolves to a JSON response
+ * @param {object} response 
+ * @returns Promise
+ */
+export const checkFetchResponse = response => {
+  if (!response.ok)
+    throw new Error(response.statusText);
+  return response.json();
+};
+
+/**
+ * Gets the value of the specified parameter on the query section
+ * of the current location, or `null` if not set
+ * @param {string} param - The parameter name
+ * @returns string
+ */
+export function getQueryParam(param) {
+  const searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get(param) || null;
+}
+
+/**
+ * Replaces newline chars (\n) by <p/> tags on the provided text if it contains HTML.
+ * @param {string} desc 
+ * @returns string
+ */
+export function htmlContent(desc = '') {
+  return /<\w*>/.test(desc) ? desc : desc.replace(/\n/g, '<p/>\n');
+}
+
+export function getPathForProject(act, user = null) {
+  const url = new URL(window.location);
+  url.searchParams.set('prj', act);
+  if (user)
+    url.searchParams.set('user', user);
+  return url.toString();
 }
