@@ -35,7 +35,7 @@ import { mergeClasses, htmlContent, getPathForProject } from '../utils';
 //import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from './SEO';
-//import ShareButtons from '../ShareButtons';
+import ShareButtons from './ShareButtons';
 import { Typography, IconButton, Button } from '@material-ui/core';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
 import ccLogo from '../assets/cclogo.png';
@@ -190,7 +190,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
       </Button>
       <Typography variant="h1" className={classes.title}>{title}</Typography>
       <Typography variant="subtitle1">{author}</Typography>
-      {/* <ShareButtons {...{ shareSites, intl, link: location?.href, title, description: pageDesc, slug, thumbnail: imgPath || thumbnail, moodleLink, embedOptions }} /> */}
+      <ShareButtons {...{ settings, t, link: window.location.href, moodleLink, title, description: pageDesc, thumbnail: imgPath, embedOptions }} />
       <div className={classes.mainBlock}>
         {imgPath &&
           <div className={classes.btnContainer}>
