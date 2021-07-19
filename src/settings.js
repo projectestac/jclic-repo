@@ -32,6 +32,7 @@
 /* global process */
 
 import { loadGoogleFont } from './utils';
+import { supportedLanguages } from './i18n';
 
 export const mainFont = ['Roboto', 'Arial', '"sans-serif"'].join(',');
 export const titleFont = ['"Open Sans"', 'Arial', '"sans-serif"'].join(',');
@@ -76,6 +77,8 @@ export const DEFAULT_THEME = {
 
 // See `.env.example` for example settings
 export const DEFAULT_SETTINGS = {
+  // List of currently supported languages
+  supportedLanguages,
   // Current theme
   theme: DEFAULT_THEME,
   // Share buttons to be displayed, and metadata used when sharing
@@ -105,6 +108,8 @@ export const DEFAULT_SETTINGS = {
   analyticsUA: process.env.ANALYTICS_UA,
   // Absolute URL of the repository logo
   logo: process.env.LOGO,
+  // Absolute URL of the main Twitter card
+  twitterCard: process.env.TWITTER_CARD,
   // Show the main title
   displayTitle: process.env.DISPLAY_TITLE === 'false' ? false : true,
   // Show the subtitle

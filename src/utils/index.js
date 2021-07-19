@@ -122,3 +122,14 @@ export function getPathForProject(act, user = null) {
     url.searchParams.set('user', user);
   return url.toString();
 }
+
+export function getAllPageVariants(location, lang, langKey, supportedLanguages) {
+  const url = new URL(location);
+  return supportedLanguages.reduce((result, l) => {
+    if (l !== lang) {
+      url.searchParams.set(langKey, l);
+      result.push({ lang: l, href: url.toString() });
+    }
+    return result;
+  }, []);
+}

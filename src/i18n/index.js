@@ -41,6 +41,8 @@ import stopwords_en from './stopwords_en.json';
 import stopwords_ca from './stopwords_ca.json';
 import stopwords_es from './stopwords_es.json';
 
+export const supportedLanguages = ['en', 'ca', 'es'];
+
 export const STOP_WORDS = {
   en: stopwords_en,
   ca: stopwords_ca,

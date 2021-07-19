@@ -35,7 +35,7 @@ import { mergeClasses } from '../utils';
 import BackToTop from '../utils/BackToTop';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-//import SEO from '../SEO';
+import SEO from './SEO';
 //import ShareButtons from '../ShareButtons';
 //import SelectProjects from './SelectProjects';
 import PaginatedList from './PaginatedList';
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 
 function RepoList({ t, settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
-  const { repoBase, jclicSearchService, displayTitle, displaySubtitle } = settings;
+  const { repoBase, jclicSearchService, displayTitle, displaySubtitle, twitterCard } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
@@ -87,7 +87,7 @@ function RepoList({ t, settings, user = null, projects, filters, setFilters, lis
 
   return (
     <div {...props} className={classes.root}>
-      {/* <SEO {...{ location, lang: locale, title, description, slug: SLUG, thumbnail: card }} /> */}
+      <SEO {...{ settings, t, title, description, thumbnail: twitterCard }} />
       {displayTitle && <Typography variant="h1">{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       {/* <ShareButtons {...{ intl, link: location?.href, title, description, slug: SLUG, thumbnail: card }} /> */}

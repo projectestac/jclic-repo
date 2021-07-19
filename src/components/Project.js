@@ -34,7 +34,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses, htmlContent, getPathForProject } from '../utils';
 //import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
-//import SEO from '../SEO';
+import SEO from './SEO';
 //import ShareButtons from '../ShareButtons';
 import { Typography, IconButton, Button } from '@material-ui/core';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
@@ -135,7 +135,7 @@ const shareSites = { moodle: true, classroom: true, embed: true };
 function Project({ t, settings, user = null, project, fullProjectList, updateAct, ...props }) {
 
   const lang = t('lang');
-  const { jnlpInstaller, maxThreads, langDefault, repoBase } = settings;
+  const { jnlpInstaller, maxThreads, langDefault, repoBase, logo } = settings;
   const {
     path, fullPath, meta_langs,
     title, author, school, date,
@@ -151,7 +151,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
   const queryParams = `${user ? `user=${user}&` : ''}act=${path}`
   const pageTitle = `${user ? t('user-repo-title', { user }) : t('repo-title')} - ${title}`;
   const pageDesc = description[k];
-  const imgPath = cover && `${fullPath}/${cover}`;
+  const imgPath = cover && `${fullPath}/${cover}` || logo;
   const moodleLink = `${fullPath}/${mainFile}`;
   const projectLink = moodleLink.replace(/\/[^/]*$/, '/index.html');
   const instJavaLink = instFile ? jnlpInstaller.replace('%%FILE%%', `${fullPath}/${instFile}`) : null;
@@ -183,7 +183,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
 
   return (
     <div {...props}>
-      {/* <SEO {...{ location, lang: locale, title: pageTitle, description: pageDesc, slug, thumbnail: imgPath, sd }} /> */}
+      <SEO {...{ settings, t, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
       <Button className={classes.backBtn} onClick={() => updateAct(null)}>
         <ArrowBack className={classes.leftIcon} />
         {t('repo-title')}
