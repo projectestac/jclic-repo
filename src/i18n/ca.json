@@ -1,4 +1,5 @@
 {
+  "lang": "ca",
   "en": "Anglès",
   "ca": "Català",
   "es": "Espanyol",
@@ -36,8 +37,8 @@
   "share-copied": "El text s'ha copiat al porta-retalls",
   "share-moodle-label": "Enllaç a utilitzar en el <a href=\"https://moodle.org/plugins/mod_jclic\" target=\"_blank\" rel=\"noopener noreferrer\">mòdul de JClic per a Moodle</a>:",
   "share-embed-label": "Codi per incrustar les activitats en un blog o pàgina web:",
-  "repo-title": "Activitats JClic",
-  "repo-description": "Repositori d'activitats JClic",
+  "repo-title": "Biblioteca JClic",
+  "repo-description": "Recull d'activitats JClic creades per la comunitat d'usàries i usuaris",
   "repo-view-mode": "Tipus de visualització",
   "repo-view-list": "Mostra una llista",
   "repo-view-cards": "Mostra targetes de projecte",

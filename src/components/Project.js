@@ -134,7 +134,8 @@ const shareSites = { moodle: true, classroom: true, embed: true };
 
 function Project({ t, settings, user = null, project, fullProjectList, updateAct, ...props }) {
 
-  const { jnlpInstaller, maxThreads, lang, langDefault, repoBase } = settings;
+  const lang = t('lang');
+  const { jnlpInstaller, maxThreads, langDefault, repoBase } = settings;
   const {
     path, fullPath, meta_langs,
     title, author, school, date,

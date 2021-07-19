@@ -1,4 +1,5 @@
 {
+  "lang": "en",
   "en": "English",
   "ca": "Catalan",
   "es": "Spanish",
@@ -36,8 +37,8 @@
   "share-copied": "The text has been copied to the clipboard",
   "share-moodle-label": "Link to use in <a href=\"https://moodle.org/plugins/mod_jclic\" target=\"_blank\" rel=\"noopener noreferrer\">JClic module for Moodle</a>:",
   "share-embed-label": "Code to embed the activities on a blog or web page:",
-  "repo-title": "JClic Activities",
-  "repo-description": "Repository of JClic activities",
+  "repo-title": "JClic library",
+  "repo-description": "Collection of JClic activities created by the user community",
   "repo-view-mode": "View mode",
   "repo-view-list": "View as list",
   "repo-view-cards": "View project cards",

@@ -78,8 +78,6 @@ export const DEFAULT_THEME = {
 export const DEFAULT_SETTINGS = {
   // Current theme
   theme: DEFAULT_THEME,
-  // Current language (to be updated by i18n)
-  lang: 'en',
   // Share buttons to be displayed, and metadata used when sharing
   shareSites: { twitter: true, facebook: true, telegram: true, whatsapp: true, pinterest: true, email: true, moodle: true, classroom: true },
   shareMeta: { hash: 'JClic,edu', via: 'xtec' },
@@ -108,9 +106,9 @@ export const DEFAULT_SETTINGS = {
   // Absolute URL of the repository logo
   logo: process.env.LOGO,
   // Show the main title
-  showTitle: process.env.SHOW_TITLE === 'false' ? false : true,
+  displayTitle: process.env.DISPLAY_TITLE === 'false' ? false : true,
   // Show the subtitle
-  showSubtitle: process.env.SHOW_SUBTITLE === 'false' ? false : true,
+  displaySubtitle: process.env.DISPLAY_SUBTITLE === 'false' ? false : true,
   // Maximum number of parallel threads when downloading activities
   maxThreads: Number(process.env.MAX_THREADS) || 20,
 };

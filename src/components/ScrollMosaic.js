@@ -32,7 +32,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from '../utils/InfiniteScroll';
 import ProjectCard from './ProjectCard';
 
 const useStyles = makeStyles(_theme => ({
@@ -49,7 +49,7 @@ const useStyles = makeStyles(_theme => ({
 const blockSize = 30;
 
 function ScrollMosaic({ t, user, projects, settings, updateAct, ...props }) {
-  
+
   const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
   const [items, setItems] = useState(projects.slice(0, page * blockSize));

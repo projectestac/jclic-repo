@@ -29,9 +29,10 @@
  *  @module
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
+import BackToTop from '../utils/BackToTop';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 //import SEO from '../SEO';
@@ -43,12 +44,19 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { List, ViewComfy } from '@material-ui/icons';
 
-const useStyles = makeStyles(_theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
+    '&h1': {
+      fontSize: '12pt',
+    },
+  },
+  title: {
+    color: `${theme.palette.primary.dark}`,
   },
   selectProjects: {
     marginTop: '1rem',
     marginBottom: '1rem',
+    maxWidth: '1200px',
   },
   infoBar: {
     display: 'flex',
@@ -61,31 +69,34 @@ const useStyles = makeStyles(_theme => ({
   },
   projectCount: {
     flexGrow: 1,
+    marginLeft: '1rem',
+    textAlign: 'right',
   }
 }));
 
 function RepoList({ t, settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
-  const { repoBase, jclicSearchService } = settings;
+  const { repoBase, jclicSearchService, displayTitle, displaySubtitle } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
   const projectCount = t(
     projects.length === 0 ? 'repo-num-zero' : projects.length === 1 ? 'repo-num-single' : 'repo-num-plural',
     { num: projects.length }); // Todo: use "formatNumber" equivalent
+  const topRef = useRef();
 
   return (
     <div {...props} className={classes.root}>
       {/* <SEO {...{ location, lang: locale, title, description, slug: SLUG, thumbnail: card }} /> */}
-      <Typography variant="h1">{title}</Typography>
+      {displayTitle && <Typography variant="h1">{title}</Typography>}
+      {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       {/* <ShareButtons {...{ intl, link: location?.href, title, description, slug: SLUG, thumbnail: card }} /> */}
       {!user &&
         <Paper className={classes['selectProjects']}>
           {/* <SelectProjects {...{ intl, jclicSearchService, filters, setFilters, setLoading, setError }} /> */}
         </Paper>
       }
-      <div className={classes['infoBar']}>
-        <Typography variant="body2" className={classes['projectCount']}>{projectCount}</Typography>
+      <div className={classes['infoBar']} ref={topRef}>
         <ToggleButtonGroup
           className={classes['viewMode']}
           size="small"
@@ -101,10 +112,12 @@ function RepoList({ t, settings, user = null, projects, filters, setFilters, lis
             <List />
           </ToggleButton>
         </ToggleButtonGroup>
+        <Typography variant="body2" className={classes['projectCount']}>{projectCount}</Typography>
       </div>
       {(listMode && <PaginatedList {...{ t, user, projects, settings, updateAct }} />)
         || <ScrollMosaic {...{ t, user, projects, settings, updateAct }} />
       }
+      <BackToTop {...{ t, topRef, showBelow: 300 }} />
     </div >
   );
 }
