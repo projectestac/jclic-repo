@@ -58,6 +58,7 @@ export default class InfiniteScroll extends Component {
     const testOptions = {
       get passive() {
         passive = true;
+        return passive;
       }
     };
 
@@ -237,19 +238,9 @@ export default class InfiniteScroll extends Component {
   render() {
     const renderProps = this.filterProps(this.props);
     const {
-      children,
-      element,
-      hasMore,
-      initialLoad,
-      isReverse,
-      loader,
-      loadMore,
-      pageStart,
-      ref,
-      threshold,
-      useCapture,
-      useWindow,
-      getScrollParent,
+      children, element, hasMore, isReverse, loader, ref,
+      // eslint-disable-next-line no-unused-vars
+      initialLoad, loadMore, pageStart, threshold, useCapture, useWindow, getScrollParent,
       ...props
     } = renderProps;
 
