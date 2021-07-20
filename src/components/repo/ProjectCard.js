@@ -1,5 +1,5 @@
 /*!
- *  File    : components/ProjectCard.js
+ *  File    : components/repo/ProjectCard.js
  *  Created : 2021-07-16
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from '../utils';
+import { mergeClasses } from '../../utils';
 import { Fab, Card } from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';

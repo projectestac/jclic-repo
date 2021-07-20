@@ -1,5 +1,5 @@
 /*!
- *  File    : MainLayout.js
+ *  File    : components/MainLayout.js
  *  Created : 2021-07-15
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -33,8 +33,8 @@ import React, { useRef } from 'react';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import merge from 'lodash/merge';
-import { DEFAULT_THEME, DEFAULT_SETTINGS } from './settings';
-import { i18nInit } from './i18n';
+import { DEFAULT_THEME, DEFAULT_SETTINGS } from '../settings';
+import { i18nInit } from '../i18n';
 
 function MainLayout({ jss, dataSettings, Component }) {
 

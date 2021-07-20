@@ -1,5 +1,5 @@
 /*!
- *  File    : components/ProjectDownload.js
+ *  File    : components/repo/ProjectDownload.js
  *  Created : 2021-07-19
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -39,7 +39,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { mergeClasses } from '../utils';
+import { mergeClasses } from '../../utils';
 import DownloadIcon from '@material-ui/icons/CloudDownload';
 import Button from '@material-ui/core/Button';
 import PromisePool from '@supercharge/promise-pool';

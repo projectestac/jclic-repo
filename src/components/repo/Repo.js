@@ -1,5 +1,5 @@
 /*!
- *  File    : RepoMain.js
+ *  File    : components/repo/Repo.js
  *  Created : 2021-07-15
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -32,12 +32,12 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
-import { checkFetchResponse, getQueryParam, updateHistoryState } from './utils';
-import { mainFont } from './settings';
+import { checkFetchResponse, getQueryParam, updateHistoryState } from '../../utils';
+import { mainFont } from '../../settings';
 import Alert from '@material-ui/lab/Alert';
-import Loading from './components/Loading';
-import Project from './components/Project';
-import RepoList from './components/RepoList';
+import Loading from '../Loading';
+import Project from './Project';
+import RepoList from './RepoList';
 
 const useStyles = makeStyles({
   root: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   },
 });
 
-function RepoMain({ settings }) {
+function Repo({ settings }) {
 
   const { t } = useTranslation();
   const { repoList, repoBase } = settings;
@@ -136,4 +136,4 @@ function RepoMain({ settings }) {
   );
 }
 
-export default RepoMain;
+export default Repo;

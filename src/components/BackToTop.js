@@ -1,5 +1,5 @@
 /*!
- *  File    : utils/BackToTop.js
+ *  File    : components/BackToTop.js
  *  Created : 2021-07-18
  *  By      : Francesc Busquets <francesc@gmail.com>
  *

@@ -1,5 +1,5 @@
 /*!
- *  File    : components/PaginatedList.js
+ *  File    : components/repo/PaginatedList.js
  *  Created : 2021-07-16
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,7 +31,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from '../utils';
+import { mergeClasses } from '../../utils';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';

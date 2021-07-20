@@ -34,8 +34,8 @@ import ReactDOM from 'react-dom';
 import { jssPreset } from '@material-ui/styles';
 import { create } from 'jss';
 import { parseStringSettings } from './utils';
-import MainLayout from './MainLayout';
-import RepoMain from './RepoMain';
+import MainLayout from './components/MainLayout';
+import Repo from './components/repo/Repo';
 
 /**
  * Encloses the main React app into a Web Component with Shadow DOM
@@ -74,7 +74,7 @@ export default class JClicRepo extends HTMLElement {
 
     // Render the React component on the pivot element
     ReactDOM.render(
-      <MainLayout {...{ jss, dataSettings, Component: RepoMain }} />,
+      <MainLayout {...{ jss, dataSettings, Component: Repo }} />,
       mountPoint);
   }
 }

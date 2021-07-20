@@ -1,5 +1,5 @@
 /*!
- *  File    : components/RepoList.js
+ *  File    : components/repo/RepoList.js
  *  Created : 2021-07-16
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,12 +31,12 @@
 
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from '../utils';
-import BackToTop from '../utils/BackToTop';
+import { mergeClasses } from '../../utils';
+import BackToTop from '../BackToTop';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import SEO from './SEO';
-import ShareButtons from './ShareButtons';
+import SEO from '../SEO';
+import ShareButtons from '../ShareButtons';
 import SelectProjects from './SelectProjects';
 import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';

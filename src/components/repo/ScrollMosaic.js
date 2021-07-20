@@ -1,5 +1,5 @@
 /*!
- *  File    : components/ScrollMosaic.js
+ *  File    : components/repo/ScrollMosaic.js
  *  Created : 2021-07-16
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,8 +31,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from '../utils';
-import InfiniteScroll from '../utils/InfiniteScroll';
+import { mergeClasses } from '../../utils';
+import InfiniteScroll from '../InfiniteScroll';
 import ProjectCard from './ProjectCard';
 
 const useStyles = makeStyles(_theme => ({

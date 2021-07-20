@@ -1,5 +1,5 @@
 /*!
- *  File    : components/Project.js
+ *  File    : components/repo/Project.js
  *  Created : 2021-07-16
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,14 +31,14 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses, htmlContent, getPathForProject } from '../utils';
+import { mergeClasses, htmlContent, getPathForProject } from '../../utils';
 import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
-import SEO from './SEO';
-import ShareButtons from './ShareButtons';
+import SEO from '../SEO';
+import ShareButtons from '../ShareButtons';
 import { Typography, IconButton, Button } from '@material-ui/core';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
-import ccLogo from '../assets/cclogo.png';
+import ccLogo from '../../assets/cclogo.png';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({

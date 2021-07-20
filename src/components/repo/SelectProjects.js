@@ -1,5 +1,5 @@
 /*!
- *  File    : components/SelectProjects.js
+ *  File    : components/repo/SelectProjects.js
  *  Created : 2021-07-20
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses, checkFetchResponse } from '../utils';
+import { mergeClasses, checkFetchResponse } from '../../utils';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
