@@ -4,24 +4,8 @@
  * Which is a fork of: https://github.com/guillaumervls/react-infinite-scroll
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 export default class InfiniteScroll extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    element: PropTypes.node,
-    hasMore: PropTypes.bool,
-    initialLoad: PropTypes.bool,
-    isReverse: PropTypes.bool,
-    loader: PropTypes.node,
-    loadMore: PropTypes.func.isRequired,
-    pageStart: PropTypes.number,
-    ref: PropTypes.func,
-    getScrollParent: PropTypes.func,
-    threshold: PropTypes.number,
-    useCapture: PropTypes.bool,
-    useWindow: PropTypes.bool
-  };
 
   static defaultProps = {
     element: 'div',

@@ -29,10 +29,10 @@
  *  @module
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses, htmlContent, getPathForProject } from '../utils';
-//import ProjectDownload from './ProjectDownload';
+import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from './SEO';
 import ShareButtons from './ShareButtons';
@@ -130,25 +130,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const shareSites = { moodle: true, classroom: true, embed: true };
-
 function Project({ t, settings, user = null, project, fullProjectList, updateAct, ...props }) {
 
   const lang = t('lang');
-  const { jnlpInstaller, maxThreads, langDefault, repoBase, logo } = settings;
+  const { jnlpInstaller, langDefault, logo } = settings;
   const {
-    path, fullPath, meta_langs,
+    fullPath, meta_langs,
     title, author, school, date,
     languages, langCodes, areas, levels, descriptors, description, license,
     relatedTo, mainFile, instFile,
-    cover, thumbnail,
-    activities, totalSize,
+    cover, activities, totalSize,
     // zipFile, files, mediaFiles,
   } = project;
 
   const classes = mergeClasses(props, useStyles());
   const k = meta_langs.includes(lang) ? lang : langDefault;
-  const queryParams = `${user ? `user=${user}&` : ''}act=${path}`
   const pageTitle = `${user ? t('user-repo-title', { user }) : t('repo-title')} - ${title}`;
   const pageDesc = description[k];
   const imgPath = cover && `${fullPath}/${cover}` || logo;
@@ -164,6 +160,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
   }
   const getProjectTitle = path => (fullProjectList && fullProjectList?.find(prj => prj.path === path)?.title) || path;
 
+  const dlgAnchorRef = useRef();
   const [dlgOpen, setDlgOpen] = useState(false);
 
   // See: https://schema.org/LearningResource
@@ -182,7 +179,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
   };
 
   return (
-    <div {...props}>
+    <div ref={dlgAnchorRef} {...props}>
       <SEO {...{ settings, t, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
       <Button className={classes.backBtn} onClick={() => updateAct(null)}>
         <ArrowBack className={classes.leftIcon} />
@@ -317,7 +314,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
           </Button>
         }
       </div>
-      {/* <ProjectDownload {...{ intl, project, dlgOpen, setDlgOpen, maxThreads }} /> */}
+      <ProjectDownload {...{ t, settings, dlgOpen, setDlgOpen, dlgAnchorRef, project }} />
     </div>
   );
 }

@@ -105,6 +105,7 @@
   "prj-java-inst": "Instal·la (Java)",
   "prj-java-inst-tooltip": "Instal·la amb el JClic Player per a Java™",
   "prj-download": "Descarrega",
+  "prj-downloading": "en descarregar",
   "prj-download-title": "Descàrrega de \"{{title}}\"",
   "prj-download-tooltip": "Descarrega les activitats en un fitxer SCORM.ZIP",
   "prj-download-file": "Descarrega el fitxer",

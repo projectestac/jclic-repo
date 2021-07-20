@@ -105,6 +105,7 @@
   "prj-java-inst": "Install (Java)",
   "prj-java-inst-tooltip": "Install with JClic Player for Java™",
   "prj-download": "Download",
+  "prj-downloading": "downloading",
   "prj-download-title": "Download of \"{{title}}\"",
   "prj-download-tooltip": "Download the activities on a SCORM.ZIP file",
   "prj-download-file": "Download file",
