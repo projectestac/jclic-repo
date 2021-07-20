@@ -31,14 +31,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { StylesProvider, ThemeProvider, jssPreset } from '@material-ui/styles';
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { jssPreset } from '@material-ui/styles';
 import { create } from 'jss';
-import RepoMain from './RepoMain';
-import merge from 'lodash/merge';
 import { parseStringSettings } from './utils';
-import { DEFAULT_THEME, DEFAULT_SETTINGS } from './settings';
-import { i18nInit } from './i18n';
+import MainLayout from './MainLayout';
+import RepoMain from './RepoMain';
 
 /**
  * Encloses the main React app into a Web Component with Shadow DOM
@@ -55,9 +52,8 @@ export default class JClicRepo extends HTMLElement {
 
   connectedCallback() {
 
-    // Parse settings and init language tool and fonts
-    const settings = merge(DEFAULT_SETTINGS, parseStringSettings(this.dataset));
-    i18nInit(settings);
+    // Parse the "data-" props passed to the web component
+    const dataSettings = parseStringSettings(this.dataset);
 
     // Create a pivot element, where ReactDOM will render the app,
     // and initialize it with our specific style (if set)
@@ -76,16 +72,9 @@ export default class JClicRepo extends HTMLElement {
       insertionPoint: mountPoint,
     });
 
-    // Create a MaterialUI theme with responsive fonts, based on current settings
-    const theme = responsiveFontSizes(createTheme(merge(DEFAULT_THEME, settings.theme)), {});
-
-    // Wrap the main app in a StylesProvider and ThemeProvider, and render the bundle on the pivot element
+    // Render the React component on the pivot element
     ReactDOM.render(
-      <StylesProvider jss={jss}>
-        <ThemeProvider theme={theme}>
-          <RepoMain {...{ settings }} />
-        </ThemeProvider>
-      </StylesProvider>,
+      <MainLayout {...{ jss, dataSettings, Component: RepoMain }} />,
       mountPoint);
   }
 }

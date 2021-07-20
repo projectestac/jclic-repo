@@ -43,6 +43,7 @@ import { mergeClasses } from '../utils';
 import DownloadIcon from '@material-ui/icons/CloudDownload';
 import Button from '@material-ui/core/Button';
 import PromisePool from '@supercharge/promise-pool';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,7 +75,8 @@ const useStyles = makeStyles(theme => ({
 
 function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
 
-  const { t, maxThreads, debug, rootRef } = settings;
+  const { t } = useTranslation();
+  const { maxThreads, debug, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
 
   const { title, fullPath, mainFile, files } = project;

@@ -32,12 +32,14 @@
 import React, { useState, useEffect } from 'react';
 import Fab from '@material-ui/core/Fab';
 import ArrowUp from '@material-ui/icons/ArrowUpward';
+import { useTranslation } from 'react-i18next';
 
 // Based on: https://github.com/donaldboulton/publiuslogic/blob/master/src/components/Scroll/index.js
 
 export default function BackToTop({ settings, showBelow, style = {} }) {
 
-  const { t, rootRef } = settings;
+  const { t } = useTranslation();
+  const { rootRef } = settings;
   const [show, setShow] = useState(showBelow ? false : true);
 
   const handleScroll = () => {

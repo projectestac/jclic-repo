@@ -29,7 +29,7 @@
  *  @module
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 import { checkFetchResponse, getQueryParam, updateHistoryState } from './utils';
@@ -48,9 +48,8 @@ const useStyles = makeStyles({
 
 function RepoMain({ settings }) {
 
-  settings.rootRef = useRef();
-  settings.t = useTranslation().t;
-  const { t, repoList, repoBase } = settings;
+  const { t } = useTranslation();
+  const { repoList, repoBase } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -126,7 +125,7 @@ function RepoMain({ settings }) {
   const styles = useStyles();
 
   return (
-    <div className={styles.root} ref={settings.rootRef}>
+    <div className={styles.root} ref={settings.rootRef} >
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||

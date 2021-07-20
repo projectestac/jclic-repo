@@ -52,6 +52,7 @@ import CopyIcon from '@material-ui/icons/FileCopyOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import ClassroomIcon from '../assets/classroom.svg';
 import MoodleIcon from '../assets/moodle.svg';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(_theme => ({
   root: {
@@ -110,8 +111,8 @@ const E = encodeURIComponent;
 
 function ShareButtons({ settings, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null, ...props }) {
 
+  const { t } = useTranslation();
   const {
-    t,
     shareSites: { twitter, facebook, telegram, whatsapp, pinterest, email, moodle, classroom, embed },
     shareMeta: { hash, via },
     facebookId,

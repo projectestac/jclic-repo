@@ -31,11 +31,13 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { getAllPageVariants } from '../utils';
 
 function SEO({ settings, location = null, title, author = '', description = '', meta = [], thumbnail = null, canonical = '', sd = null, ...props }) {
 
-  const { t, supportedLanguages, langKey } = settings;
+  const { t } = useTranslation();
+  const { supportedLanguages, langKey } = settings;
   const mainUrl = canonical || location || window.location.href;
   const metaDescription = description || t('site-description');
   const metaAuthor = author || t('site-title');

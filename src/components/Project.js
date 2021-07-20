@@ -39,6 +39,7 @@ import ShareButtons from './ShareButtons';
 import { Typography, IconButton, Button } from '@material-ui/core';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
 import ccLogo from '../assets/cclogo.png';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -132,7 +133,8 @@ const useStyles = makeStyles(theme => ({
 
 function Project({ settings, user = null, project, fullProjectList, updateAct, ...props }) {
 
-  const { t, jnlpInstaller, langDefault, logo } = settings;
+  const { t } = useTranslation();
+  const { jnlpInstaller, langDefault, logo } = settings;
   const lang = t('lang');
   const {
     fullPath, meta_langs,

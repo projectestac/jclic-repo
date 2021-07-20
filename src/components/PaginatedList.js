@@ -38,6 +38,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import TablePagination from '@material-ui/core/TablePagination';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
 
@@ -55,7 +56,8 @@ const useStyles = makeStyles(_theme => ({
 
 function PaginatedList({ settings, user, projects, updateAct, ...props }) {
 
-  const { t, repoBase, rootRef } = settings;
+  const { t } = useTranslation();
+  const { repoBase, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);

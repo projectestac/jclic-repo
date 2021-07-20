@@ -41,6 +41,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(_theme => ({
   root: {
@@ -64,7 +65,8 @@ const useStyles = makeStyles(_theme => ({
 
 function SelectProjects({ settings, filters, setFilters, setLoading, setError, ...props }) {
 
-  const { t, jclicSearchService, rootRef } = settings;
+  const { t } = useTranslation();
+  const { jclicSearchService, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
   const [query, setQuery] = useState(filters?.text || '');
   const handleChange = ev => {

@@ -34,6 +34,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
 import { Fab, Card } from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -85,7 +86,8 @@ const useStyles = makeStyles(theme => ({
 
 function ProjectCard({ settings, user, project, updateAct, children, ...props }) {
 
-  const { t, repoBase } = settings;
+  const { t } = useTranslation();
+  const { repoBase } = settings;
   const classes = mergeClasses(props, useStyles());
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover } = project;
   const base = `${repoBase}/${user ? `${user}/` : ''}${path}`;

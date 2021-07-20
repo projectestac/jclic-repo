@@ -34,6 +34,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(_theme => ({
   root: {
@@ -44,7 +45,8 @@ const useStyles = makeStyles(_theme => ({
 }));
 
 function Loading({ settings, ...props }) {
-  const { t, displayTitle } = settings;
+  const { t } = useTranslation();
+  const { displayTitle } = settings;
   const classes = mergeClasses(props, useStyles());
   return (
     <div className={classes.root}>

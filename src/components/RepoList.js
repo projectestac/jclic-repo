@@ -43,6 +43,7 @@ import ScrollMosaic from './ScrollMosaic';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { List, ViewComfy } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -76,7 +77,8 @@ const useStyles = makeStyles(theme => ({
 
 function RepoList({ settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
-  const { t, displayTitle, displaySubtitle, logo, twitterCard } = settings;
+  const { t } = useTranslation();
+  const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
