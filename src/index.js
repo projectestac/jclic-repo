@@ -29,10 +29,12 @@
  *  @module
  */
 
-import JClicRepo from './JClicRepo';
 import { initFonts } from './settings';
+import { getWebComponentClass } from './ReactWebComponent';
+import MainLayout from './components/MainLayout';
+import Repo from './components/repo/Repo';
 
 initFonts();
 
-// Just declare the custom element types
-customElements.define('jclic-repo', JClicRepo);
+// Define web components
+customElements.define('jclic-repo', getWebComponentClass(MainLayout, Repo));

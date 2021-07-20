@@ -1,6 +1,6 @@
 /*!
- *  File    : JClicRepo.js
- *  Created : 2021-07-15
+ *  File    : ReactWebComponent.js
+ *  Created : 2021-07-20
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
  *  JClic repo
@@ -34,8 +34,6 @@ import ReactDOM from 'react-dom';
 import { jssPreset } from '@material-ui/styles';
 import { create } from 'jss';
 import { parseStringSettings } from './utils';
-import MainLayout from './components/MainLayout';
-import Repo from './components/repo/Repo';
 
 /**
  * Encloses the main React app into a Web Component with Shadow DOM
@@ -48,7 +46,13 @@ import Repo from './components/repo/Repo';
  * https://stackoverflow.com/a/56516753/3896566
  * 
  */
-export default class JClicRepo extends HTMLElement {
+export class ReactWebComponent extends HTMLElement {
+
+  /**
+   * Override this functions in derived classes to return the real main layout and component
+   */
+   getLayout = () => null;
+   getMainComponent = () => null;  
 
   connectedCallback() {
 
@@ -72,9 +76,18 @@ export default class JClicRepo extends HTMLElement {
       insertionPoint: mountPoint,
     });
 
+    const Layout = this.getLayout(); 
+
     // Render the React component on the pivot element
     ReactDOM.render(
-      <MainLayout {...{ jss, dataSettings, Component: Repo }} />,
+      <Layout {...{ jss, dataSettings, Component: this.getMainComponent() }} />,
       mountPoint);
+  }
+}
+
+export function getWebComponentClass(layout, mainComponent) {
+  return class extends ReactWebComponent { 
+    getLayout = () => layout;
+    getMainComponent = () => mainComponent;
   }
 }
