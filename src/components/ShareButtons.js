@@ -108,9 +108,10 @@ const useStyles = makeStyles(_theme => ({
 
 const E = encodeURIComponent;
 
-function ShareButtons({ settings, t, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null, ...props }) {
+function ShareButtons({ settings, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null, ...props }) {
 
   const {
+    t,
     shareSites: { twitter, facebook, telegram, whatsapp, pinterest, email, moodle, classroom, embed },
     shareMeta: { hash, via },
     facebookId,

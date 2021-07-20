@@ -130,10 +130,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Project({ t, settings, user = null, project, fullProjectList, updateAct, ...props }) {
+function Project({ settings, user = null, project, fullProjectList, updateAct, ...props }) {
 
+  const { t, jnlpInstaller, langDefault, logo } = settings;
   const lang = t('lang');
-  const { jnlpInstaller, langDefault, logo } = settings;
   const {
     fullPath, meta_langs,
     title, author, school, date,
@@ -179,14 +179,14 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
 
   return (
     <div {...props}>
-      <SEO {...{ settings, t, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
+      <SEO {...{ settings, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
       <Button className={classes.backBtn} onClick={() => updateAct(null)}>
         <ArrowBack className={classes.leftIcon} />
         {t('repo-title')}
       </Button>
       <Typography variant="h1" className={classes.title}>{title}</Typography>
       <Typography variant="subtitle1">{author}</Typography>
-      <ShareButtons {...{ settings, t, link: window.location.href, moodleLink, title, description: pageDesc, thumbnail: imgPath, embedOptions }} />
+      <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: pageDesc, thumbnail: imgPath, embedOptions }} />
       <div className={classes.mainBlock}>
         {imgPath &&
           <div className={classes.btnContainer}>
@@ -313,7 +313,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
           </Button>
         }
       </div>
-      <ProjectDownload {...{ t, settings, dlgOpen, setDlgOpen, project }} />
+      <ProjectDownload {...{ settings, dlgOpen, setDlgOpen, project }} />
     </div>
   );
 }

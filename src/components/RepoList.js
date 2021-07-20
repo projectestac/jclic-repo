@@ -29,7 +29,7 @@
  *  @module
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
 import BackToTop from '../utils/BackToTop';
@@ -74,29 +74,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RepoList({ t, settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
+function RepoList({ settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
-  const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
+  const { t, displayTitle, displaySubtitle, logo, twitterCard } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
   const projectCount = t(
     projects.length === 0 ? 'repo-num-zero' : projects.length === 1 ? 'repo-num-single' : 'repo-num-plural',
     { num: projects.length }); // Todo: use "formatNumber" equivalent
-  const topRef = useRef();
 
   return (
     <div {...props} className={classes.root}>
-      <SEO {...{ settings, t, title, description, thumbnail: twitterCard }} />
+      <SEO {...{ settings, title, description, thumbnail: twitterCard }} />
       {displayTitle && <Typography variant="h1">{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
-      <ShareButtons {...{ settings, t, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
+      <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
         <Paper className={classes['selectProjects']}>
-          <SelectProjects {...{ t, settings, filters, setFilters, setLoading, setError }} />
+          <SelectProjects {...{ settings, filters, setFilters, setLoading, setError }} />
         </Paper>
       }
-      <div className={classes['infoBar']} ref={topRef}>
+      <div className={classes['infoBar']}>
         <ToggleButtonGroup
           className={classes['viewMode']}
           size="small"
@@ -114,10 +113,10 @@ function RepoList({ t, settings, user = null, projects, filters, setFilters, lis
         </ToggleButtonGroup>
         <Typography variant="body2" className={classes['projectCount']}>{projectCount}</Typography>
       </div>
-      {(listMode && <PaginatedList {...{ t, user, projects, settings, updateAct }} />)
-        || <ScrollMosaic {...{ t, user, projects, settings, updateAct }} />
+      {(listMode && <PaginatedList {...{ user, projects, settings, updateAct }} />)
+        || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
       }
-      <BackToTop {...{ t, topRef, showBelow: 300 }} />
+      <BackToTop {...{ settings, showBelow: 300 }} />
     </div >
   );
 }

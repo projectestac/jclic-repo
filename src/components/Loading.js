@@ -43,11 +43,12 @@ const useStyles = makeStyles(_theme => ({
   }
 }));
 
-function Loading({ t, ...props }) {
+function Loading({ settings, ...props }) {
+  const { t, displayTitle } = settings;
   const classes = mergeClasses(props, useStyles());
   return (
     <div className={classes.root}>
-      <Typography variant="h1">{t('repo-title')}</Typography>
+      {displayTitle && <Typography variant="h1">{t('repo-title')}</Typography>}
       <p>{t('loading')}</p>
       <CircularProgress className={classes['progress']} />
     </div>

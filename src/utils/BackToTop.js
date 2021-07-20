@@ -35,8 +35,9 @@ import ArrowUp from '@material-ui/icons/ArrowUpward';
 
 // Based on: https://github.com/donaldboulton/publiuslogic/blob/master/src/components/Scroll/index.js
 
-export default function BackToTop({ t, topRef, showBelow, style = {} }) {
+export default function BackToTop({ settings, showBelow, style = {} }) {
 
+  const { t, rootRef } = settings;
   const [show, setShow] = useState(showBelow ? false : true);
 
   const handleScroll = () => {
@@ -48,8 +49,8 @@ export default function BackToTop({ t, topRef, showBelow, style = {} }) {
   }
 
   const handleClick = () => {
-    if (topRef?.current)
-      topRef.current.scrollIntoView({
+    if (rootRef?.current)
+      rootRef.current.scrollIntoView({
         behavior: 'smooth',
       });
     else

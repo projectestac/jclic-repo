@@ -48,7 +48,7 @@ const useStyles = makeStyles(_theme => ({
 
 const blockSize = 30;
 
-function ScrollMosaic({ t, user, projects, settings, updateAct, ...props }) {
+function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
 
   const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
@@ -76,7 +76,7 @@ function ScrollMosaic({ t, user, projects, settings, updateAct, ...props }) {
       useWindow={true}
     >
       {items.map((project, n) => (
-        <ProjectCard key={n} {...{ t, user, project, settings, updateAct }} />
+        <ProjectCard key={n} {...{ settings, user, project, updateAct }} />
       ))}
     </InfiniteScroll>
   );

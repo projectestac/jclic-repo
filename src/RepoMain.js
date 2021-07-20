@@ -49,8 +49,8 @@ const useStyles = makeStyles({
 function RepoMain({ settings }) {
 
   settings.rootRef = useRef();
-  const { repoList, repoBase } = settings;
-  const { t } = useTranslation();
+  settings.t = useTranslation().t;
+  const { t, repoList, repoBase } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -60,7 +60,7 @@ function RepoMain({ settings }) {
   const [listMode, setListMode] = useState(false);
 
   const [act, setAct] = useState(getQueryParam('prj'));
-  const [user, setUser] = useState(getQueryParam('user'));
+  const [user, /* setUser*/] = useState(getQueryParam('user'));
 
   // Update `fullProjectList`, `projects` and `project`
   useEffect(() => {
@@ -129,9 +129,9 @@ function RepoMain({ settings }) {
     <div className={styles.root} ref={settings.rootRef}>
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
-        loading && <Loading {...{ t }} /> ||
-        project && <Project {...{ t, settings, user, project, fullProjectList, updateAct }} /> ||
-        projects && <RepoList {...{ t, settings, user, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct }} />
+        loading && <Loading {...{ settings }} /> ||
+        project && <Project {...{ settings, user, project, fullProjectList, updateAct }} /> ||
+        projects && <RepoList {...{ settings, user, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct }} />
       }
     </div>
   );

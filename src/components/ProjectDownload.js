@@ -72,9 +72,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ProjectDownload({ t, settings, dlgOpen, setDlgOpen, project, ...props }) {
+function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
 
-  const { maxThreads, debug, rootRef } = settings;
+  const { t, maxThreads, debug, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
 
   const { title, fullPath, mainFile, files } = project;

@@ -32,7 +32,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../utils';
-import {Fab, Card} from '@material-ui/core';
+import { Fab, Card } from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -83,9 +83,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ProjectCard({ t, user, project, settings, updateAct, children, ...props }) {
+function ProjectCard({ settings, user, project, updateAct, children, ...props }) {
 
-  const { repoBase } = settings;
+  const { t, repoBase } = settings;
   const classes = mergeClasses(props, useStyles());
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover } = project;
   const base = `${repoBase}/${user ? `${user}/` : ''}${path}`;

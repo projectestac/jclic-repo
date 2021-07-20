@@ -62,9 +62,9 @@ const useStyles = makeStyles(_theme => ({
   },
 }));
 
-function SelectProjects({ t, settings, filters, setFilters, setLoading, setError, ...props }) {
+function SelectProjects({ settings, filters, setFilters, setLoading, setError, ...props }) {
 
-  const { jclicSearchService, rootRef } = settings;
+  const { t, jclicSearchService, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
   const [query, setQuery] = useState(filters?.text || '');
   const handleChange = ev => {
