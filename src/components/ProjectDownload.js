@@ -72,9 +72,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ProjectDownload({ t, settings, dlgOpen, setDlgOpen, project, dlgAnchorRef, ...props }) {
+function ProjectDownload({ t, settings, dlgOpen, setDlgOpen, project, ...props }) {
 
-  const { maxThreads, debug } = settings;
+  const { maxThreads, debug, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
 
   const { title, fullPath, mainFile, files } = project;
@@ -277,7 +277,7 @@ function ProjectDownload({ t, settings, dlgOpen, setDlgOpen, project, dlgAnchorR
 
   return (
     <Dialog
-      container={() => dlgAnchorRef.current}
+      container={() => rootRef.current}
       classes={{ paper: classes['root'] }}
       open={dlgOpen}
       onClose={closeDlg}

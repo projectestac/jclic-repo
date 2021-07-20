@@ -37,7 +37,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import SEO from './SEO';
 import ShareButtons from './ShareButtons';
-//import SelectProjects from './SelectProjects';
+import SelectProjects from './SelectProjects';
 import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 
 function RepoList({ t, settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
-  const { repoBase, jclicSearchService, displayTitle, displaySubtitle, logo, twitterCard } = settings;
+  const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
@@ -93,7 +93,7 @@ function RepoList({ t, settings, user = null, projects, filters, setFilters, lis
       <ShareButtons {...{ settings, t, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
         <Paper className={classes['selectProjects']}>
-          {/* <SelectProjects {...{ intl, jclicSearchService, filters, setFilters, setLoading, setError }} /> */}
+          <SelectProjects {...{ t, settings, filters, setFilters, setLoading, setError }} />
         </Paper>
       }
       <div className={classes['infoBar']} ref={topRef}>

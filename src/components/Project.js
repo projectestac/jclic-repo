@@ -29,7 +29,7 @@
  *  @module
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses, htmlContent, getPathForProject } from '../utils';
 import ProjectDownload from './ProjectDownload';
@@ -160,7 +160,6 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
   }
   const getProjectTitle = path => (fullProjectList && fullProjectList?.find(prj => prj.path === path)?.title) || path;
 
-  const dlgAnchorRef = useRef();
   const [dlgOpen, setDlgOpen] = useState(false);
 
   // See: https://schema.org/LearningResource
@@ -179,7 +178,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
   };
 
   return (
-    <div ref={dlgAnchorRef} {...props}>
+    <div {...props}>
       <SEO {...{ settings, t, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
       <Button className={classes.backBtn} onClick={() => updateAct(null)}>
         <ArrowBack className={classes.leftIcon} />
@@ -314,7 +313,7 @@ function Project({ t, settings, user = null, project, fullProjectList, updateAct
           </Button>
         }
       </div>
-      <ProjectDownload {...{ t, settings, dlgOpen, setDlgOpen, dlgAnchorRef, project }} />
+      <ProjectDownload {...{ t, settings, dlgOpen, setDlgOpen, project }} />
     </div>
   );
 }

@@ -55,7 +55,7 @@ const useStyles = makeStyles(_theme => ({
 
 function PaginatedList({ t, user, projects, settings, updateAct, ...props }) {
 
-  const { repoBase } = settings;
+  const { repoBase, rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
@@ -88,6 +88,7 @@ function PaginatedList({ t, user, projects, settings, updateAct, ...props }) {
         labelRowsPerPage={t('results-per-page')}
         backIconButtonText={t('results-page-prev')}
         nextIconButtonText={t('results-page-next')}
+        SelectProps={{MenuProps: { container: () => rootRef.current }}}
       />
     </div >
   );
