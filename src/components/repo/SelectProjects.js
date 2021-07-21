@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses, checkFetchResponse } from '../../utils';
+import { mergeClasses } from '../../utils';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -63,31 +63,21 @@ const useStyles = makeStyles(_theme => ({
   },
 }));
 
-function SelectProjects({ settings, filters, setFilters, setLoading, setError, ...props }) {
+function SelectProjects({ settings, filters, updateFilters, ...props }) {
 
   const { t } = useTranslation();
-  const { jclicSearchService, rootRef } = settings;
+  const { rootRef } = settings;
   const classes = mergeClasses(props, useStyles());
   const [query, setQuery] = useState(filters?.text || '');
   const handleChange = ev => {
     ev.preventDefault();
     const { target: { name, value } } = ev;
-    setFilters({ ...filters, [name]: value === '*' ? '' : value })
+    updateFilters({ ...filters, [name]: value === '*' ? '' : value })
   }
   const handleEnterSearch = ev => {
     if (ev.type === 'click' || ev.key === 'Enter') {
       ev.preventDefault();
-      if (query) {
-        setLoading(true);
-        fetch(`${jclicSearchService}?lang=${t('lang')}&method=boolean&q=${encodeURIComponent(query)}`)
-          .then(checkFetchResponse)
-          .then(textMatches => {
-            setFilters({ ...filters, text: query, textMatches });
-          })
-          .catch(err => setError(err?.toString() || 'Error'));
-      }
-      else
-        setFilters({ ...filters, text: '', textMatches: [] });
+      updateFilters({ ...filters, text: query });
     }
   }
 

@@ -46,35 +46,71 @@ const useStyles = makeStyles({
   },
 });
 
+export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', textMatches: [] };
+
 function Repo({ settings }) {
 
   const { t } = useTranslation();
-  const { repoList, repoBase } = settings;
+  const { repoList, repoBase, jclicSearchService } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({ language: '', subject: '', level: '', text: '', textMatches: [] });
+  const [filters, setFilters] = useState({
+    language: getQueryParam('language'),
+    subject: getQueryParam('subject'),
+    level: getQueryParam('level'),
+    text: getQueryParam('text'),
+  });
   const [listMode, setListMode] = useState(false);
 
   const [act, setAct] = useState(getQueryParam('prj'));
-  const [user, /* setUser*/] = useState(getQueryParam('user'));
+  const [user, setUser] = useState(getQueryParam('user'));
 
-  // Update `fullProjectList`, `projects` and `project`
+  // Load the full project list
+  function loadFullProjectList() {
+    return fetch(repoList)
+      .then(checkFetchResponse)
+      .then(setFullProjectList)
+      .catch(err => setError(err?.toString() || 'Error'));
+  }
+
+  // Update the current project, optionally with history update
+  function updateAct(act, user = null, replace = false, updateHistory = true) {
+    if (updateHistory)
+      updateHistoryState(act, user, filters, replace);
+    setUser(user);
+    setAct(act);
+  }
+
+  // Update the filters, optionally with history update
+  function updateFilters(newFilters, replace = false, updateHistory = true) {
+    if (updateHistory)
+      updateHistoryState(act, user, newFilters, replace);
+    if (newFilters.text !== filters.text)
+      updateFullTextResults(newFilters.text);
+    setFilters(newFilters);
+  }
+
+  // Fetch the API for projects containing specific query terms
+  function updateFullTextResults(query) {
+    fetch(`${jclicSearchService}?lang=${t('lang')}&method=boolean&q=${encodeURIComponent(query)}`)
+      .then(checkFetchResponse)
+      .then(textMatches => {
+        setFilters({ ...filters, text: query, textMatches });
+      })
+      .catch(err => {
+        // Don't throw a blocking error: just notify the incident on the console
+        console.error('Error fetching search results', err);
+      });
+  }
+
+  // Operations to be performed when 'act', 'fullProjectList' or 'filters' are changed
   useEffect(() => {
-
-    function loadFullProjectList() {
-      return fetch(repoList)
-        .then(checkFetchResponse)
-        .then(_fullList => setFullProjectList(_fullList))
-        .catch(err => setError(err?.toString() || 'Error'));
-    }
-
     // Clear previous states
     setError(null);
-
-    // Load the given project
+    // If 'act' is set, load its project data
     if (act && (project === null || project.path !== act)) {
       setLoading(true);
       setProject(null);
@@ -108,19 +144,25 @@ function Repo({ settings }) {
       else
         loadFullProjectList();
     }
-  }, [repoBase, act, repoList, project, fullProjectList, filters]);
+  }, [act, fullProjectList, filters]);
 
-
-  /**
-   * Sets the current project, both as internal app state and updating
-   * the query param on the location URL
-   * @param {string} id - The current project id, or _null_ to display the full repo
-   * @param {boolean} replace  - Set to `true` only at the begginig, when `history` is started
-   */
-  function updateAct(act, user = null, replace = false) {
-    updateHistoryState(act, user, replace);
-    setAct(act);
-  }
+  // Operations to be performed at app startup
+  useEffect(() => {
+    // Start a new browser history
+    updateHistoryState(act, user, filters, true);
+    // Attach the 'popstate' event handler
+    window.addEventListener('popstate', ev => {
+      const { state } = ev;
+      if (state && Object.keys(state).includes('prj')) {
+        ev.preventDefault();
+        updateAct(state.prj, state.user, false, false);
+        updateFilters(state.filters, false, false);
+      }
+    });
+    // Check if a full text search should be performed
+    if (filters.text)
+      updateFullTextResults(filters.text);
+  }, [window]);
 
   const styles = useStyles();
 
@@ -130,7 +172,7 @@ function Repo({ settings }) {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||
         project && <Project {...{ settings, user, project, fullProjectList, updateAct }} /> ||
-        projects && <RepoList {...{ settings, user, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct }} />
+        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct }} />
       }
     </div>
   );

@@ -76,11 +76,30 @@ export function parseStringSettings(data = {}) {
  * @param {string} user - User id for user libraries, or null for main library
  * @param {boolean} replace - When `true`, the current state is replaced. Otherwise, a new state is pushed.
  */
-export function updateHistoryState(act, user, replace = false) {
+export function updateHistoryState(act, user, filters, replace = false) {
   const url = new URL(window.location.href);
-  url.searchParams.set('prj', act || '');
-  url.searchParams.set('user', user || '');
-  window.history[replace ? 'replaceState' : 'pushState']({ ...window.history.state, prj: act, user: user }, document.title, url);
+  setUrlSearchParam(url.searchParams, 'prj', act);
+  setUrlSearchParam(url.searchParams, 'user', user);
+  setUrlSearchParam(url.searchParams, 'language', !act && filters?.language);
+  setUrlSearchParam(url.searchParams, 'subject', !act && filters?.subject);
+  setUrlSearchParam(url.searchParams, 'level', !act && filters?.level);
+  setUrlSearchParam(url.searchParams, 'text', !act && filters?.text);
+  window.history[replace ? 'replaceState' : 'pushState']({ ...window.history.state, prj: act, user, filters }, document.title, url);
+}
+
+/**
+ * Set/unset a parameter on a URL search section
+ * @param {URL.SearchParams} searchParams - The URL.SearchParams object to be updated
+ * @param {string} param - Param key name
+ * @param {*} value - Value to be set, or `null` to clean it
+ * @returns 
+ */
+export function setUrlSearchParam(searchParams, param, value = '') {
+  if (value)
+    searchParams.set(param, typeof (value) === 'object' ? JSON.stringify(value) : value.toString());
+  else
+    searchParams.delete(param);
+  return searchParams;
 }
 
 /**
@@ -115,6 +134,13 @@ export function htmlContent(desc = '') {
   return /<\w*>/.test(desc) ? desc : desc.replace(/\n/g, '<p/>\n');
 }
 
+/**
+ * Build an URL pointing to a specific project, adding params to the search
+ * section of the current URL
+ * @param {string} act 
+ * @param {string=} user 
+ * @returns 
+ */
 export function getPathForProject(act, user = null) {
   const url = new URL(window.location);
   url.searchParams.set('prj', act);
@@ -123,6 +149,15 @@ export function getPathForProject(act, user = null) {
   return url.toString();
 }
 
+/**
+ * Builds a collection of URLs related to a base location, adding specific 'lang' fields
+ * for each available language.
+ * @param {string} location - Base URL
+ * @param {string} lang - Current language
+ * @param {string} langKey - Key used for language in the search section. Usually "lang".
+ * @param {string[]} supportedLanguages - List of currently supported languages
+ * @returns object[] - Array of objects with two properties: 'lang' and 'url'
+ */
 export function getAllPageVariants(location, lang, langKey, supportedLanguages) {
   const url = new URL(location);
   return supportedLanguages.reduce((result, l) => {

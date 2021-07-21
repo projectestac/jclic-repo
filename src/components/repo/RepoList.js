@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RepoList({ settings, user = null, projects, filters, setFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
+function RepoList({ settings, user = null, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
@@ -94,7 +94,7 @@ function RepoList({ settings, user = null, projects, filters, setFilters, listMo
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
         <Paper className={classes['selectProjects']}>
-          <SelectProjects {...{ settings, filters, setFilters, setLoading, setError }} />
+          <SelectProjects {...{ settings, filters, updateFilters, setLoading, setError }} />
         </Paper>
       }
       <div className={classes['infoBar']}>
