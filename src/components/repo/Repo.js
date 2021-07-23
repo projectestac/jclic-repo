@@ -51,7 +51,7 @@ export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', t
 function Repo({ settings }) {
 
   const { t } = useTranslation();
-  const { repoList, repoBase, jclicSearchService } = settings;
+  const { repoList, repoBase, usersBase, jclicSearchService } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -70,18 +70,23 @@ function Repo({ settings }) {
 
   // Load the full project list
   function loadFullProjectList() {
-    return fetch(repoList)
+    return fetch(user ? `${usersBase}/${user}/projects.json` : repoList)
       .then(checkFetchResponse)
       .then(setFullProjectList)
       .catch(err => setError(err?.toString() || 'Error'));
   }
 
   // Update the current project, optionally with history update
-  function updateAct(act, user = null, replace = false, updateHistory = true) {
+  function updateAct(newAct, newUser = null, replace = false, updateHistory = true) {
     if (updateHistory)
-      updateHistoryState(act, user, filters, replace);
-    setUser(user);
-    setAct(act);
+      updateHistoryState(newAct, newUser, filters, replace);
+    if(user !== newUser){
+      // Clear activity list when user changes
+      setFullProjectList(null);
+      setProjects(null);
+    }
+    setUser(newUser);
+    setAct(newAct);
   }
 
   // Update the filters, optionally with history update
@@ -95,11 +100,9 @@ function Repo({ settings }) {
 
   // Fetch the API for projects containing specific query terms
   function updateFullTextResults(query) {
-    fetch(`${jclicSearchService}?lang=${t('lang')}&method=boolean&q=${encodeURIComponent(query)}`)
+    !user && fetch(`${jclicSearchService}?lang=${t('lang')}&method=boolean&q=${encodeURIComponent(query)}`)
       .then(checkFetchResponse)
-      .then(textMatches => {
-        setFilters({ ...filters, text: query, textMatches });
-      })
+      .then(textMatches => setFilters({ ...filters, text: query, textMatches }))
       .catch(err => {
         // Don't throw a blocking error: just notify the incident on the console
         console.error('Error fetching search results', err);
@@ -115,7 +118,7 @@ function Repo({ settings }) {
       setLoading(true);
       setProject(null);
       setProjects(null);
-      const fullPath = `${repoBase}/${act}`;
+      const fullPath = user ? `${usersBase}/${user}/${act}` : `${repoBase}/${act}`;
       // Load a specific project
       fetch(`${fullPath}/project.json`)
         .then(checkFetchResponse)
@@ -124,7 +127,7 @@ function Repo({ settings }) {
           _project.fullPath = fullPath;
           setProject(_project);
           setLoading(false);
-          if (_project.relatedTo && !fullProjectList)
+          if (!user && _project.relatedTo && !fullProjectList)
             loadFullProjectList();
         })
         .catch(err => {
@@ -134,17 +137,20 @@ function Repo({ settings }) {
       setLoading(true);
       setProject(null);
       if (fullProjectList) {
-        setProjects(fullProjectList.filter(prj => (
-          !filters.language || prj?.langCodes?.includes(filters.language))
-          && (!filters.subject || prj?.areaCodes?.includes(filters.subject))
-          && (!filters.level || prj?.levelCodes?.includes(filters.level))
-          && (!filters.text || filters?.textMatches?.includes(prj.path))));
+        setProjects(
+          user ?
+            fullProjectList :
+            fullProjectList.filter(prj => (
+              !filters.language || prj?.langCodes?.includes(filters.language))
+              && (!filters.subject || prj?.areaCodes?.includes(filters.subject))
+              && (!filters.level || prj?.levelCodes?.includes(filters.level))
+              && (!filters.text || filters?.textMatches?.includes(prj.path))));
         setLoading(false);
       }
       else
         loadFullProjectList();
     }
-  }, [act, fullProjectList, filters]);
+  }, [act, user, fullProjectList, filters]);
 
   // Operations to be performed at app startup
   useEffect(() => {
@@ -160,7 +166,7 @@ function Repo({ settings }) {
       }
     });
     // Check if a full text search should be performed
-    if (filters.text)
+    if (!user && filters.text)
       updateFullTextResults(filters.text);
   }, [window]);
 

@@ -100,10 +100,14 @@ export const DEFAULT_SETTINGS = {
   jclicSearchService: process.env.JCLIC_SEARCH_SERVICE,
   // Base URL for JClic user projects, without ending '/'
   usersBase: process.env.USERS_BASE,
+  // Path to the repository page
+  repoPath: process.env.REPO_PATH,
+  // Path to the users library page
+  usersPath: process.env.USERS_PATH,
   // Google OAuth2 API id
-  googleOauth2Id: process.env.GOOGLE_OAUTH2_ID,
+  googleOAuth2Id: process.env.GOOGLE_OAUTH2_ID,
   // API base for user's library
-  userlibApi: process.env.USERLIB_API,
+  userLibApi: process.env.USERLIB_API,
   // Facebook app id (used in share button)
   facebookId: process.env.FACEBOOK_ID,
   // Google Analytics code

@@ -109,8 +109,10 @@ export function setUrlSearchParam(searchParams, param, value = '') {
  * @returns Promise
  */
 export const checkFetchResponse = response => {
-  if (!response.ok)
+  if (!response.ok) {
+    console.error('Bad response:', response);
     throw new Error(response.statusText);
+  }
   return response.json();
 };
 
@@ -168,3 +170,27 @@ export function getAllPageVariants(location, lang, langKey, supportedLanguages) 
     return result;
   }, []);
 }
+
+/**
+ * Simulates a click on a <a/> element
+ * @param {string} url 
+ */
+export function clickOnLink(url) {
+  const link = document.createElement("a");
+  link.setAttribute('href', url);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link)
+}
+
+export function getAbsoluteURL(path, params = {}) {
+  const { origin, pathname } = window.location;
+  const base = /^https?:\/\//.test(path) ? path : `${origin}${/^\//.test(path) ? '' : pathname}${path}`;
+  const result = new URL(base);
+  Object.keys(params).forEach(k => {
+    result.searchParams.set(k, params[k]);
+  });
+  return result.toString();
+}
+

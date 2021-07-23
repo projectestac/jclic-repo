@@ -131,7 +131,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Project({ settings, user = null, project, fullProjectList, updateAct, ...props }) {
+function Project({ settings, user, project, fullProjectList, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { jnlpInstaller, langDefault, logo } = settings;
@@ -182,9 +182,9 @@ function Project({ settings, user = null, project, fullProjectList, updateAct, .
   return (
     <div {...props}>
       <SEO {...{ settings, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
-      <Button className={classes.backBtn} onClick={() => updateAct(null)}>
+      <Button className={classes.backBtn} onClick={() => updateAct(null, user)}>
         <ArrowBack className={classes.leftIcon} />
-        {t('repo-title')}
+        {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
       <Typography variant="h1" className={classes.title}>{title}</Typography>
       <Typography variant="subtitle1">{author}</Typography>

@@ -33,8 +33,10 @@ import { initFonts } from './settings';
 import { getWebComponentClass } from './ReactWebComponent';
 import MainLayout from './components/MainLayout';
 import Repo from './components/repo/Repo';
+import UserLib from './components/user/UserLib';
 
 initFonts();
 
 // Define web components
 customElements.define('jclic-repo', getWebComponentClass(MainLayout, Repo));
+customElements.define('jclic-user-lib', getWebComponentClass(MainLayout, UserLib));

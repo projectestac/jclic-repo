@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RepoList({ settings, user = null, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
+function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
@@ -115,7 +115,8 @@ function RepoList({ settings, user = null, projects, filters, updateFilters, lis
         </ToggleButtonGroup>
         <Typography variant="body2" className={classes['projectCount']}>{projectCount}</Typography>
       </div>
-      {(listMode && <PaginatedList {...{ user, projects, settings, updateAct }} />)
+      {(listMode
+        && <PaginatedList {...{ user, projects, settings, updateAct }} />)
         || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
       }
       <BackToTop {...{ settings, showBelow: 300 }} />
