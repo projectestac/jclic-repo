@@ -31,8 +31,9 @@
 
 /* global process */
 
+import { useRef } from 'react';
 import { loadGoogleFont } from './utils';
-import { supportedLanguages } from './i18n';
+import { supportedLanguages, i18nInit } from './i18n';
 
 export const mainFont = ['Roboto', 'Arial', '"sans-serif"'].join(',');
 export const titleFont = ['"Open Sans"', 'Arial', '"sans-serif"'].join(',');
@@ -124,4 +125,19 @@ export const DEFAULT_SETTINGS = {
   maxThreads: Number(process.env.MAX_THREADS) || 20,
 };
 
-export default DEFAULT_SETTINGS;
+export function useSettings(settings = DEFAULT_SETTINGS) {
+
+  // Convert relative paths to full paths
+  settings.fullRepoPath = (new URL(settings.repoPath, window.location.href)).href;
+  settings.fullUsersPath = (new URL(settings.usersPath, window.location.href)).href;
+
+  // Init language tool
+  i18nInit(settings);
+
+  // Add a reference to the root component in settings
+  settings.rootRef = useRef();
+
+  return settings;
+}
+
+export default useSettings;

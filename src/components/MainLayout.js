@@ -29,23 +29,16 @@
  *  @module
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import merge from 'lodash/merge';
-import { DEFAULT_THEME, DEFAULT_SETTINGS } from '../settings';
-import { i18nInit } from '../i18n';
+import { DEFAULT_THEME, DEFAULT_SETTINGS, useSettings } from '../settings';
 
 function MainLayout({ jss, dataSettings, Component }) {
 
   // Merge default settings with "data-" props
-  const settings = merge(DEFAULT_SETTINGS, dataSettings);
-
-  // Add a reference to the root component in settings
-  settings.rootRef = useRef();
-
-  // Init language tool
-  i18nInit(settings);
+  const settings = useSettings(merge(DEFAULT_SETTINGS, dataSettings));
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
   const theme = responsiveFontSizes(createTheme(merge(DEFAULT_THEME, settings.theme)), {});

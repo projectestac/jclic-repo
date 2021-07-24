@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses, htmlContent, getPathForProject } from '../../utils';
+import { mergeClasses, htmlContent, getPathForProject, clickOnLink } from '../../utils';
 import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from '../SEO';
@@ -134,7 +134,7 @@ const useStyles = makeStyles(theme => ({
 function Project({ settings, user, project, fullProjectList, updateAct, ...props }) {
 
   const { t } = useTranslation();
-  const { jnlpInstaller, langDefault, logo } = settings;
+  const { jnlpInstaller, langDefault, logo, fullUsersPath } = settings;
   const lang = t('lang');
   const {
     fullPath, meta_langs,
@@ -182,7 +182,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
   return (
     <div {...props}>
       <SEO {...{ settings, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
-      <Button className={classes.backBtn} onClick={() => updateAct(null, user)}>
+      <Button className={classes.backBtn} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
         <ArrowBack className={classes.leftIcon} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
