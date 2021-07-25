@@ -87,6 +87,8 @@ export const DEFAULT_SETTINGS = {
   shareMeta: { hash: 'JClic,edu', via: 'xtec' },
   // When `true`, debug messages should be displayed on the console
   debug: process.env.DEBUG === 'true',
+  // Selected language (or _null_ for auto-detect)
+  lang: process.env.LANG || null,
   // Key used for the language query param on the URL
   langKey: process.env.LANG_KEY,
   // Fallback language

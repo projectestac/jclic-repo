@@ -55,11 +55,12 @@ export const STOP_WORDS = {
  * @param {object} options
  * @returns {object} - the [i18n](https://www.i18next.com) main object
  */
-export function i18nInit({ langKey = 'lang', langDefault = 'en' }) {
+export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) {
   return i18n
     .use(LngDetector)
     .use(initReactI18next)
     .init({
+      lng: lang,
       detection: {
         order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag'],
         lookupQuerystring: langKey,
