@@ -37,9 +37,17 @@ import en from './en.json';
 import ca from './ca.json';
 import es from './es.json';
 
-import stopwords_en from './stopwords_en.json';
-import stopwords_ca from './stopwords_ca.json';
-import stopwords_es from './stopwords_es.json';
+import stopwords_en from './stopwords-en.json';
+import stopwords_ca from './stopwords-ca.json';
+import stopwords_es from './stopwords-es.json';
+
+import user_repo_info_en from './user-repo-info-en.html';
+import user_repo_info_ca from './user-repo-info-ca.html';
+import user_repo_info_es from './user-repo-info-es.html';
+
+import user_repo_upload_info_en from './user-repo-upload-info-en.html';
+import user_repo_upload_info_ca from './user-repo-upload-info-ca.html';
+import user_repo_upload_info_es from './user-repo-upload-info-es.html';
 
 export const supportedLanguages = ['en', 'ca', 'es'];
 
@@ -68,13 +76,25 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
       },
       resources: {
         en: {
-          translation: en,
+          translation: {
+            ...en,
+            "user-repo-info": user_repo_info_en,
+            "user-repo-upload-info": user_repo_upload_info_en,
+          },
         },
         ca: {
-          translation: ca,
+          translation: {
+            ...ca,
+            "user-repo-info": user_repo_info_ca,
+            "user-repo-upload-info": user_repo_upload_info_ca,
+          },
         },
         es: {
-          translation: es,
+          translation: {
+            ...es,
+            "user-repo-info": user_repo_info_es,
+            "user-repo-upload-info": user_repo_upload_info_es,
+          },
         },
       },
       fallbackLng: langDefault,

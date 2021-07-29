@@ -316,7 +316,7 @@ function UserLib({ settings }) {
         {displayTitle && <Typography variant="h2">{title}</Typography>}
         {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} className={classes.avatar} />}
       </div>
-      {/* <MDXRenderer {...{ frontmatter, intl }}>{body}</MDXRenderer> */}
+      <div dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
       {err && <div className={classes.error}>{err}</div>}
       {loading && <CircularProgress className={classes.loading} />}
       {!loading &&

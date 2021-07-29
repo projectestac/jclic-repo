@@ -46,6 +46,10 @@ const assetRules = [
     test: /\.png$/,
     type: 'asset/inline',
   },
+  {
+    test: /\.html$/,
+    use: 'raw-loader',
+  },
 ];
 
 /**

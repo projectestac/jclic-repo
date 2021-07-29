@@ -161,7 +161,7 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
     >
       <DialogTitle id="upload-dialog-title">{t('user-repo-upload-title')}</DialogTitle>
       <DialogContent className={classes['content']}>
-        {/* <MDXRenderer {...{ frontmatter, intl }}>{body}</MDXRenderer> */}
+        <div dangerouslySetInnerHTML={{ __html: t('user-repo-upload-info') }} />
         <input
           type="file"
           accept=".scorm.zip"
