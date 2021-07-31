@@ -81,6 +81,12 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(1),
     },
   },
+  instructions: {
+    "& .code": {
+      fontFamily: "'Courier New', Courier, monospace",
+      fontSize: "1.2rem",
+    },
+  },
 }));
 
 function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadAction, ...props }) {
@@ -161,7 +167,7 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
     >
       <DialogTitle id="upload-dialog-title">{t('user-repo-upload-title')}</DialogTitle>
       <DialogContent className={classes['content']}>
-        <div dangerouslySetInnerHTML={{ __html: t('user-repo-upload-info') }} />
+        <div className={classes['instructions']} dangerouslySetInnerHTML={{ __html: t('user-repo-upload-info') }} />
         <input
           type="file"
           accept=".scorm.zip"
