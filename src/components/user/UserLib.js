@@ -357,7 +357,7 @@ function UserLib({ settings }) {
                   </tr>
                   <tr>
                     <td>{`${t('user-repo-quota')}:`}</td>
-                    <td>{t('user-repo-quota-exp', { current: filesize(userData.currentSize), quota: filesize(userData.quota) })}</td>
+                    <td>{t('user-repo-quota-exp', { current: filesize(userData.currentSize, { locale: true }), quota: filesize(userData.quota, { locale: true }) })}</td>
                   </tr>
                 </tbody>
               </table>
@@ -368,7 +368,7 @@ function UserLib({ settings }) {
                     <ProjectCard key={n} {...{ settings, user: userData.id, updateAct, project }} >
                       <div className={classes.cardInfo}>
                         <div>
-                          {`${t('prj-size')}: ${filesize(project.totalSize)}`}<br />
+                          {`${t('prj-size')}: ${filesize(project.totalSize, { locale: true })}`}<br />
                           {`${t('prj-numfiles')}: ${project.files.length}`}
                         </div>
                         <IconButton

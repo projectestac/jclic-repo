@@ -182,7 +182,7 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
         {file &&
           <>
             <div className={classes['fileInfo']}>
-              {t('user-repo-upload-selected-file')} <span className={classes['fileName']}>{file.name}</span> ({filesize(file.size)})
+              {t('user-repo-upload-selected-file')} <span className={classes['fileName']}>{file.name}</span> ({filesize(file.size, { locale: true })})
             </div>
             <TextField
               className={classes['folder']}

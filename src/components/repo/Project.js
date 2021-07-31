@@ -256,7 +256,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
           {totalSize &&
             <tr>
               <td>{`${t('prj-size')}:`}</td>
-              <td>{filesize(totalSize)}</td>
+              <td>{filesize(totalSize, { locale: true })}</td>
             </tr>
           }
           {license &&
