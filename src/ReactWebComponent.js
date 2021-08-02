@@ -51,8 +51,8 @@ export class ReactWebComponent extends HTMLElement {
   /**
    * Override this functions in derived classes to return the real main layout and component
    */
-   getLayout = () => null;
-   getMainComponent = () => null;  
+  getLayout = () => null;
+  getMainComponent = () => null;
 
   connectedCallback() {
 
@@ -76,7 +76,7 @@ export class ReactWebComponent extends HTMLElement {
       insertionPoint: mountPoint,
     });
 
-    const Layout = this.getLayout(); 
+    const Layout = this.getLayout();
 
     // Render the React component on the pivot element
     ReactDOM.render(
@@ -85,8 +85,16 @@ export class ReactWebComponent extends HTMLElement {
   }
 }
 
+/**
+ * Builds a JavaScript class extending HTMLElement,
+ * ready to be used as a web component with shadow DOM,
+ * formed by a layout (React function or Component) hosting a React main component
+ * @param {class|function} layout - The React component or function that will act as a layout
+ * @param {class|function} mainComponent - The main react component that will be hosted on the layout
+ * @returns class - The resulting HTMLElement, ready to be used in `customElements.define`
+ */
 export function getWebComponentClass(layout, mainComponent) {
-  return class extends ReactWebComponent { 
+  return class extends ReactWebComponent {
     getLayout = () => layout;
     getMainComponent = () => mainComponent;
   }

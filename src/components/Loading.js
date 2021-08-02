@@ -31,10 +31,9 @@
 
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from '../utils';
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography, CircularProgress } from "@material-ui/core";
 import { useTranslation } from 'react-i18next';
+import { mergeClasses } from '../utils';
 
 const useStyles = makeStyles(_theme => ({
   root: {

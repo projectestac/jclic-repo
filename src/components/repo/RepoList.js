@@ -33,16 +33,14 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from '../../utils';
 import BackToTop from '../BackToTop';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import { Typography, Paper } from '@material-ui/core';
+import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
+import { List, ViewComfy } from '@material-ui/icons';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import SelectProjects from './SelectProjects';
 import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import { List, ViewComfy } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({

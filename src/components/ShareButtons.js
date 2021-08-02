@@ -30,26 +30,11 @@
  */
 
 import React, { useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import { mergeClasses } from '../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Snackbar from '@material-ui/core/Snackbar';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import EmailIcon from '@material-ui/icons/Email';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import PinterestIcon from '@material-ui/icons/Pinterest';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import CodeIcon from '@material-ui/icons/Code';
-import CopyIcon from '@material-ui/icons/FileCopyOutlined';
-import CloseIcon from '@material-ui/icons/Close';
+import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import { Email, Facebook, Twitter, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@material-ui/icons';
 import ClassroomIcon from '../assets/classroom.svg';
 import MoodleIcon from '../assets/moodle.svg';
 import { useTranslation } from 'react-i18next';
@@ -141,7 +126,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.twitter} aria-label={t('share-twitter')} title={t('share-twitter')}>
-              <TwitterIcon />
+              <Twitter />
             </IconButton>
           </a>
         }
@@ -151,7 +136,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.facebook} aria-label={t('share-facebook')} title={t('share-facebook')}>
-              <FacebookIcon />
+              <Facebook />
             </IconButton>
           </a>
         }
@@ -161,7 +146,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.telegram} aria-label={t('share-telegram')} title={t('share-telegram')}>
-              <TelegramIcon />
+              <Telegram />
             </IconButton>
           </a>}
         {whatsapp && title && link &&
@@ -170,7 +155,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.whatsapp} aria-label={t('share-whatsapp')} title={t('share-whatsapp')}>
-              <WhatsAppIcon />
+              <WhatsApp />
             </IconButton>
           </a>
         }
@@ -180,7 +165,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.pinterest} aria-label={t('share-pinterest')} title={t('share-pinterest')}>
-              <PinterestIcon />
+              <Pinterest />
             </IconButton>
           </a>
         }
@@ -190,7 +175,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton className={classes.email} aria-label={t('share-email')} title={t('share-email')} >
-              <EmailIcon />
+              <Email />
             </IconButton>
           </a>
         }
@@ -225,7 +210,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               setMoodleBox(false);
               setEmbedBox(!embedBox);
             }}>
-            <CodeIcon />
+            <Code />
           </IconButton>
         }
       </div>
@@ -244,7 +229,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               <InputAdornment position="end">
                 <CopyToClipboard text={moodleLink} onCopy={() => setSnackOpen(true)}>
                   <IconButton aria-label={t('share-copy')} title={t('share-copy')} >
-                    <CopyIcon />
+                    <FileCopyOutlined />
                   </IconButton>
                 </CopyToClipboard>
               </InputAdornment>
@@ -267,7 +252,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               <InputAdornment position="end">
                 <CopyToClipboard text={embedCode} onCopy={() => setSnackOpen(true)}>
                   <IconButton aria-label={t('share-copy')} title={t('share-copy')}>
-                    <CopyIcon />
+                    <FileCopyOutlined />
                   </IconButton>
                 </CopyToClipboard>
               </InputAdornment>
@@ -289,7 +274,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         message={t('share-copied')}
         action={
           <IconButton size="small" aria-label={t('close')} title={t('close')} color="inherit" onClick={handleSnackClose}>
-            <CloseIcon fontSize="small" />
+            <Close fontSize="small" />
           </IconButton>
         }
       />

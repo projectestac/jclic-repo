@@ -184,13 +184,18 @@ export function clickOnLink(url) {
   document.body.removeChild(link)
 }
 
+/**
+ * Gets an absolute URL from a relative or absolute URL plus optional query params,
+ * using the current location as a root path
+ * @param {string} path - The absolute or relative path to be absolutized. It can contain some query params.
+ * @param {object} params - Query params to be added to the resulting URL (object with key - value pairs)
+ * @returns string - The resulting absolute URL
+ */
 export function getAbsoluteURL(path, params = {}) {
   const { origin, pathname } = window.location;
   const base = /^https?:\/\//.test(path) ? path : `${origin}${/^\//.test(path) ? '' : pathname}${path}`;
   const result = new URL(base);
-  Object.keys(params).forEach(k => {
-    result.searchParams.set(k, params[k]);
-  });
+  Object.keys(params).forEach(k => result.searchParams.set(k, params[k]));
   return result.toString();
 }
 

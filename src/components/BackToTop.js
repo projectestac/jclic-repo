@@ -30,8 +30,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import Fab from '@material-ui/core/Fab';
-import ArrowUp from '@material-ui/icons/ArrowUpward';
+import { Fab } from '@material-ui/core';
+import { ArrowUpward } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 
 // Based on: https://github.com/donaldboulton/publiuslogic/blob/master/src/components/Scroll/index.js
@@ -83,7 +83,7 @@ export default function BackToTop({ settings, showBelow, style = {} }) {
         ...style,
       }}
     >
-      <ArrowUp />
+      <ArrowUpward />
     </Fab>
   );
 }

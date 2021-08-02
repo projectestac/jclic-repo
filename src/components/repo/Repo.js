@@ -34,7 +34,7 @@ import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 import { checkFetchResponse, getQueryParam, updateHistoryState } from '../../utils';
 import { mainFont } from '../../settings';
-import Alert from '@material-ui/lab/Alert';
+import { Alert } from '@material-ui/lab';
 import Loading from '../Loading';
 import Project from './Project';
 import RepoList from './RepoList';
@@ -80,7 +80,7 @@ function Repo({ settings }) {
   function updateAct(newAct, newUser = null, replace = false, updateHistory = true) {
     if (updateHistory)
       updateHistoryState(newAct, newUser, filters, replace);
-    if(user !== newUser){
+    if (user !== newUser) {
       // Clear activity list when user changes
       setFullProjectList(null);
       setProjects(null);

@@ -33,22 +33,11 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from "@material-ui/core/styles";
 import { mainFont } from '../../settings';
-// See: https://github.com/anthonyjgrove/react-google-login
 import { GoogleLogin } from 'react-google-login';
 import filesize from 'filesize';
 import { checkFetchResponse, clickOnLink, getAbsoluteURL } from '../../utils';
-//import { getResolvedVersionForLanguage } from '../../utils/node';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import AddIcon from '@material-ui/icons/LibraryAdd';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import LoginIcon from '@material-ui/icons/ExitToApp';
-import LogoutIcon from '@material-ui/icons/Eject';
-import InfoIcon from '@material-ui/icons/Info';
+import { Button, IconButton, CircularProgress, Typography, Avatar } from '@material-ui/core';
+import { LibraryAdd, Delete, CloudDownload, ExitToApp, Eject, Info } from '@material-ui/icons';
 import DeleteDialog from './DeleteDialog';
 import UploadDialog from './UploadDialog';
 import ProjectCard from '../repo/ProjectCard';
@@ -331,13 +320,13 @@ function UserLib({ settings }) {
                 isSignedIn={false}
                 cookiePolicy={'single_host_origin'}
                 render={renderProps => (
-                  <Button variant="contained" startIcon={<LoginIcon />}
+                  <Button variant="contained" startIcon={<ExitToApp />}
                     onClick={renderProps.onClick} disabled={renderProps.disabled}>{t('user-repo-login')}</Button>
                 )}
               />
             }
-            {userData && <Button variant="contained" startIcon={<LogoutIcon />} onClick={logout}>{t('user-repo-logout')}</Button>}
-            {userData && <Button variant="contained" startIcon={<AddIcon />} onClick={uploadProject}>{t('user-repo-upload-project')}</Button>}
+            {userData && <Button variant="contained" startIcon={<Eject />} onClick={logout}>{t('user-repo-logout')}</Button>}
+            {userData && <Button variant="contained" startIcon={<LibraryAdd />} onClick={uploadProject}>{t('user-repo-upload-project')}</Button>}
           </div>
           {userData &&
             <>
@@ -376,7 +365,7 @@ function UserLib({ settings }) {
                           title={t('prj-more-info')}
                           color="primary"
                         >
-                          <InfoIcon />
+                          <Info />
                         </IconButton>
                         <IconButton
                           onClick={downloadProject(project)}
@@ -384,7 +373,7 @@ function UserLib({ settings }) {
                           title={t('prj-download')}
                           color="primary"
                         >
-                          <DownloadIcon />
+                          <CloudDownload />
                         </IconButton>
                         <IconButton
                           onClick={deleteProject(project)}
@@ -392,7 +381,7 @@ function UserLib({ settings }) {
                           title={t('user-repo-delete-project')}
                           color="primary"
                         >
-                          <DeleteIcon />
+                          <Delete />
                         </IconButton>
                       </div>
                     </ProjectCard>

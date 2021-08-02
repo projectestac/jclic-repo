@@ -33,17 +33,11 @@ import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { makeStyles } from "@material-ui/core/styles";
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { mergeClasses } from '../../utils';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import Button from '@material-ui/core/Button';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, LinearProgress } from '@material-ui/core';
+import { CloudDownload } from '@material-ui/icons';
 import PromisePool from '@supercharge/promise-pool';
 import { useTranslation } from 'react-i18next';
+import { mergeClasses } from '../../utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -297,7 +291,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
         {zipFile &&
           <Button
             variant="contained"
-            startIcon={<DownloadIcon />}
+            startIcon={<CloudDownload />}
             onClick={downloadFile}
           >
             {t('prj-download-file')}
