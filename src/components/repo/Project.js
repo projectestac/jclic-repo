@@ -44,6 +44,7 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   title: {
     color: `${theme.palette.primary.dark}`,
+    marginBottom: '0.5rem',
   },
   backBtn: {
     marginBottom: '1rem',

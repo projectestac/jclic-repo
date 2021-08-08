@@ -57,6 +57,11 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '1fr auto',
     gridGap: theme.spacing(1),
+    marginBottom: '1rem',
+  },
+  title: {
+    color: `${theme.palette.primary.dark}`,
+    alignSelf: 'center',
   },
   avatar: {
     width: theme.spacing(7),
@@ -302,7 +307,7 @@ function UserLib({ settings }) {
   return (
     <div className={classes.root} ref={settings.rootRef} >
       <div className={classes.titleGroup}>
-        {displayTitle && <Typography variant="h2">{title}</Typography>}
+        {displayTitle && <Typography variant="h2" className={classes.title}>{title}</Typography>}
         {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} className={classes.avatar} />}
       </div>
       <div dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />

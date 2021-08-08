@@ -51,6 +51,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     color: `${theme.palette.primary.dark}`,
+    marginBottom: '0.5rem',
   },
   selectProjects: {
     marginTop: '1rem',
@@ -87,17 +88,17 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
   return (
     <div {...props} className={classes.root}>
       <SEO {...{ settings, title, description, thumbnail: twitterCard }} />
-      {displayTitle && <Typography variant="h1">{title}</Typography>}
+      {displayTitle && <Typography variant="h1" className={classes.title}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
-        <Paper className={classes['selectProjects']}>
+        <Paper className={classes.selectProjects}>
           <SelectProjects {...{ settings, filters, updateFilters, setLoading, setError }} />
         </Paper>
       }
-      <div className={classes['infoBar']}>
+      <div className={classes.infoBar}>
         <ToggleButtonGroup
-          className={classes['viewMode']}
+          className={classes.viewMode}
           size="small"
           value={listMode}
           exclusive
@@ -111,7 +112,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
             <List />
           </ToggleButton>
         </ToggleButtonGroup>
-        <Typography variant="body2" className={classes['projectCount']}>{projectCount}</Typography>
+        <Typography variant="body2" className={classes.projectCount}>{projectCount}</Typography>
       </div>
       {(listMode
         && <PaginatedList {...{ user, projects, settings, updateAct }} />)

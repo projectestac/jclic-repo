@@ -64,6 +64,12 @@ const useStyles = makeStyles(_theme => ({
     marginBottom: '1rem',
     maxWidth: '60rem',
   },
+  inputBox: {
+    fontFamily: 'Monospace',
+    fontSize: '0.8rem',
+    margin: '0.4rem auto',
+    color: 'gray',
+  },
   radioGroup: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -215,9 +221,10 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         }
       </div>
       {moodle && moodleLink && moodleBox &&
-        <Paper className={classes['moodleBox']} elevation={2}>
+        <Paper className={classes.moodleBox} elevation={2}>
           <label htmlFor="moodleLink" dangerouslySetInnerHTML={{ __html: t('share-moodle-label') }} />
           <Input
+            className={classes.inputBox}
             type="text"
             fullWidth
             id="moodleLink"
@@ -238,9 +245,10 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         </Paper>
       }
       {embed && embedCode && embedBox &&
-        <Paper className={classes['embedBox']} elevation={2}>
+        <Paper className={classes.embedBox} elevation={2}>
           <label htmlFor="embedLink">{t('share-embed-label')}</label>
           <Input
+            className={classes.inputBox}
             type="text"
             fullWidth
             id="embedLink"
@@ -258,7 +266,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               </InputAdornment>
             }
           />
-          <RadioGroup className={classes['radioGroup']} aria-label={t('share-embed-size')} value={embedSize} onChange={handleChangeEmbedSize}>
+          <RadioGroup className={classes.radioGroup} aria-label={t('share-embed-size')} value={embedSize} onChange={handleChangeEmbedSize}>
             <FormControlLabel value={'640x390'} control={<Radio />} label="640x390" />
             <FormControlLabel value={'800x600'} control={<Radio />} label="800x600" />
             <FormControlLabel value={'100%x800'} control={<Radio />} label="100%" />
@@ -266,7 +274,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         </Paper>
       }
       <Snackbar
-        className={classes['snack']}
+        className={classes.snack}
         open={snackOpen}
         autoHideDuration={4000}
         onClose={handleSnackClose}
