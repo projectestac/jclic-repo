@@ -172,9 +172,8 @@ function UserLib({ settings }) {
             throw new Error(data?.error);
           }
           data.projects.forEach(normalizeProjectFields);
-          const result = { googleUser, ...data };
-          sessionStorage.setItem(AUTH_KEY, JSON.stringify(result));
-          setUserData(result);
+          sessionStorage.setItem(AUTH_KEY, JSON.stringify({ googleUser }));
+          setUserData(data);
           setErr(null);
         })
         .catch(error => {
@@ -288,7 +287,7 @@ function UserLib({ settings }) {
           throw new Error(response.error || t('unknown-error'));
       })
       .catch(error => {
-        alert(t('user-repo-delete-err', { error: error?.toString() || t('generic-error') }));
+        alert(t('user-repo-upload-err', { error: error?.toString() || t('generic-error') }));
       })
       .finally(() => {
         setUploadDlg(false);

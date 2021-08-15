@@ -63,6 +63,7 @@
   "user-repo-upload-selected-file": "Fitxer seleccionat:",
   "user-repo-upload-current-directory": "Directori on es publicarà el projecte:",
   "user-repo-upload-publish": "Publica el projecte",
+  "user-repo-upload-err": "S'ha produït un error en intentar publicar el projecte: {{error}}",
   "user-repo-delete": "Eliminació de projectes",
   "user-repo-delete-project": "Elimina el projecte",
   "user-repo-confirm-delete": "ATENCIÓ: Aquesta operació eliminarà definitivament el projecte \"{{project}}\" del servidor. Segur que voleu fer-ho?",

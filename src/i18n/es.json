@@ -63,6 +63,7 @@
   "user-repo-upload-selected-file": "Archivo seleccionado:",
   "user-repo-upload-current-directory": "Directorio donde se publicará el proyecto:",
   "user-repo-upload-publish": "Publicar el proyecto",
+  "user-repo-upload-err": "Se ha producido un error al intentar publicar el proyecto: {{error}}",
   "user-repo-delete": "Eliminación de proyectos",
   "user-repo-delete-project": "Eliminar el proyecto",
   "user-repo-confirm-delete": "ATENCIÓN: Esta operación eliminará definitivamente el proyecto \"{{project}}\" del servidor. ¿Seguro que desea hacerlo?",
