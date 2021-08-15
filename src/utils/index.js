@@ -129,11 +129,21 @@ export function getQueryParam(param) {
 
 /**
  * Replaces newline chars (\n) by <p/> tags on the provided text if it contains HTML.
- * @param {string} desc 
+ * @param {string} text - The text to process 
  * @returns string
  */
-export function htmlContent(desc = '') {
-  return /<\w*>/.test(desc) ? desc : desc.replace(/\n/g, '<p/>\n');
+export function htmlContent(text = '') {
+  return /<\w*>/.test(text) ? text : text.replace(/\n/g, '<p/>\n');
+}
+
+/**
+ * Cleans HTML tags, carriage returns and duplicate spaces from a text expression.
+ * Useful to obtain plain text expressions for metadata
+ * @param {string} text 
+ * @returns string
+ */
+export function textContent(text = '') {
+  return text.replace(/(?:<li>|<td>)/g, ' - ').replace(/<[^>]*>/g, ' ').replace(/\n/g, ' ').replace(/  +/g, ' ').trim();
 }
 
 /**

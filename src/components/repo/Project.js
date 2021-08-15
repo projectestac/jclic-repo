@@ -33,7 +33,9 @@ import React, { useState } from 'react';
 import { Typography, IconButton, Button } from '@material-ui/core';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses, htmlContent, getPathForProject } from '../../utils';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { mergeClasses, textContent, getPathForProject } from '../../utils';
 import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from '../SEO';
@@ -150,6 +152,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
   const k = meta_langs.includes(lang) ? lang : langDefault;
   const pageTitle = `${user ? t('user-repo-title', { user }) : t('repo-title')} - ${title}`;
   const pageDesc = description[k];
+  const textDesc = textContent(pageDesc);
   const imgPath = cover && `${fullPath}/${cover}` || logo;
   const moodleLink = `${fullPath}/${mainFile}`;
   const projectLink = moodleLink.replace(/\/[^/]*$/, '/index.html');
@@ -174,7 +177,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
     educationalLevel: levels[lang] || levels[langDefault],
     learningResourceType: 'learning activity',
     author: author,
-    description: pageDesc,
+    description: textDesc,
     inLanguage: langCodes.join(','),
     thumbnailUrl: imgPath,
     url: projectLink,
@@ -182,14 +185,14 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
 
   return (
     <div {...props}>
-      <SEO {...{ settings, title: pageTitle, description: pageDesc, author, thumbnail: imgPath, sd }} />
+      <SEO {...{ settings, title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd }} />
       <Button className={classes.backBtn} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
         <ArrowBack className={classes.leftIcon} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
       <Typography variant="h1" className={classes.title}>{title}</Typography>
       <Typography variant="subtitle1">{author}</Typography>
-      <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: pageDesc, thumbnail: imgPath, embedOptions }} />
+      <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
       <div className={classes.mainBlock}>
         {imgPath &&
           <div className={classes.btnContainer}>
@@ -204,7 +207,12 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
             </IconButton>
           </div>
         }
-        <div className={classes.description} dangerouslySetInnerHTML={{ __html: htmlContent(pageDesc) }}></div>
+        <ReactMarkdown
+          className={classes.description}
+          rehypePlugins={[rehypeRaw]}
+        >
+          {pageDesc}
+        </ReactMarkdown>
       </div>
       <table className={classes.dataCard}>
         <tbody>
