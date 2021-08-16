@@ -88,7 +88,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
   return (
     <div {...props} className={classes.root}>
       <SEO {...{ settings, title, description, thumbnail: twitterCard }} />
-      {displayTitle && <Typography variant="h1" className={classes.title}>{title}</Typography>}
+      {(displayTitle || user) && <Typography variant="h1" className={classes.title}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&

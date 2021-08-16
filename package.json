@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Dynamic repository of JClic activities",
   "main": "src/index.js",
   "keywords": [
@@ -85,7 +85,7 @@
     "raw-loader": "^4.0.2",
     "terser-webpack-plugin": "^5.1.4",
     "webpack": "^5.50.0",
-    "webpack-cli": "^4.7.2",
+    "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
