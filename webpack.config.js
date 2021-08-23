@@ -81,13 +81,17 @@ const config = {
   },
   plugins: [],
   devServer: {
-    host: '0.0.0.0',
-    contentBase: path.join(__dirname, 'test'),
-    watchContentBase: true,
-    compress: true,
+    host: 'localhost',
     port: 8000,
-    overlay: true,
-    public: 'localhost:8000',
+    open: true,
+    static: {
+      directory: path.join(__dirname, 'test'),
+      watch: true,
+    },
+    client: {
+      overlay: true,
+      progress: true,
+    },
   },
   optimization: {
     minimize: true,
@@ -117,7 +121,7 @@ module.exports = (env, argv) => {
   // Take environment variables from ".env.development", ".env.production"
   // or just ".env" when `mode` is not set
   config.plugins = [
-    ...config.plugins || [],
+    ...config.plugins,
     new Dotenv({
       path: (argv.mode && fs.existsSync(path.resolve(__dirname, `.env.${argv.mode}`))) ? `./.env.${argv.mode}` : './.env',
       safe: true, // load .env.example
