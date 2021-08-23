@@ -40,7 +40,6 @@ import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
-import ccLogo from '../../assets/cclogo.png';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -93,7 +92,6 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '800px',
     marginTop: '2rem',
     marginBottom: '1.5rem',
-    lineHeight: '1.5',
     "& td": {
       border: 'none',
       borderBottom: '1px solid lightgray',
@@ -107,14 +105,6 @@ const useStyles = makeStyles(theme => ({
       paddingRight: '8pt',
       verticalAlign: 'top',
     },
-  },
-  cclogo: {
-    float: 'left',
-    marginRight: '0.9rem',
-    opacity: .7,
-  },
-  cctext: {
-    fontSize: '9pt',
   },
   related: {
     margin: 0,
@@ -191,7 +181,6 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
       <Typography variant="h1" className={classes.title}>{title}</Typography>
-      <Typography variant="subtitle1">{author}</Typography>
       <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
       <div className={classes.mainBlock}>
         {imgPath &&
@@ -271,10 +260,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
           {license &&
             <tr>
               <td>{`${t('prj-license')}:`}</td>
-              <td>
-                <img className={classes.cclogo} src={ccLogo} alt="CC" />
-                <div className={classes.cctext} dangerouslySetInnerHTML={{ __html: license[lang] || license[langDefault] }} />
-              </td>
+              <td dangerouslySetInnerHTML={{ __html: license[lang] || license[langDefault] }}></td>
             </tr>
           }
           {relatedTo &&

@@ -73,6 +73,9 @@ export const DEFAULT_THEME = {
       lineHeight: 1.5,
       letterSpacing: '0.00938em',
     },
+    subtitle1: {
+      lineHeight: 'normal',
+    }
   },
 };
 
