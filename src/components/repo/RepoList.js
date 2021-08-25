@@ -58,20 +58,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '1rem',
     maxWidth: '1200px',
   },
-  infoBar: {
-    display: 'flex',
-    alignItems: 'flex-end',
+  displayMode: {
+    background: 'transparent',
     marginTop: '1rem',
     marginBottom: '1rem',
   },
-  viewMode: {
-    background: 'transparent',
-  },
-  projectCount: {
-    flexGrow: 1,
-    marginLeft: '1rem',
-    textAlign: 'right',
-  }
 }));
 
 function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
@@ -81,9 +72,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
-  const projectCount = t(
-    projects.length === 0 ? 'repo-num-zero' : projects.length === 1 ? 'repo-num-single' : 'repo-num-plural',
-    { num: projects.length }); // Todo: use "formatNumber" equivalent
+  const projectCount = t('repo-num', { count: projects.length, context: `${projects.length}` });
 
   return (
     <div {...props} className={classes.root}>
@@ -96,24 +85,22 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
           <SelectProjects {...{ settings, filters, updateFilters, setLoading, setError }} />
         </Paper>
       }
-      <div className={classes.infoBar}>
-        <ToggleButtonGroup
-          className={classes.viewMode}
-          size="small"
-          value={listMode}
-          exclusive
-          onChange={_ev => setListMode(!listMode)}
-          aria-label={t('repo-view-mode')}
-        >
-          <ToggleButton value={false} title={t('repo-view-cards')}>
-            <ViewComfy />
-          </ToggleButton>
-          <ToggleButton value={true} title={t('repo-view-list')}>
-            <List />
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Typography variant="body2" className={classes.projectCount}>{projectCount}</Typography>
-      </div>
+      <Typography variant="body2">{projectCount}</Typography>
+      <ToggleButtonGroup
+        className={classes.displayMode}
+        size="small"
+        value={listMode}
+        exclusive
+        onChange={_ev => setListMode(!listMode)}
+        aria-label={t('repo-view-mode')}
+      >
+        <ToggleButton value={false} title={t('repo-view-cards')}>
+          <ViewComfy />
+        </ToggleButton>
+        <ToggleButton value={true} title={t('repo-view-list')}>
+          <List />
+        </ToggleButton>
+      </ToggleButtonGroup>
       {(listMode
         && <PaginatedList {...{ user, projects, settings, updateAct }} />)
         || <ScrollMosaic {...{ user, projects, settings, updateAct }} />

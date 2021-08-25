@@ -96,18 +96,33 @@ LANG_DEFAULT="en"
 ```
 
 ### jclic-repo
-This web component displays the contents of the repository in two different formats: cards mosaic and full list.
+This component can display two different pages:
+
+<div style="padding-left:3rem">
+
+#### Full catalog ([RepoList.js](./src/components/repo/RepoList.js))
+
+Shows the full catalog of the repository. Users can switch between two display modes: 'cards' (default) or 'list'.
 
 A basic search engine is provided, allowing to filter results by language, educational level and topic. Search can be improved using the clicZone [full text search API](https://github.com/projectestac/zonaclic/blob/master/app/db/repo-search/index.php).
 
-The component can switch between two display modes:
+#### Project page ([Project.js](./src/components/repo/Project.js))
 
-- The repository catalog (in cards or list mode)
-- Full information about a single project, with buttons allowing to launch the activities, download in SCORM format or launch a custom [Java Web Start](https://en.wikipedia.org/wiki/Java_Web_Start) installer.
+Page with information about a single project, with buttons allowing to launch the activities, download it in SCORM format or launch a [Java Web Start](https://en.wikipedia.org/wiki/Java_Web_Start) installer.
 
-The switch between the two display modes is set by means of parameters on the URL query section: `prj` for the project directory slug, and `user` when displaying a user's project.
+</div>
 
-State switching is also recorded on the [browser history](https://developer.mozilla.org/en-US/docs/Web/API/Window/history), thus allowing
+The switch between the two display modes is set by means of parameters on the URL query section:
+- `prj`: When set, the _Project page_ mode is activated. Otherwise, the component will show the full catalog. The value of this parameter must be the subdirectory name of the project to be shown. For example:
+```html
+https://my-jclic-site.com/repo?prj=myproject
+```
+- `user`: When set in addition to `prj`, a user's project will be shown. For example:
+```html
+https://my-jclic-site.com/repo?user=johndeere&prj=mypersonalproject
+```
+
+State switching is recorded on the [browser history](https://developer.mozilla.org/en-US/docs/Web/API/Window/history), thus allowing
 to use the `back` and `forward` navigation buttons when different pages are visited.
 
 The content of the `<head>` section of the host page is dynamically updated with metadata about the information being currently displayed by the component.
@@ -117,7 +132,7 @@ This web component allows registered users to manage their personal library of J
 
 The log-in is currently done with the [Google OAuth API](https://developers.google.com/identity/protocols/oauth2) protocol. See [`.env.example`](.env.example) for the required *GOOGLE_OAUTH2_ID* param.
 
-The component acts just as a front-end to the API functions of the ClicZone [userlib API](https://github.com/projectestac/zonaclic/tree/master/app/db/userlib).
+The component acts just as a front-end to the API functions of the [ClicZone userlib API](https://github.com/projectestac/zonaclic/tree/master/app/db/userlib).
 
 ## Sponsors that make possible JClic
 
