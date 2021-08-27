@@ -37,9 +37,7 @@ import { mergeClasses } from '../../utils';
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
 
-const useStyles = makeStyles(_theme => ({
-  root: {
-  },
+const useStyles = makeStyles(theme => ({
   spacer: {
     display: 'none',
   },
@@ -47,6 +45,13 @@ const useStyles = makeStyles(_theme => ({
     flexFlow: 'wrap',
     paddingLeft: '0',
   },
+  listElements: {
+    '&:first-child': {
+      borderTop: `1px solid ${theme.palette.grey[400]}`,
+    },
+    borderBottom: `1px solid ${theme.palette.grey[400]}`,
+    paddingLeft: '0rem',
+  }
 }));
 
 function PaginatedList({ settings, user, projects, updateAct, ...props }) {
@@ -59,7 +64,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
   useEffect(() => setPage(0), [projects]);
 
   return (
-    <div {...props} className={classes.root}>
+    <div {...props}>
       <List dense>
         {projects
           .slice(page * itemsPerPage, (page + 1) * itemsPerPage)
