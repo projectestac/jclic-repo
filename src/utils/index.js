@@ -72,8 +72,8 @@ export function parseExpression(s = '') {
     return JSON.parse(s);
 
   // Check if it's a numeric expression
-  const n = parseFloat(s);
-  if (typeof n === 'number')
+  const n = Number(s);
+  if (!isNaN(n))
     return n;
 
   // Otherwise return the original string
