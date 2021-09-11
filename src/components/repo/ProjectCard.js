@@ -38,7 +38,7 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: '20rem',
+    maxWidth: '28rem',
     cursor: 'pointer',
   },
   cardContent: {

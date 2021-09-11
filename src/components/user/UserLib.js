@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '1fr auto',
     gridGap: theme.spacing(1),
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
   },
   title: {
     color: `${theme.palette.primary.dark}`,
@@ -66,6 +66,10 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+  },
+  info: {
+    minWidth: '80%',
+    maxWidth: '800px',
   },
   dataCard: {
     borderCollapse: 'collapse',
@@ -98,7 +102,7 @@ const useStyles = makeStyles(theme => ({
   projects: {
     marginTop: theme.spacing(3),
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(14rem, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
     gridGap: '1rem',
     "& a:link": {
       textDecoration: 'none',
@@ -306,10 +310,10 @@ function UserLib({ settings }) {
   return (
     <div className={classes.root} ref={settings.rootRef} >
       <div className={classes.titleGroup}>
-        {displayTitle && <Typography variant="h2" className={classes.title}>{title}</Typography>}
+        {displayTitle && <Typography variant="h1" className={classes.title}>{title}</Typography>}
         {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} className={classes.avatar} />}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
+      <div className={classes.info} dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
       {err && <div className={classes.error}>{err}</div>}
       {loading && <CircularProgress className={classes.loading} />}
       {!loading &&

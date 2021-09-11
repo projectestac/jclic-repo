@@ -10,14 +10,14 @@ The JClic authoring system binds data into [JClic projects](https://github.com/p
 
 When done, JClic projects can be saved and exported into three different formats:
 
-- Saved into a single file with extension `.jclic.zip`. This is the native format used by the Java apps "JClic Player" and "JClic Author".
-- Exported to HTML5 into a directory on your local file system, thus allowing the activities to be played on any modern web browser. This option creates the following files:
+- Save into a single file with extension `.jclic.zip`. This is the native format currently used by "JClic Player" and "JClic Author" (desktop Java apps).
+- Export to HTML5 into a directory on your local file system, thus allowing the activities to be played on any modern web browser. This option creates the following files:
   - `project.json`: Contains all the metadata associated to the JClic project: title, authorship, description, educational level, language, topic, license...
   - `index.html`: Used to launch the project on any modern web browser, both as standalone page or embedded in another context.
   - _`projectname.jclic`_: An [XML](https://en.wikipedia.org/wiki/XML) file containing the description of the project activities and sequences.
   - `imsmanifest.xml`: Makes the exported content compatible with [SCORM](https://en.wikipedia.org/wiki/Sharable_Content_Object_Reference_Model) 1.2.
   - The media files (images, sounds, fonts...) used as ingredients on the activities.
-- Exported into a single file with extension `.scorm.zip`, useful when integrating JClic activities on Virtual Learning Environments.
+- Export into a single file with extension `.scorm.zip`, useful when integrating JClic activities on Virtual Learning Environments.
 
 A _JClic repository_ consists of a root directory with a set of subdirectories, each one containing the HTML5 version of a JClic project. A single file named `projects.json` should be located on the root directory, acting as an index of the repository projects. This file contains a full list of the projects and basic information (project's folder, title, authors, languages, icons, main file...) about them.
 

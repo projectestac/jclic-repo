@@ -45,7 +45,12 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   title: {
     color: `${theme.palette.primary.dark}`,
-    marginBottom: '0.5rem',
+    marginBottom: '1rem',
+  },
+  subtitle: {
+    marginBottom: '1.5rem',
+    fontSize: '1.3rem',
+    lineHeight: 'inherit',
   },
   backBtn: {
     marginBottom: '1rem',
@@ -77,13 +82,12 @@ const useStyles = makeStyles(theme => ({
   mainBlock: {
     marginTop: '1rem',
     marginBottom: '1rem',
+    minWidth: '80%',
+    maxWidth: '800px',
   },
   description: {
     "& li": {
       marginBottom: '1rem',
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '80%',
     },
   },
   dataCard: {
@@ -180,22 +184,25 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
         <ArrowBack className={classes.leftIcon} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
-      <Typography variant="h1" className={classes.title}>{title}</Typography>
-      <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
       <div className={classes.mainBlock}>
-        {imgPath &&
-          <div className={classes.btnContainer}>
-            <img src={imgPath} className={classes.cover} alt={t('cover-alt')} />
-            <IconButton
-              className={classes.overlayBtn}
-              color="primary"
-              href={projectLink} target="_BLANK"
-              title={t('prj-launch-tooltip')}
-            >
-              <PlayArrow />
-            </IconButton>
-          </div>
-        }
+        <Typography variant="h1" className={classes.title}>{title}</Typography>
+        <Typography variant="subtitle2" className={classes.subtitle}>{author}</Typography>
+        <div>
+          {imgPath &&
+            <div className={classes.btnContainer}>
+              <img src={imgPath} className={classes.cover} alt={t('cover-alt')} />
+              <IconButton
+                className={classes.overlayBtn}
+                color="primary"
+                href={projectLink} target="_BLANK"
+                title={t('prj-launch-tooltip')}
+              >
+                <PlayArrow />
+              </IconButton>
+            </div>
+          }
+        </div>
+        <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
         <ReactMarkdown
           className={classes.description}
           rehypePlugins={[rehypeRaw]}
