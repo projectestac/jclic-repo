@@ -38,7 +38,7 @@ import ProjectCard from './ProjectCard';
 const useStyles = makeStyles(_theme => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
     gridGap: '1rem',
     "& a:link": {
       textDecoration: 'none',

@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
   projects: {
     marginTop: theme.spacing(3),
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
     gridGap: '1rem',
     "& a:link": {
       textDecoration: 'none',
