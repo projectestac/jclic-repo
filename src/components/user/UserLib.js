@@ -92,6 +92,11 @@ const useStyles = makeStyles(theme => ({
       verticalAlign: 'top',
     },
   },
+  urlField: {
+    maxWidth: '100px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
   mainButtons: {
     marginTop: theme.spacing(3),
     '& > *': {
@@ -346,7 +351,7 @@ function UserLib({ settings }) {
                   </tr>
                   <tr>
                     <td>{`${t('user-repo-library')}:`}</td>
-                    <td><a href={userRepoPath}>{userRepoPath}</a></td>
+                    <td className={classes.urlField}><a href={userRepoPath}>{userRepoPath}</a></td>
                   </tr>
                   <tr>
                     <td>{`${t('user-repo-projects')}:`}</td>
