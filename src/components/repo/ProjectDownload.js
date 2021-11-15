@@ -35,7 +35,7 @@ import JSZip from 'jszip';
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, LinearProgress } from '@material-ui/core';
 import { CloudDownload } from '@material-ui/icons';
-import PromisePool from '@supercharge/promise-pool';
+import { PromisePool } from '@supercharge/promise-pool';
 import { useTranslation } from 'react-i18next';
 import { mergeClasses } from '../../utils';
 
