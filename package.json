@@ -78,7 +78,7 @@
     "@webcomponents/webcomponentsjs": "^2.3.0",
     "clipboard-polyfill": "^2.8.6",
     "file-saver": "^2.0.2",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "web-animations-js": "^2.3.2"
   }
 }
