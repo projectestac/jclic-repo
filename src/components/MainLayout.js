@@ -30,8 +30,9 @@
  */
 
 import React from 'react';
-import { StylesProvider, ThemeProvider } from '@material-ui/styles';
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { StylesProvider, ThemeProvider } from '@mui/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes, adaptV4Theme } from '@mui/material/styles';
 import merge from 'lodash/merge';
 import { DEFAULT_SETTINGS, useSettings } from '../settings';
 
@@ -41,14 +42,16 @@ function MainLayout({ jss, dataSettings, Component }) {
   const settings = useSettings(merge(DEFAULT_SETTINGS, dataSettings));
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
-  const theme = responsiveFontSizes(createTheme(settings.theme), {});
+  const theme = responsiveFontSizes(createTheme(adaptV4Theme(settings.theme)), {});
 
   // Wrap the main app in a StylesProvider and ThemeProvider
   return (
     <StylesProvider jss={jss}>
-      <ThemeProvider theme={theme}>
-        <Component settings={settings} />
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Component settings={settings} />
+        </ThemeProvider>
+      </StyledEngineProvider>
     </StylesProvider>
   );
 }

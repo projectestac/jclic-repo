@@ -30,10 +30,10 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { mergeClasses } from '../../utils';
-import { Fab, Card } from '@material-ui/core';
-import { PlayArrow } from '@material-ui/icons';
+import { Fab, Card } from '@mui/material';
+import { PlayArrow } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({

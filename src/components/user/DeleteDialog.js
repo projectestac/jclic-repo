@@ -30,7 +30,7 @@
  */
 
 import React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 function DeleteDialog({ settings, deletePrj, setDeletePrj, deleteAction }) {

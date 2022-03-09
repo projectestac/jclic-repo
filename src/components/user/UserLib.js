@@ -31,13 +31,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { mainFont } from '../../settings';
 import { GoogleLogin } from 'react-google-login';
 import filesize from 'filesize';
 import { checkFetchResponse, clickOnLink, getAbsoluteURL } from '../../utils';
-import { Button, IconButton, CircularProgress, Typography, Avatar } from '@material-ui/core';
-import { LibraryAdd, Delete, CloudDownload, ExitToApp, Eject, Info } from '@material-ui/icons';
+import { Button, IconButton, CircularProgress, Typography, Avatar } from '@mui/material';
+import { LibraryAdd, Delete, CloudDownload, ExitToApp, Eject, Info } from '@mui/icons-material';
 import DeleteDialog from './DeleteDialog';
 import UploadDialog from './UploadDialog';
 import ProjectCard from '../repo/ProjectCard';
@@ -377,7 +377,7 @@ function UserLib({ settings }) {
                           aria-label={t('prj-more-info')}
                           title={t('prj-more-info')}
                           color="primary"
-                        >
+                          size="large">
                           <Info />
                         </IconButton>
                         <IconButton
@@ -385,7 +385,7 @@ function UserLib({ settings }) {
                           aria-label={t('prj-download')}
                           title={t('prj-download')}
                           color="primary"
-                        >
+                          size="large">
                           <CloudDownload />
                         </IconButton>
                         <IconButton
@@ -393,7 +393,7 @@ function UserLib({ settings }) {
                           aria-label={t('user-repo-delete-project')}
                           title={t('user-repo-delete-project')}
                           color="primary"
-                        >
+                          size="large">
                           <Delete />
                         </IconButton>
                       </div>

@@ -30,11 +30,11 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import { checkFetchResponse, getQueryParam, updateHistoryState } from '../../utils';
 import { mainFont } from '../../settings';
-import { Alert } from '@material-ui/lab';
+import { Alert } from '@mui/material';
 import Loading from '../Loading';
 import Project from './Project';
 import RepoList from './RepoList';

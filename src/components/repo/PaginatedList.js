@@ -30,8 +30,8 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from "@material-ui/core/styles";
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { mergeClasses } from '../../utils';
 

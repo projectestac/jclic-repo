@@ -30,9 +30,9 @@
  */
 
 import React, { useState } from 'react';
-import { Typography, IconButton, Button } from '@material-ui/core';
-import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@material-ui/icons';
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, IconButton, Button } from '@mui/material';
+import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@mui/icons-material';
+import makeStyles from '@mui/styles/makeStyles';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { mergeClasses, textContent, getPathForProject } from '../../utils';
@@ -194,9 +194,10 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
               <IconButton
                 className={classes.overlayBtn}
                 color="primary"
-                href={projectLink} target="_BLANK"
+                href={projectLink}
+                target="_BLANK"
                 title={t('prj-launch-tooltip')}
-              >
+                size="large">
                 <PlayArrow />
               </IconButton>
             </div>

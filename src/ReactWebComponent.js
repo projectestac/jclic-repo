@@ -31,7 +31,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { jssPreset } from '@material-ui/styles';
+import { jssPreset } from '@mui/styles';
 import { create } from 'jss';
 import { parseStringSettings } from './utils';
 

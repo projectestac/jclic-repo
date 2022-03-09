@@ -30,11 +30,11 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { mergeClasses } from '../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
-import { Email, Facebook, Twitter, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@material-ui/icons';
+import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { Email, Facebook, Twitter, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
 import ClassroomIcon from '../assets/classroom.svg';
 import MoodleIcon from '../assets/moodle.svg';
 import { useTranslation } from 'react-i18next';
@@ -131,7 +131,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://twitter.com/intent/tweet?text=${E(title)}&url=${E(link)}${hash ? `&hashtags=${E(hash)}` : ''}${via ? `&via=${E(via)}` : ''}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.twitter} aria-label={t('share-twitter')} title={t('share-twitter')}>
+            <IconButton
+              className={classes.twitter}
+              aria-label={t('share-twitter')}
+              title={t('share-twitter')}
+              size="large">
               <Twitter />
             </IconButton>
           </a>
@@ -141,7 +145,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://www.facebook.com/dialog/feed?app_id=${facebookId}&link=${E(link)}${thumbnail ? `&picture=${E(thumbnail)}` : ''}&name=${E(title)}${description ? `&description=${E(description)}` : ''}&redirect_uri=${E('https://facebook.com')}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.facebook} aria-label={t('share-facebook')} title={t('share-facebook')}>
+            <IconButton
+              className={classes.facebook}
+              aria-label={t('share-facebook')}
+              title={t('share-facebook')}
+              size="large">
               <Facebook />
             </IconButton>
           </a>
@@ -151,7 +159,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://telegram.me/share/url?url=${E(link)}&text=${E(`${title}\n${description || ''}`)}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.telegram} aria-label={t('share-telegram')} title={t('share-telegram')}>
+            <IconButton
+              className={classes.telegram}
+              aria-label={t('share-telegram')}
+              title={t('share-telegram')}
+              size="large">
               <Telegram />
             </IconButton>
           </a>}
@@ -160,7 +172,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://api.whatsapp.com/send?text=${E(`${title}\n${link}`)}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.whatsapp} aria-label={t('share-whatsapp')} title={t('share-whatsapp')}>
+            <IconButton
+              className={classes.whatsapp}
+              aria-label={t('share-whatsapp')}
+              title={t('share-whatsapp')}
+              size="large">
               <WhatsApp />
             </IconButton>
           </a>
@@ -170,7 +186,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://pinterest.com/pin/create/button/?url=${E(link)}&media=${E(thumbnail)}&description=${E(title)}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.pinterest} aria-label={t('share-pinterest')} title={t('share-pinterest')}>
+            <IconButton
+              className={classes.pinterest}
+              aria-label={t('share-pinterest')}
+              title={t('share-pinterest')}
+              size="large">
               <Pinterest />
             </IconButton>
           </a>
@@ -180,7 +200,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`mailto:?subject=${E(title)}&body=${E(emailBody || `${title}\n\n${description || ''}\n${link}`)}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton className={classes.email} aria-label={t('share-email')} title={t('share-email')} >
+            <IconButton
+              className={classes.email}
+              aria-label={t('share-email')}
+              title={t('share-email')}
+              size="large">
               <Email />
             </IconButton>
           </a>
@@ -190,7 +214,10 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             href={`https://classroom.google.com/u/0/share?url=${E(link)}`}
             target="_blank"
             rel="noopener noreferrer">
-            <IconButton aria-label={t('share-classroom')} title={t('share-classroom')} >
+            <IconButton
+              aria-label={t('share-classroom')}
+              title={t('share-classroom')}
+              size="large">
               <ClassroomIcon />
             </IconButton>
           </a>
@@ -203,7 +230,8 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               setSnackOpen(false);
               setMoodleBox(!moodleBox);
               setEmbedBox(false);
-            }}>
+            }}
+            size="large">
             <MoodleIcon />
           </IconButton>
         }
@@ -215,7 +243,8 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               setSnackOpen(false);
               setMoodleBox(false);
               setEmbedBox(!embedBox);
-            }}>
+            }}
+            size="large">
             <Code />
           </IconButton>
         }
@@ -235,7 +264,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             endAdornment={
               <InputAdornment position="end">
                 <CopyToClipboard text={moodleLink} onCopy={() => setSnackOpen(true)}>
-                  <IconButton aria-label={t('share-copy')} title={t('share-copy')} >
+                  <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
                     <FileCopyOutlined />
                   </IconButton>
                 </CopyToClipboard>
@@ -259,7 +288,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             endAdornment={
               <InputAdornment position="end">
                 <CopyToClipboard text={embedCode} onCopy={() => setSnackOpen(true)}>
-                  <IconButton aria-label={t('share-copy')} title={t('share-copy')}>
+                  <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
                     <FileCopyOutlined />
                   </IconButton>
                 </CopyToClipboard>

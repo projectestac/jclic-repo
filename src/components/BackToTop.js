@@ -30,8 +30,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Fab } from '@material-ui/core';
-import { ArrowUpward } from '@material-ui/icons';
+import { Fab } from '@mui/material';
+import { ArrowUpward } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
 // Based on: https://github.com/donaldboulton/publiuslogic/blob/master/src/components/Scroll/index.js

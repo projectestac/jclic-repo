@@ -30,12 +30,12 @@
  */
 
 import React from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { mergeClasses } from '../../utils';
 import BackToTop from '../BackToTop';
-import { Typography, Paper } from '@material-ui/core';
-import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
-import { List, ViewComfy } from '@material-ui/icons';
+import { Typography, Paper } from '@mui/material';
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { List, ViewComfy } from '@mui/icons-material';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import SelectProjects from './SelectProjects';

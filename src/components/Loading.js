@@ -30,8 +30,8 @@
  */
 
 import React from 'react';
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, CircularProgress } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Typography, CircularProgress } from "@mui/material";
 import { useTranslation } from 'react-i18next';
 import { mergeClasses } from '../utils';
 

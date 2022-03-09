@@ -30,10 +30,10 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { mergeClasses } from '../../utils';
-import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton } from '@mui/material';
+import { Search } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(_theme => ({
@@ -124,7 +124,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
                   title={t('search')}
                   onClick={handleEnterSearch}
                   edge="end"
-                >
+                  size="large">
                   <Search />
                 </IconButton>
               </InputAdornment>

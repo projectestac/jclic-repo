@@ -30,8 +30,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { mergeClasses } from '../../utils';
 import filesize from 'filesize';
 import { useTranslation } from 'react-i18next';
