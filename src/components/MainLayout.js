@@ -31,29 +31,26 @@
 
 import React from 'react';
 import { StylesProvider, ThemeProvider } from '@mui/styles';
-import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import { createTheme, responsiveFontSizes, adaptV4Theme } from '@mui/material/styles';
-import merge from 'lodash/merge';
+import { deepmerge } from '@mui/utils';
 import { DEFAULT_SETTINGS, useSettings } from '../settings';
 
 function MainLayout({ jss, cache, dataSettings, Component }) {
 
   // Merge default settings with "data-" props
-  const settings = useSettings(merge(DEFAULT_SETTINGS, dataSettings));
+  const settings = useSettings(deepmerge(DEFAULT_SETTINGS, dataSettings));
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
   const theme = responsiveFontSizes(createTheme(adaptV4Theme(settings.theme)), {});
-
+  
   // Wrap the main app in a StylesProvider and ThemeProvider
   return (
     <StylesProvider jss={jss}>
       <CacheProvider value={cache}>
-        {/*<StyledEngineProvider injectFirst>*/}
         <ThemeProvider theme={theme}>
           <Component settings={settings} />
         </ThemeProvider>
-        {/*</StyledEngineProvider>*/}
       </CacheProvider>
     </StylesProvider>
   );

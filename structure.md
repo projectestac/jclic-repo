@@ -6,7 +6,7 @@ Subclass of [ReactWebComponent](src/ReactWebComponent.js) - Extends HTMLElement 
   `div` (as _mountPoint_)
     ReactDOM.render
     [MainLayout](src/components/MainLayout.js)
-      StylesProvider (from '@material-ui/styles')
+      CacheProvider (from '@emotion/react')
         ThemeProvider (from '@material-ui/styles')
           Component (Repo or UserLib)
 
