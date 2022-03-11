@@ -30,7 +30,7 @@
  */
 
 import React, { useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../../utils';
 import { Fab, Card } from '@mui/material';
 import { PlayArrow } from '@mui/icons-material';

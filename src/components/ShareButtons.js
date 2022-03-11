@@ -30,7 +30,7 @@
  */
 
 import React, { useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio } from '@mui/material';

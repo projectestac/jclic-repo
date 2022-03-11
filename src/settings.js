@@ -49,7 +49,7 @@ export const DEFAULT_THEME = {
   },
   typography: {
     fontFamily: mainFont,
-    fontDisplay: 'swap',
+    fontDisplay: 'swap', // Fa res???
     h1: {
       fontFamily: titleFont,
       fontWeight: 700,

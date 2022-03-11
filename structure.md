@@ -7,7 +7,7 @@ Subclass of [ReactWebComponent](src/ReactWebComponent.js) - Extends HTMLElement 
     ReactDOM.render
     [MainLayout](src/components/MainLayout.js)
       CacheProvider (from '@emotion/react')
-        ThemeProvider (from '@material-ui/styles')
+        ThemeProvider (from '@mui/material/styles')
           Component (Repo or UserLib)
 
 ## Repo with list

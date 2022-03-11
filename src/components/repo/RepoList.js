@@ -30,7 +30,7 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../../utils';
 import BackToTop from '../BackToTop';
 import { Typography, Paper } from '@mui/material';

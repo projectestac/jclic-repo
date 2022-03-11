@@ -32,7 +32,7 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, LinearProgress } from '@mui/material';
 import { CloudDownload } from '@mui/icons-material';
 import { PromisePool } from '@supercharge/promise-pool';
@@ -277,7 +277,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
       classes={{ paper: classes['root'] }}
       open={dlgOpen}
       onClose={closeDlg}
-      TransitionProps={{ onEnter: start }}
+      TransitionProps={{ onEntered: start }}
     >
       <DialogTitle>{t('prj-download-title', { title })}</DialogTitle>
       <DialogContent className={classes['dlgContent']}>

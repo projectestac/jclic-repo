@@ -32,7 +32,7 @@
 import React, { useState } from 'react';
 import { Typography, IconButton, Button } from '@mui/material';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@mui/icons-material';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { mergeClasses, textContent, getPathForProject } from '../../utils';

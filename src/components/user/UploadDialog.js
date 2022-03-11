@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../../utils';
 import filesize from 'filesize';
 import { useTranslation } from 'react-i18next';
@@ -155,7 +155,7 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
       container={() => rootRef.current}
       className={classes['root']}
       open={uploadDlg}
-      TransitionProps={{ onExit: reset }}
+      TransitionProps={{ onExited: reset }}
       aria-labelledby="upload-dialog-title"
     >
       <DialogTitle id="upload-dialog-title">{t('user-repo-upload-title')}</DialogTitle>

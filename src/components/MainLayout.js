@@ -30,9 +30,9 @@
  */
 
 import React from 'react';
-import { StylesProvider, ThemeProvider } from '@mui/styles';
+import { StylesProvider } from '@mui/styles';
 import { CacheProvider } from '@emotion/react';
-import { createTheme, responsiveFontSizes, adaptV4Theme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 import { DEFAULT_SETTINGS, useSettings } from '../settings';
 
@@ -42,7 +42,7 @@ function MainLayout({ jss, cache, dataSettings, Component }) {
   const settings = useSettings(deepmerge(DEFAULT_SETTINGS, dataSettings));
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
-  const theme = responsiveFontSizes(createTheme(adaptV4Theme(settings.theme)), {});
+  const theme = responsiveFontSizes(createTheme(settings.theme), {});
   
   // Wrap the main app in a StylesProvider and ThemeProvider
   return (

@@ -30,7 +30,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { mergeClasses } from '../../utils';

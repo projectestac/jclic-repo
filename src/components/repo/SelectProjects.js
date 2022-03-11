@@ -30,7 +30,7 @@
  */
 
 import React, { useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../../utils';
 import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Search } from '@mui/icons-material';

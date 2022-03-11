@@ -30,7 +30,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mergeClasses } from '../../utils';
 import InfiniteScroll from '../InfiniteScroll';
 import ProjectCard from './ProjectCard';

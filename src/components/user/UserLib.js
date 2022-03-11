@@ -31,7 +31,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { mainFont } from '../../settings';
 import { GoogleLogin } from 'react-google-login';
 import filesize from 'filesize';
