@@ -67,11 +67,11 @@ export class ReactWebComponent extends HTMLElement {
     if (styleAttr)
       mountPoint.setAttribute('style', styleAttr);
 
-    // Create a Shadow DOM tree and append the pivot element to it
+    // Create a Shadow DOM tree and append the pivot element and a root 'style' element (used by emotion) to it
     const shadowRoot = this.attachShadow({ mode: 'open' });
     const emotionRoot = document.createElement('style');
-    shadowRoot.appendChild(emotionRoot);
-    const reactRoot = shadowRoot.appendChild(mountPoint);
+    shadowRoot.appendChild(emotionRoot); 
+    shadowRoot.appendChild(mountPoint);
 
 
     // Use the pivot element to create a JSS configuration
@@ -80,6 +80,7 @@ export class ReactWebComponent extends HTMLElement {
       insertionPoint: mountPoint,
     });
 
+    // Create also a css cache, baset on emotionRoot
     const cache = createCache({
       key: 'css',
       prepend: true,
