@@ -78,10 +78,11 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
     <div className={classes.root}>
       <Typography color="textSecondary" className={classes['label']}>{t('prj-filter')}</Typography>
       <FormControl className={classes.formControl}>
-        <InputLabel id="select-lang-label">{t('prj-language')}</InputLabel>
+        <InputLabel id="select-lang-label" variant="standard">{t('prj-language')}</InputLabel>
         <Select
           labelId="select-lang-label"
           name="language"
+          variant="standard"
           MenuProps={{ container: () => rootRef.current }}
           value={filters?.language || ''}
           onChange={handleChange}>
@@ -89,10 +90,11 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="select-subj-label">{t('prj-subject')}</InputLabel>
+        <InputLabel id="select-subj-label" variant="standard">{t('prj-subject')}</InputLabel>
         <Select
           labelId="select-subj-label"
           name="subject"
+          variant="standard"
           MenuProps={{ container: () => rootRef.current }}
           value={filters?.subject || ''}
           onChange={handleChange}>
@@ -100,10 +102,11 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="select-level-label">{t('prj-level')}</InputLabel>
+        <InputLabel id="select-level-label" variant="standard">{t('prj-level')}</InputLabel>
         <Select
           labelId="select-level-label"
           name="level"
+          variant="standard"
           MenuProps={{ container: () => rootRef.current }}
           value={filters?.level || ''}
           onChange={handleChange}>
@@ -113,6 +116,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
       <FormControl className={classes.formControl}>
         <TextField
           label={t('prj-text')}
+          variant="standard"
           value={query}
           onChange={({ target: { value } }) => setQuery(value)}
           onKeyPress={handleEnterSearch}
