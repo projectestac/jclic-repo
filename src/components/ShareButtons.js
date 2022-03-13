@@ -74,24 +74,6 @@ const useStyles = makeStyles(_theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  twitter: {
-    color: '#01acee',
-  },
-  facebook: {
-    color: '#3c5a98',
-  },
-  telegram: {
-    color: '#37aee2',
-  },
-  whatsapp: {
-    color: '#2cb842',
-  },
-  pinterest: {
-    color: '#cb2128',
-  },
-  email: {
-    color: '#0a5191',
-  },
   snack: {
     position: 'absolute',
     top: '9rem',
@@ -132,7 +114,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.twitter}
+              sx={{ color: '#01acee' }}
               aria-label={t('share-twitter')}
               title={t('share-twitter')}
               size="large">
@@ -146,7 +128,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.facebook}
+              sx={{ color: '#3c5a98' }}
               aria-label={t('share-facebook')}
               title={t('share-facebook')}
               size="large">
@@ -160,7 +142,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.telegram}
+              sx={{ color: '#37aee2' }}
               aria-label={t('share-telegram')}
               title={t('share-telegram')}
               size="large">
@@ -173,7 +155,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.whatsapp}
+              sx={{ color: '#2cb842' }}
               aria-label={t('share-whatsapp')}
               title={t('share-whatsapp')}
               size="large">
@@ -187,7 +169,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.pinterest}
+              sx={{ color: '#cb2128' }}
               aria-label={t('share-pinterest')}
               title={t('share-pinterest')}
               size="large">
@@ -201,7 +183,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              className={classes.email}
+              sx={{ color: '#0a5191' }}
               aria-label={t('share-email')}
               title={t('share-email')}
               size="large">
