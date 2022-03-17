@@ -126,6 +126,8 @@ export const DEFAULT_SETTINGS = {
   displayTitle: process.env.DISPLAY_TITLE === 'false' ? false : true,
   // Show the subtitle
   displaySubtitle: process.env.DISPLAY_SUBTITLE === 'false' ? false : true,
+  // Show the "back to top" button when scrolling large lists of activities
+  displayBackToTop: process.env.DISPLAY_BACK_TO_TOP === 'false' ? false : true,
   // Maximum number of parallel threads when downloading activities
   maxThreads: Number(process.env.MAX_THREADS) || 20,
 };

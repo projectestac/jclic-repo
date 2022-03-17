@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
 function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
   const { t } = useTranslation();
-  const { displayTitle, displaySubtitle, logo, twitterCard } = settings;
+  const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = settings;
   const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
@@ -105,7 +105,8 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
         && <PaginatedList {...{ user, projects, settings, updateAct }} />)
         || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
       }
-      <BackToTop {...{ settings, showBelow: 300 }} />
+      {displayBackToTop &&
+        <BackToTop {...{ settings, showBelow: 300 }} />}
     </div >
   );
 }
