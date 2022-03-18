@@ -34,12 +34,15 @@ import { StylesProvider } from '@mui/styles';
 import { CacheProvider } from '@emotion/react';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
-import { DEFAULT_SETTINGS, useSettings } from '../settings';
+import { DEFAULT_SETTINGS, useSettings, initFonts } from '../settings';
 
 function MainLayout({ jss, cache, dataSettings, Component }) {
 
   // Merge default settings with "data-" props
   const settings = useSettings(deepmerge(DEFAULT_SETTINGS, dataSettings));
+
+  // Initialize needed fonts
+  initFonts(settings);
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
   const theme = responsiveFontSizes(createTheme(settings.theme), {});

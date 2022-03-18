@@ -64,7 +64,7 @@ export function loadGoogleFont(fontName = 'Roboto', weights = '300,400,500,700')
  */
 export function parseExpression(s = '') {
   // Parse only strings
-  if (typeof s !== 'string')
+  if (typeof s !== 'string' || s === '')
     return s;
 
   // If the expression starts with "{", "[", or is a boolean, parse it as JSON

@@ -37,9 +37,13 @@ import { supportedLanguages, i18nInit } from './i18n';
 
 export const mainFont = ['Roboto', 'Arial', '"sans-serif"'].join(',');
 export const titleFont = ['"Open Sans"', 'Arial', '"sans-serif"'].join(',');
-export function initFonts() {
-  loadGoogleFont('Roboto');
-  loadGoogleFont('Open Sans');
+export function initFonts({ alreadyLoadedFonts = '' }) {
+  console.log(alreadyLoadedFonts);
+  const fontsList = new Set(alreadyLoadedFonts.split(','));
+  if (!fontsList.has('Roboto'))
+    loadGoogleFont('Roboto');
+  if (!fontsList.has('Open Sans'))
+    loadGoogleFont('Open Sans');
 }
 
 export const DEFAULT_THEME = {
@@ -128,6 +132,8 @@ export const DEFAULT_SETTINGS = {
   displaySubtitle: process.env.DISPLAY_SUBTITLE === 'false' ? false : true,
   // Show the "back to top" button when scrolling large lists of activities
   displayBackToTop: process.env.DISPLAY_BACK_TO_TOP === 'false' ? false : true,
+  // Array of names of fonts already loaded by the container page
+  alreadyLoadedFonts: process.env.alreadyLoadedFonts || '',
   // Maximum number of parallel threads when downloading activities
   maxThreads: Number(process.env.MAX_THREADS) || 20,
 };
