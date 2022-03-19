@@ -1,6 +1,6 @@
 /*!
- *  File    : components/Loading.js
- *  Created : 2021-07-16
+ *  File    : components/DataCard.js
+ *  Created : 2022-03-19
  *  By      : Francesc Busquets <francesc@gmail.com>
  *
  *  JClic repo
@@ -29,20 +29,28 @@
  *  @module
  */
 
-import React from 'react';
-import { Box, Typography, LinearProgress } from "@mui/material";
-import { useTranslation } from 'react-i18next';
+import { styled } from '@mui/material/styles'
 
-function Loading({ settings }) {
-  const { t } = useTranslation();
-  const { displayTitle } = settings;
-  return (
-    <Box>
-      {displayTitle && <Typography sx={{ mb: 2, color: 'primary.dark' }} variant="h1">{t('repo-title')}</Typography>}
-      <Typography>{t('loading')}</Typography>
-      <LinearProgress sx={{ my: 2 }} />
-    </Box>
-  );
-}
+const DataCard = styled('table')(({ _theme }) => ({
+  borderCollapse: 'collapse',
+  minWidth: '80%',
+  maxWidth: '800px',
+  marginTop: '2rem',
+  marginBottom: '1.5rem',
+  lineHeight: '1.5',
+  "& td": {
+    border: 'none',
+    borderBottom: '1px solid lightgray',
+    borderTop: '1px solid lightgray',
+    padding: '0.5rem',
+    paddingLeft: 0,
+  },
+  "& td:first-of-type": {
+    width: '9rem',
+    fontWeight: 'bold',
+    paddingRight: '8pt',
+    verticalAlign: 'top',
+  },
+}));
 
-export default Loading;
+export default DataCard;

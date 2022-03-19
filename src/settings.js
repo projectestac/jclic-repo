@@ -38,12 +38,11 @@ import { supportedLanguages, i18nInit } from './i18n';
 export const mainFont = ['Roboto', 'Arial', '"sans-serif"'].join(',');
 export const titleFont = ['"Open Sans"', 'Arial', '"sans-serif"'].join(',');
 export function initFonts({ alreadyLoadedFonts = '' }) {
-  console.log(alreadyLoadedFonts);
   const fontsList = new Set(alreadyLoadedFonts.split(','));
   if (!fontsList.has('Roboto'))
-    loadGoogleFont('Roboto');
+    loadGoogleFont('Roboto', '300,400,500,700');
   if (!fontsList.has('Open Sans'))
-    loadGoogleFont('Open Sans');
+    loadGoogleFont('Open Sans', '400,700');
 }
 
 export const DEFAULT_THEME = {
@@ -69,6 +68,9 @@ export const DEFAULT_THEME = {
       fontWeight: 700,
       fontSize: '1.5rem',
       marginBottom: '0.6rem',
+    },
+    body1: {
+      fontFamily: mainFont,
     },
     body3: {
       fontFamily: mainFont,

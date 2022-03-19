@@ -30,21 +30,13 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import { checkFetchResponse, getQueryParam, updateHistoryState } from '../../utils';
-import { mainFont } from '../../settings';
-import { Alert } from '@mui/material';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Loading from '../Loading';
 import Project from './Project';
 import RepoList from './RepoList';
-
-const useStyles = makeStyles({
-  root: {
-    padding: '1rem',
-    fontFamily: mainFont,
-  },
-});
 
 export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', textMatches: [] };
 
@@ -170,17 +162,15 @@ function Repo({ settings }) {
       updateFullTextResults(filters.text);
   }, [window]);
 
-  const styles = useStyles();
-
   return (
-    <div className={styles.root} ref={settings.rootRef} >
+    <Box sx={{ p: { xs: 1, sm: 2 }, typography: 'body1' }} ref={settings.rootRef} >
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||
         project && <Project {...{ settings, user, project, fullProjectList, updateAct }} /> ||
         projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct }} />
       }
-    </div>
+    </Box>
   );
 }
 

@@ -31,102 +31,22 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
-import { mainFont } from '../../settings';
 import { GoogleLogin } from 'react-google-login';
 import filesize from 'filesize';
 import { checkFetchResponse, clickOnLink, getAbsoluteURL } from '../../utils';
-import { Button, IconButton, CircularProgress, Typography, Avatar } from '@mui/material';
+import { Box, Alert, Button, IconButton, CircularProgress, Typography, Link, Avatar } from '@mui/material';
 import { LibraryAdd, Delete, CloudDownload, ExitToApp, Eject, Info } from '@mui/icons-material';
 import DeleteDialog from './DeleteDialog';
 import UploadDialog from './UploadDialog';
 import ProjectCard from '../repo/ProjectCard';
+import DataCard from '../DataCard';
 
 const AUTH_KEY = '__auth';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: '1rem',
-    fontFamily: mainFont,
-  },
-  error: {
-    color: theme.palette.error.dark,
-    fontWeight: 'bold',
-  },
-  titleGroup: {
-    display: 'grid',
-    gridTemplateColumns: '1fr auto',
-    gridGap: theme.spacing(1),
-    marginBottom: '1.5rem',
-  },
-  title: {
-    color: `${theme.palette.primary.dark}`,
-    alignSelf: 'center',
-  },
-  avatar: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-  info: {
-    minWidth: '80%',
-    maxWidth: '800px',
-  },
-  dataCard: {
-    borderCollapse: 'collapse',
-    minWidth: '80%',
-    maxWidth: '800px',
-    marginTop: '2rem',
-    marginBottom: '1.5rem',
-    lineHeight: '1.5',
-    "& td": {
-      border: 'none',
-      borderBottom: '1px solid lightgray',
-      borderTop: '1px solid lightgray',
-      padding: '0.5rem',
-      paddingLeft: 0,
-    },
-    "& td:first-child": {
-      width: '9rem',
-      fontWeight: 'bold',
-      paddingRight: '8pt',
-      verticalAlign: 'top',
-    },
-  },
-  urlField: {
-    maxWidth: '100px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  mainButtons: {
-    marginTop: theme.spacing(3),
-    '& > *': {
-      marginRight: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-    },
-  },
-  projects: {
-    marginTop: theme.spacing(3),
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-    gridGap: '1rem',
-    "& a:link": {
-      textDecoration: 'none',
-    }
-  },
-  cardInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    "& *:first-child": {
-      flexGrow: 1,
-    },
-  }
-}));
 
 function UserLib({ settings }) {
 
   const { t } = useTranslation();
   const { displayTitle, googleOAuth2Id, userLibApi, repoPath, debug } = settings;
-  const classes = useStyles();
   /**
    * userData fields: {
    *   googleUser,
@@ -313,17 +233,17 @@ function UserLib({ settings }) {
   const updateAct = (path, user) => clickOnLink(getAbsoluteURL(repoPath, { prj: path, user }));
 
   return (
-    <div className={classes.root} ref={settings.rootRef} >
-      <div className={classes.titleGroup}>
-        {displayTitle && <Typography variant="h1" className={classes.title}>{title}</Typography>}
-        {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} className={classes.avatar} />}
-      </div>
-      <div className={classes.info} dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
-      {err && <div className={classes.error}>{err}</div>}
-      {loading && <CircularProgress className={classes.loading} />}
+    <Box sx={{ p: { xs: 1, sm: 2 }, typography: 'body1' }} ref={settings.rootRef} >
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 1, mb: 1.5 }}>
+        {displayTitle && <Typography variant="h1" sx={{ color: 'primary.dark' }}>{title}</Typography>}
+        {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} sx={{ width: 56, height: 56 }} />}
+      </Box>
+      <Box sx={{ minWidth: 0.8, maxWidth: 800 }} dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
+      {err && <Alert severity="error">{t('error', { error: err.toLocaleString() })}</Alert>}
+      {!loading && <CircularProgress sx={{ my: 2 }} />}
       {!loading &&
         <>
-          <div className={classes.mainButtons}>
+          <Box sx={{ mt: 3, '& > button': { mr: 2, mb: 2 } }}>
             {!userData &&
               <GoogleLogin
                 clientId={googleOAuth2Id}
@@ -340,10 +260,10 @@ function UserLib({ settings }) {
             }
             {userData && <Button variant="contained" startIcon={<Eject />} onClick={logout}>{t('user-repo-logout')}</Button>}
             {userData && <Button variant="contained" startIcon={<LibraryAdd />} onClick={uploadProject}>{t('user-repo-upload-project')}</Button>}
-          </div>
+          </Box>
           {userData &&
             <>
-              <table className={classes.dataCard}>
+              <DataCard>
                 <tbody>
                   <tr>
                     <td>{`${t('user-repo-user')}:`}</td>
@@ -351,7 +271,11 @@ function UserLib({ settings }) {
                   </tr>
                   <tr>
                     <td>{`${t('user-repo-library')}:`}</td>
-                    <td className={classes.urlField}><a href={userRepoPath}>{userRepoPath}</a></td>
+                    <td>
+                      <Box sx={{ maxWidth: 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <Link href={userRepoPath}>{userRepoPath}</Link>
+                      </Box>
+                    </td>
                   </tr>
                   <tr>
                     <td>{`${t('user-repo-projects')}:`}</td>
@@ -362,17 +286,17 @@ function UserLib({ settings }) {
                     <td>{t('user-repo-quota-exp', { current: filesize(userData.currentSize, { locale: true }), quota: filesize(userData.quota, { locale: true }) })}</td>
                   </tr>
                 </tbody>
-              </table>
+              </DataCard>
               <Typography variant="h3" color="primary">{t('user-repo-projects')}</Typography>
               {(userData.projects.length === 0 && <p>{t('user-repo-no-projects')}</p>) ||
-                <div className={classes.projects}>
+                <Box sx={{ mt: 3, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: { xs: 1, sm: 2 }, '& a:link': { textDecoration: 'none' } }}>
                   {userData.projects.map((project, n) => (
                     <ProjectCard key={n} {...{ settings, user: userData.id, updateAct, project }} >
-                      <div className={classes.cardInfo}>
-                        <div>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Box sx={{ flexGrow: 1 }}>
                           {`${t('prj-size')}: ${filesize(project.totalSize, { locale: true })}`}<br />
                           {`${t('prj-numfiles')}: ${project.files.length}`}
-                        </div>
+                        </Box>
                         <IconButton
                           aria-label={t('prj-more-info')}
                           title={t('prj-more-info')}
@@ -396,10 +320,10 @@ function UserLib({ settings }) {
                           size="large">
                           <Delete />
                         </IconButton>
-                      </div>
+                      </Box>
                     </ProjectCard>
                   ))}
-                </div>
+                </Box>
               }
             </>
           }
@@ -407,7 +331,7 @@ function UserLib({ settings }) {
       }
       <DeleteDialog {...{ settings, deletePrj, setDeletePrj, deleteAction }} />
       <UploadDialog {...{ settings, uploadDlg, setUploadDlg, userData, uploadAction }} />
-    </div>
+    </Box>
   );
 }
 

@@ -40,6 +40,7 @@ import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
+import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -88,26 +89,6 @@ const useStyles = makeStyles(theme => ({
   description: {
     "& li": {
       marginBottom: '1rem',
-    },
-  },
-  dataCard: {
-    borderCollapse: 'collapse',
-    minWidth: '80%',
-    maxWidth: '800px',
-    marginTop: '2rem',
-    marginBottom: '1.5rem',
-    "& td": {
-      border: 'none',
-      borderBottom: '1px solid lightgray',
-      borderTop: '1px solid lightgray',
-      padding: '0.5rem',
-      paddingLeft: 0,
-    },
-    "& td:first-child": {
-      width: '9rem',
-      fontWeight: 'bold',
-      paddingRight: '8pt',
-      verticalAlign: 'top',
     },
   },
   related: {
@@ -211,7 +192,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
           {pageDesc}
         </ReactMarkdown>
       </div>
-      <table className={classes.dataCard}>
+      <DataCard>
         <tbody>
           <tr>
             <td>{`${t('prj-authors')}:`}</td>
@@ -284,7 +265,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
             </tr>
           }
         </tbody>
-      </table>
+      </DataCard>
       <div className={classes.buttons}>
         <Button
           variant="contained"
