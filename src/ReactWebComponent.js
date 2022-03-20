@@ -31,8 +31,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { jssPreset } from '@mui/styles';
-import { create } from 'jss';
 import createCache from '@emotion/cache';
 import { parseStringSettings } from './utils';
 
@@ -70,17 +68,10 @@ export class ReactWebComponent extends HTMLElement {
     // Create a Shadow DOM tree and append the pivot element and a root 'style' element (used by emotion) to it
     const shadowRoot = this.attachShadow({ mode: 'open' });
     const emotionRoot = document.createElement('style');
-    shadowRoot.appendChild(emotionRoot); 
+    shadowRoot.appendChild(emotionRoot);
     shadowRoot.appendChild(mountPoint);
 
-
-    // Use the pivot element to create a JSS configuration
-    const jss = create({
-      ...jssPreset(),
-      insertionPoint: mountPoint,
-    });
-
-    // Create also a css cache, baset on emotionRoot
+    // Create a css cache, baset on emotionRoot
     const cache = createCache({
       key: 'css',
       prepend: true,
@@ -91,7 +82,7 @@ export class ReactWebComponent extends HTMLElement {
 
     // Render the React component on the pivot element
     ReactDOM.render(
-      <Layout {...{ jss, cache, dataSettings, Component: this.getMainComponent() }} />,
+      <Layout {...{ cache, dataSettings, Component: this.getMainComponent() }} />,
       mountPoint);
   }
 }

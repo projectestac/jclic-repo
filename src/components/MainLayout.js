@@ -30,13 +30,12 @@
  */
 
 import React from 'react';
-import { StylesProvider } from '@mui/styles';
 import { CacheProvider } from '@emotion/react';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 import { DEFAULT_SETTINGS, useSettings, initFonts } from '../settings';
 
-function MainLayout({ jss, cache, dataSettings, Component }) {
+function MainLayout({ cache, dataSettings, Component }) {
 
   // Merge default settings with "data-" props
   const settings = useSettings(deepmerge(DEFAULT_SETTINGS, dataSettings));
@@ -46,16 +45,14 @@ function MainLayout({ jss, cache, dataSettings, Component }) {
 
   // Create a MaterialUI theme with responsive fonts, based on the current settings
   const theme = responsiveFontSizes(createTheme(settings.theme), {});
-  
+
   // Wrap the main app in a StylesProvider and ThemeProvider
   return (
-    <StylesProvider jss={jss}>
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={theme}>
-          <Component settings={settings} />
-        </ThemeProvider>
-      </CacheProvider>
-    </StylesProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Component settings={settings} />
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

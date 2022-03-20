@@ -31,9 +31,7 @@
 
 import React from "react";
 import ReactDOM from 'react-dom';
-import { create } from 'jss';
 import createCache from '@emotion/cache';
-import { jssPreset } from '@mui/styles';
 import { parseStringSettings } from './utils';
 import MainLayout from "./components/MainLayout";
 import Repo from "./components/repo/Repo";
@@ -49,9 +47,8 @@ export default function DOMRenderer(root, type = 'repo') {
   const dataSettings = parseStringSettings(root.dataset);
   const Component = type === 'user' ? UserLib : Repo;
   const cache = createCache({ key: 'css', prepend: true });
-  const jss = create({ ...jssPreset(), insertionPoint: root });
-
+ 
   ReactDOM.render(
-    <MainLayout {...{ jss, cache, dataSettings, Component }} />,
+    <MainLayout {...{ cache, dataSettings, Component }} />,
     root);
 }
