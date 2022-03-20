@@ -30,10 +30,8 @@
  */
 
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../../utils';
 import BackToTop from '../BackToTop';
-import { Typography, Paper } from '@mui/material';
+import { Typography, Paper, Box } from '@mui/material';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { List, ViewComfy } from '@mui/icons-material';
 import SEO from '../SEO';
@@ -43,51 +41,28 @@ import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '&h1': {
-      fontSize: '12pt',
-    },
-  },
-  title: {
-    color: `${theme.palette.primary.dark}`,
-    marginBottom: '0.5rem',
-  },
-  selectProjects: {
-    marginTop: '1rem',
-    marginBottom: '1rem',
-    maxWidth: '1200px',
-  },
-  displayMode: {
-    background: 'transparent',
-    marginTop: '1rem',
-    marginBottom: '1rem',
-  },
-}));
-
 function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = settings;
-  const classes = mergeClasses(props, useStyles());
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
   const projectCount = t('repo-num', { count: projects.length, context: `${projects.length}` });
 
   return (
-    <div {...props} className={classes.root}>
+    <Box {...props} >
       <SEO {...{ settings, title, description, thumbnail: twitterCard }} />
-      {(displayTitle || user) && <Typography variant="h1" className={classes.title}>{title}</Typography>}
+      {(displayTitle || user) && <Typography variant="h1" sx={{ color: 'primary.dark', mb: 1 }}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
-        <Paper className={classes.selectProjects}>
+        <Paper sx={{ my: 2, maxWidth: 1200 }}>
           <SelectProjects {...{ settings, filters, updateFilters, setLoading, setError }} />
         </Paper>
       }
       <Typography variant="body2">{projectCount}</Typography>
       <ToggleButtonGroup
-        className={classes.displayMode}
+        sx={{ my: 2 }}
         size="small"
         value={listMode}
         exclusive
@@ -107,7 +82,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
       }
       {displayBackToTop &&
         <BackToTop {...{ settings, showBelow: 300 }} />}
-    </div >
+    </Box >
   );
 }
 

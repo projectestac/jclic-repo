@@ -30,27 +30,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../../utils';
 import InfiniteScroll from '../InfiniteScroll';
 import ProjectCard from './ProjectCard';
-
-const useStyles = makeStyles(_theme => ({
-  root: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-    gridGap: '1rem',
-    "& a:link": {
-      textDecoration: 'none',
-    }
-  },
-}));
+import { Box } from '@mui/material';
 
 const blockSize = 30;
 
 function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
 
-  const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
   const [items, setItems] = useState(projects.slice(0, page * blockSize));
 
@@ -67,7 +54,6 @@ function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
   return (
     <InfiniteScroll
       {...props}
-      className={classes.root}
       pageStart={0}
       initialLoad={true}
       loadMore={loadMore}
@@ -75,9 +61,16 @@ function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
       threshold={250}
       useWindow={true}
     >
-      {items.map((project, n) => (
-        <ProjectCard key={n} {...{ settings, user, project, updateAct }} />
-      ))}
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
+        gap: 2,
+        "& a:link": { textDecoration: 'none' }
+      }}>
+        {items.map((project, n) => (
+          <ProjectCard key={n} {...{ settings, user, project, updateAct }} />
+        ))}
+      </Box>
     </InfiniteScroll>
   );
 }

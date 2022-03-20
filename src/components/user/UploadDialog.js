@@ -30,59 +30,11 @@
  */
 
 import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../../utils';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress, Box } from '@mui/material';
 import filesize from 'filesize';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-  },
-  content: {
-    '& > *': {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-    },
-  },
-  input: {
-    display: 'none',
-  },
-  info: {
-    height: '4rem',
-  },
-  fileInfo: {
-    marginTop: theme.spacing(2),
-  },
-  fileName: {
-    fontWeight: 'bold',
-  },
-  folder: {
-    width: '100%',
-    maxWidth: '18rem',
-  },
-  error: {
-    color: theme.palette.error.dark,
-  },
-  warning: {
-    color: theme.palette.warning.dark,
-  },
-  waiting: {
-    marginTop: theme.spacing(2),
-    '& > *': {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-  },
-  instructions: {
-    "& .code": {
-      fontFamily: "'Courier New', Courier, monospace",
-      fontSize: "1.2rem",
-    },
-  },
-}));
-
-function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadAction, ...props }) {
+function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadAction }) {
 
   const { rootRef } = settings;
   const { t } = useTranslation();
@@ -148,23 +100,22 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
     }
   }
 
-  const classes = mergeClasses(props, useStyles());
-
   return (
     <Dialog
       container={() => rootRef.current}
-      className={classes['root']}
+      fullWidth
+      maxWidth="md"
       open={uploadDlg}
       TransitionProps={{ onExited: reset }}
       aria-labelledby="upload-dialog-title"
     >
       <DialogTitle id="upload-dialog-title">{t('user-repo-upload-title')}</DialogTitle>
-      <DialogContent className={classes['content']}>
-        <div className={classes['instructions']} dangerouslySetInnerHTML={{ __html: t('user-repo-upload-info') }} />
+      <DialogContent sx={{ '& > *': { my: 2 } }}>
+        <Box sx={{ '& .code': { fontFamily: 'Monospace' } }} dangerouslySetInnerHTML={{ __html: t('user-repo-upload-info') }} />
         <input
           type="file"
           accept=".scorm.zip"
-          className={classes['input']}
+          style={{ display: 'none' }}
           id="input-file"
           onChange={handleUploadClick}
           disabled={waiting}
@@ -174,11 +125,11 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
         </label>
         {file &&
           <>
-            <div className={classes['fileInfo']}>
-              {t('user-repo-upload-selected-file')} <span className={classes['fileName']}>{file.name}</span> ({filesize(file.size, { locale: true })})
-            </div>
+            <Box sx={{ mt: 2 }}>
+              {t('user-repo-upload-selected-file')} <Box component="span" sx={{ fontWeight: 'bold' }}>{file.name}</Box> ({filesize(file.size, { locale: true })})
+            </Box>
             <TextField
-              className={classes['folder']}
+              sx={{ width: '100%', maxWidth: '18rem' }}
               label={t('user-repo-upload-current-directory')}
               value={folder}
               onChange={updateFolder}
@@ -186,16 +137,16 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
             />
           </>
         }
-        <div className={classes['info']}>
-          {warn && <div className={classes['warning']}>{warn}</div>}
-          {err && <div className={classes['error']}>{err}</div>}
+        <Box sx={{ height: '4rem' }}>
+          {warn && <Box sx={{ color: 'warning.dark' }}>{warn}</Box>}
+          {err && <Box sx={{ color: 'error.dark' }}>{err}</Box>}
           {waiting &&
-            <div className={classes['waiting']}>
+            <Box sx={{ mt: 2, '& > *': { my: 1 } }}>
               <div>{t('user-repo-uploading')}</div>
               <LinearProgress />
-            </div>
+            </Box>
           }
-        </div>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={uploadProject} disabled={!ready || waiting} color="primary">{t('user-repo-upload-publish')}</Button>

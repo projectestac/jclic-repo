@@ -30,35 +30,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { mergeClasses } from '../../utils';
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
-
-const useStyles = makeStyles(theme => ({
-  spacer: {
-    display: 'none',
-  },
-  toolbar: {
-    flexFlow: 'wrap',
-    paddingLeft: '0',
-  },
-  listElements: {
-    '&:first-child': {
-      borderTop: `1px solid ${theme.palette.grey[400]}`,
-    },
-    borderBottom: `1px solid ${theme.palette.grey[400]}`,
-    paddingLeft: '0rem',
-  }
-}));
 
 function PaginatedList({ settings, user, projects, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { repoBase, rootRef } = settings;
-  const classes = mergeClasses(props, useStyles());
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
   useEffect(() => setPage(0), [projects]);
@@ -69,7 +49,11 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
         {projects
           .slice(page * itemsPerPage, (page + 1) * itemsPerPage)
           .map(({ path, title, author, cover, thumbnail }, n) => (
-            <ListItem button key={n} className={classes.listElements} onClick={() => updateAct(path, user)}>
+            <ListItem
+              button
+              key={n}
+              sx={{ borderBottom: '1px solid lightgray', pl: 0, '&:first-of-type': { borderTop: '1px solid lightgray' } }}
+              onClick={() => updateAct(path, user)}>
               <ListItemAvatar>
                 <Avatar variant="square" alt={title} src={`${repoBase}/${user ? `${user}/` : ''}${path}/${thumbnail || cover}`} />
               </ListItemAvatar>
@@ -78,7 +62,6 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
           ))}
       </List>
       <TablePagination
-        classes={{ spacer: classes.spacer, toolbar: classes.toolbar }}
         component="nav"
         page={page}
         rowsPerPage={itemsPerPage}

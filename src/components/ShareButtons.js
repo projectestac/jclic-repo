@@ -30,59 +30,16 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
 import { Email, Facebook, Twitter, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
 import ClassroomIcon from '../assets/classroom.svg';
 import MoodleIcon from '../assets/moodle.svg';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(_theme => ({
-  root: {
-    position: 'relative',
-  },
-  buttons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    "& button": {
-      marginLeft: '-0.6rem',
-    },
-    "& svg": {
-      width: '24px',
-      height: '24px',
-    },
-  },
-  moodleBox: {
-    padding: '1rem',
-    marginBottom: '1rem',
-    maxWidth: '60rem',
-  },
-  embedBox: {
-    padding: '1rem',
-    marginBottom: '1rem',
-    maxWidth: '60rem',
-  },
-  inputBox: {
-    fontFamily: 'Monospace',
-    fontSize: '0.8rem',
-    margin: '0.4rem auto',
-    color: 'gray',
-  },
-  radioGroup: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  snack: {
-    position: 'absolute',
-    top: '9rem',
-  },
-}));
-
 const E = encodeURIComponent;
 
-function ShareButtons({ settings, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null, ...props }) {
+function ShareButtons({ settings, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null }) {
 
   const { t } = useTranslation();
   const {
@@ -91,7 +48,6 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
     facebookId,
   } = settings;
 
-  const classes = mergeClasses(props, useStyles());
   const [embedBox, setEmbedBox] = useState(false);
   const [moodleBox, setMoodleBox] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -106,8 +62,12 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.buttons}>
+    <Box sx={{ position: 'relative' }}>
+      <Box sx={{
+        display: 'flex', flexWrap: 'wrap',
+        //'& button': { mlx: -0.6 },
+        '& svg': { width: 24, height: 24 }
+      }}>
         {twitter && title && link &&
           <a
             href={`https://twitter.com/intent/tweet?text=${E(title)}&url=${E(link)}${hash ? `&hashtags=${E(hash)}` : ''}${via ? `&via=${E(via)}` : ''}`}
@@ -230,19 +190,17 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             <Code />
           </IconButton>
         }
-      </div>
+      </Box>
       {moodle && moodleLink && moodleBox &&
-        <Paper className={classes.moodleBox} elevation={2}>
+        <Paper sx={{ p: 2, mb: 2, maxWidth: '60rem' }} elevation={2}>
           <label htmlFor="moodleLink" dangerouslySetInnerHTML={{ __html: t('share-moodle-label') }} />
           <Input
-            className={classes.inputBox}
             type="text"
             fullWidth
+            sx={{ fontFamily: 'Monospace', color: 'text.disabled' }}
             id="moodleLink"
             value={moodleLink}
-            inputProps={{
-              readOnly: true,
-            }}
+            inputProps={{ readOnly: true }}
             endAdornment={
               <InputAdornment position="end">
                 <CopyToClipboard text={moodleLink} onCopy={() => setSnackOpen(true)}>
@@ -256,17 +214,15 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         </Paper>
       }
       {embed && embedCode && embedBox &&
-        <Paper className={classes.embedBox} elevation={2}>
+        <Paper sx={{ p: 2, mb: 2, maxWidth: '60rem' }} elevation={2}>
           <label htmlFor="embedLink">{t('share-embed-label')}</label>
           <Input
-            className={classes.inputBox}
             type="text"
             fullWidth
             id="embedLink"
             value={embedCode}
-            inputProps={{
-              readOnly: true,
-            }}
+            inputProps={{ readOnly: true }}
+            sx={{ fontFamily: 'Monospace', color: 'text.disabled' }}
             endAdornment={
               <InputAdornment position="end">
                 <CopyToClipboard text={embedCode} onCopy={() => setSnackOpen(true)}>
@@ -277,7 +233,11 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
               </InputAdornment>
             }
           />
-          <RadioGroup className={classes.radioGroup} aria-label={t('share-embed-size')} value={embedSize} onChange={handleChangeEmbedSize}>
+          <RadioGroup
+            sx={{ flexDirection: 'row', justifyContent: 'center' }}
+            aria-label={t('share-embed-size')}
+            value={embedSize}
+            onChange={handleChangeEmbedSize}>
             <FormControlLabel value={'640x390'} control={<Radio />} label="640x390" />
             <FormControlLabel value={'800x600'} control={<Radio />} label="800x600" />
             <FormControlLabel value={'100%x800'} control={<Radio />} label="100%" />
@@ -285,7 +245,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
         </Paper>
       }
       <Snackbar
-        className={classes.snack}
+        sx={{ position: 'absolute', top: '9rem' }}
         open={snackOpen}
         autoHideDuration={4000}
         onClose={handleSnackClose}
@@ -297,7 +257,7 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
           </IconButton>
         }
       />
-    </div>
+    </Box>
   );
 }
 

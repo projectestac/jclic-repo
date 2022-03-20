@@ -32,47 +32,15 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { makeStyles } from '@mui/styles';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, LinearProgress } from '@mui/material';
 import { CloudDownload } from '@mui/icons-material';
 import { PromisePool } from '@supercharge/promise-pool';
 import { useTranslation } from 'react-i18next';
-import { mergeClasses } from '../../utils';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      minWidth: '600px',
-    },
-  },
-  dlgContent: {
-    "& > *": {
-      marginBottom: theme.spacing(2),
-    }
-  },
-  status: {
-    maxWidth: '100%',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  error: {
-    color: theme.palette.error.dark,
-  },
-  actions: {
-    "& > button": {
-      margin: theme.spacing(1),
-    }
-
-  },
-}));
-
-function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
+function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
 
   const { t } = useTranslation();
   const { maxThreads, debug, rootRef } = settings;
-  const classes = mergeClasses(props, useStyles());
-
   const { title, fullPath, mainFile, files } = project;
   const numFiles = files.length - 1;
   let currentFiles = 0;
@@ -274,20 +242,29 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
   return (
     <Dialog
       container={() => rootRef.current}
-      classes={{ paper: classes['root'] }}
+      fullWidth
+      maxWidth="sm"
       open={dlgOpen}
       onClose={closeDlg}
       TransitionProps={{ onEntered: start }}
     >
       <DialogTitle>{t('prj-download-title', { title })}</DialogTitle>
-      <DialogContent className={classes['dlgContent']}>
+      <DialogContent sx={{ '& > *': { mb: 2 } }}>
         {!err && <Typography>{msg}</Typography>}
         {!err && !zipFile && !progressZip && <LinearProgress value={progress} variant="determinate" />}
         {!err && !zipFile && progressZip && <LinearProgress value={progress} variant="determinate" color="secondary" />}
-        {!err && !zipFile && <Typography className={classes['status']}>{status}</Typography>}
-        {err && <Typography className={classes['error']}>{err}</Typography>}
+        {!err && !zipFile &&
+          <Typography sx={{
+            maxWidth: '100%',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }} >
+            {status}
+          </Typography>}
+        {err && <Typography sx={{ color: 'error.dark' }}>{err}</Typography>}
       </DialogContent>
-      <DialogActions className={classes['actions']}>
+      <DialogActions sx={{ '& > button': { m: 1 } }}>
         {zipFile &&
           <Button
             variant="contained"
@@ -304,7 +281,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project, ...props }) {
           {t('cancel')}
         </Button>
       </DialogActions>
-    </Dialog>
+    </Dialog >
   );
 }
 

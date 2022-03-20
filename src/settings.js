@@ -83,6 +83,19 @@ export const DEFAULT_THEME = {
       lineHeight: 'normal',
     }
   },
+  components: {
+    'MuiTablePagination': {
+      styleOverrides: {
+        spacer: {
+          display: 'none',
+        },
+        toolbar: {
+          flexFlow: 'wrap',
+          paddingLeft: '0 !important',
+        },
+      }
+    }
+  },
 };
 
 // See `.env.example` for example settings

@@ -30,37 +30,14 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../../utils';
-import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton } from '@mui/material';
+import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton, Box } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(_theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: '1rem 0.5rem',
-  },
-  label: {
-    flexBasis: '100%',
-    marginLeft: '0.5rem',
-    marginBottom: '0.5rem',
-  },
-  formControl: {
-    marginRight: '0.5rem',
-    marginLeft: '0.5rem',
-    width: '10rem',
-    flexGrow: 1,
-    maxWidth: '21rem',
-  },
-}));
-
-function SelectProjects({ settings, filters, updateFilters, ...props }) {
+function SelectProjects({ settings, filters, updateFilters }) {
 
   const { t } = useTranslation();
   const { rootRef } = settings;
-  const classes = mergeClasses(props, useStyles());
   const [query, setQuery] = useState(filters?.text || '');
   const handleChange = ev => {
     ev.preventDefault();
@@ -75,9 +52,18 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
   }
 
   return (
-    <div className={classes.root}>
-      <Typography color="textSecondary" className={classes['label']}>{t('prj-filter')}</Typography>
-      <FormControl className={classes.formControl}>
+    <Box sx={{
+      display: 'flex', flexWrap: 'wrap',
+      py: 2, px: 1,
+      '& .MuiFormControl-root': {
+        mx: 1,
+        width: '10rem',
+        flexGrow: 1,
+        maxWidth: '21rem'
+      }
+    }}>
+      <Typography color="textSecondary" sx={{ flexBasis: '100%', ml: 1, mb: 1 }}>{t('prj-filter')}</Typography>
+      <FormControl>
         <InputLabel id="select-lang-label" variant="standard">{t('prj-language')}</InputLabel>
         <Select
           labelId="select-lang-label"
@@ -89,7 +75,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
           {t('lang-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`lang-${code}`)}</MenuItem>)}
         </Select>
       </FormControl>
-      <FormControl className={classes.formControl}>
+      <FormControl>
         <InputLabel id="select-subj-label" variant="standard">{t('prj-subject')}</InputLabel>
         <Select
           labelId="select-subj-label"
@@ -101,7 +87,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
           {t('subj-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`subj-${code}`)}</MenuItem>)}
         </Select>
       </FormControl>
-      <FormControl className={classes.formControl}>
+      <FormControl>
         <InputLabel id="select-level-label" variant="standard">{t('prj-level')}</InputLabel>
         <Select
           labelId="select-level-label"
@@ -113,7 +99,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
           {t('level-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`level-${code}`)}</MenuItem>)}
         </Select>
       </FormControl>
-      <FormControl className={classes.formControl}>
+      <FormControl>
         <TextField
           label={t('prj-text')}
           variant="standard"
@@ -135,7 +121,7 @@ function SelectProjects({ settings, filters, updateFilters, ...props }) {
           }}
         />
       </FormControl>
-    </div>
+    </Box>
   );
 }
 

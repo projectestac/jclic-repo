@@ -30,65 +30,14 @@
  */
 
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { mergeClasses } from '../../utils';
-import { Fab, Card } from '@mui/material';
+import { Fab, Card, Box } from '@mui/material';
 import { PlayArrow } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: '28rem',
-    cursor: 'pointer',
-  },
-  cardContent: {
-    position: 'relative',
-    height: '10rem',
-  },
-  title: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: '0.5rem 3rem 0.5rem 0.5rem',
-    fontSize: '1rem',
-    fontWeight: 'bold',
-    color: theme.palette.grey[800],
-    backgroundColor: 'rgba(255,255,255,0.85)',
-  },
-  language: {
-    fontSize: '0.8rem',
-    fontWeight: 'bold',
-    padding: '0.15rem 0.15rem 0.3rem 0.1rem',
-    margin: '0.4rem',
-    display: 'inline-block',
-    borderRadius: '4px',
-    minWidth: '1.5rem',
-    lineHeight: '1rem',
-    textAlign: 'center',
-    backgroundColor: theme.palette.info.dark,
-    color: theme.palette.primary.contrastText,
-  },
-  playBtn: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    margin: '0.4rem',
-  },
-  cardBottom: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    fontSize: '9pt',
-    padding: '0.5rem',
-  },
-}));
-
-function ProjectCard({ settings, user, project, updateAct, children, ...props }) {
+function ProjectCard({ settings, user, project, updateAct, children }) {
 
   const { t } = useTranslation();
   const { repoBase, usersBase } = settings;
-  const classes = mergeClasses(props, useStyles());
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover } = project;
   const base = `${user ? usersBase : repoBase}/${user ? `${user}/` : ''}${path}`;
   const projectLink = `${base}/${mainFile.replace(/[^/]*$/, 'index.html')}`;
@@ -96,7 +45,7 @@ function ProjectCard({ settings, user, project, updateAct, children, ...props })
 
   return (
     <Card
-      className={classes['card']}
+      sx={{ maxWidth: '28rem', cursor: 'pointer' }}
       onMouseOver={() => setRaised(true)}
       onMouseOut={() => setRaised(false)}
       onClick={ev => {
@@ -105,11 +54,38 @@ function ProjectCard({ settings, user, project, updateAct, children, ...props })
       }}
       elevation={raised ? 8 : 1}
     >
-      <div className={classes.cardContent} style={{ background: `no-repeat center/150% url("${base}/${cover}")` }}>
-        {langCodes.map(code => <span key={code} className={classes.language}>{code}</span>)}
-        <div className={classes.title}>{title}</div>
+      <Box
+        sx={{ position: 'relative', height: '10rem' }}
+        style={{ background: `no-repeat center/150% url("${base}/${cover}")` }}
+      >
+        {langCodes.map(code => (
+          <Box component="span" key={code} sx={{
+            fontSize: '0.8rem', fontWeight: 'bold',
+            display: 'inline-block',
+            m: '0.4rem', borderRadius: '4px', minWidth: '1.5rem',
+            p: '0.15rem 0.15rem 0.3rem 0.1rem',
+            lineHeight: '1rem', textAlign: 'center',
+            backgroundColor: 'info.dark',
+            color: 'primary.contrastText',
+          }}>
+            {code}
+          </Box>))}
+        <Box sx={{
+          position: 'absolute',
+          bottom: 0, left: 0, right: 0,
+          p: '0.5rem 3rem 0.5rem 0.5rem',
+          fontSize: '1rem', fontWeight: 'bold',
+          color: 'grey.800',
+          backgroundColor: 'rgba(255,255,255,0.85)',
+        }}>
+          {title}
+        </Box>
         <Fab
-          className={classes.playBtn}
+          sx={{
+            position: 'absolute',
+            right: 0, bottom: 0,
+            margin: '0.4rem',
+          }}
           color="primary"
           size="small"
           onClick={ev => {
@@ -120,10 +96,16 @@ function ProjectCard({ settings, user, project, updateAct, children, ...props })
         >
           <PlayArrow />
         </Fab>
-      </div>
-      <div className={classes['cardBottom']}>
+      </Box>
+      <Box sx={{
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        fontSize: '9pt',
+        p: 1,
+      }}>
         {children || author}
-      </div>
+      </Box>
     </Card>
   );
 }

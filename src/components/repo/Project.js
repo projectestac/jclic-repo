@@ -30,84 +30,17 @@
  */
 
 import React, { useState } from 'react';
-import { Typography, IconButton, Button } from '@mui/material';
+import { Typography, IconButton, Button, Box } from '@mui/material';
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@mui/icons-material';
-import { makeStyles } from '@mui/styles';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { mergeClasses, textContent, getPathForProject } from '../../utils';
+import { textContent, getPathForProject } from '../../utils';
 import ProjectDownload from './ProjectDownload';
 import filesize from 'filesize';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
-
-const useStyles = makeStyles(theme => ({
-  title: {
-    color: `${theme.palette.primary.dark}`,
-    marginBottom: '1rem',
-  },
-  subtitle: {
-    marginBottom: '1.5rem',
-    fontSize: '1.3rem',
-    lineHeight: 'inherit',
-  },
-  backBtn: {
-    marginBottom: '1rem',
-  },
-  cover: {
-    minWidth: '96px',
-    minHeight: '96px',
-    maxWidth: '100%',
-    maxHeight: '300px',
-  },
-  btnContainer: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '1rem',
-  },
-  overlayBtn: {
-    position: 'absolute',
-    opacity: '20%',
-    height: '10rem',
-    width: '10rem',
-    "& svg": {
-      fontSize: 96,
-    },
-    "&:hover": {
-      opacity: '90%',
-    },
-  },
-  mainBlock: {
-    marginTop: '1rem',
-    marginBottom: '1rem',
-    minWidth: '80%',
-    maxWidth: '800px',
-  },
-  description: {
-    "& li": {
-      marginBottom: '1rem',
-    },
-  },
-  related: {
-    margin: 0,
-    paddingLeft: 0,
-    listStyleType: 'none',
-  },
-  buttons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    "& a,button": {
-      marginRight: '1rem',
-      marginBottom: '1rem',
-    }
-  },
-  leftIcon: {
-    marginRight: '0.5rem',
-  },
-}));
 
 function Project({ settings, user, project, fullProjectList, updateAct, ...props }) {
 
@@ -123,7 +56,6 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
     // zipFile, files, mediaFiles,
   } = project;
 
-  const classes = mergeClasses(props, useStyles());
   const k = meta_langs.includes(lang) ? lang : langDefault;
   const pageTitle = `${user ? t('user-repo-title', { user }) : t('repo-title')} - ${title}`;
   const pageDesc = description[k];
@@ -159,21 +91,29 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
   };
 
   return (
-    <div {...props}>
+    <Box {...props}>
       <SEO {...{ settings, title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd }} />
-      <Button className={classes.backBtn} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
-        <ArrowBack className={classes.leftIcon} />
+      <Button sx={{ mb: 2 }} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
+        <ArrowBack sx={{ mr: 1 }} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
       </Button>
-      <div className={classes.mainBlock}>
-        <Typography variant="h1" className={classes.title}>{title}</Typography>
-        <Typography variant="subtitle2" className={classes.subtitle}>{author}</Typography>
-        <div>
+      <Box sx={{ my: 2, minWidth: 0.8, maxWidth: 800 }}>
+        <Typography variant="h1" sx={{ color: 'primary.dark', mb: 2 }}>{title}</Typography>
+        <Typography variant="subtitle2" sx={{ color: 'primary.main', mb: 3, fontSize: '1.3rem', lineHeight: 'inherit' }}>{author}</Typography>
+        <Box>
           {imgPath &&
-            <div className={classes.btnContainer}>
-              <img src={imgPath} className={classes.cover} alt={t('cover-alt')} />
+            <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+              <Box
+                component="img"
+                sx={{ minWidth: 96, minHeight: 96, maxWidth: 1, maxHeight: 300 }}
+                src={imgPath}
+                alt={t('cover-alt')} />
               <IconButton
-                className={classes.overlayBtn}
+                sx={{
+                  position: 'absolute', opacity: '20%', height: '10rem', width: '10rem',
+                  '& svg': { fontSize: 96 },
+                  ':hover': { opacity: '90%' }
+                }}
                 color="primary"
                 href={projectLink}
                 target="_BLANK"
@@ -181,17 +121,16 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
                 size="large">
                 <PlayArrow />
               </IconButton>
-            </div>
+            </Box>
           }
-        </div>
+        </Box>
         <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
-        <ReactMarkdown
-          className={classes.description}
-          rehypePlugins={[rehypeRaw]}
-        >
-          {pageDesc}
-        </ReactMarkdown>
-      </div>
+        <Box sx={{ '& li': { mb: 2 } }}>
+          <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+            {pageDesc}
+          </ReactMarkdown>
+        </Box>
+      </Box>
       <DataCard>
         <tbody>
           <tr>
@@ -256,17 +195,21 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
             <tr>
               <td>{`${t('prj-related')}:`}</td>
               <td>
-                <ul className={classes.related}>
+                <Box component="ul" sx={{ m: 0, pl: 0, listStyleType: 'none' }}>
                   {relatedTo.map((prj, n) => (
                     <li key={n}><a href={getPathForProject(prj, user)}>{getProjectTitle(prj)}</a></li>
                   ))}
-                </ul>
+                </Box>
               </td>
             </tr>
           }
         </tbody>
       </DataCard>
-      <div className={classes.buttons}>
+      <Box sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& a,button': { mr: 2, mb: 2 },
+      }}>
         <Button
           variant="contained"
           color="primary"
@@ -298,9 +241,9 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
             {t('prj-java-inst')}
           </Button>
         }
-      </div>
+      </Box>
       <ProjectDownload {...{ settings, dlgOpen, setDlgOpen, project }} />
-    </div>
+    </Box>
   );
 }
 

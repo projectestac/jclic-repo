@@ -240,7 +240,7 @@ function UserLib({ settings }) {
       </Box>
       <Box sx={{ minWidth: 0.8, maxWidth: 800 }} dangerouslySetInnerHTML={{ __html: t('user-repo-info') }} />
       {err && <Alert severity="error">{t('error', { error: err.toLocaleString() })}</Alert>}
-      {!loading && <CircularProgress sx={{ my: 2 }} />}
+      {loading && <CircularProgress sx={{ my: 2 }} />}
       {!loading &&
         <>
           <Box sx={{ mt: 3, '& > button': { mr: 2, mb: 2 } }}>
