@@ -30,7 +30,7 @@
  */
 
 import React from "react";
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import createCache from '@emotion/cache';
 import { parseStringSettings } from './utils';
 import MainLayout from "./components/MainLayout";
@@ -42,13 +42,11 @@ import UserLib from "./components/user/UserLib";
  * @param {HTMLElement} root - The DOM element where the requested component will be rendered
  * @param {string*} type - Type of component to be rendered. Can be 'repo' (default) or 'user'
  */
-export default function DOMRenderer(root, type = 'repo') {
+export default function DOMRenderer(rootElement, type = 'repo') {
 
-  const dataSettings = parseStringSettings(root.dataset);
+  const dataSettings = parseStringSettings(rootElement.dataset);
   const Component = type === 'user' ? UserLib : Repo;
   const cache = createCache({ key: 'css', prepend: true });
- 
-  ReactDOM.render(
-    <MainLayout {...{ cache, dataSettings, Component }} />,
-    root);
+  const root = createRoot(rootElement);
+  root.render(<MainLayout {...{ cache, dataSettings, Component }} />);
 }

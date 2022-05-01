@@ -30,7 +30,7 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import createCache from '@emotion/cache';
 import { parseStringSettings } from './utils';
 
@@ -79,11 +79,10 @@ export class ReactWebComponent extends HTMLElement {
     });
 
     const Layout = this.getLayout();
+    const root = createRoot(mountPoint);
 
     // Render the React component on the pivot element
-    ReactDOM.render(
-      <Layout {...{ cache, dataSettings, Component: this.getMainComponent() }} />,
-      mountPoint);
+    root.render(<Layout {...{ cache, dataSettings, Component: this.getMainComponent() }} />);
   }
 }
 
