@@ -54,6 +54,7 @@
     "pirab_eu"
   ],
   "cover": "cover.gif",
+  "coverWebp": "cover.webp",
   "thumbnail": "thumb.png",
   "zipFile": "jclic/pirabord.jclic.zip",
   "instFile": "jclic/pirabord.jclic.inst",
@@ -76,6 +77,7 @@
     "jclic.js/favicon.ico",
     "jclic.js/icon-72.png",
     "jclic.js/icon-192.png",
-    "jclic.js/imsmanifest.xml"
+    "jclic.js/imsmanifest.xml",
+    "cover.webp"
   ]
 }

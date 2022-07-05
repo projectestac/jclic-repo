@@ -74,6 +74,7 @@
     "galioc/g0600_b"
   ],
   "cover": "cover.gif",
+  "coverWebp": "cover.webp",
   "thumbnail": "thumb.png",
   "zipFile": "jclic/g0501a_intro.jclic.zip",
   "instFile": "jclic/g0501a.jclic.inst",
@@ -96,6 +97,7 @@
     "jclic.js/favicon.ico",
     "jclic.js/icon-72.png",
     "jclic.js/icon-192.png",
-    "jclic.js/imsmanifest.xml"
+    "jclic.js/imsmanifest.xml",
+    "cover.webp"
   ]
 }

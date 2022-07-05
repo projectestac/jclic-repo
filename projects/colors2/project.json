@@ -39,6 +39,7 @@
     "es": "Esta obra está bajo una licencia de Creative Commons <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0\">BY-NC-SA</a>"
   },
   "cover": "cover.gif",
+  "coverWebp": "cover.webp",
   "thumbnail": "thumb.png",
   "zipFile": "jclic/colors2.jclic.zip",
   "instFile": "jclic/colors2.jclic.inst",
@@ -61,6 +62,7 @@
     "jclic.js/favicon.ico",
     "jclic.js/icon-72.png",
     "jclic.js/icon-192.png",
-    "jclic.js/imsmanifest.xml"
+    "jclic.js/imsmanifest.xml",
+    "cover.webp"
   ]
 }
