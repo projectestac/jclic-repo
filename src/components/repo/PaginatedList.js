@@ -48,14 +48,14 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
       <List dense>
         {projects
           .slice(page * itemsPerPage, (page + 1) * itemsPerPage)
-          .map(({ path, title, author, cover, thumbnail }, n) => (
+          .map(({ path, title, author, cover, coverWebp, thumbnail }, n) => (
             <ListItem
               button
               key={n}
               sx={{ borderBottom: '1px solid lightgray', pl: 0, '&:first-of-type': { borderTop: '1px solid lightgray' } }}
               onClick={() => updateAct(path, user)}>
               <ListItemAvatar>
-                <Avatar variant="square" alt={title} src={`${repoBase}/${user ? `${user}/` : ''}${path}/${thumbnail || cover}`} />
+                <Avatar variant="square" alt={title} src={`${repoBase}/${user ? `${user}/` : ''}${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
               <ListItemText primary={title} secondary={author} />
             </ListItem>
@@ -71,8 +71,8 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
         onPageChange={(_ev, p) => setPage(p)}
         labelDisplayedRows={({ from, to, count }) => t('results-count', { from, to, count })}
         labelRowsPerPage={t('results-per-page')}
-        backIconButtonProps={{title: t('results-page-prev')}}
-        nextIconButtonProps={{title: t('results-page-next')}}
+        backIconButtonProps={{ title: t('results-page-prev') }}
+        nextIconButtonProps={{ title: t('results-page-next') }}
         SelectProps={{ MenuProps: { container: () => rootRef.current } }}
       />
     </div >

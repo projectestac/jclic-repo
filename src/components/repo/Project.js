@@ -52,7 +52,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
     title, author, school, date,
     languages, langCodes, areas, levels, descriptors, description, license,
     relatedTo, mainFile, instFile,
-    cover, activities, totalSize,
+    cover, coverWebp, activities, totalSize,
     // zipFile, files, mediaFiles,
   } = project;
 
@@ -60,7 +60,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
   const pageTitle = `${user ? t('user-repo-title', { user }) : t('repo-title')} - ${title}`;
   const pageDesc = description[k];
   const textDesc = textContent(pageDesc);
-  const imgPath = cover && `${fullPath}/${cover}` || logo;
+  const imgPath = (coverWebp || cover) && `${fullPath}/${coverWebp || cover}` || logo;
   const moodleLink = `${fullPath}/${mainFile}`;
   const projectLink = moodleLink.replace(/\/[^/]*$/, '/index.html');
   const instJavaLink = instFile ? jnlpInstaller.replace('%%FILE%%', `${fullPath}/${instFile}`) : null;

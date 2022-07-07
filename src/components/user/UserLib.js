@@ -55,7 +55,7 @@ function UserLib({ settings }) {
    *   expires (ISO date),
    *   currentSize (bytes), quota (bytes),
    *   projects: [
-   *     { basePath, name, title, cover, thumbnail, mainFile,
+   *     { basePath, name, title, cover, coverWebp, thumbnail, mainFile,
    *       author, school, date,
    *       meta_langs, description: {lang:desc,}, langCodes: [lang,], languages: {lang:langName,}, levels: {lang:level,}, areas: {lang:area,},
    *       files: [file,], totalFileSize(bytes)

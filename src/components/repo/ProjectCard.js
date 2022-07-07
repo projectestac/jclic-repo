@@ -38,7 +38,7 @@ function ProjectCard({ settings, user, project, updateAct, children }) {
 
   const { t } = useTranslation();
   const { repoBase, usersBase } = settings;
-  const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover } = project;
+  const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover, coverWebp } = project;
   const base = `${user ? usersBase : repoBase}/${user ? `${user}/` : ''}${path}`;
   const projectLink = `${base}/${mainFile.replace(/[^/]*$/, 'index.html')}`;
   const [raised, setRaised] = useState(false);
@@ -56,7 +56,7 @@ function ProjectCard({ settings, user, project, updateAct, children }) {
     >
       <Box
         sx={{ position: 'relative', height: '10rem' }}
-        style={{ background: `no-repeat center/150% url("${base}/${cover}")` }}
+        style={{ background: `no-repeat center/150% url("${base}/${coverWebp || cover}")` }}
       >
         {langCodes.map(code => (
           <Box component="span" key={code} sx={{
