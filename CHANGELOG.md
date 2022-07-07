@@ -3,6 +3,10 @@
 - Upgraded to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html) and [MUI 5](https://mui.com/).
 - React apps can be used as [Web Components](https://developer.mozilla.org/es/docs/Web/Web_Components) with [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) for better integration on sites with complex styles, like some WordPress themes.
 - Upgraded components
+- Added support for webp covers
+- Update styling to MUI5 with `sx`
+- Set back-to-top button optional
+- Added a standard Recat DOM rendererfor usage without WebComponents
 
 ### v2.0.7 (2021-09-19)
 #### Improvements
