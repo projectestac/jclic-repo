@@ -55,8 +55,14 @@ export class ReactWebComponent extends HTMLElement {
 
   connectedCallback() {
 
-    // Parse the "data-" props passed to the web component
-    const dataSettings = parseStringSettings(this.dataset);
+    // Get the main React componnet
+    const Component = this.getMainComponent();
+
+    // Allow mainComponent to create slot clients, if needed
+    Component.createSlotClients?.(this);
+
+    // Parse the "data-" props passed to the web component, and set the 'isWebComponent' flag
+    const dataSettings = {...parseStringSettings(this.dataset), isWebComponent: true};
 
     // Create a pivot element, where ReactDOM will render the app,
     // and initialize it with our specific style (if set)
@@ -82,7 +88,7 @@ export class ReactWebComponent extends HTMLElement {
     const root = createRoot(mountPoint);
 
     // Render the React component on the pivot element
-    root.render(<Layout {...{ cache, dataSettings, Component: this.getMainComponent() }} />);
+    root.render(<Layout {...{ cache, dataSettings, Component }} />);
   }
 }
 

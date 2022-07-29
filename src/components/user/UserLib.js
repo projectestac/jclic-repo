@@ -29,24 +29,27 @@
  *  @module
  */
 
-import React, { useState, useEffect } from 'react';
+/* global google */
+
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GoogleLogin } from 'react-google-login';
 import filesize from 'filesize';
 import { checkFetchResponse, clickOnLink, getAbsoluteURL } from '../../utils';
 import { Box, Alert, Button, IconButton, CircularProgress, Typography, Link, Avatar } from '@mui/material';
-import { LibraryAdd, Delete, CloudDownload, ExitToApp, Eject, Info } from '@mui/icons-material';
+import { LibraryAdd, Delete, CloudDownload, Eject, Info } from '@mui/icons-material';
 import DeleteDialog from './DeleteDialog';
 import UploadDialog from './UploadDialog';
 import ProjectCard from '../repo/ProjectCard';
 import DataCard from '../DataCard';
 
-const AUTH_KEY = '__auth';
+const GOOGLE_BUTTON_ID = 'googleButton';
+const GOOGLE_BUTTON_SLOT = 'googleButtonSlot';
 
 function UserLib({ settings }) {
 
+  const googleButtonRef = useRef(null);
   const { t } = useTranslation();
-  const { displayTitle, googleOAuth2Id, userLibApi, repoPath, debug } = settings;
+  const { displayTitle, userLibApi, repoPath, debug, googleOAuth2Id, gsiApi, authKey, isWebComponent } = settings;
   /**
    * userData fields: {
    *   googleUser,
@@ -68,23 +71,85 @@ function UserLib({ settings }) {
   const [err, setErr] = useState(null);
   const [deletePrj, setDeletePrj] = useState(null);
   const [uploadDlg, setUploadDlg] = useState(false);
+  const [googleScript, setGoogleScript] = useState(null);
 
   const title = userData ? t('user-repo-title', { user: userData.fullUserName || userData.id }) : t('user-repo');
 
+  const loadGSI = () => {
+    // Load Google Identity Services Javascript API
+    if (!googleScript) {
+      const scriptTag = document.createElement('script');
+      scriptTag.src = gsiApi;
+      scriptTag.async = true;
+      scriptTag.defer = true;
+      scriptTag.onload = () => {
+
+        if (!google) {
+          console.error('Global object "google" not found!');
+          return;
+        }
+
+        // Initialize API
+        google.accounts.id.initialize({
+          client_id: googleOAuth2Id,
+          auto_select: false,
+          callback: response => loginSuccess(response.credential),
+          cancel_on_tap_outside: false,
+        });
+
+        // Render Google Button
+        const buttonHost = isWebComponent ? document.getElementById(GOOGLE_BUTTON_ID) : googleButtonRef.current;
+        if (!buttonHost)
+          console.error('Unable to find any HTML element suitable to be used as host for the Google log-in button');
+        else
+          google.accounts.id.renderButton(
+            buttonHost,
+            {
+              type: 'standard', // 'standard' or 'button'
+              theme: 'filled_blue', // 'outline', 'filled_blue' or 'filled_black'
+              size: 'large', // 'large', 'medium' or 'small'
+              text: 'signin', // 'signin_with', 'signup_with', 'continue_with' or 'signin'
+              shape: 'rectangular', // 'rectangular', 'pill', 'circle' or 'square'
+              logo_alignment: 'left', // 'left', 'center'
+              width: 300, // max: 400
+            }
+          );
+        // Also display the One Tap dialog (WARNING: Only works for the first login!)
+        // google.accounts.id.prompt();
+      };
+
+      scriptTag.onerror = (error) => {
+        console.error('Error loading Google Identity Services', error);
+      };
+
+      // Place the script tag
+      document.head.appendChild(scriptTag);
+      setGoogleScript(scriptTag);
+
+      // Return a cleaning function to `useEffect`
+      return () => {
+        document.head.removeChild(googleScript);
+        setGoogleScript(null);
+      }
+    }
+  };
+
   useEffect(() => {
     if (!userData) {
-      const obj = JSON.parse(sessionStorage.getItem(AUTH_KEY));
+      const obj = JSON.parse(sessionStorage.getItem(authKey));
       // Consider the authentication code to be valid for the entire session.
-      if (obj && obj.googleUser /* && obj.expires && Date.now() < new Date(obj.expires) */)
-        loginSuccess(obj.googleUser);
+      if (obj && obj.credential /* && obj.expires && Date.now() < new Date(obj.expires) */)
+        loginSuccess(obj.credential);
+      else
+        return loadGSI();
     }
-  });
+  }, []);
 
-  const loginSuccess = (googleUser) => {
-    sessionStorage.removeItem(AUTH_KEY);
-    if (googleUser && googleUser.tokenId) {
+  const loginSuccess = (credential) => {
+    sessionStorage.removeItem(authKey);
+    if (credential) {
       setLoading(true);
-      fetch(`${userLibApi}/getUserInfo`, {
+      fetch(`${userLibApi}/db/userlib/getUserInfo.php`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -93,7 +158,7 @@ function UserLib({ settings }) {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
           'Accept': 'application/json',
         },
-        body: `id_token=${googleUser.tokenId}`,
+        body: new URLSearchParams({ NEW_API: true, id_token: credential }),
       })
         .then(checkFetchResponse)
         .then(data => {
@@ -101,21 +166,27 @@ function UserLib({ settings }) {
             throw new Error(data?.error);
           }
           data.projects.forEach(normalizeProjectFields);
-          sessionStorage.setItem(AUTH_KEY, JSON.stringify({ googleUser }));
+          sessionStorage.setItem(authKey, JSON.stringify({ credential }));
           setUserData(data);
           setErr(null);
         })
-        .catch(error => {
-          if (googleUser.disconnect)
-            googleUser.disconnect();
-          setErr(error?.toString() || t('generic-error'));
-        })
+        .catch(error => setErr(error?.toString() || t('generic-error')))
         .finally(() => {
           setLoading(false);
         });
     }
     else
       setErr(t('user-repo-login-error'));
+  }
+
+  const logout = () => {
+    if (userData) {
+      sessionStorage.removeItem(authKey);
+      setUserData(null);
+      setErr(null);
+      if (!googleScript)
+        loadGSI();
+    }
   }
 
   const normalizeProjectFields = project => {
@@ -125,21 +196,6 @@ function UserLib({ settings }) {
       project.totalSize = project.totalFileSize;
     return project;
   };
-
-  const loginFailed = ({ error, details }) => {
-    sessionStorage.removeItem(AUTH_KEY);
-    setUserData(null);
-    setLoading(false);
-    setErr(`ERROR: ${details} (${error})`);
-  }
-
-  const logout = () => {
-    if (userData && typeof userData?.googleUser?.disconnect === 'function')
-      userData.googleUser.disconnect();
-    sessionStorage.removeItem(AUTH_KEY);
-    setUserData(null);
-    setErr(null);
-  }
 
   const uploadProject = () => {
     setUploadDlg(true);
@@ -164,7 +220,7 @@ function UserLib({ settings }) {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'Accept': 'application/json',
       },
-      body: `project=${project.name}`,
+      body: new URLSearchParams({ project: project.name }),
     })
       .then(checkFetchResponse)
       .then(response => {
@@ -243,20 +299,11 @@ function UserLib({ settings }) {
       {loading && <CircularProgress sx={{ my: 2 }} />}
       {!loading &&
         <>
-          <Box sx={{ mt: 3, '& > button': { mr: 2, mb: 2 } }}>
+          <Box id="loginArea" sx={{ mt: 3, '& > button': { mr: 2, mb: 2 } }}>
             {!userData &&
-              <GoogleLogin
-                clientId={googleOAuth2Id}
-                buttonText={t('user-repo-login')}
-                onSuccess={loginSuccess}
-                onFailure={loginFailed}
-                isSignedIn={false}
-                cookiePolicy={'single_host_origin'}
-                render={renderProps => (
-                  <Button variant="contained" startIcon={<ExitToApp />}
-                    onClick={renderProps.onClick} disabled={renderProps.disabled}>{t('user-repo-login')}</Button>
-                )}
-              />
+              <Box sx={{ maxWidth: '300px' }} >
+                <slot name={GOOGLE_BUTTON_SLOT} ref={googleButtonRef}></slot>
+              </Box>
             }
             {userData && <Button variant="contained" startIcon={<Eject />} onClick={logout}>{t('user-repo-logout')}</Button>}
             {userData && <Button variant="contained" startIcon={<LibraryAdd />} onClick={uploadProject}>{t('user-repo-upload-project')}</Button>}
@@ -333,6 +380,13 @@ function UserLib({ settings }) {
       <UploadDialog {...{ settings, uploadDlg, setUploadDlg, userData, uploadAction }} />
     </Box>
   );
+}
+
+UserLib.createSlotClients = (parent) => {
+  const buttonTag = document.createElement('div');
+  buttonTag.id = GOOGLE_BUTTON_ID;
+  buttonTag.slot = GOOGLE_BUTTON_SLOT;
+  parent.appendChild(buttonTag);
 }
 
 export default UserLib;

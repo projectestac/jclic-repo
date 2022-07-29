@@ -133,6 +133,10 @@ export const DEFAULT_SETTINGS = {
   googleOAuth2Id: process.env.GOOGLE_OAUTH2_ID,
   // API base for user's library
   userLibApi: process.env.USERLIB_API,
+  // Google Identity Services endpoint
+  gsiApi: process.env.GSI_API,
+  // Key used to store credentials in browser session
+  authKey: process.env.AUTH_KEY,
   // Facebook app id (used in share button)
   facebookId: process.env.FACEBOOK_ID,
   // Google Analytics code
@@ -151,6 +155,8 @@ export const DEFAULT_SETTINGS = {
   alreadyLoadedFonts: process.env.alreadyLoadedFonts || '',
   // Maximum number of parallel threads when downloading activities
   maxThreads: Number(process.env.MAX_THREADS) || 20,
+  // Runing as custom web component
+  isWebComponent: false,
 };
 
 export function useSettings(settings = DEFAULT_SETTINGS) {
