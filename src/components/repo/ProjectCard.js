@@ -39,7 +39,7 @@ function ProjectCard({ settings, user, project, updateAct, children }) {
   const { t } = useTranslation();
   const { repoBase, usersBase } = settings;
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover, coverWebp } = project;
-  const base = `${user ? usersBase : repoBase}/${user ? `${user}/` : ''}${path}`;
+  const base = user ? `${usersBase}/${user}/${path}` : `${repoBase}/${path}`;
   const projectLink = `${base}/${mainFile.replace(/[^/]*$/, 'index.html')}`;
   const [raised, setRaised] = useState(false);
 

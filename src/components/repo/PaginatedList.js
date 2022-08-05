@@ -38,9 +38,10 @@ const DEFAULT_ITEMS_PER_PAGE = 25;
 function PaginatedList({ settings, user, projects, updateAct, ...props }) {
 
   const { t } = useTranslation();
-  const { repoBase, rootRef } = settings;
+  const { repoBase, usersBase, rootRef } = settings;
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
+  const base = user ? `${usersBase}/${user}` : repoBase;
   useEffect(() => setPage(0), [projects]);
 
   return (
@@ -55,7 +56,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
               sx={{ borderBottom: '1px solid lightgray', pl: 0, '&:first-of-type': { borderTop: '1px solid lightgray' } }}
               onClick={() => updateAct(path, user)}>
               <ListItemAvatar>
-                <Avatar variant="square" alt={title} src={`${repoBase}/${user ? `${user}/` : ''}${path}/${thumbnail || coverWebp || cover}`} />
+                <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
               <ListItemText primary={title} secondary={author} />
             </ListItem>

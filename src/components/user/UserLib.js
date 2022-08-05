@@ -149,7 +149,7 @@ function UserLib({ settings }) {
     sessionStorage.removeItem(authKey);
     if (credential) {
       setLoading(true);
-      fetch(`${userLibApi}/db/userlib/getUserInfo.php`, {
+      fetch(`${userLibApi}/getUserInfo`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
