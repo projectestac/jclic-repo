@@ -34,7 +34,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import filesize from 'filesize';
-import { checkFetchResponse, clickOnLink, getAbsoluteURL } from '../../utils';
+import { checkFetchResponse, clickOnLink, getAbsoluteURL, ellipsis } from '../../utils';
 import { Box, Alert, Button, IconButton, CircularProgress, Typography, Link, Avatar } from '@mui/material';
 import { LibraryAdd, Delete, CloudDownload, Eject, Info } from '@mui/icons-material';
 import DeleteDialog from './DeleteDialog';
@@ -319,7 +319,7 @@ function UserLib({ settings }) {
                   <tr>
                     <td>{`${t('user-repo-library')}:`}</td>
                     <td>
-                      <Box sx={{ maxWidth: 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <Box sx={{ maxWidth: 400, ...ellipsis }}>
                         <Link href={userRepoPath}>{userRepoPath}</Link>
                       </Box>
                     </td>

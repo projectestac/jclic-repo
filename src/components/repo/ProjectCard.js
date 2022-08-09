@@ -33,6 +33,7 @@ import React, { useState } from 'react';
 import { Fab, Card, Box } from '@mui/material';
 import { PlayArrow } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { ellipsis } from '../../utils';
 
 function ProjectCard({ settings, user, project, updateAct, children }) {
 
@@ -98,9 +99,7 @@ function ProjectCard({ settings, user, project, updateAct, children }) {
         </Fab>
       </Box>
       <Box sx={{
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
+        ...ellipsis,
         fontSize: '9pt',
         p: 1,
       }}>

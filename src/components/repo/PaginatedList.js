@@ -32,6 +32,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { ellipsis } from '../../utils';
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
 
@@ -58,7 +59,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
               <ListItemAvatar>
                 <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
-              <ListItemText primary={title} secondary={author} />
+              <ListItemText primary={title} secondary={author} secondaryTypographyProps={ellipsis} />
             </ListItem>
           ))}
       </List>

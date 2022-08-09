@@ -36,6 +36,7 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, 
 import { CloudDownload } from '@mui/icons-material';
 import { PromisePool } from '@supercharge/promise-pool';
 import { useTranslation } from 'react-i18next';
+import { ellipsis } from '../../utils';
 
 function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
 
@@ -256,9 +257,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
         {!err && !zipFile &&
           <Typography sx={{
             maxWidth: '100%',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
+            ...ellipsis,
           }} >
             {status}
           </Typography>}

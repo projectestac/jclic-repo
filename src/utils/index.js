@@ -237,3 +237,11 @@ export function getAbsoluteURL(path, params = {}) {
   return result.toString();
 }
 
+/**
+ * CSS attributes for one-line fields
+ */
+export const ellipsis = {
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+};
