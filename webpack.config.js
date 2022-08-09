@@ -124,7 +124,7 @@ module.exports = (env, argv) => {
     ...config.plugins,
     new Dotenv({
       path: (argv.mode && fs.existsSync(path.resolve(__dirname, `.env.${argv.mode}`))) ? `./.env.${argv.mode}` : './.env',
-      safe: true, // load .env.example
+      safe: './.env.example',
       allowEmptyValues: true,
     })
   ];
