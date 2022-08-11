@@ -6,7 +6,7 @@
 - Added support for webp covers
 - Update styling to MUI5 with `sx`
 - Set back-to-top button optional
-- Added a standard Recat DOM renderer for usage without WebComponents
+- Added a standard React DOM renderer, to be able to use the apps without the Web Component envelope.
 - Added support for the new [Google Identity Services](https://developers.google.com/identity/oauth2/web) API
 
 ### v2.0.7 (2021-09-19)

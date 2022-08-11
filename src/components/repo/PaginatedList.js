@@ -68,7 +68,10 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
         page={page}
         rowsPerPage={itemsPerPage}
         rowsPerPageOptions={[10, 25, 50, 100]}
-        onRowsPerPageChange={ev => setItemsPerPage(ev.target.value)}
+        onRowsPerPageChange={({ target: { value } }) => {
+          setItemsPerPage(value);
+          setPage(0);
+        }}
         count={projects.length}
         onPageChange={(_ev, p) => setPage(p)}
         labelDisplayedRows={({ from, to, count }) => t('results-count', { from, to, count })}
