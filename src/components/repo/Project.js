@@ -231,7 +231,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
         </Button>
         {!user && instJavaLink &&
           <Button
-            variant="contained"
+            variant="outlined"
             color="primary"
             startIcon={<LocalCafe />}
             href={instJavaLink}
