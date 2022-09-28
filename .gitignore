@@ -17,6 +17,8 @@ notes
 .env.production
 .env.local
 .env.development.local
+.env.development.pre
+.env.development.pro
 .env.test.local
 .env.production.local
 
