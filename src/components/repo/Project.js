@@ -36,7 +36,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { textContent, getPathForProject } from '../../utils';
 import ProjectDownload from './ProjectDownload';
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import DataCard from '../DataCard';

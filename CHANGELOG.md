@@ -1,13 +1,13 @@
-### v2.1.1 (not yet released)
+### v2.1.1 (2022-10-04)
 #### Improvements
 - Upgraded to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html) and [MUI 5](https://mui.com/).
-- React apps can be used as [Web Components](https://developer.mozilla.org/es/docs/Web/Web_Components) with [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) for better integration on sites with complex styles, like some WordPress themes.
-- Upgraded components
-- Added support for webp covers
-- Update styling to MUI5 with `sx`
-- Set back-to-top button optional
+- React apps can now be used as [Web Components](https://developer.mozilla.org/es/docs/Web/Web_Components) with [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) for better integration on sites with complex styles, like some WordPress themes.
+- Upgraded components.
+- Added support for [WebP](https://developers.google.com/speed/webp/) file format in project covers.
+- Update styling to [MUI5](https://mui.com/) with [`sx` props](https://mui.com/system/getting-started/the-sx-prop/).
+- Set back-to-top button optional.
 - Added a standard React DOM renderer, to be able to use the apps without the Web Component envelope.
-- Added support for the new [Google Identity Services](https://developers.google.com/identity/oauth2/web) API
+- Added support for the new [Google Identity Services](https://developers.google.com/identity/oauth2/web) API.
 
 ### v2.0.7 (2021-09-19)
 #### Improvements

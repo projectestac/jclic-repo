@@ -33,7 +33,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import { checkFetchResponse, clickOnLink, getAbsoluteURL, ellipsis } from '../../utils';
 import { Box, Alert, Button, IconButton, CircularProgress, Typography, Link, Avatar } from '@mui/material';
 import { LibraryAdd, Delete, CloudDownload, Eject, Info } from '@mui/icons-material';

@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress, Box } from '@mui/material';
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import { useTranslation } from 'react-i18next';
 
 function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadAction }) {
