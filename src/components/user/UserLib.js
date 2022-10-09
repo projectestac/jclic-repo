@@ -126,9 +126,15 @@ function UserLib({ settings }) {
       document.head.appendChild(scriptTag);
       setGoogleScript(scriptTag);
 
+      // Clean up global CSS directives that might affect the rendering of the Google button
+      const customStyle = document.createElement('style');
+      customStyle.textContent = '#googleButton iframe {max-width: initial;}';
+      document.head.appendChild(customStyle);
+
       // Return a cleaning function to `useEffect`
       return () => {
-        document.head.removeChild(googleScript);
+        document.head.removeChild(scriptTag);
+        document.head.removeChild(customStyle);
         setGoogleScript(null);
       }
     }

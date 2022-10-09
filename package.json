@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Dynamic repository of JClic activities",
   "main": "src/index.js",
   "keywords": [
@@ -77,7 +77,7 @@
     "@svgr/webpack": "^6.4.0",
     "babel-loader": "^8.2.5",
     "dotenv-webpack": "^8.0.1",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.8",
     "prop-types": "^15.8.1",
     "raw-loader": "^4.0.2",

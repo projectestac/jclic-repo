@@ -1,3 +1,7 @@
+### v2.1.2 (2022-10-09)
+#### Improvements
+- Clean up global CSS directives that can affect the rendering of the Google button.
+
 ### v2.1.1 (2022-10-04)
 #### Improvements
 - Upgraded to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html) and [MUI 5](https://mui.com/).
