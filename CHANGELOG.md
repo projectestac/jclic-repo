@@ -1,3 +1,7 @@
+### v2.1.3 (Not yet released)
+#### Improvements
+- Upgraded components
+
 ### v2.1.2 (2022-10-09)
 #### Improvements
 - Clean up global CSS directives that can affect the rendering of the Google button.
