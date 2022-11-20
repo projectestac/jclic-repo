@@ -49,6 +49,10 @@ import user_repo_upload_info_en from './user-repo-upload-info-en.html';
 import user_repo_upload_info_ca from './user-repo-upload-info-ca.html';
 import user_repo_upload_info_es from './user-repo-upload-info-es.html';
 
+import java_download_info_en from './java-download-info-en.html';
+import java_download_info_ca from './java-download-info-ca.html';
+import java_download_info_es from './java-download-info-es.html';
+
 export const supportedLanguages = ['en', 'ca', 'es'];
 
 export const STOP_WORDS = {
@@ -80,6 +84,7 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             ...en,
             "user-repo-info": user_repo_info_en,
             "user-repo-upload-info": user_repo_upload_info_en,
+            "java-download-info": java_download_info_en,
           },
         },
         ca: {
@@ -87,6 +92,7 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             ...ca,
             "user-repo-info": user_repo_info_ca,
             "user-repo-upload-info": user_repo_upload_info_ca,
+            "java-download-info": java_download_info_ca,
           },
         },
         es: {
@@ -94,6 +100,7 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             ...es,
             "user-repo-info": user_repo_info_es,
             "user-repo-upload-info": user_repo_upload_info_es,
+            "java-download-info": java_download_info_es,
           },
         },
       },

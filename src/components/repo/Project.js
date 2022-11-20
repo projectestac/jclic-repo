@@ -30,8 +30,8 @@
  */
 
 import React, { useState } from 'react';
-import { Typography, IconButton, Button, Box } from '@mui/material';
-import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload } from '@mui/icons-material';
+import { Typography, IconButton, Button, Box, Popover, Input, InputAdornment, Snackbar } from '@mui/material';
+import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload, FileCopyOutlined, Close } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { textContent, getPathForProject } from '../../utils';
@@ -41,11 +41,12 @@ import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 function Project({ settings, user, project, fullProjectList, updateAct, ...props }) {
 
   const { t } = useTranslation();
-  const { jnlpInstaller, langDefault, logo, fullUsersPath } = settings;
+  const { langDefault, logo, fullUsersPath, rootRef } = settings;
   const lang = t('lang');
   const {
     fullPath, meta_langs,
@@ -63,7 +64,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
   const imgPath = (coverWebp || cover) && `${fullPath}/${coverWebp || cover}` || logo;
   const moodleLink = `${fullPath}/${mainFile}`;
   const projectLink = moodleLink.replace(/\/[^/]*$/, '/index.html');
-  const instJavaLink = instFile ? jnlpInstaller.replace('%%FILE%%', `${fullPath}/${instFile}`) : null;
+  const instJavaLink = instFile ? `${fullPath}/${instFile}` : null;
   const embedOptions = {
     width: '800',
     height: '600',
@@ -89,6 +90,12 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
     thumbnailUrl: imgPath || '',
     url: projectLink,
   };
+
+  const [instPopAnchorEl, setInstPopAnchorEl] = useState(null);
+  const instPopOpen = Boolean(instPopAnchorEl);
+  const instPopId = instPopOpen ? 'install-popover' : undefined;
+  const [snackOpen, setSnackOpen] = useState(false);
+  const handleSnackClose = (_ev, reason) => { if (reason !== 'clickaway') setSnackOpen(false); };
 
   return (
     <Box {...props}>
@@ -230,16 +237,67 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
           {t('prj-download')}
         </Button>
         {!user && instJavaLink &&
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<LocalCafe />}
-            href={instJavaLink}
-            target="_BLANK"
-            title={t('prj-java-inst-tooltip')}
-          >
-            {t('prj-java-inst')}
-          </Button>
+          <>
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={<LocalCafe />}
+              target="_BLANK"
+              title={t('prj-java-inst-tooltip')}
+              aria-describedby={instPopId}
+              onClick={ev => setInstPopAnchorEl(ev.currentTarget)}
+            >
+              {t('prj-java-inst')}
+            </Button>
+            <Popover
+              id={instPopId}
+              open={instPopOpen}
+              anchorEl={instPopAnchorEl}
+              onClose={() => { setInstPopAnchorEl(null); setSnackOpen(false); }}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              container={() => rootRef.current}
+            >
+              <Box sx={{ minWidth: 0.8, maxWidth: 600, p: 2 }} >
+                <div dangerouslySetInnerHTML={{ __html: t('java-download-info') }} />
+                <Input
+                  type="text"
+                  fullWidth
+                  sx={{ fontFamily: 'Monospace', color: 'text.disabled' }}
+                  value={instJavaLink}
+                  inputProps={{ readOnly: true }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <CopyToClipboard text={instJavaLink} onCopy={() => setSnackOpen(true)}>
+                        <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
+                          <FileCopyOutlined />
+                        </IconButton>
+                      </CopyToClipboard>
+                    </InputAdornment>
+                  }
+                />
+                <Snackbar
+                  sx={{ position: 'absolute', top: '9rem' }}
+                  open={snackOpen}
+                  autoHideDuration={4000}
+                  onClose={handleSnackClose}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  message={t('share-copied')}
+                  action={
+                    <IconButton size="small" aria-label={t('close')} title={t('close')} color="inherit" onClick={handleSnackClose}>
+                      <Close fontSize="small" />
+                    </IconButton>
+                  }
+                />
+              </Box>
+            </Popover>
+          </>
         }
       </Box>
       <ProjectDownload {...{ settings, dlgOpen, setDlgOpen, project }} />

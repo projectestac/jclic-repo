@@ -1,6 +1,7 @@
 ### v2.1.3 (Not yet released)
 #### Improvements
 - Upgraded components
+- Replaced the direct call to Java WebStart, which no longer works, with an informative note when clicking the "install project" button.
 
 ### v2.1.2 (2022-10-09)
 #### Improvements

@@ -34,7 +34,7 @@
   "share-embed": "Incrustar en un blog o página web",
   "share-embed-size": "Dimensiones del objeto a incrustar",
   "share-copy": "Copiar texto al portapapeles",
-  "share-copied": "El texto se ha copiado al portapapeles",
+  "share-copied": "El texto se ha copiado en el portapapeles",
   "share-moodle-label": "Enlace a utilizar en el <a href=\"https://moodle.org/plugins/mod_jclic\" target=\"_blank\" rel=\"noopener noreferrer\">módulo de JClic para Moodle</a>:",
   "share-embed-label": "Código para incrustar las actividades en un blog o página web:",
   "repo-title": "Biblioteca JClic",
