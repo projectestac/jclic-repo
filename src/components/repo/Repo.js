@@ -163,7 +163,7 @@ function Repo({ settings }) {
   }, [window]);
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 2 }, typography: 'body1' }} ref={settings.rootRef} >
+    <Box sx={{ typography: 'body1' }} ref={settings.rootRef} >
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||

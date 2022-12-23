@@ -295,7 +295,7 @@ function UserLib({ settings }) {
   const updateAct = (path, user) => clickOnLink(getAbsoluteURL(repoPath, { prj: path, user }));
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 2 }, typography: 'body1' }} ref={settings.rootRef} >
+    <Box sx={{ typography: 'body1' }} ref={settings.rootRef} >
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 1, mb: 1.5 }}>
         {displayTitle && <Typography variant="h1" sx={{ color: 'primary.dark' }}>{title}</Typography>}
         {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} sx={{ width: 56, height: 56 }} />}
