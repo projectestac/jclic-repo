@@ -30,7 +30,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
+import { List, ListItemButton, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ellipsis } from '../../utils';
 
@@ -51,8 +51,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
         {projects
           .slice(page * itemsPerPage, (page + 1) * itemsPerPage)
           .map(({ path, title, author, cover, coverWebp, thumbnail }, n) => (
-            <ListItem
-              button
+            <ListItemButton
               key={n}
               sx={{ borderBottom: '1px solid lightgray', pl: 0, '&:first-of-type': { borderTop: '1px solid lightgray' } }}
               onClick={() => updateAct(path, user)}>
@@ -60,7 +59,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
                 <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
               <ListItemText primary={title} secondary={author} secondaryTypographyProps={ellipsis} />
-            </ListItem>
+            </ListItemButton>
           ))}
       </List>
       <TablePagination
