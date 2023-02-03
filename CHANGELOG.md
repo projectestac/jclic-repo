@@ -1,4 +1,4 @@
-### v2.1.4 (Not yet released)
+### v2.1.4 (2023-02-03)
 #### Improvements
 - Upgraded components.
 - Removed default padding in main components.
