@@ -6,6 +6,7 @@ const pkg = require('./package.json');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const date = new Date();
+const webpack = require("webpack");
 
 const banner = `
 ${pkg.name} version ${pkg.version} (${date.toISOString().substr(0, 10)})
@@ -79,7 +80,11 @@ const config = {
       ...assetRules,
     ]
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(require("./package.json").version),
+    }),
+  ],
   devServer: {
     host: 'localhost',
     port: 8000,

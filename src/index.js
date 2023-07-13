@@ -29,11 +29,17 @@
  *  @module
  */
 
+/* global VERSION */
+
 import { getWebComponentClass } from './ReactWebComponent';
 import MainLayout from './components/MainLayout';
 import Repo from './components/repo/Repo';
 import UserLib from './components/user/UserLib';
 import DOMRenderer from './DOMRenderer';
+
+// Log app version from package.json
+// Const VERSION is intitialized by Webpack
+console.log(`JClicRepo version ${VERSION}`);
 
 // Define web components
 customElements.define('jclic-repo', getWebComponentClass(MainLayout, Repo));
