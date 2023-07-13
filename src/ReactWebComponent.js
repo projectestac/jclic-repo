@@ -62,16 +62,20 @@ export class ReactWebComponent extends HTMLElement {
     Component.createSlotClients?.(this);
 
     // Parse the "data-" props passed to the web component, and set the 'isWebComponent' flag
-    const dataSettings = {...parseStringSettings(this.dataset), isWebComponent: true};
+    const dataSettings = { ...parseStringSettings(this.dataset), isWebComponent: true };
 
     // Create a pivot element, where ReactDOM will render the app,
     // and initialize it with our specific style (if set)
     const mountPoint = document.createElement('div');
-    const styleAttr = this.getAttribute('style');
-    if (styleAttr)
-      mountPoint.setAttribute('style', styleAttr);
 
-    // Create a Shadow DOM tree and append the pivot element and a root 'style' element (needed by emotion) to it
+    // Transfer our `style` attribute to the mountPoint
+    const styleAttr = this.getAttribute('style');
+    if (styleAttr) {
+      mountPoint.setAttribute('style', styleAttr);
+      this.removeAttribute('style');
+    }
+
+    // Create a Shadow DOM tree and append to it the pivot element and a root style element (needed by emotion)
     const shadowRoot = this.attachShadow({ mode: 'open' });
     const emotionRoot = document.createElement('style');
     shadowRoot.appendChild(emotionRoot);
