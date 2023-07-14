@@ -8,8 +8,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 const date = new Date();
 const webpack = require("webpack");
 
+const version = `${pkg.version} (${date.toISOString().substring(0, 10)})`;
 const banner = `
-${pkg.name} version ${pkg.version} (${date.toISOString().substr(0, 10)})
+${pkg.name} v${version}
 ${pkg.description}
 ${pkg.homepage}
  
@@ -82,7 +83,7 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify(require("./package.json").version),
+      APP_ID: JSON.stringify(`${pkg.title} v${version}`),
     }),
   ],
   devServer: {
