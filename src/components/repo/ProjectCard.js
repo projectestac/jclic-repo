@@ -33,12 +33,12 @@ import React, { useState } from 'react';
 import { Fab, Card, Box } from '@mui/material';
 import { PlayArrow } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { ellipsis } from '../../utils';
+import { ellipsis, clickOnLink, getAbsoluteURL } from '../../utils';
 
 function ProjectCard({ settings, user, project, updateAct, children }) {
 
   const { t } = useTranslation();
-  const { repoBase, usersBase } = settings;
+  const { repoBase, usersBase, repoPath } = settings;
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover, coverWebp } = project;
   const base = user ? `${usersBase}/${user}/${path}` : `${repoBase}/${path}`;
   const projectLink = `${base}/${mainFile.replace(/[^/]*$/, 'index.html')}`;
@@ -51,7 +51,10 @@ function ProjectCard({ settings, user, project, updateAct, children }) {
       onMouseOut={() => setRaised(false)}
       onClick={ev => {
         ev.preventDefault();
-        updateAct(path, user);
+        if (ev.ctrlKey)
+          clickOnLink(getAbsoluteURL(repoPath, { prj: path, user }), true);
+        else
+          updateAct(path, user);
       }}
       elevation={raised ? 8 : 1}
     >
