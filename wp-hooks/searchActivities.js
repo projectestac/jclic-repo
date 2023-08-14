@@ -14,73 +14,70 @@
       matches.forEach(match => {
         const project = projects.find(p => p.path === match);
         if (project) {
-          const { title, author, cover, coverWebp } = project;
+          const { title, author, cover, coverWebp, langCodes } = project;
           const link = `https://projectes.xtec.cat/clic/${lang}/repo/?prj=${match}`;
           const img = `https://clic.xtec.cat/projects/${match}/${coverWebp || cover}`;
-          results.push({ title, author, img, link, match });
+          results.push({ title, author, img, link, match, langCodes });
         }
       });
     }
     return results;
   }
 
-  function $getArticle({ title, author, img, link, match }) {
-    return jq('<artile />')
-      .addClass(['post', 'type-post', 'has-post-thumbnail', 'ast-grid-common-col', 'ast-full-width', 'ast-article-post', 'ast-width-md-12'])
+  function $getWaitingBlock(lang, query) {
+    return jq('<div/>')
+      .addClass(['ast-separate-container', 'ast-article-post'])
+      .append([
+        jq('<h2/>')
+          .text(
+            lang === 'ca' ? `S'estan cercant activitats JClic amb el text "${query}"...` :
+              lang === 'es' ? `Buscando actividades JClic con el texto "${query}"...` :
+                `Searching for JClic activities containing the text "${query}"...`),
+      ]);
+  }
+
+  function $getArticle({ title, author, img, link, match, langCodes }) {
+    return jq('<article/>')
+      .addClass(['ast-separate-container', 'ast-article-post'])
       .attr('id', `act-${match}`)
-      .append(
-        jq('<div/>').addClass(['ast-post-format-', 'blog-layout-1', 'ast-no-date-box']).append(
-          jq('<div/>').addClass(['post-content', 'ast-grid-common-col']).append(
-            [
-              jq('<div/>').addClass(['ast-blog-featured-section', 'post-thumb', 'ast-grid-common-col', 'ast-float']).append(
-                jq('<div/>').addClass(['post-thumb-img-content', 'post-thumb']).append(
-                  jq('<a/>').attr('href', link).append(
-                    jq('<img>')
-                      .addClass(['attachment-large', 'size-large', 'wp-post-image'])
-                      .attr('src', img)
-                      .attr('alt', title)
-                      .css('max-height', '80pt')
-                  )
-                )
-              ),
-              jq('<header/>').addClass('entry-header').append(
-                jq('<h2/>').addClass('entry-title').append(
-                  jq('<a/>')
-                    .attr('href', link)
-                    .attr('rel', 'bookmark')
-                    .text(title)
-                )
-              ),
-              jq('<div/>').addClass(['entry-content', 'clear']).attr('itemprop', 'text').append(
-                jq('<p/>').text(author)
-              )
-            ]
-          )
-        )
-      );
+      .append([
+        jq(`<img/>`)
+          .attr('src', img)
+          .attr('alt', title)
+          .css({ 'max-height': '6rem', 'margin-bottom': '1rem' }),
+        jq('<h2/>')
+          .append(jq('<a/>')
+            .attr('href', link)
+            .text(`${title}${langCodes.length ? ` (${langCodes.join(', ')})` : ''}`)),
+        jq('<div/>')
+          .addClass(['entry-content', 'clear'])
+          .append(jq('<p/>').text(author)),
+      ]);
   }
 
   const $main = jq('#main');
   let $mainRow = jq('.ast-row');
+  if (!$mainRow.length) {
+    $mainRow = jq('<div/>').addClass('ast-row');
+    $main.append($mainRow);
+  }
+  const $notFound = jq('.no-results');
 
   const { pathname, search } = window.location;
   const lang = pathname.split('/')[3];
   const query = (new URLSearchParams(search)).get('s');
   if (lang && query) {
-    // TODO: show waiting block
+    const $waitingBlock = $getWaitingBlock(lang, query);
+    $mainRow.append($waitingBlock);
+
     const results = await searchActivities(lang, query);
-    // TODO: Remove waiting block
+
+    $waitingBlock.remove();
+
     if (results.length) {
-      // TODO: Remove $notFound
-      // const $notFound = jq('.no-results');
-      if (!$mainRow.length) {
-        $mainRow = jq('<div/>').addClass('ast-row');
-        $main.append($mainRow);
-      }
+      $notFound.remove();
       results.forEach(result => $mainRow.append($getArticle(result)));
     }
   }
 
 })();
-
-
