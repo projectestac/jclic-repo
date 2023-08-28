@@ -1,4 +1,4 @@
-### v2.1.5 (not yet released)
+### v2.1.6 (not yet released)
 #### Improvements
 - Upgraded components.
 - CTRL+click on card opens the project in new tab
