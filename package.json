@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Dynamic repository of JClic activities",
   "main": "src/index.js",
   "keywords": [
