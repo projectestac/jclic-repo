@@ -37,6 +37,7 @@ import { supportedLanguages, i18nInit } from './i18n';
 
 export const mainFont = ['Roboto', 'Arial', '"sans-serif"'].join(',');
 export const titleFont = ['"Open Sans"', 'Arial', '"sans-serif"'].join(',');
+// export const titleFont = mainFont;
 export function initFonts({ alreadyLoadedFonts = '' }) {
   const fontsList = new Set(alreadyLoadedFonts.split(','));
   if (!fontsList.has('Roboto'))
@@ -56,7 +57,7 @@ export const DEFAULT_THEME = {
     h1: {
       fontFamily: titleFont,
       fontWeight: 700,
-      fontSize: '3rem',
+      fontSize: '2.8rem',
     },
     h2: {
       fontFamily: titleFont,
