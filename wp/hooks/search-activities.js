@@ -52,7 +52,7 @@ jq(document).ready(async function () {
           .text(
             lang === 'ca' ? `S'ha${num > 1 ? 'n' : ''} trobat ${num} activitat${num > 1 ? 's' : ''} JClic amb el text "${query}":` :
               lang === 'es' ? `Se ha${num > 1 ? 'n' : ''} encontrado ${num} actividad${num > 1 ? 'es' : ''} JClic con el texto "${query}":` :
-                `Found ${num} JClic activities containing "${query}":`),
+                `Found ${num} JClic activit${num > 1 ? 'ies' : 'y'} containing "${query}":`),
       ]);
   }
 
@@ -85,7 +85,7 @@ jq(document).ready(async function () {
 
     // If there isn't a main row, create it
     if (!$mainRow.length) {
-      $mainRow = jq('<div/>').addClass('ast-row');
+      $mainRow = jq('<div/>').addClass(['ast-row']);
       $main.append($mainRow);
     }
 
@@ -128,20 +128,18 @@ jq(document).ready(async function () {
         };
 
         // "More results" button
-        const $more = jq('<div/>')
-          .css({ padding: '1.5rem', fontWeight: 'bold' })
-          .append(jq('<a/>')
-            .attr('href', '#')
-            .on('click', ev => {
-              // Show next 10 results
-              ev.preventDefault();
-              showResults();
-            })
-            .html(
-              lang === 'ca' ? 'Més resultats »' :
-                lang === 'es' ? 'Más resultados »' :
-                  'More results »'
-            ));
+        const $more = jq('<button/>')
+          .css({ marginTop: '1.5rem', marginBottom: '1.5rem' })
+          .on('click', ev => {
+            // Show next 10 results
+            ev.preventDefault();
+            showResults();
+          })
+          .html(
+            lang === 'ca' ? 'Mostra més resultats »' :
+              lang === 'es' ? 'Mostrar más resultados »' :
+                'Show more results »'
+          );
 
         // Show first 10 results
         showResults();
