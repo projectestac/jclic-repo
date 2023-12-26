@@ -49,10 +49,10 @@
   "readmeFilename": "README.md",
   "homepage": "https://projectestac.github.io/jclic-repo",
   "dependencies": {
-    "@emotion/react": "^11.11.1",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.1",
-    "@mui/material": "^5.15.1",
+    "@mui/icons-material": "^5.15.2",
+    "@mui/material": "^5.15.2",
     "@supercharge/promise-pool": "^3.1.0",
     "assert": "^2.1.0",
     "file-saver": "^2.0.5",
