@@ -21,7 +21,7 @@ When done, JClic projects can be saved and exported into three different formats
 
 A _JClic repository_ consists of a root directory with a set of subdirectories, each one containing the HTML5 version of a JClic project. A single file named `projects.json` should be located on the root directory, acting as an index of the repository projects. This file contains a full list of the projects and basic information (project's folder, title, authors, languages, icons, main file...) about them.
 
-There are currently two types of activity repositories in the [clicZone](https://clic.xtec.cat): the [main library](https://clic.xtec.cat/repo),
+There are currently two types of activity repositories in the [clicZone](https://projectes.xtec.cat/clic): the [main library](https://projectes.xtec.cat/clic/en/repo/),
 with more than 2,000 projects, and hundreds of small personal repositories where registered users (currently Catalan teachers) can upload and publish their own JClic projects.
 
 See  the [`samples`](../../tree/samples/projects) branch for examples of `projects.json` and individual `project.json` files.
