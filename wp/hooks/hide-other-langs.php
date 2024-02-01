@@ -34,8 +34,7 @@ add_action('wp_head', function () {
     // Emet el codi CSS amagant les classes indicades a $hideLangs
     ?>
     <style id="amaga_altres_idiomes">
-      <?= $hideLangs ?>
-        {
+      <?= $hideLangs ?> { 
         display: none;
       }
     </style>
