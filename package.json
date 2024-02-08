@@ -51,8 +51,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.7",
-    "@mui/material": "^5.15.7",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/material": "^5.15.9",
     "@supercharge/promise-pool": "^3.1.1",
     "assert": "^2.1.0",
     "file-saver": "^2.0.5",
@@ -64,7 +64,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-i18next": "^14.0.1",
+    "react-i18next": "^14.0.5",
     "react-markdown": "^9.0.1",
     "rehype-raw": "^7.0.0"
   },
@@ -81,7 +81,7 @@
     "prop-types": "^15.8.1",
     "raw-loader": "^4.0.2",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.90.0",
+    "webpack": "^5.90.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
