@@ -32,7 +32,7 @@
 import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
-import { Email, Facebook, Twitter, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
+import { Email, Facebook, X, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
 import ClassroomIcon from '../assets/classroom.svg';
 import MoodleIcon from '../assets/moodle.svg';
 import { useTranslation } from 'react-i18next';
@@ -74,11 +74,15 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             target="_blank"
             rel="noopener noreferrer">
             <IconButton
-              sx={{ color: '#01acee' }}
+              sx={{ color: '#000' }}
               aria-label={t('share-twitter')}
               title={t('share-twitter')}
               size="large">
-              <Twitter />
+              <X style={{
+                // Add extra margin to make 'X' logo visually similar to others
+                width: '20px', height: '20px',
+                margin: '2px'
+              }} />
             </IconButton>
           </a>
         }
