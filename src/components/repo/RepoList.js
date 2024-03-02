@@ -31,7 +31,7 @@
 
 import React from 'react';
 import BackToTop from '../BackToTop';
-import { Typography, Paper, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { List, ViewComfy } from '@mui/icons-material';
 import SEO from '../SEO';
@@ -41,13 +41,12 @@ import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
 import { useTranslation } from 'react-i18next';
 
-function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct, ...props }) {
+function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = settings;
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
-  const projectCount = t('repo-num', { count: projects.length, context: `${projects.length}` });
 
   return (
     <Box {...props} >
@@ -56,11 +55,11 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user &&
-        <Paper sx={{ my: 2, maxWidth: 1200 }}>
-          <SelectProjects {...{ settings, filters, updateFilters, setLoading, setError }} />
-        </Paper>
+        <Box sx={{ my: 2, maxWidth: 1200 }}>
+          <SelectProjects {...{ settings, filters, updateFilters, currentCount: projects.length }} />
+        </Box>
       }
-      <Typography variant="body2">{projectCount}</Typography>
+      {/*<Typography variant="body2">{projectCount}</Typography>*/}
       <ToggleButtonGroup
         sx={{ my: 2 }}
         size="small"

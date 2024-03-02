@@ -168,7 +168,7 @@ function Repo({ settings }) {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||
         project && <Project {...{ settings, user, project, fullProjectList, updateAct }} /> ||
-        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, setLoading, setError, updateAct }} />
+        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct }} />
       }
     </Box>
   );

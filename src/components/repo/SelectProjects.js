@@ -30,20 +30,23 @@
  */
 
 import React, { useState } from 'react';
-import { Typography, InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton, Box } from '@mui/material';
+import { InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton, Box, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
-function SelectProjects({ settings, filters, updateFilters }) {
+function SelectProjects({ settings, filters, updateFilters, currentCount }) {
 
   const { t } = useTranslation();
   const { rootRef } = settings;
   const [query, setQuery] = useState(filters?.text || '');
+  const count = t('repo-num', { count: currentCount, context: `${currentCount}` });
+
   const handleChange = ev => {
     ev.preventDefault();
     const { target: { name, value } } = ev;
     updateFilters({ ...filters, [name]: value === '*' ? '' : value })
   }
+
   const handleEnterSearch = ev => {
     if (ev.type === 'click' || ev.key === 'Enter') {
       ev.preventDefault();
@@ -54,58 +57,23 @@ function SelectProjects({ settings, filters, updateFilters }) {
   return (
     <Box sx={{
       display: 'flex', flexWrap: 'wrap',
-      py: 2, px: 1,
-      '& .MuiFormControl-root': {
+      pb: 2, pt: 1, px: 1,
+      backgroundColor: '#f5f5f5',
+      '& .type-select-control': {
         mx: 1,
         width: '10rem',
         flexGrow: 1,
         maxWidth: '21rem'
       }
     }}>
-      <Typography color="textSecondary" sx={{ flexBasis: '100%', ml: 1, mb: 1 }}>{t('prj-filter')}</Typography>
-      <FormControl>
-        <InputLabel id="select-lang-label" variant="standard">{t('prj-language')}</InputLabel>
-        <Select
-          labelId="select-lang-label"
-          name="language"
-          variant="standard"
-          MenuProps={{ container: () => rootRef.current }}
-          value={filters?.language || ''}
-          onChange={handleChange}>
-          {t('lang-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`lang-${code}`)}</MenuItem>)}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel id="select-subj-label" variant="standard">{t('prj-subject')}</InputLabel>
-        <Select
-          labelId="select-subj-label"
-          name="subject"
-          variant="standard"
-          MenuProps={{ container: () => rootRef.current }}
-          value={filters?.subject || ''}
-          onChange={handleChange}>
-          {t('subj-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`subj-${code}`)}</MenuItem>)}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel id="select-level-label" variant="standard">{t('prj-level')}</InputLabel>
-        <Select
-          labelId="select-level-label"
-          name="level"
-          variant="standard"
-          MenuProps={{ container: () => rootRef.current }}
-          value={filters?.level || ''}
-          onChange={handleChange}>
-          {t('level-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`level-${code}`)}</MenuItem>)}
-        </Select>
-      </FormControl>
-      <FormControl>
+      <FormControl sx={{ flexBasis: '100%', mx: 1, mb: 1 }}>
         <TextField
+          sx={{ maxWidth: '21rem' }}
           label={t('prj-text')}
           variant="standard"
           value={query}
           onChange={({ target: { value } }) => setQuery(value)}
-          onKeyPress={handleEnterSearch}
+          onKeyDown={handleEnterSearch}
           InputProps={{
             endAdornment:
               <InputAdornment position="end">
@@ -121,6 +89,45 @@ function SelectProjects({ settings, filters, updateFilters }) {
           }}
         />
       </FormControl>
+      <FormControl className='type-select-control'>
+        <InputLabel id="select-lang-label" variant="standard">{t('prj-language')}</InputLabel>
+        <Select
+          labelId="select-lang-label"
+          name="language"
+          variant="standard"
+          MenuProps={{ container: () => rootRef.current }}
+          value={filters?.language || ''}
+          onChange={handleChange}>
+          {t('lang-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`lang-${code}`)}</MenuItem>)}
+        </Select>
+      </FormControl>
+      <FormControl className='type-select-control'>
+        <InputLabel id="select-subj-label" variant="standard">{t('prj-subject')}</InputLabel>
+        <Select
+          labelId="select-subj-label"
+          name="subject"
+          variant="standard"
+          MenuProps={{ container: () => rootRef.current }}
+          value={filters?.subject || ''}
+          onChange={handleChange}>
+          {t('subj-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`subj-${code}`)}</MenuItem>)}
+        </Select>
+      </FormControl>
+      <FormControl className='type-select-control'>
+        <InputLabel id="select-level-label" variant="standard">{t('prj-level')}</InputLabel>
+        <Select
+          labelId="select-level-label"
+          name="level"
+          variant="standard"
+          MenuProps={{ container: () => rootRef.current }}
+          value={filters?.level || ''}
+          onChange={handleChange}>
+          {t('level-codes').split('|').map((code) => <MenuItem key={code} value={code}>{t(`level-${code}`)}</MenuItem>)}
+        </Select>
+      </FormControl>
+      <Typography variant="body1" sx={{ flexBasis: '100%', mx: 1, mt: 3, color: 'primary.main' }}>
+        {`${count}${Object.values(filters).join('') && t('repo-with-filters') || ''}`}
+      </Typography>
     </Box>
   );
 }
