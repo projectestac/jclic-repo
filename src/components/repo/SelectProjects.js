@@ -34,7 +34,7 @@ import { InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, I
 import { Search } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
-function SelectProjects({ settings, filters, updateFilters, currentCount }) {
+function SelectProjects({ settings, filters, updateFilters, currentCount = 0, sx = {} }) {
 
   const { t } = useTranslation();
   const { rootRef } = settings;
@@ -58,13 +58,19 @@ function SelectProjects({ settings, filters, updateFilters, currentCount }) {
     <Box sx={{
       display: 'flex', flexWrap: 'wrap',
       pb: 2, pt: 1, px: 1,
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#f8f8f8',
+      borderRadius: '4px',
+      borderStyle: 'solid',
+      borderWidth: '2px',
+      borderColor: '#888',
+      maxWidth: '66rem',
       '& .type-select-control': {
         mx: 1,
         width: '10rem',
         flexGrow: 1,
         maxWidth: '21rem'
-      }
+      },
+      ...sx,
     }}>
       <FormControl sx={{ flexBasis: '100%', mx: 1, mb: 1 }}>
         <TextField

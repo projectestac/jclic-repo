@@ -54,12 +54,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
       {(displayTitle || user) && <Typography variant="h1" sx={{ color: 'primary.dark', mb: 1 }}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
-      {!user &&
-        <Box sx={{ my: 2, maxWidth: 1200 }}>
-          <SelectProjects {...{ settings, filters, updateFilters, currentCount: projects.length }} />
-        </Box>
-      }
-      {/*<Typography variant="body2">{projectCount}</Typography>*/}
+      {!user && <SelectProjects {...{ sx: { my: 2 }, settings, filters, updateFilters, currentCount: projects.length }} />}
       <ToggleButtonGroup
         sx={{ my: 2 }}
         size="small"

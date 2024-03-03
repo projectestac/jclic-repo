@@ -75,9 +75,13 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
         onPageChange={(_ev, p) => setPage(p)}
         labelDisplayedRows={({ from, to, count }) => t('results-count', { from, to, count })}
         labelRowsPerPage={t('results-per-page')}
-        backIconButtonProps={{ title: t('results-page-prev') }}
-        nextIconButtonProps={{ title: t('results-page-next') }}
-        SelectProps={{ MenuProps: { container: () => rootRef.current } }}
+        slotProps={{
+          actions: {
+            previousButton: { title: t('results-page-prev') },
+            nextButton: { title: t('results-page-next') },
+          },
+          select: { MenuProps: { container: () => rootRef.current } },
+        }}
       />
     </div >
   );
