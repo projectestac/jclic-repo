@@ -62,6 +62,7 @@ function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
       useWindow={true}
     >
       <Box sx={{
+        my: 2,
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
         gap: 2,

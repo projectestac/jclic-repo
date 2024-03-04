@@ -31,9 +31,9 @@
 
 import React from 'react';
 import BackToTop from '../BackToTop';
-import { Typography, Box } from '@mui/material';
-import { ToggleButtonGroup, ToggleButton } from '@mui/material';
-import { List, ViewComfy } from '@mui/icons-material';
+import { Typography, Box, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+// import { ToggleButtonGroup, ToggleButton, RadioGroup, Switch } from '@mui/material';
+// import { List, ViewComfy } from '@mui/icons-material';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import SelectProjects from './SelectProjects';
@@ -55,25 +55,25 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
       {!user && <SelectProjects {...{ sx: { my: 2 }, settings, filters, updateFilters, currentCount: projects.length }} />}
-      <ToggleButtonGroup
-        sx={{ my: 2 }}
-        size="small"
-        value={listMode}
-        exclusive
-        onChange={_ev => setListMode(!listMode)}
-        aria-label={t('repo-view-mode')}
-      >
-        <ToggleButton value={false} title={t('repo-view-cards')}>
-          <ViewComfy />
-        </ToggleButton>
-        <ToggleButton value={true} title={t('repo-view-list')}>
-          <List />
-        </ToggleButton>
-      </ToggleButtonGroup>
-      {(listMode
-        && <PaginatedList {...{ user, projects, settings, updateAct }} />)
-        || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
-      }
+      {projects.length > 0 && <>
+        <RadioGroup
+          sx={{ flexDirection: 'row', my: 1, ml: 1 }}
+          aria-label={t('repo-view-mode')}
+          value={listMode}
+          onChange={ev => setListMode(ev.target.value === 'true')}>
+          <FormControlLabel value={false} control={<Radio />} label={t('repo-view-cards')} />
+          <FormControlLabel value={true} control={<Radio />} label={t('repo-view-list')} />
+        </RadioGroup>
+        {/* <FormControlLabel sx={{ my: 1 }} control={<Switch checked={listMode} onChange={ev => setListMode(ev.target.checked)}/>} label={t('repo-view-list')} /> */}
+        {/* <ToggleButtonGroup sx={{ my: 2 }} size="small" value={listMode} exclusive onChange={_ev => setListMode(!listMode)} aria-label={t('repo-view-mode')}>
+              <ToggleButton value={false} title={t('repo-view-cards')}><ViewComfy /></ToggleButton>
+              <ToggleButton value={true} title={t('repo-view-list')}><List /></ToggleButton>
+            </ToggleButtonGroup> */}
+        {(listMode
+          && <PaginatedList {...{ user, projects, settings, updateAct }} />)
+          || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
+        }
+      </>}
       {displayBackToTop &&
         <BackToTop {...{ settings, showBelow: 300 }} />}
     </Box >
