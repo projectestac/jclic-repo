@@ -18,7 +18,7 @@
   "search-results": "Resultats de la cerca \"{{query}}\"",
   "no-results": "No s'ha trobat cap resultat",
   "results-per-page": "Resultats per pàgina:",
-  "results-count": "Resultats {{from, number}} al {{to, number}} de {{count, number}}",
+  "results-count": "S'estan mostrant els resultats {{from, number}} al {{to, number}} d'un total de {{count, number}}",
   "results-page-prev": "Pàgina anterior",
   "results-page-next": "Pàgina següent",
   "404-not-found": "Pàgina no trobada",

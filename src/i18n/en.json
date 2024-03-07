@@ -18,7 +18,7 @@
   "search-results": "Search results for \"{{query}}\"",
   "no-results": "No results found",
   "results-per-page": "Results per page:",
-  "results-count": "Results {{from, number}} to {{to, number}} of {{count, number}}",
+  "results-count": "Showing results {{from, number}} to {{to, number}} of a total of {{count, number}}",
   "results-page-prev": "Previous page",
   "results-page-next": "Next page",
   "404-not-found": "Page not found",

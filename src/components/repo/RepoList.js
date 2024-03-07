@@ -64,11 +64,6 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
           <FormControlLabel value={false} control={<Radio />} label={t('repo-view-cards')} />
           <FormControlLabel value={true} control={<Radio />} label={t('repo-view-list')} />
         </RadioGroup>
-        {/* <FormControlLabel sx={{ my: 1 }} control={<Switch checked={listMode} onChange={ev => setListMode(ev.target.checked)}/>} label={t('repo-view-list')} /> */}
-        {/* <ToggleButtonGroup sx={{ my: 2 }} size="small" value={listMode} exclusive onChange={_ev => setListMode(!listMode)} aria-label={t('repo-view-mode')}>
-              <ToggleButton value={false} title={t('repo-view-cards')}><ViewComfy /></ToggleButton>
-              <ToggleButton value={true} title={t('repo-view-list')}><List /></ToggleButton>
-            </ToggleButtonGroup> */}
         {(listMode
           && <PaginatedList {...{ user, projects, settings, updateAct }} />)
           || <ScrollMosaic {...{ user, projects, settings, updateAct }} />

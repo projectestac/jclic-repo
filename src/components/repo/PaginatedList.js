@@ -64,6 +64,11 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
       </List>
       <TablePagination
         component="nav"
+        sx={{
+          '& > div': {
+            justifyContent: 'flex-end',
+          }
+        }}
         page={page}
         rowsPerPage={itemsPerPage}
         rowsPerPageOptions={[10, 25, 50, 100]}

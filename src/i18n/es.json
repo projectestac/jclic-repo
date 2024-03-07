@@ -18,7 +18,7 @@
   "search-results": "Resultados de la búsqueda \"{{query}}\"",
   "no-results": "No se encontró ningún resultado",
   "results-per-page": "Resultados por página:",
-  "results-count": "Resultados {{from, number}} al {{to, number}} de {{count, number}}",
+  "results-count": "Se están mostrando los resultados {{from, number}} al {{to, number}} de un total de {{count, number}}",
   "results-page-prev": "Página anterior",
   "results-page-next": "Página siguiente",
   "404-not-found": "Página no encontrada",
