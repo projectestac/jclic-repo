@@ -252,3 +252,27 @@ export const ellipsis = {
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
 };
+
+/**
+ * Converts a date in format DD/MM/YYYY to the current locale date format.
+ * In case of error, returns the provided 'date' parameter
+ * @param {string} date 
+ * @returns string
+ */
+export function formatDate(date) {
+  let [day = 0, month = 0, year = 0] = date.split('/').map(s => parseInt(s));
+  
+  // Check possible two-digit year format
+  if (year <= 99 && year >= 90)
+    year += 1900;
+  else if (year <= 50 && year >= 0)
+    year += 2000;
+
+  if (day > 0 && day <= 31 && month > 0 && month <= 12 && year > 1990) {
+    const d = new Date(year, month - 1, day);
+    return d.toLocaleDateString();
+  }
+
+  // Resolve to the provided string
+  return date;
+}

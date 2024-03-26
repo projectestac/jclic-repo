@@ -34,7 +34,7 @@ import { Typography, IconButton, Button, Box, Popover, Input, InputAdornment, Sn
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload, FileCopyOutlined, Close } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { textContent, getPathForProject } from '../../utils';
+import { textContent, getPathForProject, formatDate } from '../../utils';
 import ProjectDownload from './ProjectDownload';
 import { filesize } from 'filesize';
 import SEO from '../SEO';
@@ -177,7 +177,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
           {date &&
             <tr>
               <td>{`${t('prj-date')}:`}</td>
-              <td>{date}</td>
+              <td>{formatDate(date)}</td>
             </tr>
           }
           {activities &&
