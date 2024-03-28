@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Afegeix els tipus Mime "zip" i "gzip" a la llista de tipus admesos pel WordPress,
+ * Afegeix els tipus Mime "xml", "zip" i "gzip" a la llista de tipus admesos pel WordPress,
  * possibilitant així la pujada i publicació d'aquest tipus de fitxers requerits
  * per l'estàndard "sitemaps.org"
  * 
@@ -14,12 +14,14 @@
  */
 
 add_filter( 'upload_mimes', function ($mime_types) {
+	$mime_types['xml'] = 'application/xml';
 	$mime_types['zip'] = 'application/zip';
 	$mime_types['gz'] = 'application/gzip';
 	return $mime_types;
 } );
 
 add_filter( 'ext2type', function ($stack_ext2type) {
+	$stack_ext2type[ 'archive' ][] = 'xml';
 	$stack_ext2type[ 'archive' ][] = 'zip';
 	$stack_ext2type[ 'archive' ][] = 'gz';
 	return $stack_ext2type;
