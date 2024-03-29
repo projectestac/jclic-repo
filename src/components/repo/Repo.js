@@ -55,7 +55,7 @@ function Repo({ settings }) {
     level: getQueryParam('level'),
     text: getQueryParam('text'),
   });
-  const [listMode, setListMode] = useState(false);
+  const [listMode, setListMode] = useState(getQueryParam('list') === 'true');
 
   const [act, setAct] = useState(getQueryParam('prj'));
   const [user, setUser] = useState(getQueryParam('user'));
@@ -71,7 +71,7 @@ function Repo({ settings }) {
   // Update the current project, optionally with history update
   function updateAct(newAct, newUser = null, replace = false, updateHistory = true) {
     if (updateHistory)
-      updateHistoryState(newAct, newUser, filters, replace);
+      updateHistoryState({ act: newAct, user: newUser, filters }, replace);
     if (user !== newUser) {
       // Clear activity list when user changes
       setFullProjectList(null);
@@ -84,7 +84,7 @@ function Repo({ settings }) {
   // Update the filters, optionally with history update
   function updateFilters(newFilters, replace = false, updateHistory = true) {
     if (updateHistory)
-      updateHistoryState(act, user, newFilters, replace);
+      updateHistoryState({ act, user, filters: newFilters }, replace);
     if (newFilters.text !== filters.text)
       updateFullTextResults(newFilters.text);
     setFilters(newFilters);
@@ -147,7 +147,7 @@ function Repo({ settings }) {
   // Operations to be performed at app startup
   useEffect(() => {
     // Start a new browser history
-    updateHistoryState(act, user, filters, true);
+    updateHistoryState({ act, user, filters }, true);
     // Attach the 'popstate' event handler
     window.addEventListener('popstate', ev => {
       const { state } = ev;

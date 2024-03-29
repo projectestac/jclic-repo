@@ -100,11 +100,17 @@ export function parseStringSettings(data = {}) {
 /**
  * Updates window.history.state and the query params of current URL, thus allowing
  * to navigate between different app states
- * @param {string} act - Id of the project to display, or `null` to show the projects list
- * @param {string} user - User id for user libraries, or null for main library
+ * @param {object} settings - Settings to be reflected in search params
+ * @param {string} settings.act - Id of the project to display, or `null` to show the projects list
+ * @param {string} settings.user - User id for user libraries, or null for main library
+ * @param {object} settings.filters - Filters to be applied to the current list of projects
+ * @param {string} settings.filters.language - Language filter
+ * @param {string} settings.filters.subject - Subject filter
+ * @param {string} settings.filters.level - Level filter
+ * @param {string} settings.filters.text - Full text search filter
  * @param {boolean} replace - When `true`, the current state is replaced. Otherwise, a new state is pushed.
  */
-export function updateHistoryState(act, user, filters, replace = false) {
+export function updateHistoryState({ act = '', user = '', filters = {} }, replace = false) {
   const url = new URL(window.location.href);
   setUrlSearchParam(url.searchParams, 'prj', act);
   setUrlSearchParam(url.searchParams, 'user', user);
@@ -261,7 +267,7 @@ export const ellipsis = {
  */
 export function formatDate(date) {
   let [day = 0, month = 0, year = 0] = date.split('/').map(s => parseInt(s));
-  
+
   // Check possible two-digit year format
   if (year <= 99 && year >= 90)
     year += 1900;

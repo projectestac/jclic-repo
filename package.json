@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.1.9",
+  "version": "2.1.10",
   "description": "Dynamic repository of JClic activities",
   "main": "src/index.js",
   "keywords": [
@@ -50,7 +50,7 @@
   "homepage": "https://projectestac.github.io/jclic-repo",
   "dependencies": {
     "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@supercharge/promise-pool": "^3.2.0",

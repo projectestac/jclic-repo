@@ -32,14 +32,14 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItemButton, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { ellipsis } from '../../utils';
+import { ellipsis, clickOnLink, getAbsoluteURL } from '../../utils';
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
 
 function PaginatedList({ settings, user, projects, updateAct, ...props }) {
 
   const { t } = useTranslation();
-  const { repoBase, usersBase, rootRef } = settings;
+  const { repoBase, usersBase, rootRef, repoPath } = settings;
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
   const base = user ? `${usersBase}/${user}` : repoBase;
@@ -54,7 +54,13 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
             <ListItemButton
               key={n}
               sx={{ borderBottom: '1px solid lightgray', pl: 0, '&:first-of-type': { borderTop: '1px solid lightgray' } }}
-              onClick={() => updateAct(path, user)}>
+              onClick={ev => {
+                ev.preventDefault();
+                if (ev.ctrlKey)
+                  clickOnLink(getAbsoluteURL(repoPath, { prj: path, user, list: 'true' }), true);
+                else
+                  updateAct(path, user);
+              }}>
               <ListItemAvatar>
                 <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
