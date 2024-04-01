@@ -31,7 +31,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { checkFetchResponse, getQueryParam, updateHistoryState } from '../../utils';
+import { checkFetchResponse, getQueryParam, updateHistoryState, getPathForProject } from '../../utils';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Loading from '../Loading';
@@ -56,6 +56,7 @@ function Repo({ settings }) {
     text: getQueryParam('text'),
   });
   const [listMode, setListMode] = useState(getQueryParam('list') === 'true');
+  const [canonical, setCanonical] = useState(window.location.href);
 
   const [act, setAct] = useState(getQueryParam('prj'));
   const [user, setUser] = useState(getQueryParam('user'));
@@ -79,6 +80,7 @@ function Repo({ settings }) {
     }
     setUser(newUser);
     setAct(newAct);
+    setCanonical(getPathForProject(newAct, newUser))
   }
 
   // Update the filters, optionally with history update
@@ -146,6 +148,8 @@ function Repo({ settings }) {
 
   // Operations to be performed at app startup
   useEffect(() => {
+    // Remove existing 'canonical', if any (will be restored by SEO)
+    (document.querySelector('link[rel=canonical]'))?.remove();
     // Start a new browser history
     updateHistoryState({ act, user, filters }, true);
     // Attach the 'popstate' event handler
@@ -167,8 +171,8 @@ function Repo({ settings }) {
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||
-        project && <Project {...{ settings, user, project, fullProjectList, updateAct }} /> ||
-        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct }} />
+        project && <Project {...{ settings, user, project, fullProjectList, updateAct, canonical }} /> ||
+        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical }} />
       }
     </Box>
   );

@@ -98,7 +98,7 @@ function SEO({ settings, location = null, title, author = '', description = '', 
     href,
   }));
   if (canonical)
-    links.push({ rel: 'canonical', content: canonical });
+    links.push({ rel: 'canonical', href: canonical });
 
   return (
     <Helmet

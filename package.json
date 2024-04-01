@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "Dynamic repository of JClic activities",
   "main": "src/index.js",
   "keywords": [
@@ -58,7 +58,7 @@
     "file-saver": "^2.0.5",
     "filesize": "^10.1.1",
     "i18next": "^23.10.1",
-    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-browser-languagedetector": "^7.2.1",
     "jszip": "^3.10.1",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",

@@ -41,7 +41,7 @@ import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
 import { useTranslation } from 'react-i18next';
 
-function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, ...props }) {
+function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = settings;
@@ -50,7 +50,7 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
 
   return (
     <Box {...props} >
-      <SEO {...{ settings, title, description, thumbnail: twitterCard }} />
+      <SEO {...{ settings, title, description, thumbnail: twitterCard, canonical }} />
       {(displayTitle || user) && <Typography variant="h1" sx={{ color: 'primary.dark', mb: 1 }}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
       <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />

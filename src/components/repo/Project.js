@@ -43,7 +43,7 @@ import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-function Project({ settings, user, project, fullProjectList, updateAct, ...props }) {
+function Project({ settings, user, project, fullProjectList, updateAct, canonical, ...props }) {
 
   const { t } = useTranslation();
   const { langDefault, logo, fullUsersPath, rootRef } = settings;
@@ -99,7 +99,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, ...props
 
   return (
     <Box {...props}>
-      <SEO {...{ settings, title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd }} />
+      <SEO {...{ settings, title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd, canonical }} />
       <Button sx={{ mb: 2 }} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
         <ArrowBack sx={{ mr: 1 }} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}

@@ -1,7 +1,12 @@
-### v2.1.6 (not yet released)
+### v2.1.11 (2024-04-01)
 #### Improvements
 - Upgraded components.
 - CTRL+click on card opens the project in new tab
+- Improved SEO with 'canonical' and 'alternate' head tags
+- Added some PHP snippets for WordPress
+- Display dates in the current locale format
+- Improved the usability of 'switch to list' control
+- Optimized search box
 
 ### v2.1.4 (2023-02-03)
 #### Improvements

@@ -183,13 +183,14 @@ export function textContent(text = '') {
 /**
  * Build an URL pointing to a specific project, adding params to the search
  * section of the current URL
- * @param {string} act 
- * @param {string=} user 
- * @returns 
+ * @param {string} act - current project path
+ * @param {string=} user - current user
+ * @returns string
  */
 export function getPathForProject(act, user = null) {
   const url = new URL(window.location);
-  url.searchParams.set('prj', act);
+  if (act)
+    url.searchParams.set('prj', act);
   if (user)
     url.searchParams.set('user', user);
   return url.toString();
@@ -208,8 +209,13 @@ export function getAllPageVariants(location, lang, langKey, supportedLanguages) 
   const url = new URL(location);
   return supportedLanguages.reduce((result, l) => {
     if (l !== lang) {
-      url.searchParams.set(langKey, l);
-      result.push({ lang: l, href: url.toString() });
+      const p = location.indexOf(`/${lang}/`);
+      if (p >= 0)
+        result.push({ lang: l, href: `${location.substring(0, p)}/${l}/${location.substring(p + 4)}` });
+      else {
+        url.searchParams.set(langKey, l);
+        result.push({ lang: l, href: url.toString() });
+      }
     }
     return result;
   }, []);
