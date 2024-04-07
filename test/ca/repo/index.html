@@ -6,6 +6,12 @@
   <title>JClic repo - Main page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="to-be-removed">
+  <script>
+    // Declare a fake koko_analytics environment
+    window.koko_analytics = {
+      url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
+    };
+  </script>
   <script type="text/javascript" src="/jclic-repo.min.js"></script>
 </head>
 
@@ -18,14 +24,9 @@
     <p>Web components can be used anywhere on your web page or blog post. In this example, the main JClic library should
       appear just below this paragraph</p>
     <h1>JClic library</h1>
-    <jclic-repo 
-      style="padding: 1em;"
-      data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
-      data-display-title="true" 
-      data-display-subtitle="true"
-      data-display-back-to-top-off="false"
+    <jclic-repo style="padding: 1em;" data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
+      data-display-title="true" data-display-subtitle="true" data-display-back-to-top-off="false"
       data-already-loaded-fonts=""
-      
       data-share-sites-off='{"twitter":false,"facebook":true,"telegram":false,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
       data-lang-off="en" data-lang-default-off='en' data-lang-key-off='lang'
       data-theme-off='{"palette":{"primary":{"main":"#F00"}}}' />

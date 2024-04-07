@@ -78,6 +78,7 @@
   "user-repo-uploading": "Se está subiendo el archivo...",
   "user-repo-add-project": "Publicar un nuevo proyecto",
   "generic-error": "La operación no se ha podido completar",
+  "load-project-error": "El proyecto \"{{path}}\" no existe o no se puede cargar en este momento.",
   "error": "Se ha producido un error: {{error}}",
   "unknown-error": "Error desconocido",
   "loading": "Se están cargando los datos...",

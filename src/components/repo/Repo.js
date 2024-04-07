@@ -43,7 +43,7 @@ export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', t
 function Repo({ settings }) {
 
   const { t } = useTranslation();
-  const { repoList, repoBase, usersBase, jclicSearchService } = settings;
+  const { debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -80,7 +80,7 @@ function Repo({ settings }) {
     }
     setUser(newUser);
     setAct(newAct);
-    setCanonical(getPathForProject(newAct, newUser))
+    setCanonical(getPathForProject(newAct, newUser));
   }
 
   // Update the filters, optionally with history update
@@ -121,11 +121,15 @@ function Repo({ settings }) {
           _project.fullPath = fullPath;
           setProject(_project);
           setLoading(false);
+          if (_project.id && !user && kokoAnalyticsEnabled)
+            fetch(`${window?.koko_analytics?.url}&p=${kokoAnalyticsBaseId + _project.id}&nv=0&up=0`)
+              .catch(err => debug && console.error(`Unable to report project "${_project.path}" to Koko Analytics`, err));
           if (!user && _project.relatedTo && !fullProjectList)
             loadFullProjectList();
         })
         .catch(err => {
-          setError(err?.toString() || 'Error');
+          debug && console.error(`Error loading ${fullPath}/project.json`, err);
+          setError(t('load-project-error', { path: `${user ? `${user}/` : ''}${act}` }));
         });
     } else if (!act) {
       setLoading(true);

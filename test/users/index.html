@@ -5,7 +5,13 @@
   <meta charset="utf-8">
   <title>JClic repo - users library</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript" src="/jclic-repo.min.js"></script>
+  <script>
+  // Declare a fake koko_analytics environment
+  window.koko_analytics = {
+    url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
+  };
+  </script>
+<script type="text/javascript" src="/jclic-repo.min.js"></script>
 </head>
 
 <body>

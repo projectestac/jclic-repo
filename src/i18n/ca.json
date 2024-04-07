@@ -77,6 +77,7 @@
   "user-repo-err-bad-chars": "ERROR: El nom del directori no pot contenir accents, espais ni caràcters especials.",
   "user-repo-uploading": "S'està pujant el fitxer...",
   "generic-error": "L'operació no s'ha pogut completar",
+  "load-project-error": "El projecte \"{{path}}\" no existeix o no es pot carregar en aquest moment.",
   "error": "S'ha produït un error: {{error}}",
   "unknown-error": "Error desconegut",
   "loading": "S'estan carregant les dades...",

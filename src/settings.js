@@ -156,10 +156,13 @@ export const DEFAULT_SETTINGS = {
   alreadyLoadedFonts: process.env.alreadyLoadedFonts || '',
   // Maximum number of parallel threads when downloading activities
   maxThreads: Number(process.env.MAX_THREADS) || 20,
+  // Enable reporting to Koko Analytics WordPress plugin, if available
+  kokoAnalyticsEnabled: window?.koko_analytics?.url && process.env.KOKO_ANALYTICS_ENABLED === 'true',  
+  // Integer to be added to JClic project ids to compute fake WP post ids when reporting to Koko Analytics
+  kokoAnalyticsBaseId: Number(process.env.KOKO_ANALYTICS_BASE_ID) || 50000,
   // Runing as custom web component
   isWebComponent: false,
 };
-
 export function useSettings(settings = DEFAULT_SETTINGS) {
 
   // Convert relative paths to full paths

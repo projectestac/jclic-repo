@@ -5,6 +5,12 @@
   <meta charset="utf-8">
   <title>JClic repo - Main page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Declare a fake koko_analytics environment
+    window.koko_analytics = {
+      url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
+    };
+  </script>
   <script type="text/javascript" src="/jclic-repo.min.js"></script>
 </head>
 
@@ -23,11 +29,12 @@
       data-display-title="true" 
       data-display-subtitle="true"
       data-display-back-to-top-off="false"
-      data-already-loaded-fonts=""
-      
+      data-already-loaded-fonts=""      
       data-share-sites-off='{"twitter":false,"facebook":true,"telegram":false,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
       data-lang-off="en" data-lang-default-off='en' data-lang-key-off='lang'
-      data-theme-off='{"palette":{"primary":{"main":"#F00"}}}' />
+      data-theme-off='{"palette":{"primary":{"main":"#F00"}}}' 
+      data-koko-analytics-enabled="true" 
+      data-koko-analytics-base-id="50000" />
     <h1>More page content</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

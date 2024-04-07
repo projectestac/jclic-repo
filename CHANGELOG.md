@@ -1,3 +1,9 @@
+### v2.1.12 (2024-04-07)
+#### Improvements
+- Upgraded components
+- Report project page views to Koko Analytics WordPress plugin, if available.
+- Improve error messages
+
 ### v2.1.11 (2024-04-01)
 #### Improvements
 - Upgraded components.
