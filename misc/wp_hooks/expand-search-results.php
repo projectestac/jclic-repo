@@ -1,6 +1,7 @@
 <?php
 /**
  * Amplia els resultats de la cerca de WordPress (search.php) amb coincidències de les paraules buscades en la base de dades de projectes JClic.
+ * Veure: https://github.com/projectestac/jclic-repo/blob/main/misc/wp_hooks/search-activities.js
  */
 add_action('wp_footer', function () {
   if (is_search()) {
