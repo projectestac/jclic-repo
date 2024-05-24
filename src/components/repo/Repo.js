@@ -43,7 +43,7 @@ export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', t
 function Repo({ settings }) {
 
   const { t } = useTranslation();
-  const { debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = settings;
+  const { rootRef, debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = settings;
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -112,6 +112,8 @@ function Repo({ settings }) {
       setLoading(true);
       setProject(null);
       setProjects(null);
+      // Scroll to the beggining of the project component
+      rootRef?.current?.scrollIntoView(true);
       const fullPath = user ? `${usersBase}/${user}/${act}` : `${repoBase}/${act}`;
       // Load a specific project
       fetch(`${fullPath}/project.json`)
@@ -171,7 +173,7 @@ function Repo({ settings }) {
   }, [window]);
 
   return (
-    <Box sx={{ typography: 'body1' }} ref={settings.rootRef} >
+    <Box sx={{ typography: 'body1' }} ref={rootRef} >
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading {...{ settings }} /> ||
