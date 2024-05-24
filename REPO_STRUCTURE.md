@@ -6,7 +6,7 @@ https://clic.xtec.cat/projects
 Each project has a subdirectory in this root structure. For example, the "demo" project is located in:<br/>
 https://clic.xtec.cat/projects/demo
 
-Some projects can have subprojects. For example, the "cs18" module of the [Andrómeda](https://projectes.xtec.cat/clic/ca/repo/?text=andr%C3%B3meda&subject=soc) project resides in:<br/>
+Some projects can have subprojects. For example, the "cs18" module of the [Andrómeda](https://projectes.xtec.cat/clic/ca/repo/?text=andr%C3%B3meda&subject=soc) (codename "androcs") project resides in:<br/>
 https://clic.xtec.cat/projects/androcs/cs18
 
 The full list of projects is always here:<br/>
@@ -14,6 +14,7 @@ https://clic.xtec.cat/projects/projects.json
 
 This list is an array of objects. The main fields of these objects are:
 
+- __id__: Numeric identifier of this project in the library.
 - __path__: The subirectory of the root repository where this project resides, as previously seen.
 - __title__: The main title of the project
 - __author__: The author or authors of this project, separed by comma.
@@ -62,6 +63,8 @@ In addition to the `project.json` file, there is also another metadata file name
 https://clic.xtec.cat/projects/demo/all-words.txt<br/>
 WARNING: This file is encoded in UTF-8. You may see incorrect characters if you open it with a web browser, as it usually defaults to ISO-8859 encoding.
 
+The complete list of all projects with all their fields, including the contents of the `all-words.txt` file, is available in [this spreadsheet](https://docs.google.com/spreadsheets/d/1mf2PdYnTkh-J1toqM7a8QKEsJj98A7ydPHGo7IUAi3w/edit?usp=sharing).
+
 The main web page of the repository is available in three languages: Catalan (ca), Spanish (es) and English (en) at:<br/>
 https://projectes.xtec.cat/clic/ca/repo<br/>
 https://projectes.xtec.cat/clic/es/repo<br/>
@@ -71,4 +74,3 @@ The URL of the page corresponding to each project is formed by adding `?prj=path
 https://projectes.xtec.cat/clic/ca/repo/?prj=demo<br/>
 https://projectes.xtec.cat/clic/es/repo/?prj=demo<br/>
 https://projectes.xtec.cat/clic/en/repo/?prj=demo<br/>
-

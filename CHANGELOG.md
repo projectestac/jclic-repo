@@ -1,6 +1,7 @@
-### v2.1.13 (not yet released)
+### v2.1.13 (2024-05-24)
 #### Improvements
 - Upgraded components
+- Scroll the page to the top of the main component when a new project is set
 
 ### v2.1.12 (2024-04-07)
 #### Improvements
