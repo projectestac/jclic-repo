@@ -55,7 +55,7 @@ function SelectProjects({ settings, filters, updateFilters, currentCount = 0, sx
   }
 
   return (
-    <Box sx={{
+    (<Box sx={{
       display: 'flex', flexWrap: 'wrap',
       pb: 2, pt: 1, px: 1,
       backgroundColor: '#f8f8f8',
@@ -80,18 +80,20 @@ function SelectProjects({ settings, filters, updateFilters, currentCount = 0, sx
           value={query}
           onChange={({ target: { value } }) => setQuery(value)}
           onKeyDown={handleEnterSearch}
-          InputProps={{
-            endAdornment:
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label={t('search')}
-                  title={t('search')}
-                  onClick={handleEnterSearch}
-                  edge="end"
-                  size="large">
-                  <Search />
-                </IconButton>
-              </InputAdornment>
+          slotProps={{
+            input: {
+              endAdornment:
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label={t('search')}
+                    title={t('search')}
+                    onClick={handleEnterSearch}
+                    edge="end"
+                    size="large">
+                    <Search />
+                  </IconButton>
+                </InputAdornment>
+            }
           }}
         />
       </FormControl>
@@ -134,7 +136,7 @@ function SelectProjects({ settings, filters, updateFilters, currentCount = 0, sx
       <Typography variant="body1" sx={{ flexBasis: '100%', mx: 1, mt: 3, color: 'primary.main' }}>
         {`${count}${Object.values(filters).join('') && t('repo-with-filters') || ''}`}
       </Typography>
-    </Box>
+    </Box>)
   );
 }
 
