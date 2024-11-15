@@ -1,7 +1,8 @@
-### v2.2.0 (not yet released)
+### v2.2.0 (2024-11-15)
 #### Improvements
 - Upgrade to [MUI](https://mui.com/material-ui/) v6.1
 - Upgraded components
+- Updated instrucions in user library
 
 ### v2.1.13 (2024-05-24)
 #### Improvements
