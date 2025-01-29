@@ -1,28 +1,29 @@
-### v2.3.0 (Not yet released)
+### v2.3.0 (2025-01-29)
 #### Improvements
-- Upgrade to [React](https://react.dev/) v.19
-- Remove discontinued peer [`react-copy-to-clipboard`](https://www.npmjs.com/package/react-copy-to-clipboard)
+- Upgraded to [React](https://react.dev/) v.19
+- Removed discontinued peer [`react-copy-to-clipboard`](https://www.npmjs.com/package/react-copy-to-clipboard)
+- Updated peer dependencies
 
 ### v2.2.0 (2024-11-15)
 #### Improvements
 - Upgrade to [MUI](https://mui.com/material-ui/) v6.1
-- Upgraded components
+- Updated peer dependencies
 - Updated instrucions in user library
 
 ### v2.1.13 (2024-05-24)
 #### Improvements
-- Upgraded components
+- Updated peer dependencies
 - Scroll the page to the top of the main component when a new project is set
 
 ### v2.1.12 (2024-04-07)
 #### Improvements
-- Upgraded components
+- Updated peer dependencies
 - Report project page views to Koko Analytics WordPress plugin, if available.
 - Improve error messages
 
 ### v2.1.11 (2024-04-01)
 #### Improvements
-- Upgraded components.
+- Updated peer dependencies.
 - CTRL+click on card opens the project in new tab
 - Improved SEO with 'canonical' and 'alternate' head tags
 - Added some PHP snippets for WordPress
@@ -32,12 +33,12 @@
 
 ### v2.1.4 (2023-02-03)
 #### Improvements
-- Upgraded components.
+- Updated peer dependencies.
 - Removed default padding in main components.
 
 ### v2.1.3 (2022-11-21)
 #### Improvements
-- Upgraded components.
+- Updated peer dependencies.
 - Replaced the direct call to Java WebStart, which no longer works, with an informative note when clicking the "install project" button.
 
 ### v2.1.2 (2022-10-09)
@@ -48,7 +49,7 @@
 #### Improvements
 - Upgraded to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html) and [MUI 5](https://mui.com/).
 - React apps can now be used as [Web Components](https://developer.mozilla.org/es/docs/Web/Web_Components) with [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) for better integration on sites with complex styles, like some WordPress themes.
-- Upgraded components.
+- Updated peer dependencies.
 - Added support for [WebP](https://developers.google.com/speed/webp/) file format in project covers.
 - Update styling to [MUI5](https://mui.com/) with [`sx` props](https://mui.com/system/getting-started/the-sx-prop/).
 - Set back-to-top button optional.
