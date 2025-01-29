@@ -1,7 +1,7 @@
 ### v2.3.0 (Not yet released)
 #### Improvements
 - Upgrade to [React](https://react.dev/) v.19
-- Force upgrade other components that ara not yet available for React 19
+- Remove discontinued peer [`react-copy-to-clipboard`](https://www.npmjs.com/package/react-copy-to-clipboard)
 
 ### v2.2.0 (2024-11-15)
 #### Improvements

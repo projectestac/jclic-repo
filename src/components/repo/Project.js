@@ -41,7 +41,6 @@ import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 function Project({ settings, user, project, fullProjectList, updateAct, canonical, ...props }) {
 
@@ -274,11 +273,16 @@ function Project({ settings, user, project, fullProjectList, updateAct, canonica
                   inputProps={{ readOnly: true }}
                   endAdornment={
                     <InputAdornment position="end">
-                      <CopyToClipboard text={instJavaLink} onCopy={() => setSnackOpen(true)}>
-                        <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
-                          <FileCopyOutlined />
-                        </IconButton>
-                      </CopyToClipboard>
+                      <IconButton
+                        aria-label={t('share-copy')}
+                        title={t('share-copy')}
+                        size="large"
+                        onClick={() => {
+                          navigator.clipboard.writeText(instJavaLink)
+                            .then(() => setSnackOpen(true));
+                        }}>
+                        <FileCopyOutlined />
+                      </IconButton>
                     </InputAdornment>
                   }
                 />

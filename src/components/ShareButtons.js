@@ -30,7 +30,6 @@
  */
 
 import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
 import { Email, Facebook, X, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
 import ClassroomIcon from '../assets/classroom.svg';
@@ -207,11 +206,16 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             inputProps={{ readOnly: true }}
             endAdornment={
               <InputAdornment position="end">
-                <CopyToClipboard text={moodleLink} onCopy={() => setSnackOpen(true)}>
-                  <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
-                    <FileCopyOutlined />
-                  </IconButton>
-                </CopyToClipboard>
+                <IconButton
+                  aria-label={t('share-copy')}
+                  title={t('share-copy')}
+                  size="large"
+                  onClick={() => {
+                    navigator.clipboard.writeText(moodleLink)
+                      .then(() => setSnackOpen(true));
+                  }}>
+                  <FileCopyOutlined />
+                </IconButton>
               </InputAdornment>
             }
           />
@@ -229,11 +233,16 @@ function ShareButtons({ settings, link, moodleLink, title, description, thumbnai
             sx={{ fontFamily: 'Monospace', color: 'text.disabled' }}
             endAdornment={
               <InputAdornment position="end">
-                <CopyToClipboard text={embedCode} onCopy={() => setSnackOpen(true)}>
-                  <IconButton aria-label={t('share-copy')} title={t('share-copy')} size="large">
-                    <FileCopyOutlined />
-                  </IconButton>
-                </CopyToClipboard>
+                <IconButton
+                  aria-label={t('share-copy')}
+                  title={t('share-copy')}
+                  size="large"
+                  onClick={() => {
+                    navigator.clipboard.writeText(embedCode)
+                      .then(() => setSnackOpen(true));
+                  }}>
+                  <FileCopyOutlined />
+                </IconButton>
               </InputAdornment>
             }
           />
