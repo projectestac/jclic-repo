@@ -30,6 +30,7 @@
  */
 
 import React from 'react';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { CacheProvider } from '@emotion/react';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
@@ -46,13 +47,14 @@ function MainLayout({ cache, dataSettings, Component }) {
   // Create a MaterialUI theme with responsive fonts, based on the current settings
   const theme = responsiveFontSizes(createTheme(settings.theme), {});
 
-  // Wrap the main app in a StylesProvider and ThemeProvider
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        <Component settings={settings} />
-      </ThemeProvider>
-    </CacheProvider>
+    <HelmetProvider>
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={theme}>
+          <Component settings={settings} />
+        </ThemeProvider>
+      </CacheProvider>
+    </HelmetProvider>
   );
 }
 

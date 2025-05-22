@@ -30,7 +30,7 @@
  */
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from '@dr.pogodin/react-helmet';
 import { useTranslation } from 'react-i18next';
 import { getAllPageVariants } from '../utils';
 

@@ -1,3 +1,8 @@
+### v2.3.1 (2025-05-22)
+#### Improvements
+- Replaced discontinued [`react-helmet](https://www.npmjs.com/package/react-helmet) package by [`@dr.pogodin/react-helmet`](https://www.npmjs.com/package/@dr.pogodin/react-helmet) for compatibility with React v19. 
+- Upgraded peer dependencies
+
 ### v2.3.0 (2025-01-29)
 #### Improvements
 - Upgraded to [React](https://react.dev/) v.19
