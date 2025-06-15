@@ -4,6 +4,7 @@
 
 #### Improvements
 - Upgraded peer dependencies
+- Using 'eslint.config' instead of 'eslintrc' (deprecated in [Eslint](https://eslint.org/) V9)
 
 ### v2.3.1 (2025-05-22)
 #### Improvements

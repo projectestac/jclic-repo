@@ -65,7 +65,7 @@ export default class InfiniteScroll extends Component {
     try {
       document.addEventListener('test', null, testOptions);
       document.removeEventListener('test', null, testOptions);
-    } catch (e) {
+    } catch (_e) {
       // ignore
     }
     return passive;
