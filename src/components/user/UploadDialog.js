@@ -106,7 +106,7 @@ function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadActio
       fullWidth
       maxWidth="md"
       open={uploadDlg}
-      TransitionProps={{ onExited: reset }}
+      slotProps={{ transition: { onExited: reset } }}
       aria-labelledby="upload-dialog-title"
     >
       <DialogTitle id="upload-dialog-title">{t('user-repo-upload-title')}</DialogTitle>
