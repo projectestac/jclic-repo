@@ -1,0 +1,58 @@
+const {
+    defineConfig,
+} = require("eslint/config");
+
+const globals = require("globals");
+const babelParser = require("@babel/eslint-parser");
+const react = require("eslint-plugin-react");
+const js = require("@eslint/js");
+
+const {
+    FlatCompat,
+} = require("@eslint/eslintrc");
+
+const compat = new FlatCompat({
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all
+});
+
+module.exports = defineConfig([{
+    languageOptions: {
+        globals: {
+            ...globals.browser,
+        },
+
+        parser: babelParser,
+        ecmaVersion: 12,
+        sourceType: "module",
+
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            },
+        },
+    },
+
+    extends: compat.extends("eslint:recommended", "plugin:react/recommended"),
+
+    plugins: {
+        react,
+    },
+
+    rules: {
+        "react/prop-types": 0,
+
+        "no-unused-vars": ["error", {
+            vars: "all",
+            args: "after-used",
+            argsIgnorePattern: "^_",
+        }],
+    },
+
+    settings: {
+        react: {
+            version: "detect",
+        },
+    },
+}]);
