@@ -64,7 +64,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
               <ListItemAvatar>
                 <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
-              <ListItemText primary={title} secondary={author} secondaryTypographyProps={ellipsis} />
+              <ListItemText primary={title} secondary={author} slotProps={{ secondary: ellipsis }} />
             </ListItemButton>
           ))}
       </List>
