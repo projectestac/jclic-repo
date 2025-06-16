@@ -1,10 +1,10 @@
 ### v2.3.2 (2025-06-15)
 #### Bug fixes
-- Moved MUI Dialog [`TransitionProps`](https://mui.com/material-ui/api/dialog/#dialog-prop-TransitionProps) (deprecated) to `slotProps` (see [MUI deprecation guide](https://mui.com/material-ui/migration/migrating-from-deprecated-apis/#transitionprops))
+- Updated some [MUI](https://mui.com/material-ui/) deprecated functions to equivalents in V7, according to the [MUI deprecation guide](https://mui.com/material-ui/migration/migrating-from-deprecated-apis/#transitionprops).
 
 #### Improvements
 - Upgraded peer dependencies
-- Using 'eslint.config' instead of 'eslintrc' (deprecated in [Eslint](https://eslint.org/) V9)
+- Using 'eslint.config.mjs' instead of '.eslintrc.js' (deprecated in [Eslint](https://eslint.org/) V9)
 
 ### v2.3.1 (2025-05-22)
 #### Improvements

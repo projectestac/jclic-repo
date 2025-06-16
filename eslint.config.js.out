@@ -1,3 +1,5 @@
+/* global require, __dirname, module */
+
 const {
     defineConfig,
 } = require("eslint/config");
