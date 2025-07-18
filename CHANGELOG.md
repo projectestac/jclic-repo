@@ -1,3 +1,6 @@
+### v2.3.3 (not yet released)
+- Upgraded peer dependencies
+
 ### v2.3.2 (2025-06-15)
 #### Bug fixes
 - Updated some [MUI](https://mui.com/material-ui/) deprecated functions to equivalents in V7, according to the [MUI deprecation guide](https://mui.com/material-ui/migration/migrating-from-deprecated-apis/#transitionprops).
