@@ -76,7 +76,6 @@
   "user-repo-warn-dir-exists": "ATENCIÓN: Ya existe un proyecto en este directorio. Su contenido será reemplazado. Hágalo únicamente si lo que pretende es publicar una nueva versión del mismo proyecto.",
   "user-repo-err-bad-chars": "ERROR: El nombre del directorio no puede contener acentos, espacios en blanco ni caracteres especiales.",
   "user-repo-uploading": "Se está subiendo el archivo...",
-  "user-repo-add-project": "Publicar un nuevo proyecto",
   "generic-error": "La operación no se ha podido completar",
   "load-project-error": "El proyecto \"{{path}}\" no existe o no se puede cargar en este momento.",
   "error": "Se ha producido un error: {{error}}",
