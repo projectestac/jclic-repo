@@ -247,7 +247,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
       maxWidth="sm"
       open={dlgOpen}
       onClose={closeDlg}
-      TransitionProps={{ onEntered: start }}
+      slotProps={{ transition: { onEntered: start } }}
     >
       <DialogTitle>{t('prj-download-title', { title })}</DialogTitle>
       <DialogContent sx={{ '& > *': { mb: 2 } }}>
