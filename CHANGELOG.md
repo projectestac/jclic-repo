@@ -1,5 +1,6 @@
 ### v2.3.3 (not yet released)
 - Upgraded peer dependencies
+- Upgraded [MUI](https://mui.com/material-ui/) to v9
 
 ### v2.3.2 (2025-06-15)
 #### Bug fixes
