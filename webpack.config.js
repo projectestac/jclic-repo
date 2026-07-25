@@ -118,6 +118,9 @@ const config = {
     maxAssetSize: 2000000,
     maxEntrypointSize: 2000000,
   },
+  experiments: {
+    typescript: false,
+  },
 };
 
 module.exports = (env, argv) => {
