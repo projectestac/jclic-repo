@@ -29,8 +29,6 @@
  *  @module
  */
 
-/* global process */
-
 import { useRef } from 'react';
 import { loadGoogleFont } from './utils';
 import { supportedLanguages, i18nInit } from './i18n';
@@ -109,57 +107,57 @@ export const DEFAULT_SETTINGS = {
   shareSites: { twitter: true, facebook: true, telegram: true, whatsapp: true, pinterest: true, email: true, moodle: true, classroom: true, embed: true },
   shareMeta: { hash: 'JClic,edu', via: 'xtec' },
   // When `true`, debug messages should be displayed on the console
-  debug: process.env.DEBUG === 'true',
+  debug: import.meta.env.VITE_DEBUG === 'true',
   // Selected language (or _null_ for auto-detect)
-  lang: process.env.LANG || null,
+  lang: import.meta.env.VITE_LANG || null,
   // Key used for the language query param on the URL
-  langKey: process.env.LANG_KEY,
+  langKey: import.meta.env.VITE_LANG_KEY,
   // Fallback language
-  langDefault: process.env.LANG_DEFAULT,
+  langDefault: import.meta.env.VITE_LANG_DEFAULT,
   // Base URL for JClic projects library, without ending '/'
-  repoBase: process.env.REPO_BASE,
+  repoBase: import.meta.env.VITE_REPO_BASE,
   // Full URL to projects list
-  repoList: process.env.REPO_LIST,
+  repoList: import.meta.env.VITE_REPO_LIST,
   // Link to the JNLP JClic Installer
-  jnlpInstaller: process.env.JNLP_INSTALLER,
+  jnlpInstaller: import.meta.env.VITE_JNLP_INSTALLER,
   // API entry point of the JClic repo search service
-  jclicSearchService: process.env.JCLIC_SEARCH_SERVICE,
+  jclicSearchService: import.meta.env.VITE_JCLIC_SEARCH_SERVICE,
   // Base URL for JClic user projects, without ending '/'
-  usersBase: process.env.USERS_BASE,
+  usersBase: import.meta.env.VITE_USERS_BASE,
   // Path to the repository page
-  repoPath: process.env.REPO_PATH,
+  repoPath: import.meta.env.VITE_REPO_PATH,
   // Path to the users library page
-  usersPath: process.env.USERS_PATH,
+  usersPath: import.meta.env.VITE_USERS_PATH,
   // Google OAuth2 API id
-  googleOAuth2Id: process.env.GOOGLE_OAUTH2_ID,
+  googleOAuth2Id: import.meta.env.VITE_GOOGLE_OAUTH2_ID,
   // API base for user's library
-  userLibApi: process.env.USERLIB_API,
+  userLibApi: import.meta.env.VITE_USERLIB_API,
   // Google Identity Services endpoint
-  gsiApi: process.env.GSI_API,
+  gsiApi: import.meta.env.VITE_GSI_API,
   // Key used to store credentials in browser session
-  authKey: process.env.AUTH_KEY,
+  authKey: import.meta.env.VITE_AUTH_KEY,
   // Facebook app id (used in share button)
-  facebookId: process.env.FACEBOOK_ID,
+  facebookId: import.meta.env.VITE_FACEBOOK_ID,
   // Google Analytics code
-  analyticsUA: process.env.ANALYTICS_UA,
+  analyticsUA: import.meta.env.VITE_ANALYTICS_UA,
   // Absolute URL of the repository logo
-  logo: process.env.LOGO,
+  logo: import.meta.env.VITE_LOGO,
   // Absolute URL of the main Twitter card
-  twitterCard: process.env.TWITTER_CARD,
+  twitterCard: import.meta.env.VITE_TWITTER_CARD,
   // Show the main title
-  displayTitle: process.env.DISPLAY_TITLE === 'false' ? false : true,
+  displayTitle: import.meta.env.VITE_DISPLAY_TITLE === 'false' ? false : true,
   // Show the subtitle
-  displaySubtitle: process.env.DISPLAY_SUBTITLE === 'false' ? false : true,
+  displaySubtitle: import.meta.env.VITE_DISPLAY_SUBTITLE === 'false' ? false : true,
   // Show the "back to top" button when scrolling large lists of activities
-  displayBackToTop: process.env.DISPLAY_BACK_TO_TOP === 'false' ? false : true,
+  displayBackToTop: import.meta.env.VITE_DISPLAY_BACK_TO_TOP === 'false' ? false : true,
   // Array of names of fonts already loaded by the container page
-  alreadyLoadedFonts: process.env.alreadyLoadedFonts || '',
+  alreadyLoadedFonts: import.meta.env.VITE_ALREADY_LOADED_FONTS || '',
   // Maximum number of parallel threads when downloading activities
-  maxThreads: Number(process.env.MAX_THREADS) || 20,
+  maxThreads: Number(import.meta.env.VITE_MAX_THREADS) || 20,
   // Enable reporting to Koko Analytics WordPress plugin, if available
-  kokoAnalyticsEnabled: window?.koko_analytics?.url && process.env.KOKO_ANALYTICS_ENABLED === 'true',  
+  kokoAnalyticsEnabled: window?.koko_analytics?.url && import.meta.env.VITE_KOKO_ANALYTICS_ENABLED === 'true',  
   // Integer to be added to JClic project ids to compute fake WP post ids when reporting to Koko Analytics
-  kokoAnalyticsBaseId: Number(process.env.KOKO_ANALYTICS_BASE_ID) || 50000,
+  kokoAnalyticsBaseId: Number(import.meta.env.VITE_KOKO_ANALYTICS_BASE_ID) || 50000,
   // Runing as custom web component
   isWebComponent: false,
 };

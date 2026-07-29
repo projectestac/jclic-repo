@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>JClic authoring test</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    main {
+      padding: 1rem 1rem;
+    }
+
+    header {
+      padding: 0 1rem;
+    }
+
+    footer {
+      background-color: gray;
+      color: white;
+      padding: 2rem 1rem;
+    }
+  </style>
+  <script type="module" src="./src/index.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>JClic Repo test page</h1>
+  </header>
+  <main>
+    <jclic-repo data-already-loaded-fonts="Roboto"></jclic-repo>
+  </main>
+  <footer>
+    <p>Page footer</p>
+  </footer>
+</body>
+
+</html>

@@ -32,8 +32,8 @@
 import React, { useState } from 'react';
 import { IconButton, Paper, Input, InputAdornment, Snackbar, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
 import { Email, Facebook, X, Telegram, Pinterest, WhatsApp, Code, Close, FileCopyOutlined } from '@mui/icons-material';
-import ClassroomIcon from '../assets/classroom.svg';
-import MoodleIcon from '../assets/moodle.svg';
+import ClassroomIcon from '../assets/classroom.svg?react';
+import MoodleIcon from '../assets/moodle.svg?react';
 import { useTranslation } from 'react-i18next';
 
 const E = encodeURIComponent;

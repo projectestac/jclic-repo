@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>React-MUI web component test</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <script type="module" src="./my-component.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>MUI web component test page</h1>
+    </header>
+    <main>
+      <h2>Sample section</h2>
+      <p>
+        In this example, the component is rendered using the regular React DOM
+        renderer. It should appear just below this paragraph
+      </p>
+      <div
+        id="my-component"
+        style="margin: 1rem 0"
+        data-info="Text injected by a 'data-...' attribute"
+        data-already-loaded-fonts="Roboto"
+        data-lang="en"
+        data-theme='{"palette":{"background":{"paper":"#f0f0f0"}}}'
+      ></div>
+      <p>The sample section continues here...</p>
+    </main>
+    <script type="module">
+      if (window.ReactDOMRenderer) {
+        const mountPoint = document.querySelector("#my-component");
+        if (mountPoint) window.ReactDOMRenderer(mountPoint, "main");
+        else console.error('Mount point with ID "my-component" not found!');
+      } else console.error("ReactDOMRenderer not defined!");
+    </script>
+  </body>
+</html>

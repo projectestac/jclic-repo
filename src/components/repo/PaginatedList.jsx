@@ -43,6 +43,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
   const base = user ? `${usersBase}/${user}` : repoBase;
+  
   useEffect(() => setPage(0), [projects]);
 
   return (
