@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 /*!
  *  File    : components/user/UserLib.js
  *  Created : 2021-07-21
@@ -75,6 +76,48 @@ function UserLib({ settings }) {
 
   const title = userData ? t('user-repo-title', { user: userData.fullUserName || userData.id }) : t('user-repo');
 
+  const normalizeProjectFields = project => {
+    if (project.basePath)
+      project.path = project.basePath;
+    if (!project.totalSize)
+      project.totalSize = project.totalFileSize;
+    return project;
+  };
+
+  const loginSuccess = (credential) => {
+    sessionStorage.removeItem(authKey);
+    if (credential) {
+      setLoading(true);
+      fetch(`${userLibApi}/getUserInfo`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'Accept': 'application/json',
+        },
+        body: new URLSearchParams({ NEW_API: true, id_token: credential }),
+      })
+        .then(checkFetchResponse)
+        .then(data => {
+          if (!data || data.status !== 'validated') {
+            throw new Error(data?.error);
+          }
+          data.projects.forEach(normalizeProjectFields);
+          sessionStorage.setItem(authKey, JSON.stringify({ credential }));
+          setUserData(data);
+          setErr(null);
+        })
+        .catch(error => setErr(error?.toString() || t('generic-error')))
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    else
+      setErr(t('user-repo-login-error'));
+  }
+
   const loadGSI = () => {
     // Load Google Identity Services Javascript API
     if (!googleScript) {
@@ -145,45 +188,13 @@ function UserLib({ settings }) {
       const obj = JSON.parse(sessionStorage.getItem(authKey));
       // Consider the authentication code to be valid for the entire session.
       if (obj && obj.credential /* && obj.expires && Date.now() < new Date(obj.expires) */)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         loginSuccess(obj.credential);
       else
         return loadGSI();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const loginSuccess = (credential) => {
-    sessionStorage.removeItem(authKey);
-    if (credential) {
-      setLoading(true);
-      fetch(`${userLibApi}/getUserInfo`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'Accept': 'application/json',
-        },
-        body: new URLSearchParams({ NEW_API: true, id_token: credential }),
-      })
-        .then(checkFetchResponse)
-        .then(data => {
-          if (!data || data.status !== 'validated') {
-            throw new Error(data?.error);
-          }
-          data.projects.forEach(normalizeProjectFields);
-          sessionStorage.setItem(authKey, JSON.stringify({ credential }));
-          setUserData(data);
-          setErr(null);
-        })
-        .catch(error => setErr(error?.toString() || t('generic-error')))
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    else
-      setErr(t('user-repo-login-error'));
-  }
 
   const logout = () => {
     if (userData) {
@@ -194,14 +205,6 @@ function UserLib({ settings }) {
         loadGSI();
     }
   }
-
-  const normalizeProjectFields = project => {
-    if (project.basePath)
-      project.path = project.basePath;
-    if (!project.totalSize)
-      project.totalSize = project.totalFileSize;
-    return project;
-  };
 
   const uploadProject = () => {
     setUploadDlg(true);

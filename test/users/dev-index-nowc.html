@@ -3,15 +3,16 @@
 
 <head>
   <meta charset="utf-8">
-  <title>JClic repo - users library</title>
+  <title>JClic repo - Users library (no web component)</title>
+  <link rel="shortcut icon" href="../favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-  // Declare a fake koko_analytics environment
-  window.koko_analytics = {
-    url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
-  };
+    // Declare a fake koko_analytics environment
+    window.koko_analytics = {
+      url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
+    };
   </script>
-<script type="text/javascript" src="/jclic-repo.min.js"></script>
+  <script type="module" src="/src/index.js"></script>
 </head>
 
 <body>
@@ -23,12 +24,13 @@
     <p>Web components can be used anywhere on your web page or blog post. In this example, the main JClic library should
       appear just below this paragraph</p>
     <h1>JClic library</h1>
-    <jclic-user-lib
-      style="background-color: whitesmoke; padding: 1em;"      
+    <div
+      id="userLib"
+      style="background-color: whitesmoke;"
       data-display-title="true"
-      data-already-loaded-fonts=""
-      data-theme='{"typography": {"h1": {"fontFamily": "Roboto", "fontSize": "36", "fontWeight": "500"}}, "palette": {"primary": {"main": "rgb(74,147,147)"}}}'
-    />
+      data-repo-path="/repo/index-nowc.html"
+      data-users-path="/users/index-nowc.html"
+    ></div>
     <h1>More page content</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -39,6 +41,13 @@
   <footer>
     <p>Main page footer</p>
   </footer>
+  <script>
+    const mountPoint = document.querySelector('#userLib');
+    if (mountPoint)
+      window.JClicRepoDOMRenderer(mountPoint, 'user');
+    else
+      console.error('Mount point with ID "userLib" not found!');
+  </script>
 </body>
 
 </html>

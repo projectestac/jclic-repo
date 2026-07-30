@@ -1,10 +1,11 @@
 /* global process */
 
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, searchForWorkspaceRoot } from "vite";
 import react from "@vitejs/plugin-react";
 import banner from "vite-plugin-banner";
+import eslint from "vite-plugin-eslint";
 import svgrPlugin from "vite-plugin-svgr";
-import pkg from "./package.json";
+import pkg from "./package.json"  with { type: 'json' };
 
 const date = new Date();
 const version = `${pkg.version} (${date.toISOString().substring(0, 10)})`;
@@ -35,52 +36,57 @@ ${pkg.repository.url}
 `;
 
 // See: https://vite.dev/config/
-export default ({ mode }) => {
+export default ({ mode, isPreview }) => {
   process.env = {
     ...process.env,
     ...loadEnv(mode, process.cwd()),
-    VITE_APP_VERSION: `v${pkg.version}`,
+    VITE_APP_ID: `${pkg.title} v${version}`,
   };
 
   return defineConfig({
     plugins: [
-      react(),
       banner(bannerText),
+      react(),
       svgrPlugin(),
-    ],
-    base: "",
-    resolve: {
-      alias: {
-        "@": "/src",
+      eslint(),
+      {
+        name: 'html-transform',
+        transformIndexHtml(html) {
+          return (mode === 'development' && !isPreview)
+            ? html.replaceAll('/preview-', '/dev-')
+            : html;
+        }
       },
-    },
-    publicDir: "public",
-    appType: "spa",
-    assetsInclude: ["**/*.html"],
+    ],
     build: {
       minify: "oxc",
       assetsDir: "",
       assetsInlineLimit: 16384,
-      chunkSizeWarningLimit: 1000000,
+      chunkSizeWarningLimit: 2000000,
       cssCodeSplit: false,
       sourcemap: true,
-      rollupOptions: {
+      rolldownOptions: {
         output: {
-          entryFileNames: `jclic-repo.js`,
+          entryFileNames: `jclic-repo.min.js`,
           format: "iife",
         },
       },
+      license: { fileName: 'jclic-repo.components.LICENSE' },
     },
     oxc: {
       legalComments: "none",
     },
     server: {
       port: 8000,
-      allowedHosts: true,
+      fs: {
+        allow: [
+          searchForWorkspaceRoot(process.cwd()),
+          '/test',
+        ],
+      }
     },
     preview: {
       port: 8000,
-      allowedHosts: true,
     },
   });
 };

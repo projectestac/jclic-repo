@@ -41,17 +41,17 @@ import stopwords_en from './stopwords-en.json';
 import stopwords_ca from './stopwords-ca.json';
 import stopwords_es from './stopwords-es.json';
 
-import user_repo_info_en from './user-repo-info-en.html';
-import user_repo_info_ca from './user-repo-info-ca.html';
-import user_repo_info_es from './user-repo-info-es.html';
+import user_repo_info_en from './user-repo-info-en.html?raw';
+import user_repo_info_ca from './user-repo-info-ca.html?raw';
+import user_repo_info_es from './user-repo-info-es.html?raw';
 
-import user_repo_upload_info_en from './user-repo-upload-info-en.html';
-import user_repo_upload_info_ca from './user-repo-upload-info-ca.html';
-import user_repo_upload_info_es from './user-repo-upload-info-es.html';
+import user_repo_upload_info_en from './user-repo-upload-info-en.html?raw';
+import user_repo_upload_info_ca from './user-repo-upload-info-ca.html?raw';
+import user_repo_upload_info_es from './user-repo-upload-info-es.html?raw';
 
-import java_download_info_en from './java-download-info-en.html';
-import java_download_info_ca from './java-download-info-ca.html';
-import java_download_info_es from './java-download-info-es.html';
+import java_download_info_en from './java-download-info-en.html?raw';
+import java_download_info_ca from './java-download-info-ca.html?raw';
+import java_download_info_es from './java-download-info-es.html?raw';
 
 export const supportedLanguages = ['en', 'ca', 'es'];
 

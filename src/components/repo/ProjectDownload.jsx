@@ -75,6 +75,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
       }
     });
     _xhrs.length = 0;
+    // eslint-disable-next-line react-hooks/immutability
     currentFiles = 0;
   }
 
@@ -268,6 +269,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
           <Button
             variant="contained"
             startIcon={<CloudDownload />}
+            // eslint-disable-next-line react-hooks/immutability
             onClick={downloadFile}
           >
             {t('prj-download-file')}
@@ -275,6 +277,7 @@ function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
         }
         <Button
           variant="contained"
+          // eslint-disable-next-line react-hooks/immutability
           onClick={closeDlg}
         >
           {t('cancel')}

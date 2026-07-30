@@ -35,9 +35,8 @@ import Repo from './components/repo/Repo';
 import UserLib from './components/user/UserLib';
 import DOMRenderer from './DOMRenderer';
 
-// Log app ID, intitialized by WebPack
-/* global APP_ID */
-// console.log(APP_ID);
+// Log app ID, intitialized by Vite
+console.log(import.meta.env.VITE_APP_ID);
 
 // Define web components
 customElements.define('jclic-repo', getWebComponentClass(MainLayout, Repo));

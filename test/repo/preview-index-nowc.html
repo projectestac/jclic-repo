@@ -3,33 +3,40 @@
 
 <head>
   <meta charset="utf-8">
-  <title>JClic repo - Main page</title>
+  <title>JClic repo - Main page (no web component)</title>
+  <link rel="shortcut icon" href="../favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="to-be-removed">
   <script>
     // Declare a fake koko_analytics environment
     window.koko_analytics = {
       url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
     };
   </script>
-  <script type="text/javascript" src="/jclic-repo.min.js"></script>
+  <script type="module" crossorigin src="/jclic-repo.min.js"></script>
 </head>
 
 <body>
   <header>
     <p>Main document header</p>
   </header>
-  <main style="max-width:1340px;margin-left:auto;margin-right:auto;padding:20px;">
+  <main>
     <h1>Previous page content</h1>
     <p>Web components can be used anywhere on your web page or blog post. In this example, the main JClic library should
       appear just below this paragraph</p>
-    <h1>JClic library</h1>
-    <jclic-repo style="padding: 1em;" data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
-      data-display-title="true" data-display-subtitle="true" data-display-back-to-top-off="false"
-      data-already-loaded-fonts=""
-      data-share-sites-off='{"twitter":false,"facebook":true,"telegram":false,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
-      data-lang-off="en" data-lang-default-off='en' data-lang-key-off='lang'
-      data-theme-off='{"palette":{"primary":{"main":"#F00"}}}' />
+    <div 
+      id="repo" 
+      style="background-color: whitesmoke;" 
+      data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
+      data-repo-path="/repo/index-nowc.html" 
+      data-users-path="/users/index-nowc.html" 
+      data-display-title="true"
+      data-display-subtitle="true"
+      data-share-sites-off='{"twitter":true,"facebook":true,"telegram":true,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
+      data-lang-off="en"
+      data-lang-default-off='en'
+      data-lang-key-off='lang'
+      data-theme-off='{"palette":{"primary":{"main":"#F00"}}}'
+    ></div>
     <h1>More page content</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -40,6 +47,13 @@
   <footer>
     <p>Main page footer</p>
   </footer>
+  <script>
+    const mountPoint = document.querySelector('#repo');
+    if (mountPoint)
+      window.JClicRepoDOMRenderer(mountPoint, 'repo');
+    else
+      console.error('Mount point with ID "repo" not found!');
+  </script>
 </body>
 
 </html>

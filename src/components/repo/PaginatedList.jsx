@@ -43,12 +43,17 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
   const [page, setPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
   const base = user ? `${usersBase}/${user}` : repoBase;
-  
-  useEffect(() => setPage(0), [projects]);
+
+  useEffect(() => {
+    if (page > 0)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPage(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projects]);
 
   return (
     <div {...props}>
-      <List dense>
+      <List dense sx={{ maxWidth: 'min(90vw,67rem)' }}>
         {projects
           .slice(page * itemsPerPage, (page + 1) * itemsPerPage)
           .map(({ path, title, author, cover, coverWebp, thumbnail }, n) => (
@@ -65,7 +70,7 @@ function PaginatedList({ settings, user, projects, updateAct, ...props }) {
               <ListItemAvatar>
                 <Avatar variant="square" alt={title} src={`${base}/${path}/${thumbnail || coverWebp || cover}`} />
               </ListItemAvatar>
-              <ListItemText primary={title} secondary={author} slotProps={{ secondary: ellipsis }} />
+              <ListItemText primary={title} secondary={author} slotProps={{ secondary: { sx: ellipsis } }} />
             </ListItemButton>
           ))}
       </List>

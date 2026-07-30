@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>JClic repo - Main page (no web component)</title>
+  <title>JClic repo - Users library (no web component)</title>
+  <link rel="shortcut icon" href="../favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     // Declare a fake koko_analytics environment
@@ -11,7 +12,7 @@
       url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
     };
   </script>
-  <script type="text/javascript" src="/jclic-repo.min.js"></script>
+  <script type="module" crossorigin src="/jclic-repo.min.js"></script>
 </head>
 
 <body>
@@ -22,12 +23,14 @@
     <h1>Previous page content</h1>
     <p>Web components can be used anywhere on your web page or blog post. In this example, the main JClic library should
       appear just below this paragraph</p>
-    <div id="repo" style="background-color: whitesmoke;" data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
-      data-repo-path="/repo/index-nowc.html" data-users-path="/users/index-nowc.html" data-display-title="true"
-      data-display-subtitle="true"
-      data-share-sites-off='{"twitter":true,"facebook":true,"telegram":true,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
-      data-lang-off="en" data-lang-default-off='en' data-lang-key-off='lang'
-      data-theme-off='{"palette":{"primary":{"main":"#F00"}}}'></div>
+    <h1>JClic library</h1>
+    <div
+      id="userLib"
+      style="background-color: whitesmoke;"
+      data-display-title="true"
+      data-repo-path="/repo/index-nowc.html"
+      data-users-path="/users/index-nowc.html"
+    ></div>
     <h1>More page content</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -39,11 +42,11 @@
     <p>Main page footer</p>
   </footer>
   <script>
-    const mountPoint = document.querySelector('#repo');
+    const mountPoint = document.querySelector('#userLib');
     if (mountPoint)
-      window.JClicRepoDOMRenderer(mountPoint, 'repo');
+      window.JClicRepoDOMRenderer(mountPoint, 'user');
     else
-      console.error('Mount point with ID "repo" not found!');
+      console.error('Mount point with ID "userLib" not found!');
   </script>
 </body>
 

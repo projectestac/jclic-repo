@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /*!
  *  File    : components/repo/Repo.js
  *  Created : 2021-07-15
@@ -38,7 +39,7 @@ import Loading from '../Loading';
 import Project from './Project';
 import RepoList from './RepoList';
 
-export const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', textMatches: [] };
+const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', textMatches: [] };
 
 function Repo({ settings }) {
 
@@ -150,6 +151,7 @@ function Repo({ settings }) {
       else
         loadFullProjectList();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [act, user, fullProjectList, filters]);
 
   // Operations to be performed at app startup
@@ -170,6 +172,7 @@ function Repo({ settings }) {
     // Check if a full text search should be performed
     if (!user && filters.text)
       updateFullTextResults(filters.text);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window]);
 
   return (

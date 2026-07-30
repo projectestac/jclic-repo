@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/immutability */
 /*!
  *  File    : settings.js
  *  Created : 2021-07-15
