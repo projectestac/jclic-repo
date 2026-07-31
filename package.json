@@ -49,7 +49,7 @@
   "readmeFilename": "README.md",
   "homepage": "https://projectestac.github.io/jclic-repo",
   "dependencies": {
-    "@dr.pogodin/react-helmet": "^3.2.2",
+    "@dr.pogodin/react-helmet": "^3.2.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.2.0",
@@ -69,9 +69,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.4",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
     "baseline-browser-mapping": "^2.11.8",
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
