@@ -12,15 +12,8 @@ coverage
 notes
 
 # Dotenv environment variables
-.env
-.env.development
-.env.production
-.env.local
-.env.development.local
-.env.development.pre
-.env.development.pro
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Misc
 .DS_Store

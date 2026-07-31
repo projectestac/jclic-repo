@@ -87,8 +87,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev-pro": "vite --mode development-pro",
+    "dev-pre": "vite --mode development-pre",
     "start": "vite",
     "build": "vite build && cd dist && ln -s ../test . && cd ..",
+    "build-pro": "vite build --mode production-pro && cd dist && ln -s ../test . && cd ..",
+    "build-pre": "vite build --mode production-pre && cd dist && ln -s ../test . && cd ..",
     "lint": "eslint src --ext .js,.jsx",
     "preview": "vite preview",
     "prettier": "prettier ./src --write"

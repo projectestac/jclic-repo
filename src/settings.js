@@ -162,6 +162,11 @@ export const DEFAULT_SETTINGS = {
   // Runing as custom web component
   isWebComponent: false,
 };
+
+console.log(import.meta.env.VITE_KOKO_ANALYTICS_ENABLED)
+
+console.log(DEFAULT_SETTINGS)
+
 export function useSettings(settings = DEFAULT_SETTINGS) {
 
   // Convert relative paths to full paths

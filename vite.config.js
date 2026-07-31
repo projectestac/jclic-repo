@@ -37,10 +37,12 @@ ${pkg.repository.url}
 
 // See: https://vite.dev/config/
 export default ({ mode, isPreview }) => {
+
+  const modeEnv = loadEnv(mode, process.cwd());
   process.env = {
     ...process.env,
-    ...loadEnv(mode, process.cwd()),
-    VITE_APP_ID: `${pkg.title} v${version}`,
+    ...modeEnv,
+    VITE_APP_ID: `${pkg.title} v${version} (${mode})`,
   };
 
   return defineConfig({
@@ -52,7 +54,7 @@ export default ({ mode, isPreview }) => {
       {
         name: 'html-transform',
         transformIndexHtml(html) {
-          return (mode === 'development' && !isPreview)
+          return (mode.startsWith('development') && !isPreview)
             ? html.replaceAll('/index.html', '/dev-index.html')
             : html;
         }
