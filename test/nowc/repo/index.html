@@ -4,15 +4,14 @@
 <head>
   <meta charset="utf-8">
   <title>JClic repo - Main page (no web component)</title>
-  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="shortcut icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     // Declare a fake koko_analytics environment
     window.koko_analytics = {
       url: 'https://fake-wp.site/wp-admin/admin-ajax.php?action=koko_analytics_collect',
     };
-  </script>
-  <script type="module" src="/src/index.js"></script>
+  </script>  
 </head>
 
 <body>
@@ -23,12 +22,12 @@
     <h1>Previous page content</h1>
     <p>Web components can be used anywhere on your web page or blog post. In this example, the main JClic library should
       appear just below this paragraph</p>
-    <div
-      id="repo"
-      style="background-color: whitesmoke;"
+    <div 
+      id="repo" 
+      style="background-color: whitesmoke;" 
       data-logo="https://clic.xtec.cat/dist/jclic/jclic_48x48.png"
-      data-repo-path="/repo/index-nowc.html"
-      data-users-path="/users/index-nowc.html"
+      data-repo-path="/test/nowc/repo/index.html" 
+      data-users-path="/test/nowc/users/index.html" 
       data-display-title="true"
       data-display-subtitle="true"
       data-share-sites-off='{"twitter":true,"facebook":true,"telegram":true,"whatsapp":true,"pinterest":true,"email":true,"moodle":true,"classroom":true}'
@@ -47,7 +46,8 @@
   <footer>
     <p>Main page footer</p>
   </footer>
-  <script>
+  <script type="module">
+    import '/jclic-repo.min.js';
     const mountPoint = document.querySelector('#repo');
     if (mountPoint)
       window.JClicRepoDOMRenderer(mountPoint, 'repo');

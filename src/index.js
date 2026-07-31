@@ -44,3 +44,4 @@ customElements.define('jclic-user-lib', getWebComponentClass(MainLayout, UserLib
 
 // Define the global DOMRenderer function
 window.JClicRepoDOMRenderer = DOMRenderer;
+

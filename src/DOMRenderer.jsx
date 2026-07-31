@@ -43,7 +43,6 @@ import UserLib from "./components/user/UserLib";
  * @param {string*} type - Type of component to be rendered. Can be 'repo' (default) or 'user'
  */
 export default function DOMRenderer(rootElement, type = 'repo') {
-
   const dataSettings = parseStringSettings(rootElement.dataset);
   const Component = type === 'user' ? UserLib : Repo;
   const cache = createCache({ key: 'css', prepend: true });

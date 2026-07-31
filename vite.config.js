@@ -53,7 +53,7 @@ export default ({ mode, isPreview }) => {
         name: 'html-transform',
         transformIndexHtml(html) {
           return (mode === 'development' && !isPreview)
-            ? html.replaceAll('/preview-', '/dev-')
+            ? html.replaceAll('/index.html', '/dev-index.html')
             : html;
         }
       },
