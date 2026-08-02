@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 /*!
  *  File    : components/repo/Repo.js
  *  Created : 2021-07-15
@@ -48,6 +47,7 @@ function Repo() {
   const { rootRef, debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = useMainContext();
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
+  const [page, setPage] = useState(0);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -79,6 +79,7 @@ function Repo() {
       // Clear activity list when user changes
       setFullProjectList(null);
       setProjects(null);
+      setPage(0);
     }
     setUser(newUser);
     setAct(newAct);
@@ -108,12 +109,14 @@ function Repo() {
   // Operations to be performed when 'act', 'fullProjectList' or 'filters' are changed
   useEffect(() => {
     // Clear previous states
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setError(null);
     // If 'act' is set, load its project data
     if (act && (project === null || project.path !== act)) {
       setLoading(true);
       setProject(null);
       setProjects(null);
+      setPage(0);
       // Scroll to the beggining of the project component
       rootRef?.current?.scrollIntoView(true);
       const fullPath = user ? `${usersBase}/${user}/${act}` : `${repoBase}/${act}`;
@@ -147,6 +150,7 @@ function Repo() {
               && (!filters.subject || prj?.areaCodes?.includes(filters.subject))
               && (!filters.level || prj?.levelCodes?.includes(filters.level))
               && (!filters.text || filters?.textMatches?.includes(prj.path))));
+        setPage(0);
         setLoading(false);
       }
       else
@@ -182,7 +186,7 @@ function Repo() {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
         loading && <Loading /> ||
         project && <Project {...{ user, project, fullProjectList, updateAct, canonical }} /> ||
-        projects && <RepoList {...{ user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical }} />
+        projects && <RepoList {...{ user, projects, page, setPage, filters, updateFilters, listMode, setListMode, updateAct, canonical }} />
       }
     </Box>
   );

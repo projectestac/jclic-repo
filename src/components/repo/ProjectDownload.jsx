@@ -45,7 +45,6 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
   const { maxThreads, debug, rootRef } = useMainContext();
   const { title, fullPath, mainFile, files } = project;
   const numFiles = files.length - 1;
-  let currentFiles = 0;
   const [msg, setMsg] = useState('message');
   const [status, setStatus] = useState('status');
   const [err, setErr] = useState(null);
@@ -53,7 +52,7 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
   const [zipFile, setZipFile] = useState(null);
   const [progressZip, setProgressZip] = useState(false);
   // Array of `XMLHttpRequest`, used to abort pending requests
-  const _xhrs = [];
+  const [xhrs, setXhrs] = useState([]);
   // Get the zip file name from the last part of the project path
   const fileParts = fullPath.split('/');
   const zipFileName = `${fileParts[fileParts.length - 1]}.scorm.zip`;
@@ -65,7 +64,7 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
     setProgress(0);
     setProgressZip(false);
     setZipFile(null);
-    _xhrs.forEach(xhr => {
+    xhrs.forEach(xhr => {
       if (xhr.readyState < 4) {
         try {
           xhr.abort();
@@ -75,9 +74,7 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
         }
       }
     });
-    _xhrs.length = 0;
-    // eslint-disable-next-line react-hooks/immutability
-    currentFiles = 0;
+    setXhrs([]);
   }
 
   const closeDlg = () => {
@@ -139,6 +136,10 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
     // Clear the current dialog
     reset();
 
+    // Direct counter of XHRS (syncronized with state)
+    const _xhrs = [];
+    setXhrs(_xhrs);
+
     // Run only when `project` is not null
     if (project) {
       setMsg(t('prj-preparing-scorm'));
@@ -165,6 +166,9 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
       delete prj.path;
       delete prj.fullPath;
 
+      // Used for progress bar
+      let currentFiles = 0;
+
       // Add the modified 'project.json' to the ZIP file
       zip.file('project.json', JSON.stringify(prj, null, ' '), {});
 
@@ -182,12 +186,14 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
               setStatus(file);
               // Compress and save the resulting data in `zip`
               zip.file(file.replace(pathToRemove, ''), data, { binary: true });
-              setProgress((++currentFiles) * 100 / numFiles);
+              setProgress(++currentFiles * 100 / numFiles);
               resolve(true);
             }
           });
-          if (xhr)
+          if (xhr) {
             _xhrs.push(xhr);
+            setXhrs(_xhrs);
+          }
         });
       };
 
@@ -227,7 +233,10 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
           setStatus('');
         })
         // Clear all references to XMLHttpRequests
-        .finally(() => { _xhrs.length = 0; });
+        .finally(() => {
+          _xhrs.length = 0;
+          setXhrs(_xhrs);
+        });
     }
   }
 
@@ -270,7 +279,6 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
           <Button
             variant="contained"
             startIcon={<CloudDownload />}
-            // eslint-disable-next-line react-hooks/immutability
             onClick={downloadFile}
           >
             {t('prj-download-file')}
@@ -278,7 +286,6 @@ function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
         }
         <Button
           variant="contained"
-          // eslint-disable-next-line react-hooks/immutability
           onClick={closeDlg}
         >
           {t('cancel')}

@@ -29,7 +29,7 @@
  *  @module
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { List, ListItemButton, ListItemAvatar, Avatar, ListItemText, TablePagination } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ellipsis, clickOnLink, getAbsoluteURL } from '@/lib';
@@ -37,20 +37,12 @@ import { useMainContext } from "@/contexts";
 
 const DEFAULT_ITEMS_PER_PAGE = 25;
 
-function PaginatedList({ user, projects, updateAct, ...props }) {
+function PaginatedList({ user, projects, page, setPage, updateAct, ...props }) {
 
   const { t } = useTranslation();
   const { repoBase, usersBase, rootRef, repoPath } = useMainContext();
-  const [page, setPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
+  const [itemsPerPage, setItemsPerPage] = React.useState(DEFAULT_ITEMS_PER_PAGE);
   const base = user ? `${usersBase}/${user}` : repoBase;
-
-  useEffect(() => {
-    if (page > 0)
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPage(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projects]);
 
   return (
     <div {...props}>

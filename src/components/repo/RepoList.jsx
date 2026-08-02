@@ -42,7 +42,7 @@ import ScrollMosaic from './ScrollMosaic';
 import { useTranslation } from 'react-i18next';
 import { useMainContext } from "@/contexts";
 
-function RepoList({ user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical, ...props }) {
+function RepoList({ user, projects, page, setPage, filters, updateFilters, listMode, setListMode, updateAct, canonical, ...props }) {
 
   const { t } = useTranslation();
   const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = useMainContext();
@@ -66,7 +66,7 @@ function RepoList({ user, projects, filters, updateFilters, listMode, setListMod
           <FormControlLabel value={true} control={<Radio />} label={t('repo-view-list')} />
         </RadioGroup>
         {(listMode
-          && <PaginatedList {...{ user, projects, updateAct }} />)
+          && <PaginatedList {...{ user, projects, page, setPage, updateAct }} />)
           || <ScrollMosaic {...{ user, projects, updateAct }} />
         }
       </>}
