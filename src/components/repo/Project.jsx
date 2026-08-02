@@ -34,18 +34,19 @@ import { Typography, IconButton, Button, Box, Popover, Input, InputAdornment, Sn
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload, FileCopyOutlined, Close } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { textContent, getPathForProject, formatDate } from '../../utils';
+import { textContent, getPathForProject, formatDate } from '@/lib';
 import ProjectDownload from './ProjectDownload';
 import { filesize } from 'filesize';
 import SEO from '../SEO';
 import ShareButtons from '../ShareButtons';
 import DataCard from '../DataCard';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function Project({ settings, user, project, fullProjectList, updateAct, canonical, ...props }) {
+function Project({ user, project, fullProjectList, updateAct, canonical, ...props }) {
 
   const { t } = useTranslation();
-  const { langDefault, logo, fullUsersPath, rootRef } = settings;
+  const { langDefault, logo, fullUsersPath, rootRef } = useMainContext();
   const lang = t('lang');
   const {
     fullPath, meta_langs,
@@ -98,7 +99,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, canonica
 
   return (
     <Box {...props}>
-      <SEO {...{ settings, title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd, canonical }} />
+      <SEO {...{ title: pageTitle, description: textDesc, author, thumbnail: imgPath, sd, canonical }} />
       <Button sx={{ mb: 2 }} onClick={() => document.referrer === fullUsersPath ? history.back() : updateAct(null, user)}>
         <ArrowBack sx={{ mr: 1 }} />
         {t(user ? 'user-repo-title' : 'repo-title', { user })}
@@ -130,7 +131,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, canonica
             </Box>
           }
         </Box>
-        <ShareButtons {...{ settings, link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
+        <ShareButtons {...{ link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
         <Box sx={{ '& li': { mb: 2 } }}>
           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
             {pageDesc}
@@ -304,7 +305,7 @@ function Project({ settings, user, project, fullProjectList, updateAct, canonica
           </>
         }
       </Box>
-      <ProjectDownload {...{ settings, dlgOpen, setDlgOpen, project }} />
+      <ProjectDownload {...{ dlgOpen, setDlgOpen, project }} />
     </Box>
   );
 }

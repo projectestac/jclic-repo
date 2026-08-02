@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/refs */
 /*!
  *  File    : components/user/UserLib.js
  *  Created : 2021-07-21
@@ -35,22 +34,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { filesize } from 'filesize';
-import { checkFetchResponse, clickOnLink, getAbsoluteURL, ellipsis } from '../../utils';
+import { checkFetchResponse, clickOnLink, getAbsoluteURL, ellipsis } from '@/lib';
 import { Box, Alert, Button, IconButton, CircularProgress, Typography, Link, Avatar } from '@mui/material';
 import { LibraryAdd, Delete, CloudDownload, Eject, Info } from '@mui/icons-material';
 import DeleteDialog from './DeleteDialog';
 import UploadDialog from './UploadDialog';
 import ProjectCard from '../repo/ProjectCard';
 import DataCard from '../DataCard';
+import { useMainContext } from "@/contexts";
 
 const GOOGLE_BUTTON_ID = 'googleButton';
 const GOOGLE_BUTTON_SLOT = 'googleButtonSlot';
 
-function UserLib({ settings }) {
+function UserLib() {
 
   const googleButtonRef = useRef(null);
   const { t } = useTranslation();
-  const { displayTitle, userLibApi, repoPath, debug, googleOAuth2Id, gsiApi, authKey, isWebComponent } = settings;
+  const { rootRef, displayTitle, userLibApi, repoPath, debug, googleOAuth2Id, gsiApi, authKey, isWebComponent } = useMainContext();
   /**
    * userData fields: {
    *   googleUser,
@@ -298,7 +298,7 @@ function UserLib({ settings }) {
   const updateAct = (path, user) => clickOnLink(getAbsoluteURL(repoPath, { prj: path, user }));
 
   return (
-    <Box sx={{ typography: 'body1' }} ref={settings.rootRef} >
+    <Box sx={{ typography: 'body1' }} ref={rootRef} >
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 1, mb: 1.5 }}>
         {displayTitle && <Typography variant="h1" sx={{ color: 'primary.dark' }}>{title}</Typography>}
         {userData && <Avatar alt={userData.fullUserName} src={userData.avatar} sx={{ width: 56, height: 56 }} />}
@@ -347,7 +347,7 @@ function UserLib({ settings }) {
               {(userData.projects.length === 0 && <p>{t('user-repo-no-projects')}</p>) ||
                 <Box sx={{ mt: 3, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: { xs: 1, sm: 2 }, '& a:link': { textDecoration: 'none' } }}>
                   {userData.projects.map((project, n) => (
-                    <ProjectCard key={n} {...{ settings, user: userData.id, updateAct, project }} >
+                    <ProjectCard key={n} {...{ user: userData.id, updateAct, project }} >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ flexGrow: 1 }}>
                           {`${t('prj-size')}: ${filesize(project.totalSize, { locale: true })}`}<br />
@@ -385,8 +385,8 @@ function UserLib({ settings }) {
           }
         </>
       }
-      <DeleteDialog {...{ settings, deletePrj, setDeletePrj, deleteAction }} />
-      <UploadDialog {...{ settings, uploadDlg, setUploadDlg, userData, uploadAction }} />
+      <DeleteDialog {...{ deletePrj, setDeletePrj, deleteAction }} />
+      <UploadDialog {...{ uploadDlg, setUploadDlg, userData, uploadAction }} />
     </Box>
   );
 }

@@ -36,18 +36,19 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, 
 import { CloudDownload } from '@mui/icons-material';
 import { PromisePool } from '@supercharge/promise-pool';
 import { useTranslation } from 'react-i18next';
-import { ellipsis } from '../../utils';
+import { ellipsis } from '@/lib';
+import { useMainContext } from "@/contexts";
 
-function ProjectDownload({ settings, dlgOpen, setDlgOpen, project }) {
+function ProjectDownload({ dlgOpen, setDlgOpen, project }) {
 
   const { t } = useTranslation();
-  const { maxThreads, debug, rootRef } = settings;
+  const { maxThreads, debug, rootRef } = useMainContext();
   const { title, fullPath, mainFile, files } = project;
   const numFiles = files.length - 1;
   let currentFiles = 0;
   const [msg, setMsg] = useState('message');
   const [status, setStatus] = useState('status');
-  const [err, setErr] = useState('error');
+  const [err, setErr] = useState(null);
   const [progress, setProgress] = useState(0);
   const [zipFile, setZipFile] = useState(null);
   const [progressZip, setProgressZip] = useState(false);

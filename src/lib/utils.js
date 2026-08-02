@@ -1,5 +1,5 @@
 /*!
- *  File    : utils/index.js
+ *  File    : lib/utils.js
  *  Created : 2021-07-15
  *  By      : Francesc Busquets <francesc@gmail.com>
  *

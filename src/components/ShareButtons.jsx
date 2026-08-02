@@ -35,17 +35,18 @@ import { Email, Facebook, X, Telegram, Pinterest, WhatsApp, Code, Close, FileCop
 import ClassroomIcon from '../assets/classroom.svg?react';
 import MoodleIcon from '../assets/moodle.svg?react';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
 const E = encodeURIComponent;
 
-function ShareButtons({ settings, link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null }) {
+function ShareButtons({ link, moodleLink, title, description, thumbnail, embedOptions, emailBody = null }) {
 
   const { t } = useTranslation();
   const {
     shareSites: { twitter, facebook, telegram, whatsapp, pinterest, email, moodle, classroom, embed },
     shareMeta: { hash, via },
     facebookId,
-  } = settings;
+  } = useMainContext();
 
   const [embedBox, setEmbedBox] = useState(false);
   const [moodleBox, setMoodleBox] = useState(false);

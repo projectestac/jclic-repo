@@ -32,12 +32,13 @@
 import React from 'react';
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { useTranslation } from 'react-i18next';
-import { getAllPageVariants } from '../utils';
+import { getAllPageVariants } from '@/lib';
+import { useMainContext } from "@/contexts";
 
-function SEO({ settings, location = null, title, author = '', description = '', meta = [], thumbnail = null, canonical = '', sd = null, ...props }) {
+function SEO({ location = null, title, author = '', description = '', meta = [], thumbnail = null, canonical = '', sd = null, ...props }) {
 
   const { t } = useTranslation();
-  const { supportedLanguages, langKey } = settings;
+  const { supportedLanguages, langKey } = useMainContext();
   const mainUrl = canonical || location || window.location.href;
   const metaDescription = description || t('site-description');
   const metaAuthor = author || t('site-title');

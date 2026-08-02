@@ -32,19 +32,20 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { checkFetchResponse, getQueryParam, updateHistoryState, getPathForProject } from '../../utils';
+import { checkFetchResponse, getQueryParam, updateHistoryState, getPathForProject } from '@/lib';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Loading from '../Loading';
 import Project from './Project';
 import RepoList from './RepoList';
+import { useMainContext } from "@/contexts";
 
 const EMPTY_FILTERS = { language: '', subject: '', level: '', text: '', textMatches: [] };
 
-function Repo({ settings }) {
+function Repo() {
 
   const { t } = useTranslation();
-  const { rootRef, debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = settings;
+  const { rootRef, debug, repoList, repoBase, usersBase, jclicSearchService, kokoAnalyticsEnabled, kokoAnalyticsBaseId } = useMainContext();
   const [fullProjectList, setFullProjectList] = useState(null);
   const [projects, setProjects] = useState(null);
   const [project, setProject] = useState(null);
@@ -179,9 +180,9 @@ function Repo({ settings }) {
     <Box sx={{ typography: 'body1' }} ref={rootRef} >
       {
         error && <Alert severity="error">{t('error', { error: error.toLocaleString() })}</Alert> ||
-        loading && <Loading {...{ settings }} /> ||
-        project && <Project {...{ settings, user, project, fullProjectList, updateAct, canonical }} /> ||
-        projects && <RepoList {...{ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical }} />
+        loading && <Loading /> ||
+        project && <Project {...{ user, project, fullProjectList, updateAct, canonical }} /> ||
+        projects && <RepoList {...{ user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical }} />
       }
     </Box>
   );

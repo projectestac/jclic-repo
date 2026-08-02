@@ -40,21 +40,22 @@ import SelectProjects from './SelectProjects';
 import PaginatedList from './PaginatedList';
 import ScrollMosaic from './ScrollMosaic';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function RepoList({ settings, user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical, ...props }) {
+function RepoList({ user, projects, filters, updateFilters, listMode, setListMode, updateAct, canonical, ...props }) {
 
   const { t } = useTranslation();
-  const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = settings;
+  const { displayTitle, displaySubtitle, logo, twitterCard, displayBackToTop } = useMainContext();
   const title = user ? t('user-repo-title', { user }) : t('repo-title');
   const description = user ? t('user-repo-description', { user }) : t('repo-description');
 
   return (
     <Box {...props} >
-      <SEO {...{ settings, title, description, thumbnail: twitterCard, canonical }} />
+      <SEO {...{ title, description, thumbnail: twitterCard, canonical }} />
       {(displayTitle || user) && <Typography variant="h1" sx={{ color: 'primary.dark', mb: 1 }}>{title}</Typography>}
       {displaySubtitle && !user && <Typography variant="subtitle1">{t('repo-description')}</Typography>}
-      <ShareButtons {...{ settings, title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
-      {!user && <SelectProjects {...{ sx: { my: 2 }, settings, filters, updateFilters, currentCount: projects.length }} />}
+      <ShareButtons {...{ title: t('site-title'), description: t('site-description'), thumbnail: twitterCard || logo, link: window.location.href }} />
+      {!user && <SelectProjects {...{ sx: { my: 2 }, filters, updateFilters, currentCount: projects.length }} />}
       {projects.length > 0 && <>
         <RadioGroup
           sx={{ flexDirection: 'row', my: 1, ml: 1 }}
@@ -65,12 +66,12 @@ function RepoList({ settings, user, projects, filters, updateFilters, listMode, 
           <FormControlLabel value={true} control={<Radio />} label={t('repo-view-list')} />
         </RadioGroup>
         {(listMode
-          && <PaginatedList {...{ user, projects, settings, updateAct }} />)
-          || <ScrollMosaic {...{ user, projects, settings, updateAct }} />
+          && <PaginatedList {...{ user, projects, updateAct }} />)
+          || <ScrollMosaic {...{ user, projects, updateAct }} />
         }
       </>}
       {displayBackToTop &&
-        <BackToTop {...{ settings, showBelow: 300 }} />}
+        <BackToTop {...{ showBelow: 300 }} />}
     </Box >
   );
 }

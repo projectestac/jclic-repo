@@ -32,7 +32,7 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
 import createCache from '@emotion/cache';
-import { parseStringSettings } from './utils';
+import { parseStringSettings } from '@/lib';
 
 /**
  * Encloses the main React app into a Web Component with Shadow DOM

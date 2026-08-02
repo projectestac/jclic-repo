@@ -32,10 +32,11 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function DeleteDialog({ settings, deletePrj, setDeletePrj, deleteAction }) {
+function DeleteDialog({ deletePrj, setDeletePrj, deleteAction }) {
 
-  const { rootRef } = settings;
+  const { rootRef } = useMainContext();
   const { t } = useTranslation();
 
   return (

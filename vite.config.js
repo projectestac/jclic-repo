@@ -60,6 +60,11 @@ export default ({ mode, isPreview }) => {
         }
       },
     ],
+    resolve: {
+      alias: {
+        "@": "/src",
+      },
+    },
     build: {
       minify: "oxc",
       assetsDir: "",

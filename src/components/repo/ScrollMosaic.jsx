@@ -36,7 +36,7 @@ import { Box } from '@mui/material';
 
 const blockSize = 30;
 
-function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
+function ScrollMosaic({ user, projects, updateAct, ...props }) {
 
   const [page, setPage] = useState(0);
   const [items, setItems] = useState(projects.slice(0, page * blockSize));
@@ -50,7 +50,7 @@ function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(0);
     loadMore();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects]);
 
   return (
@@ -71,7 +71,7 @@ function ScrollMosaic({ settings, user, projects, updateAct, ...props }) {
         "& a:link": { textDecoration: 'none' }
       }}>
         {items.map((project, n) => (
-          <ProjectCard key={n} {...{ settings, user, project, updateAct }} />
+          <ProjectCard key={n} {...{ user, project, updateAct }} />
         ))}
       </Box>
     </InfiniteScroll>

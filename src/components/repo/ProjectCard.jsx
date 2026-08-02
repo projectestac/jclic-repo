@@ -33,12 +33,13 @@ import React, { useState } from 'react';
 import { Fab, Card, Box } from '@mui/material';
 import { PlayArrow } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { ellipsis, clickOnLink, getAbsoluteURL } from '../../utils';
+import { ellipsis, clickOnLink, getAbsoluteURL } from '@/lib';
+import { useMainContext } from "@/contexts";
 
-function ProjectCard({ settings, user, project, updateAct, children }) {
+function ProjectCard({ user, project, updateAct, children }) {
 
   const { t } = useTranslation();
-  const { repoBase, usersBase, repoPath } = settings;
+  const { repoBase, usersBase, repoPath } = useMainContext();
   const { path, title = 'Untitled', author = 'Unknown author', langCodes = [], mainFile, cover, coverWebp } = project;
   const base = user ? `${usersBase}/${user}/${path}` : `${repoBase}/${path}`;
   const projectLink = `${base}/${mainFile.replace(/[^/]*$/, 'index.html')}`;

@@ -33,11 +33,12 @@ import React, { useState } from 'react';
 import { InputLabel, MenuItem, FormControl, Select, TextField, InputAdornment, IconButton, Box, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function SelectProjects({ settings, filters, updateFilters, currentCount = 0, sx = {} }) {
+function SelectProjects({ filters, updateFilters, currentCount = 0, sx = {} }) {
 
   const { t } = useTranslation();
-  const { rootRef } = settings;
+  const { rootRef } = useMainContext();
   const [query, setQuery] = useState(filters?.text || '');
   const count = t('repo-num', { count: currentCount, context: `${currentCount}` });
 

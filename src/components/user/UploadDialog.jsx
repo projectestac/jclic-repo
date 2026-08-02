@@ -33,10 +33,11 @@ import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, LinearProgress, Box } from '@mui/material';
 import { filesize } from 'filesize';
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function UploadDialog({ settings, uploadDlg, setUploadDlg, userData, uploadAction }) {
+function UploadDialog({ uploadDlg, setUploadDlg, userData, uploadAction }) {
 
-  const { rootRef } = settings;
+  const { rootRef } = useMainContext();
   const { t } = useTranslation();
 
   const [file, setFile] = useState(null);

@@ -33,6 +33,7 @@ import i18n from 'i18next';
 import LngDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
+// Import translations
 import en from './en.json';
 import ca from './ca.json';
 import es from './es.json';
@@ -53,7 +54,8 @@ import java_download_info_en from './java-download-info-en.html?raw';
 import java_download_info_ca from './java-download-info-ca.html?raw';
 import java_download_info_es from './java-download-info-es.html?raw';
 
-export const supportedLanguages = ['en', 'ca', 'es'];
+// Currently supported languages
+const SUPPORTED_LANGUAGES = ['en', 'ca', 'es'];
 
 export const STOP_WORDS = {
   en: stopwords_en,
@@ -61,13 +63,29 @@ export const STOP_WORDS = {
   es: stopwords_es,
 };
 
+// MUI locales for currently supported languages (add or replace as needed)
+import { enUS, caES, esES } from "@mui/material/locale";
+export const muiLocales = { en: enUS, ca: caES, es: esES };
+export function getMuiLocale(lang) {
+  return muiLocales[lang] || enUS;
+}
+
 /**
  * Initializes the i18n system
  * See https://www.i18next.com/overview/api for detailed options
- * @param {object} options
+ * @param {object} settings
+ * @param {string} settings.langKey - Key used in querystring to set the language (default: 'lang')
+ * @param {string} settings.langDefault - Default language if none is detected (default: 'en')
+ * @param {string|null} settings.lang - Force a specific language (overrides detection)
  * @returns {object} - the [i18n](https://www.i18next.com) main object
  */
-export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) {
+export function i18nInit(settings) {
+
+  const { langKey = "lang", langDefault = "en", lang = null } = settings;
+
+  // Store supported languages list into settings
+  settings.supportedLanguages = SUPPORTED_LANGUAGES;
+
   return i18n
     .use(LngDetector)
     .use(initReactI18next)
@@ -85,6 +103,8 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             "user-repo-info": user_repo_info_en,
             "user-repo-upload-info": user_repo_upload_info_en,
             "java-download-info": java_download_info_en,
+            intlNumber: "{{val, number}}",
+            intlDateTime: "{{val, datetime}}",
           },
         },
         ca: {
@@ -93,6 +113,8 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             "user-repo-info": user_repo_info_ca,
             "user-repo-upload-info": user_repo_upload_info_ca,
             "java-download-info": java_download_info_ca,
+            intlNumber: "{{val, number}}",
+            intlDateTime: "{{val, datetime}}",
           },
         },
         es: {
@@ -101,6 +123,8 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
             "user-repo-info": user_repo_info_es,
             "user-repo-upload-info": user_repo_upload_info_es,
             "java-download-info": java_download_info_es,
+            intlNumber: "{{val, number}}",
+            intlDateTime: "{{val, datetime}}",
           },
         },
       },
@@ -108,6 +132,8 @@ export function i18nInit({ langKey = 'lang', langDefault = 'en', lang = null }) 
       interpolation: {
         escapeValue: false,
       },
+      // Not needed since i18next v26
+      // showSupportNotice: false,
     });
 }
 

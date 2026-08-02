@@ -32,7 +32,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import createCache from '@emotion/cache';
-import { parseStringSettings } from './utils';
+import { parseStringSettings } from '@/lib';
 import MainLayout from "./components/MainLayout";
 import Repo from "./components/repo/Repo";
 import UserLib from "./components/user/UserLib";

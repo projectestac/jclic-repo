@@ -30,31 +30,27 @@
  */
 
 import React from 'react';
+import { CssBaseline } from "@mui/material";
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { CacheProvider } from '@emotion/react';
-import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
-import { deepmerge } from '@mui/utils';
-import { DEFAULT_SETTINGS, useSettings, initFonts } from '../settings';
+import { MainContextProvider } from "@/contexts";
+import { ThemeProviderWithLocale } from "@/lib";
 
 function MainLayout({ cache, dataSettings, Component }) {
 
-  // Merge default settings with "data-" props
-  const settings = useSettings(deepmerge(DEFAULT_SETTINGS, dataSettings));
-
-  // Initialize needed fonts
-  initFonts(settings);
-
-  // Create a MaterialUI theme with responsive fonts, based on the current settings
-  const theme = responsiveFontSizes(createTheme(settings.theme), {});
+  const rootRef = React.useRef();
 
   return (
-    <HelmetProvider>
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={theme}>
-          <Component settings={settings} />
-        </ThemeProvider>
-      </CacheProvider>
-    </HelmetProvider>
+    <MainContextProvider {...{ rootRef, dataSettings }}>
+      <CssBaseline />
+      <HelmetProvider>
+        <CacheProvider value={cache}>
+          <ThemeProviderWithLocale>
+            <Component />
+          </ThemeProviderWithLocale>
+        </CacheProvider>
+      </HelmetProvider>
+    </MainContextProvider>
   );
 }
 

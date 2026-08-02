@@ -32,10 +32,11 @@
 import React from 'react';
 import { Box, Typography, LinearProgress } from "@mui/material";
 import { useTranslation } from 'react-i18next';
+import { useMainContext } from "@/contexts";
 
-function Loading({ settings }) {
+function Loading() {
   const { t } = useTranslation();
-  const { displayTitle } = settings;
+  const { displayTitle } = useMainContext();
   return (
     <Box>
       {displayTitle && <Typography sx={{ mb: 2, color: 'primary.dark' }} variant="h1">{t('repo-title')}</Typography>}
