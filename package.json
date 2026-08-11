@@ -1,7 +1,7 @@
 {
   "name": "jclic-repo",
   "title": "JClic repo",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "type": "module",
   "description": "Dynamic repository of JClic activities",
   "keywords": [
