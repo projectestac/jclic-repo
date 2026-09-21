@@ -1,5 +1,6 @@
 ### v2.3.4 (Not yet released)
 - Upgraded peer dependencies
+- Make any links in the descriptions open in a new tab
 
 ### v2.3.3 (2026-05-08)
 - Upgraded peer dependencies

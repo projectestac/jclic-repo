@@ -34,6 +34,7 @@ import { Typography, IconButton, Button, Box, Popover, Input, InputAdornment, Sn
 import { PlayArrow, ArrowBack, PlayCircleFilled, LocalCafe, CloudDownload, FileCopyOutlined, Close } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import rehypeExternalLinks from 'rehype-external-links';
 import { textContent, getPathForProject, formatDate } from '@/lib';
 import ProjectDownload from './ProjectDownload';
 import { filesize } from 'filesize';
@@ -133,7 +134,10 @@ function Project({ user, project, fullProjectList, updateAct, canonical, ...prop
         </Box>
         <ShareButtons {...{ link: window.location.href, moodleLink, title, description: textDesc, thumbnail: imgPath, embedOptions }} />
         <Box sx={{ '& li': { mb: 2 } }}>
-          <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+          <ReactMarkdown rehypePlugins={[
+            rehypeRaw,
+            [rehypeExternalLinks, { rel: ['nofollow', 'noopener', 'noreferrer'], target: '_blank' }],
+          ]}>
             {pageDesc}
           </ReactMarkdown>
         </Box>
