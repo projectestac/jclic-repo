@@ -151,10 +151,11 @@
   "subj-ef": "Educació física",
   "subj-tec": "Tecnologies",
   "subj-div": "Diversos",
-  "level-codes": "*|INF|PRI|SEC|BTX",
+  "level-codes": "*|INF|PRI|SEC|BTX|OTHER",
   "level-*": "Tots els nivells",
   "level-INF": "Infantil (3-6)",
   "level-PRI": "Primària (6-12)",
   "level-SEC": "Secundària (12-16)",
-  "level-BTX": "Batxillerat (16-18)"
+  "level-BTX": "Batxillerat / FP (16-18)",
+  "level-OTHER": "Altres"
 }

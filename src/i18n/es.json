@@ -151,10 +151,11 @@
   "subj-ef": "Educación física",
   "subj-tec": "Tecnología",
   "subj-div": "Diversos",
-  "level-codes": "*|INF|PRI|SEC|BTX",
+  "level-codes": "*|INF|PRI|SEC|BTX|OTHER",
   "level-*": "Todos los niveles",
   "level-INF": "Infantil (3-6)",
   "level-PRI": "Primaria (6-12)",
   "level-SEC": "Secundaria (12-16)",
-  "level-BTX": "Bachillerato (16-18)"
+  "level-BTX": "Bachillerato / FP (16-18)",
+  "level-OTHER": "Other"
 }

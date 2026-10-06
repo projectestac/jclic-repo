@@ -151,10 +151,11 @@
   "subj-ef": "Physical education",
   "subj-tec": "Design & technology",
   "subj-div": "Miscellaneous",
-  "level-codes": "*|INF|PRI|SEC|BTX",
+  "level-codes": "*|INF|PRI|SEC|BTX|OTHER",
   "level-*": "All levels",
   "level-INF": "Kindergarten (3-6)",
   "level-PRI": "Primary school (6-12)",
   "level-SEC": "Secondary school (12-16)",
-  "level-BTX": "High school (16-18)"
+  "level-BTX": "High school / VET (16-18)",
+  "level-OTHER": "Other"
 }
